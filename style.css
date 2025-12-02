@@ -164,13 +164,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .home-step {
     background: rgba(232, 215, 198, 0.2);
     border-radius: 5px;
-    padding: 15px;
+    padding: 5px;
     text-align: left;
     position: relative;
     border-left: 5px solid #8B4513;
