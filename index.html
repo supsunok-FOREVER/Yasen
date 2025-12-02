@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин «Ясень» — Конструктор дивана</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- ЛЕВАЯ ПАНЕЛЬ: Меню 7 шагов -->
+        <aside class="sidebar-logo">
+            <div class="logo-vertical" id="logoYasen">
+                <!-- Заполнится JS -->
+            </div>
+            <div class="progress-track">
+                <div class="steps-container" id="stepsMenu">
+                                <!-- Меню 6 шагов -->
+                    <div class="menu-step" data-step="room">
+                        <i class="fas fa-door-open"></i>
+                        <span>Комната</span>
+                    </div>
+                    <div class="menu-step" data-step="model">
+                        <i class="fas fa-shapes"></i>
+                        <span>Модель</span>
+                    </div>
+                    <div class="menu-step" data-step="mechanism">
+                        <i class="fas fa-cogs"></i>
+                        <span>Механизм</span>
+                    </div>
+                    <div class="menu-step" data-step="filling">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Наполнитель</span>
+                    </div>
+                    <div class="menu-step" data-step="fabric">
+                        <i class="fas fa-tshirt"></i>
+                        <span>Ткань</span>
+                    </div>
+                    <div class="menu-step" data-step="decor">
+                        <i class="fas fa-palette"></i>
+                        <span>Декор</span>
+                    </div>
+                </div>
+                <!-- 7-й шаг -->
+                <div class="step-7">
+                    <div class="menu-step final-step" data-step="test">
+                        <i class="fas fa-flag-checkered"></i>
+                        <span>Тест-драйв</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ЦЕНТР: Динамический контент -->
+        <main class="maze-area" id="mazeArea">
+            <!-- Сначала Home page -->
+            <div class="home-content active" id="homeContent">
+                <h1>Добро пожаловать в конструктор диванов «Ясень»</h1>
+                <div class="home-steps">
+                    <div class="home-step">
+                        <div class="step-number">1</div>
+                        <h3>Определитесь с комнатой и задачей</h3>
+                        <p>Гостиная для приёма гостей, спальня для чтения и т.д.</p>
+                    </div>
+                    <div class="home-step">
+                        <div class="step-number">2</div>
+                        <h3>Выберите тип модели</h3>
+                        <p>«Еврософа» у стены, угловой диван, модульная система.</p>
+                    </div>
+                    <div class="home-step">
+                        <div class="step-number">3</div>
+                        <h3>Подберите механизм трансформации</h3>
+                        <p>Для ежедневного сна — один, для гостевого — другой.</p>
+                    </div>
+                    <div class="home-step">
+                        <div class="step-number">4</div>
+                        <h3>Поймите разницу в наполнителях</h3>
+                        <p>Упругий ППУ для поддержки спины, пружинные блоки для элитной мягкости.</p>
+                    </div>
+                    <div class="home-step">
+                        <div class="step-number">5</div>
+                        <h3>Изучите ткани</h3>
+                        <p>Прочная рогожка для семьи с детьми, мягкий велюр для уюта, высокотехнологичный антикоготь.</p>
+                    </div>
+                    <div class="home-step">
+                        <div class="step-number">6</div>
+                        <h3>Продумайте детали</h3>
+                        <p>Высота подлокотников, форма спинки, декоративные подушки.</p>
+                    </div>
+                    <div class="home-step final">
+                        <div class="step-number">7</div>
+                        <h3>Приходите в «Ясень» на финальный тест-драйв</h3>
+                        <p>Спиной оцените мягкость, рукой проверьте ткань, соберите-разложите механизм. Только так рождается уверенность в выборе.</p>
+                    </div>
+                </div>
+                <button class="btn-start" id="startButton">
+                    <i class="fas fa-play"></i> Начать выбор дивана
+                </button>
+            </div>
+            
+            <!-- Сетка для других шагов (скрыта по умолчанию) -->
+            <div class="house-grid" id="houseGrid" style="display: none;">
+                <!-- Будет заполняться через JS -->
+            </div>
+            
+            <!-- Контент для тест-драйва (скрыт по умолчанию) -->
+            <div class="test-drive-content" id="testContent" style="display: none;">
+                <!-- Будет заполняться через JS -->
+            </div>
+        </main>
+
+        <!-- ПРАВАЯ ПАНЕЛЬ: Информация (только для десктопа) -->
+        <aside class="info-panel" id="infoPanel">
+            <div class="panel-content">
+                <h2 id="panelTitle"><i class="fas fa-info-circle"></i> Ваш путь к дивану</h2>
+                <p id="panelSubtitle">Выберите шаг в меню слева</p>
+                
+                <!-- Пояснение текущего шага -->
+                <div class="step-explanation" id="stepExplanation">
+                    <p>Каждый шаг приближает вас к идеальному дивану.</p>
+                </div>
+
+                <!-- Детали выбранного параметра -->
+                <div class="dynamic-content">
+                    <div class="parameter-details" id="parameterDetails">
+                        <p>Выберите параметр в центральном окне.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Навигация -->
+            <div class="panel-navigation">
+                <button class="btn-nav" id="prevBtn" disabled><i class="fas fa-arrow-left"></i> Назад</button>
+                <span class="step-counter">Шаг <span id="currentStepNum">0</span> из 7</span>
+                <button class="btn-nav" id="nextBtn">Далее <i class="fas fa-arrow-right"></i></button>
+            </div>
+            
+            <button class="btn-reset" id="resetButton"><i class="fas fa-redo"></i> Начать заново</button>
+        </aside>
+
+        <!-- МОБИЛЬНАЯ ИНФО-ПАНЕЛЬ (скрыта на десктопе) -->
+        <div class="mobile-info-panel" id="mobileInfoPanel">
+            <div class="mobile-info-content">
+                <h3 id="mobilePanelTitle">Информация</h3>
+                <div id="mobileParameterDetails">
+                    <p>Выберите параметр для подробностей</p>
+                </div>
+                <button class="btn-close-mobile-info">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- НИЖНЯЯ ПАНЕЛЬ: Карточка выбора -->
+        <footer class="selection-card" id="selectionCard">
+            <h3><i class="fas fa-clipboard-list"></i> Ваша подборка</h3>
+            <div class="tags-container" id="selectionTags">
+                <div class="empty-state">
+                    <i class="fas fa-clipboard"></i>
+                    <p>Начните выбирать параметры</p>
+                </div>
+            </div>
+            <button class="btn-primary" id="finalButton" disabled>Записаться на тест-драйв</button>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
