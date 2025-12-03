@@ -180,11 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeMobileInfoBtn = document.querySelector('.btn-close-mobile-info');
 
     // Логотип
-    'ЯСЕНЬ'.split('').forEach(letter => {
-        const span = document.createElement('span');
-        span.textContent = letter;
-        logoYasen.appendChild(span);
-    });
+    //'ЯСЕНЬ'.split('').forEach(letter => {
+     //   const span = document.createElement('span');
+       // span.textContent = letter;
+        //logoYasen.appendChild(span);
+    //});
 
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
