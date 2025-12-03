@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Порядок шагов (основные шаги 1-6, без home и test для навигации)
-    const stepsOrder = ['home', 'room', 'model', 'mechanism', 'filling', 'fabric', 'decor', 'test'];
+    const stepsOrder = ['home', 'room', 'model', 'mechanism', 'filling', 'fabric', 'decor'];
     const mainSteps = ['room', 'model', 'mechanism', 'filling', 'fabric', 'decor']; // 6 основных шагов
     
     // Состояние
