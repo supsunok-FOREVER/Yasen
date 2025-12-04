@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+     document.addEventListener('click', function(event) {
+        const clickableStep = event.target.closest('.clickable-step');
+        if (clickableStep && appState.currentStep === 'home') {
+            const stepId = clickableStep.dataset.step;
+            if (stepId) {
+                goToStep(stepId);
+            }
+        }
+    });
     // ========== БАЗА ДАННЫХ ==========
     const stepsData = {
         home: {
@@ -65,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
                   desc: 'Можно менять конфигурацию под любые задачи.' },
                 { id: 'model4', title: 'Еврософа', icon: 'fa-star',
                   desc: 'Компактная модель с лаконичным дизайном.' },
-                { id: 'model5', title: 'Диван-кровать', icon: 'fa-moon',
-                  desc: '. Основной акцент на удобство раскладывания.' }
+                { id: 'model5', title:'Диван-Кровать', icon: 'fa-moon',
+                  desc: 'Основной акцент на удобство раскладывания.' }
             ]
         },
         mechanism: {
@@ -74,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Способ трансформации дивана",
             explanation: "Механизм — это сердце дивана, если нужно спальное место.",
             options: [
-               { id: 'mechanism1', title: 'Еврокнижка', icon: 'fa-book-open', 
+                { id: 'mechanism1', title: 'Еврокнижка', icon: 'fa-book-open', 
                   desc: 'Надёжный и простой механизм для ежедневного сна.' },
                 { id: 'mechanism2', title: 'Выкатной', icon: 'fa-arrow-right',
                   desc: 'Спальное место выкатывается из-под сиденья.' },
@@ -91,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Внутреннее наполнение дивана",
             explanation: "Наполнитель определяет мягкость, упругость и долговечность дивана.",
             options: [
-               { id: 'filling1', title: 'ППУ (Стретчпен)', icon: 'fa-layer-group', 
+                { id: 'filling1', title: 'ППУ (Стретчпен)', icon: 'fa-layer-group', 
                   desc: 'Современный, упругий материал с эффектом памяти.' },
                 { id: 'filling2', title: 'Пружинный блок', icon: 'fa-bolt',
                   desc: 'Классическое решение для ортопедической поддержки.' },
@@ -101,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   desc: 'Мягкий и объёмный синтетический материал.' },
                 { id: 'filling5', title: 'Пух/перо', icon: 'fa-heart',
                   desc: 'Классический наполнитель для максимальной мягкости.' }
-        
             ]
         },
         fabric: {
@@ -119,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   desc: 'Плотная, мягкая ткань, хорошо скрывает загрязнения.' },
                 { id: 'fabric5', title: 'Кожа', icon: 'fa-ring',
                   desc: 'Натуральный материал premium-класса, элегантный и долговечный.' }
-        
             ]
         },
         decor: {
@@ -136,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { id: 'decor4', title: 'Стежка', icon: 'fa-bezier-curve',
                   desc: 'Каретная стяжка или фигурные швы.' },
                 { id: 'decor5', title: 'Кант', icon: 'fa-border-style',
-                  desc: 'КантКонтрастная окантовка по краям дивана.' }
+                  desc: 'Контрастная окантовка по краям дивана.' }
             ]
         },
         test: {
@@ -174,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetButton = document.getElementById('resetButton');
     const startButton = document.getElementById('startButton');
     const currentStepNum = document.getElementById('currentStepNum');
-    const logoYasen = document.getElementById('logoYasen');
+    
     const mobileInfoPanel = document.getElementById('mobileInfoPanel');
     const mobilePanelTitle = document.getElementById('mobilePanelTitle');
     const mobileParameterDetails = document.getElementById('mobileParameterDetails');
@@ -190,6 +198,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
+            if (stepId === 'home') {
+        // Удаляем старые обработчики и добавляем новые для кликабельных шагов
+        setTimeout(() => {
+            const clickableSteps = document.querySelectorAll('.clickable-step');
+            clickableSteps.forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepId = this.dataset.step;
+                    if (stepId) {
+                        goToStep(stepId);
+                    }
+                });
+            });
+        }, 100); // Небольшая задержка для гарантии, что DOM обновлен
+    }
+    
         if (!stepsData[stepId]) return;
         
         // 1. Обновляем состояние
@@ -230,11 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (stepId === 'test') {
             testContent.style.display = 'block';
             testContent.innerHTML = `
-                <h2 style="color: #8B4513; margin-bottom: 20px;"><i class="fas fa-flag-checkered"></i> Готово!</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; margin: 0 auto 30px;">
-                    Вы выбрали все параметры. Теперь самое важное — <strong>ощутить диван вживую</strong> в нашем салоне.
-                </p>
-                
+                             
                 <div style="background: #f9f5f0; padding: 25px; border-radius: 15px; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
                     <h3 style="color: #8B4513; margin-bottom: 20px; text-align: center;"><i class="fas fa-store"></i> Мы приглашаем вас в Наши магазины</h3>
                     
@@ -243,16 +262,19 @@ document.addEventListener('DOMContentLoaded', function() {
                             <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Мебель-Холл"</h4>
                             <p style="color: #666; margin-bottom: 5px;">Санкт-Петербург, пл.Карла Фаберже, дом 8, секция 2-120, 1 этаж</p>
                             <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-subway"></i> м.Ладожская</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (812) 326-78-79</p>
+                         
                             <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 20:00</p>
+                               <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (812) 326-78-79</p>
                         </div>
                         
                         <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
                             <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Торговый Двор"</h4>
                             <p style="color: #666; margin-bottom: 5px;">Санкт-Петербург, пр.Науки, дом 21, секция 8, 2 этаж</p>
                             <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-subway"></i> м.Академическая</p>
+                          
+                            <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 20:00</p>  
                             <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (812) 207-10-14</p>
-                            <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 20:00</p>
+
                         </div>
                     </div>
                     
@@ -260,27 +282,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
                             <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Всеволожский"</h4>
                             <p style="color: #666; margin-bottom: 5px;">г.Всеволожск, Всеволожский пр., дом 61, секция 208, 2 этаж</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (81370) 43-628</p>
+                          
                             <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 10:00 - 20:00</p>
+                              <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (81370) 43-628</p>
                         </div>
                         
                         <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
                             <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Юго-Запад"</h4>
                             <p style="color: #666; margin-bottom: 5px;">Санкт-Петербург, пр.Маршала Жукова, дом 35, секция 57, 2 этаж</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. +7 (965) 042-99-06</p>
+                           
                             <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 21:00</p>
+                             <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. +7 (965) 042-99-06</p>
                         </div>
                     </div>
                 </div>
-                
-                <p style="font-size: 1.1rem; margin-bottom: 20px; font-style: italic; color: #5a4738; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    <i class="fas fa-star" style="color: #D2691E;"></i> Приходите, мы поможем вам выбрать идеальный диван и ответим на все вопросы!
-                </p>
-                
-                <button class="btn-primary" id="bookTestDrive" style="font-size: 1.1rem; padding: 15px 30px;">
-                    <i class="fas fa-calendar-alt"></i> Записаться на тест-драйв
-                </button>
-            `;
+                              `;
             
             const bookBtn = document.getElementById('bookTestDrive');
             if (bookBtn) {
@@ -326,30 +342,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.className = `option-card ${positionClass} ${colorClass} ${isSelected ? 'selected' : ''}`;
                 card.dataset.optionId = option.id;
                 card.dataset.step = stepId;
-                const isMobile = window.innerWidth < 480;
-
-               if (isMobile) {
-                // --- Мобильная версия (ТОЛЬКО icon + title) ---
+                
                 card.innerHTML = `
                     <i class="fas ${option.icon}"></i>
-                    <div class="option-title">${option.title}</div>    `;
-                } else {
-                    // --- Десктопная версия (как раньше) ---
-                    card.innerHTML = `
-                        <i class="fas ${option.icon}"></i>
-                        <div class="option-title">${option.title}</div>
-                        <div class="option-desc">${option.desc.substring(0, 60)}...</div>
-                    `;
-                }
+                    <div class="option-title">${option.title}</div>
+                    <div class="option-desc">${option.desc.substring(0, 60)}...</div>
+                `;
                 
-                // Добавляем кота в прихожую
-                if (stepId === 'room' && option.id === 'hallway') {
-                    const catDiv = document.createElement('div');
-                    catDiv.className = 'cat';
-                    catDiv.textContent = '=^..^=';
-                    catDiv.id = 'catGuide';
-                    card.appendChild(catDiv);
-                }
+          
                 
                 houseGrid.appendChild(card);
             });
@@ -426,7 +426,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth <= 1200) {
             mobilePanelTitle.textContent = optionData.title;
             mobileParameterDetails.innerHTML = `<p>${optionData.desc}</p>`;
-            mobileInfoPanel.style.display = 'block';
+//            mobileInfoPanel.style.display = 'block';
+
+    // Добавляем класс к body, чтобы дать отступ снизу (если CSS использует body.mobile-info-open)
+    //document.body.classList.add('mobile-info-open');
         }
         
         // Обновляем навигацию и карточку
@@ -499,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
             selectionTags.innerHTML = `
                 <div class="empty-state">
                     <i class="fas fa-clipboard"></i>
-                    <p>Начните выбирать параметры</p>
+                    Выберите параметры
                 </div>`;
             return;
         }
@@ -598,3 +601,50 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== ЗАПУСК ==========
     goToStep('home');
 });
+
+// ===== Mobile panel: защита от всплытия и надёжное закрытие =====
+(function setupMobilePanelClose() {
+    if (!mobileInfoPanel) return;
+
+    // Предотвращаем всплытие кликов внутри панели (чтобы document click не перехватил)
+    mobileInfoPanel.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+
+    // Надёжный обработчик закрытия кнопки X
+    if (closeMobileInfoBtn) {
+        closeMobileInfoBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // чтобы внешний click не сработал
+
+            // Снимаем видимость (если у тебя есть CSS .mobile-info-panel.show — используем его)
+            mobileInfoPanel.classList.remove('show');
+
+            // Убираем inline display (если где-то ставится)
+            mobileInfoPanel.style.display = 'none';
+
+            // Убираем отступ у body (если добавлялся)
+            document.body.classList.remove('mobile-info-open');
+        });
+    }
+
+    // Закрытие по клику вне панели (если нужно): клик по документу закроет панель
+    document.addEventListener('click', function () {
+        if (mobileInfoPanel.classList.contains('show') || mobileInfoPanel.style.display === 'block') {
+            mobileInfoPanel.classList.remove('show');
+            mobileInfoPanel.style.display = 'none';
+            document.body.classList.remove('mobile-info-open');
+        }
+    });
+
+    // Закрытие по ESC
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            if (mobileInfoPanel.classList.contains('show') || mobileInfoPanel.style.display === 'block') {
+                mobileInfoPanel.classList.remove('show');
+                mobileInfoPanel.style.display = 'none';
+                document.body.classList.remove('mobile-info-open');
+            }
+        }
+    });
+})();

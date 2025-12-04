@@ -36,7 +36,7 @@ body {
     align-items: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     z-index: 100;
-}
+  }
 
 .logo-vertical {
     writing-mode: vertical-rl;
@@ -64,6 +64,7 @@ body {
     align-items: center;
     flex-grow: 1;
     justify-content: space-between;
+    
 }
 
 .steps-container {
@@ -242,7 +243,7 @@ body {
         "left-bottom right-bottom";
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
     max-width: 700px;
     height: 100%;
@@ -330,15 +331,6 @@ body {
 .color-4 { background: #E6E1F2; color: #4a3c94; }
 .color-5 { background: #F5F1E8; color: #666; }
 
-/* Кот - только в прихожей (крыше) */
-.cat {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 3.5rem;
-    transition: all 0.5s ease;
-    z-index: 10;
-}
 
 /* Тест-драйв контент */
 .test-drive-content {
@@ -605,6 +597,60 @@ body {
     cursor: not-allowed;
     opacity: 0.6;
 }
+.mobile-info-panel {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  transform: translateY(110%);
+  transition: transform .28s ease, opacity .28s ease;
+  opacity: 0;
+  z-index: 700;
+  display: none; /* скрыта по умолчанию */
+}
+
+.mobile-info-panel.show {
+  transform: translateY(0);
+  opacity: 1;
+  display: block;
+}
+
+body.mobile-info-open {
+  padding-bottom: calc(60vh + 12px); /* опционально, если хочешь чтобы footer поднимался */
+}
+
+compact-steps {
+        gap: 12px;
+        margin-bottom: 20px;
+}
+    
+    .steps-column {
+        min-width: 100%;
+        gap: 10px;
+}
+    
+    .compact-step {
+        padding: 10px 12px;
+        min-height: 55px;
+        gap: 10px;
+}
+    
+    .compact-step.clickable-step:hover {
+        transform: translateX(3px);
+}
+    
+    .step-indicator {
+        min-width: 32px;
+}
+    
+    .step-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+}
+    
+    .step-content p {
+        font-size: 0.9rem;
+}
+    
 
 /* ===== АДАПТИВНОСТЬ ===== */
 @media (max-width: 1200px) {
@@ -613,6 +659,12 @@ body {
         grid-template-rows: 1fr auto 120px;
     }
     
+     .sidebar-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
     .info-panel {
         display: none; /* Скрываем правую панель на планшетах */
     }
@@ -636,6 +688,7 @@ body {
 @media (max-width: 768px) {
     .app-container {
         display: flex;
+        
         flex-direction: column;
         height: 100vh;
         overflow: auto;
@@ -644,27 +697,21 @@ body {
     }
     
     .sidebar-logo {
+        display: flex;
         width: 100%;
-        height: 70px;
+        height: 80px;
         flex-direction: row;
-        padding: 10px 15px;
+        padding: 5px 5px;
         margin-bottom: 5px;
         grid-row: auto;
+        align-items: center;
+        
     }
     
-    .logo-vertical {
-        writing-mode: horizontal-tb;
-        height: auto;
-        margin-bottom: 0;
-        margin-right: 20px;
-        font-size: 1.8rem;
-        letter-spacing: 5px;
-    }
-    
-    .progress-track {
+     .progress-track {
         flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
+        justify-content:center;
+        width: 90%;
     }
     
     .steps-container {
@@ -674,8 +721,8 @@ body {
     }
     
     .menu-step {
-        width: 45px;
-        height: 45px;
+        width: 55px;
+        height: 55px;
     }
     
     .menu-step i {
@@ -719,16 +766,16 @@ body {
     }
     
     .option-card {
-        min-height: 130px;
+        min-height: 100px;
         padding: 15px;
     }
     
     .option-card i {
-        font-size: 2rem;
+        font-size: 1.3rem;
     }
     
     .option-card .option-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .selection-card {
@@ -749,5 +796,55 @@ body {
         font-size: 2.5rem;
         bottom: 10px;
         right: 10px;
+    }
+}
+    @media (max-width: 480px) {
+    .home-content {
+        padding: 10px;
+    }
+    
+      .progress-track {
+        flex-direction: row;
+        justify-content:center;
+        width: 90%;
+    }
+    .compact-step {
+        padding: 8px 10px;
+        min-height: 50px;
+        gap: 8px;
+    }
+    
+    .step-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+    
+    .step-content p {
+        font-size: 0.85rem;
+    }
+    
+    .selection-card {
+        padding: 10px 12px;
+    }
+    
+    .selection-content {
+        gap: 8px;
+    }
+    
+    .selection-label {
+        font-size: 0.95rem;
+        gap: 6px;
+    }
+    
+    .selection-tag {
+        padding: 4px 8px;
+        font-size: 0.8rem;
+        max-width: 120px;
+    }
+    
+    .btn-primary {
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 }
