@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobilePanelTitle = document.getElementById('mobilePanelTitle');
     const mobileParameterDetails = document.getElementById('mobileParameterDetails');
     const closeMobileInfoBtn = document.querySelector('.btn-close-mobile-info');
+   
 
     // Логотип
     // 'ЯСЕНЬ'.split('').forEach(letter => {
@@ -325,12 +326,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 card.className = `option-card ${positionClass} ${colorClass} ${isSelected ? 'selected' : ''}`;
                 card.dataset.optionId = option.id;
                 card.dataset.step = stepId;
-                
+                const isMobile = window.innerWidth < 480;
+
+               if (isMobile) {
+                // --- Мобильная версия (ТОЛЬКО icon + title) ---
                 card.innerHTML = `
                     <i class="fas ${option.icon}"></i>
-                    <div class="option-title">${option.title}</div>
-                    <div class="option-desc">${option.desc.substring(0, 60)}...</div>
-                `;
+                    <div class="option-title">${option.title}</div>    `;
+                } else {
+                    // --- Десктопная версия (как раньше) ---
+                    card.innerHTML = `
+                        <i class="fas ${option.icon}"></i>
+                        <div class="option-title">${option.title}</div>
+                        <div class="option-desc">${option.desc.substring(0, 60)}...</div>
+                    `;
+                }
                 
                 // Добавляем кота в прихожую
                 if (stepId === 'room' && option.id === 'hallway') {
