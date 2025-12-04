@@ -688,7 +688,6 @@ compact-steps {
 @media (max-width: 768px) {
     .app-container {
         display: flex;
-        
         flex-direction: column;
         height: 100vh;
         overflow: auto;
@@ -799,13 +798,8 @@ compact-steps {
     }
 }
     @media (max-width: 480px) {
-    .home-content {
-        padding: 10px;
-    }
-    
-      .app-container {
+    ..app-container {
         display: flex;
-        
         flex-direction: column;
         height: 100vh;
         overflow: auto;
@@ -828,7 +822,7 @@ compact-steps {
      .progress-track {
         flex-direction: row;
         justify-content:center;
-        width: 100%;
+        width: 90%;
     }
     
     .steps-container {
@@ -838,47 +832,80 @@ compact-steps {
     }
     
     .menu-step {
-        width: 35px;
-        height: 35px;
+        width: 55px;
+        height: 55px;
     }
     
-    .compact-step {
-        padding: 8px 10px;
-        min-height: 50px;
-        gap: 8px;
+    .menu-step i {
+        font-size: 1rem;
+        margin-bottom: 2px;
     }
     
-    .step-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 0.9rem;
+    .menu-step span {
+        font-size: 0.6rem;
     }
     
-    .step-content p {
-        font-size: 0.85rem;
+    .step-7 {
+        margin-top: 0;
+        margin-left: 5px;
+    }
+    
+    .maze-area {
+        flex: 1;
+        margin-bottom: 5px;
+        padding: 15px;
+        grid-column: auto;
+        grid-row: auto;
+    }
+    
+    .home-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .home-step {
+        padding: 15px;
+    }
+    
+    .home-step h3 {
+        font-size: 1.1rem;
+    }
+    
+    .house-grid {
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .option-card {
+        min-height: 100px;
+        padding: 15px;
+    }
+    
+    .option-card i {
+        font-size: 1.3rem;
+    }
+    
+    .option-card .option-title {
+        font-size: 1rem;
     }
     
     .selection-card {
-        padding: 10px 12px;
+        flex-direction: column;
+        gap: 15px;
+        height: auto;
+        padding: 15px;
+        margin-top: 5px;
+        grid-column: auto;
+        grid-row: auto;
     }
     
-    .selection-content {
-        gap: 8px;
+    .tags-container {
+        max-height: none;
     }
     
-    .selection-label {
-        font-size: 0.95rem;
-        gap: 6px;
-    }
-    
-    .selection-tag {
-        padding: 4px 8px;
-        font-size: 0.8rem;
-        max-width: 120px;
-    }
-    
-    .btn-primary {
-        padding: 6px 12px;
-        font-size: 0.8rem;
+    .cat {
+        font-size: 2.5rem;
+        bottom: 10px;
+        right: 10px;
     }
 }
