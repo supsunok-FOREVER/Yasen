@@ -650,7 +650,7 @@ body {
     }
     
     .sidebar-logo {
-        width: fit-content;
+        width: 100%;
         height: 70px;
         flex-direction: row;
         padding: 10px 15px;
@@ -675,6 +675,7 @@ body {
         flex-direction: row;
         margin-bottom: 0;
         gap: 8px;
+        justify-content: center;
     }
     
     .menu-step {
@@ -697,6 +698,7 @@ body {
     }
     
     .maze-area {
+        width: 100%;
         display: flex;
         flex: 1;
         margin-bottom: 5px;
@@ -719,6 +721,7 @@ body {
     }
     
     .house-grid {
+        width: 100%;
         display: flex;
         gap: 10px;
         padding: 10px;
@@ -800,5 +803,12 @@ body {
     .btn-primary {
         padding: 6px 12px;
         font-size: 0.8rem;
+    }
+     .steps-container {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0;
+        gap: 8px;
+        justify-content: center;
     }
 } 
