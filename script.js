@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== БАЗА ДАННЫХ ==========
     const stepsData = {
         home: {
-            title:  "7 шагов к идеальному дивану",
+            title: "Добро пожаловать!",
+            subtitle: "7 шагов к идеальному дивану",
             explanation: "Продуманный путь выбора от определения задачи до тест-драйва в салоне."
         },
         room: {
@@ -57,16 +58,16 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Форма и конфигурация дивана",
             explanation: "Модель определяет вместимость и то, как диван впишется в геометрию комнаты.",
             options: [
-                { id: 'model1', title: 'Прямой диван', icon: 'fa-square', 
-                  desc: 'для размещения у стены. Идеален для небольших пространств.' },
-                { id: 'model2', title: 'Угловой диван', icon: 'fa-th-large',
-                  desc: 'Максимально использует угол комнаты, больше посадочных мест.' },
-                { id: 'model3', title: 'Модульная система', icon: 'fa-puzzle-piece',
-                  desc: 'Можно менять конфигурацию под любые задачи.' },
-                { id: 'model4', title: 'Еврософа', icon: 'fa-star',
-                  desc: 'Компактная модель с лаконичным дизайном.' },
-                { id: 'model5', title: 'Диван-кровать', icon: 'fa-moon',
-                  desc: '. Основной акцент на удобство раскладывания.' }
+                { id: 'model1', title: 'Модель 1', icon: 'fa-square', 
+                  desc: 'Прямой диван для размещения у стены. Идеален для небольших пространств.' },
+                { id: 'model2', title: 'Модель 2', icon: 'fa-th-large',
+                  desc: 'Угловой диван. Максимально использует угол комнаты, больше посадочных мест.' },
+                { id: 'model3', title: 'Модель 3', icon: 'fa-puzzle-piece',
+                  desc: 'Модульная система. Можно менять конфигурацию под любые задачи.' },
+                { id: 'model4', title: 'Модель 4', icon: 'fa-star',
+                  desc: 'Еврософа. Компактная модель с лаконичным дизайном.' },
+                { id: 'model5', title: 'Модель 5', icon: 'fa-moon',
+                  desc: 'Диван-кровать. Основной акцент на удобство раскладывания.' }
             ]
         },
         mechanism: {
@@ -145,9 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    // Порядок шагов (основные шаги 1-6, без home и test для навигации)
+    // Порядок шагов
     const stepsOrder = ['home', 'room', 'model', 'mechanism', 'filling', 'fabric', 'decor', 'test'];
-    const mainSteps = ['room', 'model', 'mechanism', 'filling', 'fabric', 'decor']; // 6 основных шагов
     
     // Состояние
     const appState = {
@@ -179,11 +179,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeMobileInfoBtn = document.querySelector('.btn-close-mobile-info');
 
     // Логотип
-    // 'ЯСЕНЬ'.split('').forEach(letter => {
+    //'ЯСЕНЬ'.split('').forEach(letter => {
     //    const span = document.createElement('span');
     //    span.textContent = letter;
-    //    logoYasen.appendChild(span);
-    // });
+     //   logoYasen.appendChild(span);
+    //});
 
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateInfoPanel(stepId);
         
         // 5. Обновляем навигацию
-        updateNavigation();
+        updateNavigation(stepIndex);
         
         // 6. Обновляем карточку выбора
         updateSelectionCard();
@@ -228,52 +228,9 @@ document.addEventListener('DOMContentLoaded', function() {
             testContent.style.display = 'block';
             testContent.innerHTML = `
                 <h2 style="color: #8B4513; margin-bottom: 20px;"><i class="fas fa-flag-checkered"></i> Готово!</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 700px; margin: 0 auto 30px;">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 500px; margin: 0 auto 30px;">
                     Вы выбрали все параметры. Теперь самое важное — <strong>ощутить диван вживую</strong> в нашем салоне.
                 </p>
-                
-                <div style="background: #f9f5f0; padding: 25px; border-radius: 15px; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    <h3 style="color: #8B4513; margin-bottom: 20px; text-align: center;"><i class="fas fa-store"></i> Мы приглашаем вас в Наши магазины</h3>
-                    
-                    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-                        <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
-                            <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Мебель-Холл"</h4>
-                            <p style="color: #666; margin-bottom: 5px;">Санкт-Петербург, пл.Карла Фаберже, дом 8, секция 2-120, 1 этаж</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-subway"></i> м.Ладожская</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (812) 326-78-79</p>
-                            <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 20:00</p>
-                        </div>
-                        
-                        <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
-                            <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Торговый Двор"</h4>
-                            <p style="color: #666; margin-bottom: 5px;">Санкт-Петербург, пр.Науки, дом 21, секция 8, 2 этаж</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-subway"></i> м.Академическая</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (812) 207-10-14</p>
-                            <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 20:00</p>
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
-                        <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
-                            <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Всеволожский"</h4>
-                            <p style="color: #666; margin-bottom: 5px;">г.Всеволожск, Всеволожский пр., дом 61, секция 208, 2 этаж</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. 8 (81370) 43-628</p>
-                            <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 10:00 - 20:00</p>
-                        </div>
-                        
-                        <div style="flex: 1; min-width: 300px; background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #D2691E;">
-                            <h4 style="color: #5a4738; margin-bottom: 10px;"><i class="fas fa-map-marker-alt"></i> ТЦ "Юго-Запад"</h4>
-                            <p style="color: #666; margin-bottom: 5px;">Санкт-Петербург, пр.Маршала Жукова, дом 35, секция 57, 2 этаж</p>
-                            <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-phone"></i> тел. +7 (965) 042-99-06</p>
-                            <p style="color: #8B4513; font-weight: 600;"><i class="fas fa-clock"></i> пн-вс 11:00 - 21:00</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <p style="font-size: 1.1rem; margin-bottom: 20px; font-style: italic; color: #5a4738; max-width: 700px; margin-left: auto; margin-right: auto;">
-                    <i class="fas fa-star" style="color: #D2691E;"></i> Приходите, мы поможем вам выбрать идеальный диван и ответим на все вопросы!
-                </p>
-                
                 <button class="btn-primary" id="bookTestDrive" style="font-size: 1.1rem; padding: 15px 30px;">
                     <i class="fas fa-calendar-alt"></i> Записаться на тест-драйв
                 </button>
@@ -282,16 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const bookBtn = document.getElementById('bookTestDrive');
             if (bookBtn) {
                 bookBtn.addEventListener('click', function() {
-                    // Здесь можно добавить логику для записи на тест-драйв
-                    alert('Спасибо за интерес! Скоро с вами свяжется наш менеджер для записи на тест-драйв.');
-                    
-                    // Показываем номер телефона для звонка
-                    const phoneNumber = "+7 (965) 042-99-06";
-                    const confirmCall = confirm(`Хотите позвонить нам по номеру ${phoneNumber}?`);
-                    
-                    if (confirmCall) {
-                        window.location.href = `tel:${phoneNumber}`;
-                    }
+                    alert('Форма записи на тест-драйв. Все ваши выборы сохранены.');
                 });
             }
         } else {
@@ -364,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
             panelTitle.innerHTML = `<i class="fas fa-home"></i> ${stepData.title}`;
             panelSubtitle.textContent = stepData.subtitle;
             stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
-            parameterDetails.innerHTML = '';
+            parameterDetails.innerHTML = '<p>Нажмите "Начать выбор дивана" чтобы перейти к первому шагу.</p>';
             return;
         }
         
@@ -417,65 +365,33 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileInfoPanel.style.display = 'block';
         }
         
-        // Обновляем навигацию и карточку
-        updateNavigation();
         updateSelectionCard();
     }
 
-    function updateNavigation() {
-        const stepIndex = stepsOrder.indexOf(appState.currentStep);
-        const currentStep = appState.currentStep;
+    function updateNavigation(stepIndex) {
         const isMobile = window.innerWidth <= 1200;
         
-        // Кнопка "Назад"
         prevBtn.disabled = (stepIndex === 0);
+        nextBtn.disabled = (stepIndex === stepsOrder.length - 1);
         
-        // Кнопка "Далее" - новая логика
-        let nextDisabled = false;
-        
-        if (currentStep === 'home') {
-            nextDisabled = false; // Всегда можно перейти от home к room
-        } else if (currentStep === 'test') {
-            nextDisabled = true; // На test шаге кнопка "Далее" неактивна
-        } else if (mainSteps.includes(currentStep)) {
-            // Для основных шагов (1-6) проверяем выбран ли текущий шаг
-            const isCurrentStepSelected = !!appState.selections[currentStep];
-            nextDisabled = !isCurrentStepSelected;
-            
-            // На шаге 6 (decor) дополнительно проверяем, что все предыдущие шаги выбраны
-            if (currentStep === 'decor') {
-                const allPreviousSelected = mainSteps.every(step => 
-                    step === 'decor' ? true : !!appState.selections[step]
-                );
-                nextDisabled = !allPreviousSelected;
-            }
-        }
-        
-        nextBtn.disabled = nextDisabled;
-        
-        // Меняем текст кнопки "Далее" на последнем шаге перед test
-        if (currentStep === 'decor') {
+        if (stepIndex === stepsOrder.length - 2) {
             nextBtn.innerHTML = 'К тест-драйву <i class="fas fa-arrow-right"></i>';
         } else {
             nextBtn.innerHTML = 'Далее <i class="fas fa-arrow-right"></i>';
         }
         
-        // Обновляем номер шага (для home показываем 0, для остальных - реальный номер)
-        let displayStepNum = 0;
-        if (currentStep !== 'home' && currentStep !== 'test') {
-            displayStepNum = mainSteps.indexOf(currentStep) + 1;
-        } else if (currentStep === 'test') {
-            displayStepNum = 7;
-        }
+        // Обновляем номер шага (исключая home из счётчика)
+        const displayStepNum = stepIndex === 0 ? 0 : stepIndex;
         currentStepNum.textContent = displayStepNum;
         
-        // Проверяем, все ли 6 основных шагов выбраны для активации кнопки внизу
-        const allMainStepsSelected = mainSteps.every(step => !!appState.selections[step]);
-        finalButton.disabled = !allMainStepsSelected;
+        // Проверяем, все ли шаги выбраны (кроме home)
+        const mainSteps = stepsOrder.slice(1, -1); // Все кроме 'home' и 'test'
+        const allSelected = mainSteps.every(step => appState.selections[step]);
+        finalButton.disabled = !allSelected;
         
         // На мобильных скрываем навигацию на home и test
         if (isMobile) {
-            const isHomeOrTest = currentStep === 'home' || currentStep === 'test';
+            const isHomeOrTest = stepsOrder[stepIndex] === 'home' || stepsOrder[stepIndex] === 'test';
             document.querySelector('.panel-navigation').style.display = isHomeOrTest ? 'none' : 'flex';
         }
     }
@@ -492,14 +408,15 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        mainSteps.forEach((stepId, index) => {
+        stepsOrder.slice(1, -1).forEach(stepId => {
             if (appState.selections[stepId]) {
                 const selection = appState.selections[stepId];
+                const stepIndex = stepsOrder.indexOf(stepId);
                 
                 const tag = document.createElement('div');
                 tag.className = 'selection-tag';
                 tag.innerHTML = `
-                    <div class="tag-step">${index + 1}</div>
+                    <div class="tag-step">${stepIndex}</div>
                     <span>${selection.title}</span>
                 `;
                 
@@ -565,13 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     finalButton.addEventListener('click', function(event) {
         event.preventDefault();
-        // Проверяем, все ли шаги выбраны
-        const allMainStepsSelected = mainSteps.every(step => !!appState.selections[step]);
-        if (allMainStepsSelected) {
-            goToStep('test');
-        } else {
-            alert('Пожалуйста, завершите выбор всех параметров.');
-        }
+        goToStep('test');
     });
 
     closeMobileInfoBtn?.addEventListener('click', function() {
@@ -580,7 +491,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Адаптация при изменении размера окна
     window.addEventListener('resize', function() {
-        updateNavigation();
+        const currentStep = appState.currentStep;
+        updateNavigation(stepsOrder.indexOf(currentStep));
     });
 
     // ========== ЗАПУСК ==========

@@ -1,4 +1,4 @@
-это мой проект -/* Базовые стили */
+/* Базовые стили */
 * {
     margin: 0;
     padding: 0;
@@ -151,7 +151,7 @@ body {
     width: 100%;
     max-width: 900px;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
 }
 
 .home-content h1 {
@@ -163,14 +163,14 @@ body {
 .home-steps {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 25px;
+    margin-bottom: 40px;
 }
 
 .home-step {
     background: rgba(232, 215, 198, 0.2);
-    border-radius: 25px;
-    padding: 5px;
+    border-radius: 15px;
+    padding: 25px;
     text-align: left;
     position: relative;
     border-left: 5px solid #8B4513;
@@ -288,7 +288,6 @@ body {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     min-height: 180px;
     width: 100%;
-    position: relative;
 }
 
 .option-card:hover {
@@ -301,12 +300,8 @@ body {
 }
 
 .option-card i {
-    font-size: 1.8rem;
+    font-size: 2.8rem;
     margin-bottom: 15px;
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    margin: 0;
 }
 
 .option-card .option-title {
@@ -641,7 +636,6 @@ body {
 @media (max-width: 768px) {
     .app-container {
         display: flex;
-        justify-content:center;
         flex-direction: column;
         height: 100vh;
         overflow: auto;
@@ -656,26 +650,27 @@ body {
         padding: 10px 15px;
         margin-bottom: 5px;
         grid-row: auto;
-        align-items: center;
-        justify-content: center;
     }
-
+    
+    .logo-vertical {
+        writing-mode: horizontal-tb;
+        height: auto;
+        margin-bottom: 0;
+        margin-right: 20px;
+        font-size: 1.8rem;
+        letter-spacing: 5px;
+    }
     
     .progress-track {
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         width: 100%;
-        height: fit-content;
-        align-items: center;
-        display: flex;
     }
     
     .steps-container {
-        display: flex;
         flex-direction: row;
         margin-bottom: 0;
         gap: 8px;
-        justify-content: center;
     }
     
     .menu-step {
@@ -698,8 +693,6 @@ body {
     }
     
     .maze-area {
-        width: 100%;
-        display: flex;
         flex: 1;
         margin-bottom: 5px;
         padding: 15px;
@@ -721,15 +714,12 @@ body {
     }
     
     .house-grid {
-        width: 100%;
-        display: flex;
         gap: 10px;
         padding: 10px;
     }
     
     .option-card {
-        display: flex;
-        min-height: 90px;
+        min-height: 130px;
         padding: 15px;
     }
     
@@ -760,55 +750,4 @@ body {
         bottom: 10px;
         right: 10px;
     }
-    @media (max-width: 480px) {
-    .home-content {
-        padding: 10px;
-    }
-    
-    .compact-step {
-        padding: 8px 10px;
-        min-height: 50px;
-        gap: 8px;
-    }
-    
-    .step-icon {
-        width: 28px;
-        height: 28px;
-        font-size: 0.9rem;
-    }
-    
-    .step-content p {
-        font-size: 0.85rem;
-    }
-    
-    .selection-card {
-        padding: 10px 12px;
-    }
-    
-    .selection-content {
-        gap: 8px;
-    }
-    
-    .selection-label {
-        font-size: 0.95rem;
-        gap: 6px;
-    }
-    
-    .selection-tag {
-        padding: 4px 8px;
-        font-size: 0.8rem;
-        max-width: 120px;
-    }
-    
-    .btn-primary {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-     .steps-container {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 0;
-        gap: 8px;
-        justify-content: center;
-    }
-} 
+}
