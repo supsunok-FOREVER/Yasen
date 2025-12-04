@@ -803,20 +803,45 @@ compact-steps {
         padding: 10px;
     }
     
-      .sidebar-logo {
+      .app-container {
         display: flex;
-        width: 90%;
+        
+        flex-direction: column;
+        height: 100vh;
+        overflow: auto;
+        padding: 5px;
+        gap: 5px;
+    }
+    
+    .sidebar-logo {
+        display: flex;
+        width: 100%;
         height: 80px;
         flex-direction: row;
         padding: 5px 5px;
         margin-bottom: 5px;
         grid-row: auto;
         align-items: center;
-      }
-      .progress-track {
+        
+    }
+    
+     .progress-track {
         flex-direction: row;
-        width: 90%;
-      }
+        justify-content:center;
+        width: 100%;
+    }
+    
+    .steps-container {
+        flex-direction: row;
+        margin-bottom: 0;
+        gap: 8px;
+    }
+    
+    .menu-step {
+        width: 35px;
+        height: 35px;
+    }
+    
     .compact-step {
         padding: 8px 10px;
         min-height: 50px;
