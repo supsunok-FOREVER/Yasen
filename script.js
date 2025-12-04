@@ -348,9 +348,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="option-title">${option.title}</div>
                     <div class="option-desc">${option.desc.substring(0, 60)}...</div>
                 `;
-                
-          
-                
                 houseGrid.appendChild(card);
             });
             
@@ -428,8 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileParameterDetails.innerHTML = `<p>${optionData.desc}</p>`;
          mobileInfoPanel.style.display = 'block';
 
-    // Добавляем класс к body, чтобы дать отступ снизу (если CSS использует body.mobile-info-open)
-    //document.body.classList.add('mobile-info-open');
         }
         
         // Обновляем навигацию и карточку
