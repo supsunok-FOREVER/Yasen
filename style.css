@@ -798,7 +798,7 @@ compact-steps {
     }
 }
     @media (max-width: 480px) {
-    ..app-container {
+    .app-container {
         display: flex;
         flex-direction: column;
         height: 100vh;
@@ -837,7 +837,7 @@ compact-steps {
     }
     
     .menu-step i {
-        font-size: 1rem;
+        font-size: 0.8rem;
         margin-bottom: 2px;
     }
     
