@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth <= 1200) {
             mobilePanelTitle.textContent = optionData.title;
             mobileParameterDetails.innerHTML = `<p>${optionData.desc}</p>`;
-//            mobileInfoPanel.style.display = 'block';
+         mobileInfoPanel.style.display = 'block';
 
     // Добавляем класс к body, чтобы дать отступ снизу (если CSS использует body.mobile-info-open)
     //document.body.classList.add('mobile-info-open');
@@ -497,16 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateSelectionCard() {
         selectionTags.innerHTML = '';
-        
-        if (Object.keys(appState.selections).length === 0) {
-            selectionTags.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-clipboard"></i>
-                    Выберите параметры
-                </div>`;
-            return;
-        }
-        
+          
         mainSteps.forEach((stepId, index) => {
             if (appState.selections[stepId]) {
                 const selection = appState.selections[stepId];
