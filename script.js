@@ -1,16 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    
-     document.addEventListener('click', function(event) {
-        const clickableStep = event.target.closest('.clickable-step');
-        if (clickableStep && appState.currentStep === 'home') {
-            const stepId = clickableStep.dataset.step;
-            if (stepId) {
-                goToStep(stepId);
-            }
-        }
-    });
-    // ========== БАЗА ДАННЫХ ==========
-    const stepsData = {
+const stepsData = {
         home: {
             title:  "7 шагов к идеальному дивану",
             explanation: "Продуманный путь выбора от определения задачи до тест-драйва в салоне."
@@ -155,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
+
     // Порядок шагов (основные шаги 1-6, без home и test для навигации)
     const stepsOrder = ['home', 'room', 'model', 'mechanism', 'filling', 'fabric', 'decor', 'test'];
     const mainSteps = ['room', 'model', 'mechanism', 'filling', 'fabric', 'decor']; // 6 основных шагов
@@ -182,12 +171,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetButton = document.getElementById('resetButton');
     const startButton = document.getElementById('startButton');
     const currentStepNum = document.getElementById('currentStepNum');
-    
+    const logoYasen = document.getElementById('logoYasen');
     const mobileInfoPanel = document.getElementById('mobileInfoPanel');
     const mobilePanelTitle = document.getElementById('mobilePanelTitle');
     const mobileParameterDetails = document.getElementById('mobileParameterDetails');
     const closeMobileInfoBtn = document.querySelector('.btn-close-mobile-info');
-   
 
     // Логотип
     // 'ЯСЕНЬ'.split('').forEach(letter => {
@@ -198,21 +186,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
-            if (stepId === 'home') {
-        // Удаляем старые обработчики и добавляем новые для кликабельных шагов
-        setTimeout(() => {
-            const clickableSteps = document.querySelectorAll('.clickable-step');
-            clickableSteps.forEach(step => {
-                step.addEventListener('click', function() {
-                    const stepId = this.dataset.step;
-                    if (stepId) {
-                        goToStep(stepId);
-                    }
-                });
-            });
-        }, 100); // Небольшая задержка для гарантии, что DOM обновлен
-    }
-    
         if (!stepsData[stepId]) return;
         
         // 1. Обновляем состояние
@@ -440,10 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth <= 1200) {
             mobilePanelTitle.textContent = optionData.title;
             mobileParameterDetails.innerHTML = `<p>${optionData.desc}</p>`;
-//            mobileInfoPanel.style.display = 'block';
-
-    // Добавляем класс к body, чтобы дать отступ снизу (если CSS использует body.mobile-info-open)
-    //document.body.classList.add('mobile-info-open');
+            mobileInfoPanel.style.display = 'block';
         }
         
         // Обновляем навигацию и карточку
@@ -615,50 +585,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== ЗАПУСК ==========
     goToStep('home');
 });
-
-// ===== Mobile panel: защита от всплытия и надёжное закрытие =====
-(function setupMobilePanelClose() {
-    if (!mobileInfoPanel) return;
-
-    // Предотвращаем всплытие кликов внутри панели (чтобы document click не перехватил)
-    mobileInfoPanel.addEventListener('click', function (e) {
-        e.stopPropagation();
-    });
-
-    // Надёжный обработчик закрытия кнопки X
-    if (closeMobileInfoBtn) {
-        closeMobileInfoBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation(); // чтобы внешний click не сработал
-
-            // Снимаем видимость (если у тебя есть CSS .mobile-info-panel.show — используем его)
-            mobileInfoPanel.classList.remove('show');
-
-            // Убираем inline display (если где-то ставится)
-            mobileInfoPanel.style.display = 'none';
-
-            // Убираем отступ у body (если добавлялся)
-            document.body.classList.remove('mobile-info-open');
-        });
-    }
-
-    // Закрытие по клику вне панели (если нужно): клик по документу закроет панель
-    document.addEventListener('click', function () {
-        if (mobileInfoPanel.classList.contains('show') || mobileInfoPanel.style.display === 'block') {
-            mobileInfoPanel.classList.remove('show');
-            mobileInfoPanel.style.display = 'none';
-            document.body.classList.remove('mobile-info-open');
-        }
-    });
-
-    // Закрытие по ESC
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            if (mobileInfoPanel.classList.contains('show') || mobileInfoPanel.style.display === 'block') {
-                mobileInfoPanel.classList.remove('show');
-                mobileInfoPanel.style.display = 'none';
-                document.body.classList.remove('mobile-info-open');
-            }
-        }
-    });
-})();
