@@ -1,9 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+     document.addEventListener('click', function(event) {
+        const clickableStep = event.target.closest('.clickable-step');
+        if (clickableStep && appState.currentStep === 'home') {
+            const stepId = clickableStep.dataset.step;
+            if (stepId) {
+                goToStep(stepId);
+            }
+        }
+    });
     // ========== БАЗА ДАННЫХ ==========
     const stepsData = {
         home: {
-            title: "Добро пожаловать!",
-            subtitle: "7 шагов к идеальному дивану",
+            title:  "7 шагов к идеальному дивану",
             explanation: "Продуманный путь выбора от определения задачи до тест-драйва в салоне."
         },
         room: {
@@ -58,16 +67,16 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Форма и конфигурация дивана",
             explanation: "Модель определяет вместимость и то, как диван впишется в геометрию комнаты.",
             options: [
-                { id: 'model1', title: 'Модель 1', icon: 'fa-square', 
-                  desc: 'Прямой диван для размещения у стены. Идеален для небольших пространств.' },
-                { id: 'model2', title: 'Модель 2', icon: 'fa-th-large',
-                  desc: 'Угловой диван. Максимально использует угол комнаты, больше посадочных мест.' },
-                { id: 'model3', title: 'Модель 3', icon: 'fa-puzzle-piece',
-                  desc: 'Модульная система. Можно менять конфигурацию под любые задачи.' },
-                { id: 'model4', title: 'Модель 4', icon: 'fa-star',
-                  desc: 'Еврософа. Компактная модель с лаконичным дизайном.' },
-                { id: 'model5', title: 'Модель 5', icon: 'fa-moon',
-                  desc: 'Диван-кровать. Основной акцент на удобство раскладывания.' }
+                { id: 'model1', title: 'Прямой диван', icon: 'fa-square', 
+                  desc: 'для размещения у стены. Идеален для небольших пространств.' },
+                { id: 'model2', title: 'Угловой диван', icon: 'fa-th-large',
+                  desc: 'Максимально использует угол комнаты, больше посадочных мест.' },
+                { id: 'model3', title: 'Модульная система', icon: 'fa-puzzle-piece',
+                  desc: 'Можно менять конфигурацию под любые задачи.' },
+                { id: 'model4', title: 'Еврософа', icon: 'fa-star',
+                  desc: 'Компактная модель с лаконичным дизайном.' },
+                { id: 'model5', title:'Диван-Кровать', icon: 'fa-moon',
+                  desc: 'Основной акцент на удобство раскладывания.' }
             ]
         },
         mechanism: {
@@ -75,16 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Способ трансформации дивана",
             explanation: "Механизм — это сердце дивана, если нужно спальное место.",
             options: [
-                { id: 'mechanism1', title: 'Механизм 1', icon: 'fa-book-open', 
-                  desc: 'Еврокнижка. Надёжный и простой механизм для ежедневного сна.' },
-                { id: 'mechanism2', title: 'Механизм 2', icon: 'fa-arrow-right',
-                  desc: 'Выкатной. Спальное место выкатывается из-под сиденья.' },
-                { id: 'mechanism3', title: 'Механизм 3', icon: 'fa-fish',
-                  desc: 'Дельфин. Чаще используется в угловых диванах.' },
-                { id: 'mechanism4', title: 'Механизм 4', icon: 'fa-comments',
-                  desc: 'Клик-кляк. Позволяет фиксировать спинку в нескольких положениях.' },
-                { id: 'mechanism5', title: 'Механизм 5', icon: 'fa-times-circle',
-                  desc: 'Без механизма. Стационарный диван, не для трансформации.' }
+                { id: 'mechanism1', title: 'Еврокнижка', icon: 'fa-book-open', 
+                  desc: 'Надёжный и простой механизм для ежедневного сна.' },
+                { id: 'mechanism2', title: 'Выкатной', icon: 'fa-arrow-right',
+                  desc: 'Спальное место выкатывается из-под сиденья.' },
+                { id: 'mechanism3', title: 'Дельфин', icon: 'fa-fish',
+                  desc: 'Чаще используется в угловых диванах.' },
+                { id: 'mechanism4', title: 'Клик-кляк', icon: 'fa-comments',
+                  desc: 'Позволяет фиксировать спинку в нескольких положениях.' },
+                { id: 'mechanism5', title: 'Без механизма', icon: 'fa-times-circle',
+                  desc: 'Стационарный диван, не для трансформации.' }
             ]
         },
         filling: {
@@ -92,16 +101,16 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Внутреннее наполнение дивана",
             explanation: "Наполнитель определяет мягкость, упругость и долговечность дивана.",
             options: [
-                { id: 'filling1', title: 'Наполнитель 1', icon: 'fa-layer-group', 
-                  desc: 'ППУ (Стретчпен). Современный, упругий материал с эффектом памяти.' },
-                { id: 'filling2', title: 'Наполнитель 2', icon: 'fa-bolt',
-                  desc: 'Пружинный блок. Классическое решение для ортопедической поддержки.' },
-                { id: 'filling3', title: 'Наполнитель 3', icon: 'fa-feather',
-                  desc: 'Латекс. Натуральный материал, гипоаллергенный и дышащий.' },
-                { id: 'filling4', title: 'Наполнитель 4', icon: 'fa-cloud',
-                  desc: 'Холлофайбер. Мягкий и объёмный синтетический материал.' },
-                { id: 'filling5', title: 'Наполнитель 5', icon: 'fa-heart',
-                  desc: 'Пух/перо. Классический наполнитель для максимальной мягкости.' }
+                { id: 'filling1', title: 'ППУ (Стретчпен)', icon: 'fa-layer-group', 
+                  desc: 'Современный, упругий материал с эффектом памяти.' },
+                { id: 'filling2', title: 'Пружинный блок', icon: 'fa-bolt',
+                  desc: 'Классическое решение для ортопедической поддержки.' },
+                { id: 'filling3', title: 'Латекс', icon: 'fa-feather',
+                  desc: 'Натуральный материал, гипоаллергенный и дышащий.' },
+                { id: 'filling4', title: 'Холлофайбер', icon: 'fa-cloud',
+                  desc: 'Мягкий и объёмный синтетический материал.' },
+                { id: 'filling5', title: 'Пух/перо', icon: 'fa-heart',
+                  desc: 'Классический наполнитель для максимальной мягкости.' }
             ]
         },
         fabric: {
@@ -109,16 +118,16 @@ document.addEventListener('DOMContentLoaded', function() {
             subtitle: "Обивочный материал дивана",
             explanation: "Ткань определяет тактильные ощущения, износостойкость и внешний вид.",
             options: [
-                { id: 'fabric1', title: 'Ткань 1', icon: 'fa-th', 
-                  desc: 'Рогожка. Прочная фактурная ткань из натуральных волокон.' },
-                { id: 'fabric2', title: 'Ткань 2', icon: 'fa-soft',
-                  desc: 'Велюр. Мягкая, приятная на ощупь ткань с коротким ворсом.' },
-                { id: 'fabric3', title: 'Ткань 3', icon: 'fa-paw',
-                  desc: 'Антикоготь. Высокотехнологичная ткань с повышенной стойкостью.' },
-                { id: 'fabric4', title: 'Ткань 4', icon: 'fa-braille',
-                  desc: 'Шенилл. Плотная, мягкая ткань, хорошо скрывает загрязнения.' },
-                { id: 'fabric5', title: 'Ткань 5', icon: 'fa-ring',
-                  desc: 'Кожа. Натуральный материал premium-класса, элегантный и долговечный.' }
+                { id: 'fabric1', title: 'Рогожка', icon: 'fa-th', 
+                  desc: 'Прочная фактурная ткань из натуральных волокон.' },
+                { id: 'fabric2', title: 'Велюр', icon: 'fa-soft',
+                  desc: 'Мягкая, приятная на ощупь ткань с коротким ворсом.' },
+                { id: 'fabric3', title: 'Антикоготь', icon: 'fa-paw',
+                  desc: 'Высокотехнологичная ткань с повышенной стойкостью.' },
+                { id: 'fabric4', title: 'Шенилл', icon: 'fa-braille',
+                  desc: 'Плотная, мягкая ткань, хорошо скрывает загрязнения.' },
+                { id: 'fabric5', title: 'Кожа', icon: 'fa-ring',
+                  desc: 'Натуральный материал premium-класса, элегантный и долговечный.' }
             ]
         },
         decor: {
@@ -147,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Порядок шагов (основные шаги 1-6, без home и test для навигации)
-    const stepsOrder = ['home', 'room', 'model', 'mechanism', 'filling', 'fabric', 'decor'];
+    const stepsOrder = ['home', 'room', 'model', 'mechanism', 'filling', 'fabric', 'decor', 'test'];
     const mainSteps = ['room', 'model', 'mechanism', 'filling', 'fabric', 'decor']; // 6 основных шагов
     
     // Состояние
@@ -173,21 +182,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const resetButton = document.getElementById('resetButton');
     const startButton = document.getElementById('startButton');
     const currentStepNum = document.getElementById('currentStepNum');
-    const logoYasen = document.getElementById('logoYasen');
+    
     const mobileInfoPanel = document.getElementById('mobileInfoPanel');
     const mobilePanelTitle = document.getElementById('mobilePanelTitle');
     const mobileParameterDetails = document.getElementById('mobileParameterDetails');
     const closeMobileInfoBtn = document.querySelector('.btn-close-mobile-info');
+   
 
     // Логотип
-    //'ЯСЕНЬ'.split('').forEach(letter => {
-     //   const span = document.createElement('span');
-       // span.textContent = letter;
-        //logoYasen.appendChild(span);
-    //});
+    // 'ЯСЕНЬ'.split('').forEach(letter => {
+    //    const span = document.createElement('span');
+    //    span.textContent = letter;
+    //    logoYasen.appendChild(span);
+    // });
 
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
+            if (stepId === 'home') {
+        // Удаляем старые обработчики и добавляем новые для кликабельных шагов
+        setTimeout(() => {
+            const clickableSteps = document.querySelectorAll('.clickable-step');
+            clickableSteps.forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepId = this.dataset.step;
+                    if (stepId) {
+                        goToStep(stepId);
+                    }
+                });
+            });
+        }, 100); // Небольшая задержка для гарантии, что DOM обновлен
+    }
+    
         if (!stepsData[stepId]) return;
         
         // 1. Обновляем состояние
@@ -271,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 
-                <p style="font-size: 1.1rem; margin-bottom: 30px; font-style: italic; color: #5a4738; max-width: 700px; margin-left: auto; margin-right: auto;">
+                <p style="font-size: 1.1rem; margin-bottom: 20px; font-style: italic; color: #5a4738; max-width: 700px; margin-left: auto; margin-right: auto;">
                     <i class="fas fa-star" style="color: #D2691E;"></i> Приходите, мы поможем вам выбрать идеальный диван и ответим на все вопросы!
                 </p>
                 
@@ -365,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
             panelTitle.innerHTML = `<i class="fas fa-home"></i> ${stepData.title}`;
             panelSubtitle.textContent = stepData.subtitle;
             stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
-            parameterDetails.innerHTML = '<p>Нажмите "Начать выбор дивана" чтобы перейти к первому шагу.</p>';
+            parameterDetails.innerHTML = '';
             return;
         }
         
@@ -415,7 +440,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.innerWidth <= 1200) {
             mobilePanelTitle.textContent = optionData.title;
             mobileParameterDetails.innerHTML = `<p>${optionData.desc}</p>`;
-            mobileInfoPanel.style.display = 'block';
+//            mobileInfoPanel.style.display = 'block';
+
+    // Добавляем класс к body, чтобы дать отступ снизу (если CSS использует body.mobile-info-open)
+    //document.body.classList.add('mobile-info-open');
         }
         
         // Обновляем навигацию и карточку
@@ -571,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (allMainStepsSelected) {
             goToStep('test');
         } else {
-            alert('Пожалуйста, завершите выбор всех параметров (6 шагов) перед переходом к тест-драйву.');
+            alert('Пожалуйста, завершите выбор всех параметров.');
         }
     });
 
@@ -587,3 +615,50 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== ЗАПУСК ==========
     goToStep('home');
 });
+
+// ===== Mobile panel: защита от всплытия и надёжное закрытие =====
+(function setupMobilePanelClose() {
+    if (!mobileInfoPanel) return;
+
+    // Предотвращаем всплытие кликов внутри панели (чтобы document click не перехватил)
+    mobileInfoPanel.addEventListener('click', function (e) {
+        e.stopPropagation();
+    });
+
+    // Надёжный обработчик закрытия кнопки X
+    if (closeMobileInfoBtn) {
+        closeMobileInfoBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // чтобы внешний click не сработал
+
+            // Снимаем видимость (если у тебя есть CSS .mobile-info-panel.show — используем его)
+            mobileInfoPanel.classList.remove('show');
+
+            // Убираем inline display (если где-то ставится)
+            mobileInfoPanel.style.display = 'none';
+
+            // Убираем отступ у body (если добавлялся)
+            document.body.classList.remove('mobile-info-open');
+        });
+    }
+
+    // Закрытие по клику вне панели (если нужно): клик по документу закроет панель
+    document.addEventListener('click', function () {
+        if (mobileInfoPanel.classList.contains('show') || mobileInfoPanel.style.display === 'block') {
+            mobileInfoPanel.classList.remove('show');
+            mobileInfoPanel.style.display = 'none';
+            document.body.classList.remove('mobile-info-open');
+        }
+    });
+
+    // Закрытие по ESC
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            if (mobileInfoPanel.classList.contains('show') || mobileInfoPanel.style.display === 'block') {
+                mobileInfoPanel.classList.remove('show');
+                mobileInfoPanel.style.display = 'none';
+                document.body.classList.remove('mobile-info-open');
+            }
+        }
+    });
+})();
