@@ -812,11 +812,11 @@ compact-steps {
         margin-bottom: 5px;
         grid-row: auto;
         align-items: center;
+      }
       .progress-track {
         flex-direction: row;
-        justify-content:center;
         width: 90%;
-    }
+      }
     .compact-step {
         padding: 8px 10px;
         min-height: 50px;
