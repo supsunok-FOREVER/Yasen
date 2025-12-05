@@ -429,6 +429,26 @@ body {
 .color-4 { background: #E6E1F2; color: #4a3c94; }
 .color-5 { background: #F5F1E8; color: #666; }
 
+.finalButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.finalButton:disabled:hover::after {
+    content: "Заполните все 6 параметров выше";
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #5a4738;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
 /* Тест-драйв контент */
 .test-drive-content {
@@ -915,7 +935,6 @@ compact-steps {
     .app-container {
         display: flex;
         flex-direction: column;
-        height: 98%;
         overflow: flex;
         padding: 1px;
         gap: 5px;
@@ -985,8 +1004,8 @@ compact-steps {
         gap: 20px;
         width: 95%;
         max-width: 500px;
-        height: 100%;
         max-height: 500px;
+        width: fit-content
 }
     .home-content h1 {
         font-size: 1.5rem;
@@ -1010,6 +1029,7 @@ compact-steps {
         min-height: 8px;
         padding: 2px;
         font-size: 0.7rem;
+        height: auto;
     }
     
     .option-card i {
@@ -1023,9 +1043,8 @@ compact-steps {
     .option-card .option-desc {
         font-size: 0.9rem;
     }
-    
     .selection-card {
-        flex-direction: column;
+        display: flex;
         gap: 5px;
         height: auto;
         padding: 5px;
@@ -1033,6 +1052,7 @@ compact-steps {
         grid-column: auto;
         grid-row: auto;
         font-size: 0.7rem;
+        align-items: center;
 
     }
     
