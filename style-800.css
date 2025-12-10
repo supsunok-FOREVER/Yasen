@@ -1,27 +1,46 @@
 /* Адаптация для экранов до 800px */
-/* Скрываем логотип на мобильных устройствах */
 @media (max-width: 800px) {
+    /* 1. ИЗМЕНЯЕМ ОСНОВНУЮ GRID-СТРУКТУРУ */
+    .app-container {
+        display: grid;
+        grid-template-columns: 220px 1fr; /* 2 колонки вместо 3 */
+        grid-template-rows: 1fr auto; /* 2 строки */
+        gap: 0;
+    }
+    
+    /* 2. ЯВНО ЗАДАЁМ ПОЗИЦИИ ЭЛЕМЕНТОВ */
+    .sidebar-logo {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 25px 15px;
+        height: auto;
+    }
+    
+    .maze-area {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 20px;
+    }
+    
+    .info-panel {
+        display: none; /* Скрываем правую панель */
+    }
+    
+    .selection-card {
+        grid-column: 1 / span 2; /* Занимает обе колонки */
+        grid-row: 2;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    
+    /* 3. ОСТАЛЬНЫЕ СТИЛИ (ваши существующие) */
     .logo-container {
         display: none !important;
     }
-    
-    /* Опционально: корректируем отступы меню */
-    .sidebar-logo {
-        padding: 15px 10px;
-        justify-content: center;
-    }
-    
-    .progress-track {
-        width: 100%;
-    }
-    
-    /* Убираем разделитель для шага 7, так как логотипа нет */
-    .step-7-container {
-        border-left: none;
-        margin-left: 0;
-        padding-left: 0;
-    }
-    
     
     .logo-text {
         font-size: 20px;
@@ -33,11 +52,18 @@
         font-size: 10px;
     }
     
-    
+    /* 4. ГОРИЗОНТАЛЬНОЕ МЕНЮ */
     .steps-container {
         flex-direction: row;
         gap: 8px;
         padding: 5px 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .steps-container::-webkit-scrollbar {
+        display: none;
     }
     
     .menu-step {
@@ -45,6 +71,7 @@
         padding: 10px;
         min-width: 70px;
         gap: 8px;
+        flex-shrink: 0;
     }
     
     .menu-step:hover {
@@ -76,13 +103,8 @@
         height: 18px;
         font-size: 10px;
     }
-   
-    .maze-area {
-        grid-column: 1;
-        grid-row: 2;
-        padding: 20px;
-    }
     
+    /* 5. ЦЕНТРАЛЬНАЯ ОБЛАСТЬ */
     .home-title {
         font-size: 28px;
     }
@@ -100,6 +122,7 @@
         gap: 15px;
     }
     
+    /* 6. HOUSE GRID - 1 колонка для планшетов */
     .house-grid {
         grid-template-columns: 1fr;
         grid-template-rows: repeat(5, 1fr);
@@ -132,15 +155,7 @@
         grid-row: 5;
     }
     
-    .selection-card {
-        grid-column: 1;
-        grid-row: 3;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-        padding: 15px 20px;
-    }
-    
+    /* 7. НИЖНЯЯ ПАНЕЛЬ (уже задано выше) */
     .selection-card-header {
         justify-content: center;
     }
@@ -154,6 +169,7 @@
         width: 100%;
     }
     
+    /* 8. ТЕСТ-ДРАЙВ */
     .test-drive-container {
         padding: 20px;
     }
@@ -166,7 +182,7 @@
         min-width: 100%;
     }
     
-    /* Убираем отступ у body при открытой мобильной панели */
+    /* 9. МОБИЛЬНАЯ ПАНЕЛЬ */
     body.mobile-info-open {
         overflow: hidden;
     }
