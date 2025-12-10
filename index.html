@@ -2,16 +2,43 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Магазин «Ясень» - 7 шагов к идеальному дивану</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" media="(max-width: 1200px)" href="style-1200.css">
-    <link rel="stylesheet" media="(max-width: 800px)" href="style-800.css">
-    <link rel="stylesheet" media="(max-width: 480px)" href="style-480.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Preload critical assets -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome - preload and async load -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    
+    <!-- Google Fonts - preload and async load -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap">
+    </noscript>
+    
+    <!-- Ваши стили с conditional preload -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="style-480.css" as="style" media="(max-width: 480px)">
+    <link rel="preload" href="style-800.css" as="style" media="(min-width: 481px) and (max-width: 800px)">
+    <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1200px)">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Conditional stylesheets -->
+    <link rel="stylesheet" href="style-480.css" media="(max-width: 480px)">
+    <link rel="stylesheet" href="style-800.css" media="(min-width: 481px) and (max-width: 800px)">
+    <link rel="stylesheet" href="style-1200.css" media="(max-width: 1200px)">
+    
+    <title>Ваш персональный гид в мире комфорта и стиля</title>
 </head>
 <body>
     <div class="app-container">
