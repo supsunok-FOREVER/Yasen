@@ -1,0 +1,184 @@
+/* Адаптация для экранов до 800px */
+/* Скрываем логотип на мобильных устройствах */
+@media (max-width: 800px) {
+    .logo-container {
+        display: none !important;
+    }
+    
+    /* Опционально: корректируем отступы меню */
+    .sidebar-logo {
+        padding: 15px 10px;
+        justify-content: center;
+    }
+    
+    .progress-track {
+        width: 100%;
+    }
+    
+    /* Убираем разделитель для шага 7, так как логотипа нет */
+    .step-7-container {
+        border-left: none;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+    
+    .logo-text {
+        font-size: 20px;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+    }
+    
+    .logo-subtitle {
+        font-size: 10px;
+    }
+    
+    
+    .steps-container {
+        flex-direction: row;
+        gap: 8px;
+        padding: 5px 0;
+    }
+    
+    .menu-step {
+        flex-direction: column;
+        padding: 10px;
+        min-width: 70px;
+        gap: 8px;
+    }
+    
+    .menu-step:hover {
+        transform: translateY(-3px);
+    }
+    
+    .menu-step.active {
+        border-left: none;
+        border-bottom: 3px solid #e8d0b3;
+    }
+    
+    .menu-step-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    
+    .menu-step-text {
+        font-size: 12px;
+        text-align: center;
+        white-space: nowrap;
+    }
+    
+    .menu-step-number {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+    }
+   
+    .maze-area {
+        grid-column: 1;
+        grid-row: 2;
+        padding: 20px;
+    }
+    
+    .home-title {
+        font-size: 28px;
+    }
+    
+    .home-subtitle {
+        font-size: 16px;
+    }
+    
+    .compact-steps {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .steps-column {
+        gap: 15px;
+    }
+    
+    .house-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+        gap: 15px;
+        max-width: 500px;
+    }
+    
+    .house-roof {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    .house-left-top {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    
+    .house-right-top {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    
+    .house-left-bottom {
+        grid-column: 1;
+        grid-row: 4;
+    }
+    
+    .house-right-bottom {
+        grid-column: 1;
+        grid-row: 5;
+    }
+    
+    .selection-card {
+        grid-column: 1;
+        grid-row: 3;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+    
+    .selection-card-header {
+        justify-content: center;
+    }
+    
+    .tags-container {
+        justify-content: center;
+        min-height: 40px;
+    }
+    
+    .btn-final {
+        width: 100%;
+    }
+    
+    .test-drive-container {
+        padding: 20px;
+    }
+    
+    .shop-group {
+        flex-direction: column;
+    }
+    
+    .shop-card {
+        min-width: 100%;
+    }
+    
+    /* Убираем отступ у body при открытой мобильной панели */
+    body.mobile-info-open {
+        overflow: hidden;
+    }
+    
+    .mobile-info-panel {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        max-height: 70vh;
+    }
+    
+    .mobile-info-content h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+}

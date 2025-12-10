@@ -1,0 +1,384 @@
+{
+  "stepsData": {
+    "home": {
+      "title": "7 шагов к идеальному дивану",
+      "subtitle": "Ваш персональный гид в мире комфорта и стиля",
+      "explanation": "Продуманный путь выбора от определения задачи до тест-драйва в салоне.",
+      "compactSteps": [
+        {
+          "step": "room",
+          "icon": "fa-door-open",
+          "title": "Выберите комнату",
+          "description": "Где будет стоять диван"
+        },
+        {
+          "step": "model",
+          "icon": "fa-shapes",
+          "title": "Определитесь с формой",
+          "description": "Форма и размер дивана"
+        },
+        {
+          "step": "mechanism",
+          "icon": "fa-cogs",
+          "title": "Выберите механизм",
+          "description": "Способ трансформации"
+        },
+        {
+          "step": "filling",
+          "icon": "fa-layer-group",
+          "title": "Подберите наполнитель",
+          "description": "Оптимальная жёсткость"
+        },
+        {
+          "step": "fabric",
+          "icon": "fa-tshirt",
+          "title": "Выберите ткань",
+          "description": "Материал обивки"
+        },
+        {
+          "step": "decor",
+          "icon": "fa-palette",
+          "title": "Добавьте декор",
+          "description": "Индивидуальные детали"
+        }
+      ]
+    },
+    "room": {
+      "title": "Выберите комнату",
+      "subtitle": "Для каждой комнаты нужен свой диван",
+      "explanation": "Комната определяет размер, функцию и стиль будущего дивана.",
+      "options": [
+        {
+          "id": "hallway",
+          "title": "Прихожая",
+          "icon": "fa-home",
+          "desc": "Первое впечатление о доме. Часто ставят узкие банкетки или диваны с ящиком для хранения.",
+          "position": "roof",
+          "colorClass": "color-hallway"
+        },
+        {
+          "id": "kitchen",
+          "title": "Кухня",
+          "icon": "fa-utensils",
+          "desc": "Диван для кухни должен быть компактным, устойчивым к загрязнениям и влаге.",
+          "position": "left-top",
+          "colorClass": "color-kitchen"
+        },
+        {
+          "id": "living",
+          "title": "Гостиная",
+          "icon": "fa-couch",
+          "desc": "Главная комната для отдыха. Нужен стильный, комфортный диван, часто с функцией спального места.",
+          "position": "right-top",
+          "colorClass": "color-living"
+        },
+        {
+          "id": "kids",
+          "title": "Детская",
+          "icon": "fa-child",
+          "desc": "Игривое и безопасное пространство. Диван должен быть прочным, с немаркой тканью.",
+          "position": "left-bottom",
+          "colorClass": "color-kids"
+        },
+        {
+          "id": "bedroom",
+          "title": "Спальня",
+          "icon": "fa-bed",
+          "desc": "Личное пространство для релаксации. Диван должен быть удобным для чтения и уединения.",
+          "position": "right-bottom",
+          "colorClass": "color-bedroom"
+        }
+      ]
+    },
+    "model": {
+      "title": "Выберите модель",
+      "subtitle": "Форма и конфигурация дивана",
+      "explanation": "Модель определяет вместимость и то, как диван впишется в геометрию комнаты.",
+      "options": [
+        {
+          "id": "model1",
+          "title": "Прямой диван",
+          "icon": "fa-square",
+          "desc": "Идеален для размещения у стены в небольших пространствах."
+        },
+        {
+          "id": "model2",
+          "title": "Угловой диван",
+          "icon": "fa-th-large",
+          "desc": "Максимально использует угол комнаты, больше посадочных мест."
+        },
+        {
+          "id": "model3",
+          "title": "Модульная система",
+          "icon": "fa-puzzle-piece",
+          "desc": "Можно менять конфигурацию под любые задачи и пространства."
+        },
+        {
+          "id": "model4",
+          "title": "Еврософа",
+          "icon": "fa-star",
+          "desc": "Компактная модель с лаконичным дизайном для современных интерьеров."
+        },
+        {
+          "id": "model5",
+          "title": "Диван-Кровать",
+          "icon": "fa-moon",
+          "desc": "Основной акцент на удобство раскладывания и комфорт для сна."
+        }
+      ]
+    },
+    "mechanism": {
+      "title": "Выберите механизм",
+      "subtitle": "Способ трансформации дивана",
+      "explanation": "Механизм — это сердце дивана, если нужно спальное место.",
+      "options": [
+        {
+          "id": "mechanism1",
+          "title": "Еврокнижка",
+          "icon": "fa-book-open",
+          "desc": "Надёжный и простой механизм для ежедневного сна. Высокая износостойкость."
+        },
+        {
+          "id": "mechanism2",
+          "title": "Выкатной",
+          "icon": "fa-arrow-right",
+          "desc": "Спальное место выкатывается из-под сиденья. Ровная поверхность для сна."
+        },
+        {
+          "id": "mechanism3",
+          "title": "Дельфин",
+          "icon": "fa-fish",
+          "desc": "Чаще используется в угловых диванах. Простой и удобный механизм."
+        },
+        {
+          "id": "mechanism4",
+          "title": "Клик-кляк",
+          "icon": "fa-comments",
+          "desc": "Позволяет фиксировать спинку в нескольких положениях для отдыха."
+        },
+        {
+          "id": "mechanism5",
+          "title": "Без механизма",
+          "icon": "fa-times-circle",
+          "desc": "Стационарный диван, не для трансформации. Максимальный комфорт сидения."
+        }
+      ]
+    },
+    "filling": {
+      "title": "Выберите наполнитель",
+      "subtitle": "Внутреннее наполнение дивана",
+      "explanation": "Наполнитель определяет мягкость, упругость и долговечность дивана.",
+      "options": [
+        {
+          "id": "filling1",
+          "title": "ППУ (Стретчпен)",
+          "icon": "fa-layer-group",
+          "desc": "Современный, упругий материал с эффектом памяти. Быстро восстанавливает форму."
+        },
+        {
+          "id": "filling2",
+          "title": "Пружинный блок",
+          "icon": "fa-bolt",
+          "desc": "Классическое решение для ортопедической поддержки. Долговечность и комфорт."
+        },
+        {
+          "id": "filling3",
+          "title": "Латекс",
+          "icon": "fa-feather-alt",
+          "desc": "Натуральный материал, гипоаллергенный и дышащий. Мягкость и экологичность."
+        },
+        {
+          "id": "filling4",
+          "title": "Холлофайбер",
+          "icon": "fa-cloud",
+          "desc": "Мягкий и объёмный синтетический материал. Доступность и лёгкость."
+        },
+        {
+          "id": "filling5",
+          "title": "Пух/перо",
+          "icon": "fa-heart",
+          "desc": "Классический наполнитель для максимальной мягкости. Роскошь и комфорт."
+        }
+      ]
+    },
+    "fabric": {
+      "title": "Выберите ткань",
+      "subtitle": "Обивочный материал дивана",
+      "explanation": "Ткань определяет тактильные ощущения, износостойкость и внешний вид.",
+      "options": [
+        {
+          "id": "fabric1",
+          "title": "Рогожка",
+          "icon": "fa-th",
+          "desc": "Прочная фактурная ткань из натуральных волокон. Практичность и натуральность."
+        },
+        {
+          "id": "fabric2",
+          "title": "Велюр",
+          "icon": "fa-couch",
+          "desc": "Мягкая, приятная на ощупь ткань с коротким ворсом. Комфорт и элегантность."
+        },
+        {
+          "id": "fabric3",
+          "title": "Антикоготь",
+          "icon": "fa-paw",
+          "desc": "Высокотехнологичная ткань с повышенной стойкостью к повреждениям."
+        },
+        {
+          "id": "fabric4",
+          "title": "Шенилл",
+          "icon": "fa-braille",
+          "desc": "Плотная, мягкая ткань, хорошо скрывает загрязнения. Практичность."
+        },
+        {
+          "id": "fabric5",
+          "title": "Кожа",
+          "icon": "fa-circle",
+          "desc": "Натуральный материал premium-класса, элегантный и долговечный. Статус."
+        }
+      ]
+    },
+    "decor": {
+      "title": "Выберите декор",
+      "subtitle": "Детали оформления дивана",
+      "explanation": "Декор создаёт характер дивана и адаптирует его под ваш стиль.",
+      "options": [
+        {
+          "id": "decor1",
+          "title": "Подушки и спинки",
+          "icon": "fa-cube",
+          "desc": "Классические квадратные или валики. Добавляют комфорт и стиль."
+        },
+        {
+          "id": "decor2",
+          "title": "Подлокотники",
+          "icon": "fa-hand-paper",
+          "desc": "Мягкие, жёсткие или с функциональными полками. Удобство и функциональность."
+        },
+        {
+          "id": "decor3",
+          "title": "Ножки",
+          "icon": "fa-shoe-prints",
+          "desc": "Деревянные, металлические, пластиковые. Влияют на стиль и высоту."
+        },
+        {
+          "id": "decor4",
+          "title": "Стежка",
+          "icon": "fa-bezier-curve",
+          "desc": "Каретная стяжка или фигурные швы. Декоративные элементы."
+        },
+        {
+          "id": "decor5",
+          "title": "Кант",
+          "icon": "fa-border-style",
+          "desc": "Контрастная окантовка по краям дивана. Акцент на форме."
+        }
+      ]
+    },
+    "test": {
+      "title": "Запишитесь на тест-драйв!",
+      "subtitle": "Финальный шаг — встреча в салоне",
+      "explanation": "Вы прошли все шаги онлайн. Теперь самое важное — ощутить диван вживую.",
+      "shops": [
+        {
+          "name": "ТЦ \"Мебель-Холл\"",
+          "address": "Санкт-Петербург, пл.Карла Фаберже, дом 8, секция 2-120, 1 этаж",
+          "metro": "м.Ладожская",
+          "hours": "пн-вс 11:00 - 20:00",
+          "phone": "тел. 8 (812) 326-78-79"
+        },
+        {
+          "name": "ТЦ \"Торговый Двор\"",
+          "address": "Санкт-Петербург, пр.Науки, дом 21, секция 8, 2 этаж",
+          "metro": "м.Академическая",
+          "hours": "пн-вс 11:00 - 20:00",
+          "phone": "тел. 8 (812) 207-10-14"
+        },
+        {
+          "name": "ТЦ \"Всеволожский\"",
+          "address": "г.Всеволожск, Всеволожский пр., дом 61, секция 208, 2 этаж",
+          "metro": "",
+          "hours": "пн-вс 10:00 - 20:00",
+          "phone": "тел. 8 (81370) 43-628"
+        },
+        {
+          "name": "ТЦ \"Юго-Запад\"",
+          "address": "Санкт-Петербург, пр.Маршала Жукова, дом 35, секция 57, 2 этаж",
+          "metro": "",
+          "hours": "пн-вс 11:00 - 21:00",
+          "phone": "тел. +7 (965) 042-99-06"
+        }
+      ],
+      "phoneNumber": "+7 (965) 042-99-06",
+      "confirmationMessage": "Спасибо за интерес! Скоро с вами свяжется наш менеджер для записи на тест-драйв.",
+      "confirmCallMessage": "Хотите позвонить нам по номеру {{phoneNumber}}?"
+    }
+  },
+  "stepsOrder": ["home", "room", "model", "mechanism", "filling", "fabric", "decor", "test"],
+  "mainSteps": ["room", "model", "mechanism", "filling", "fabric", "decor"],
+  "uiTexts": {
+    "backButton": "Назад",
+    "nextButton": "Далее",
+    "toTestDriveButton": "К тест-драйву",
+    "resetButton": "Начать заново",
+    "startButton": "Начать подбор",
+    "finalButton": "Записаться на тест-драйв",
+    "bookTestDriveButton": "Записаться на тест-драйв",
+    "selectionCardTitle": "Ваша подборка",
+    "stepCounter": "Шаг {{current}} из {{total}}",
+    "noSelectionMessage": "Выберите параметр в центральном окне, чтобы увидеть его подробное описание.",
+    "touchFabricNote": "Обязательно прикоснитесь к тканям в салоне!",
+    "resetConfirmation": "Очистить все выборы?",
+    "completeAllStepsAlert": "Пожалуйста, завершите выбор всех параметров.",
+    "colorClasses": ["color-1", "color-2", "color-3", "color-4", "color-5"],
+    "mobilePanelTitle": "Информация",
+    "mobileNoSelectionMessage": "Выберите параметр для подробностей",
+    "shopInvitation": "Мы приглашаем вас в Наши магазины",
+    "callConfirmation": "Хотите позвонить нам?"
+  },
+  "icons": {
+    "home": "fa-home",
+    "info": "fa-info-circle",
+    "arrowLeft": "fa-arrow-left",
+    "arrowRight": "fa-arrow-right",
+    "redo": "fa-redo",
+    "clipboard": "fa-clipboard-list",
+    "store": "fa-store",
+    "mapMarker": "fa-map-marker-alt",
+    "subway": "fa-subway",
+    "clock": "fa-clock",
+    "phone": "fa-phone",
+    "calendarCheck": "fa-calendar-check",
+    "handPointRight": "fa-hand-point-right",
+    "times": "fa-times",
+    "playCircle": "fa-play-circle"
+  },
+  "uiClasses": {
+    "testDrive": {
+      "container": "test-drive-container",
+      "shopList": "shop-list",
+      "shopGroup": "shop-group",
+      "shopCard": "shop-card",
+      "shopName": "shop-name",
+      "shopAddress": "shop-address",
+      "shopMetro": "shop-metro",
+      "shopHours": "shop-hours",
+      "shopPhone": "shop-phone",
+      "buttonContainer": "button-container",
+      "bookButton": "book-test-drive-btn"
+    },
+    "home": {
+      "compactSteps": "compact-steps",
+      "stepsColumn": "steps-column",
+      "compactStep": "compact-step",
+      "stepIndicator": "step-indicator",
+      "stepIcon": "step-icon",
+      "stepContent": "step-content"
+    },
+    "houseGrid": {
+      "optionCard": "option-card",
+      "optionTitle": "option-title",
+      "optionDesc": "option-desc"
+    }
+  }
+}

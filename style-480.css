@@ -1,0 +1,206 @@
+/* Адаптация для экранов до 480px */
+@media (max-width: 480px) {
+    /* Убедимся, что логотип скрыт на самых маленьких экранах */
+
+        .logo-container {
+        display: none;
+    }
+    
+    /* Расширяем меню на всю ширину */
+    .sidebar-logo {
+        justify-content: space-around;
+    }
+   
+    .menu-step {
+        min-width: 55px;
+        padding: 6px 3px;
+    }
+     
+    .logo-text {
+        font-size: 18px;
+    }
+    
+    .logo-subtitle {
+        font-size: 9px;
+    }
+    
+    .steps-container {
+        gap: 5px;
+    }
+    
+     
+    .menu-step-icon {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    
+    .menu-step-text {
+        font-size: 11px;
+    }
+    
+    .menu-step-number {
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
+    }
+    
+    .step-7-container {
+        margin-left: 5px;
+        padding-left: 5px;
+    }
+    
+    .maze-area {
+        padding: 15px;
+    }
+    
+    .home-title {
+        font-size: 24px;
+    }
+    
+    .home-subtitle {
+        font-size: 14px;
+    }
+    
+    .compact-step {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .step-indicator {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .step-icon {
+        font-size: 20px;
+    }
+    
+    .step-content h3 {
+        font-size: 14px;
+    }
+    
+    .step-content p {
+        font-size: 12px;
+    }
+    
+    .btn-large {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+    
+    .house-grid {
+        gap: 12px;
+    }
+    
+    .option-card {
+        padding: 15px;
+        min-height: 160px;
+    }
+    
+    .option-card i {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    
+    .option-title {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .option-desc {
+        font-size: 12px;
+    }
+    
+    .selection-card {
+        padding: 12px 15px;
+    }
+    
+    .selection-card-header h3 {
+        font-size: 16px;
+    }
+    
+    .selection-tag {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    
+    .tag-step {
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+    }
+    
+    .test-drive-container {
+        padding: 15px;
+    }
+    
+    .test-drive-container h3 {
+        font-size: 20px;
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .shop-card {
+        padding: 15px;
+    }
+    
+    .shop-name {
+        font-size: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .shop-address,
+    .shop-metro,
+    .shop-hours,
+    .shop-phone {
+        font-size: 14px;
+    }
+    
+    .book-test-drive-btn {
+        padding: 15px 25px;
+        font-size: 16px;
+        width: 100%;
+    }
+    
+    /* Навигация на мобильных */
+    .panel-navigation {
+        margin: 20px 0;
+        padding: 15px;
+    }
+    
+    .step-counter {
+        font-size: 14px;
+    }
+    
+    .btn-nav {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .btn-nav span {
+        display: none;
+    }
+    
+    .btn-nav i {
+        margin: 0;
+    }
+    
+    /* Мобильная информационная панель */
+    .mobile-info-panel {
+        padding: 15px;
+    }
+    
+    .mobile-info-content h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .mobile-info-content p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
