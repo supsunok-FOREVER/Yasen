@@ -1,0 +1,6 @@
+/* style-360.css - Дополнительное уменьшение для экранов ≤360px */
+@media (max-width: 600) {
+     .option-card i {
+        display: none ;
+    }
+}
