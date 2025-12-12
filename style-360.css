@@ -58,7 +58,46 @@
     
     .step-content p {
         font-size: 9px;
+    }@media (max-width: 360px) {
+    .app-container {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr auto;
+        height: 100vh;
     }
+    
+    .sidebar-logo {
+        padding: 8px 0;
+        height: 100%;
+    }
+    
+    .steps-container {
+        padding: 0 6px;
+        gap: 4px;
+    }
+    
+    .menu-step {
+        padding: 6px;
+        gap: 6px;
+    }
+    
+    .menu-step-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .menu-step-text {
+        font-size: 10px;
+        min-width: 80px; /* Уменьшаем на маленьких экранах */
+    }
+    
+    .maze-area {
+        padding: 8px;
+    }
+    
+    /* Остальные стили остаются */
+    /* ... */
+}
     
     /* Грид: остаёмся 2x3, но ещё меньше */
     .house-grid {
