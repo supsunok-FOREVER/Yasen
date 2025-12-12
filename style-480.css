@@ -263,9 +263,7 @@
     .test-drive-container h3 i {
         font-size: 18px;
     }
-    @media (max-width: 480px) {
-    /* ... существующие стили ... */
-    
+   
     /* Адаптация заголовков главной страницы */
     .home-header {
         margin-bottom: 20px;
