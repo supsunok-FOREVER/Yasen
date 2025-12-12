@@ -1,21 +1,23 @@
 @media (max-width: 480px) {
-    .app-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr auto;
+      .app-container {
+        grid-template-columns: 70px 1fr; /* Меню слева, контент справа */
+        grid-template-rows: 1fr auto;
         grid-template-areas: 
-            "sidebar"
-            "main"
-            "footer";
+            "sidebar main"
+            "footer footer";
+        min-height: 100vh;
     }
     
-    /* Вертикальное меню (ещё меньше) */
+       /* Компактное вертикальное меню */
     .sidebar-logo {
         grid-area: sidebar;
-        padding: 10px 8px;
+        padding: 10px 5px;
         min-height: auto;
         background: #2c1810;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
     }
-    
     .logo-container {
         display: none;
     }
@@ -25,10 +27,14 @@
         gap: 6px;
     }
     
-    .menu-step {
-        padding: 8px;
+     .menu-step {
+        padding: 8px 5px;
         gap: 8px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
+    
     
     .menu-step-icon {
         width: 24px;
@@ -37,18 +43,19 @@
     }
     
     .menu-step-text {
-        font-size: 10px;
+        font-size: 9px;
+        line-height: 1.2;
+        white-space: normal;
+        display: block;
+    }
+   .menu-step-number {
+        display: none; /* Скрываем номера на мобилке */
     }
     
-    .menu-step-number {
-        width: 14px;
-        height: 14px;
-        font-size: 8px;
-    }
-    
-    .maze-area {
+     .maze-area {
         grid-area: main;
         padding: 10px;
+        overflow-y: auto;
     }
     
     /* Центральный контент */
@@ -84,6 +91,27 @@
     
     .step-content p {
         font-size: 10px;
+    }
+    
+        
+    /* Сетки подстраиваем под новую ширину */
+    .home-grid, .house-grid, .shops-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        max-width: 100%;
+    }
+    
+    .home-card, .option-card, .shop-card-grid {
+        padding: 10px;
+        min-height: 140px;
+    }
+    
+    /* Нижняя панель */
+    .selection-card {
+        grid-area: footer;
+        padding: 10px;
+        gap: 10px;
+        flex-wrap: wrap;
     }
     
     /* Квадратный грид 2x3 (ещё меньше) */
