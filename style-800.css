@@ -1,6 +1,7 @@
 @media (max-width: 751px) {
     .app-container {
-        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
         grid-template-columns: 1fr ;
         grid-template-rows: auto 1fr auto ;
         grid-template-areas: "sidebar" "main" "footer";
@@ -9,20 +10,26 @@
     .sidebar-logo {
         grid-area: sidebar ;
         flex-direction: row ;
-        min-height: 60px ;
+        min-height: 40px ;
+         display: flex;
+        
     }
+    .progress-track {align-content: center;}
     
     .maze-area {
         grid-area: main ;
         display: flex;
         width: 100%;
-    }
-    .house-grid{display: flex;
-        width: 100%;}
-    .info-panel {
+        padding: 1px;
+           }
+    .house-grid.optionDesc {max-height: 40px }
+       
+        .info-panel {
         display: none ;
     }
-    
+        .option-card i {
+        display: none ;
+    }
     .selection-card {
         grid-area: footer ;
     }
@@ -30,6 +37,7 @@
    /* 3. ОСТАЛЬНЫЕ СТИЛИ (ваши существующие) */
     .logo-container {
         display: none ;
+        width: 100%;
     }
     
     .logo-text {
@@ -45,32 +53,33 @@
     /* 4. ГОРИЗОНТАЛЬНОЕ МЕНЮ */
     .steps-container {
         flex-direction: row;
-        gap: 8px;
-        padding: 1px 0;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        }
     
     .steps-container::-webkit-scrollbar {
         display: none;
+        align-self: center;
     }
     
     .menu-step {
         flex-direction: column;
         padding: 1px;
-        min-width: 50px;
+        min-width: 30px;
         gap: 8px;
         flex-shrink: 0;
     }
     
     .menu-step:hover {
         transform: translateY(-3px);
+        align-self: center;
     }
     
     .menu-step.active {
         border-left: none;
         border-bottom: 3px solid #e8d0b3;
+        align-self: center;
     }
     
     .menu-step-icon {
@@ -146,25 +155,69 @@
     }
    
     .option-card {
-        justify-content: flex-start ;
+        display: flex;
+        justify-content: flex ;
         padding-top: 5px ;
-        max-height: 30px;
+        max-height: 10px;
+        min-height: 60px; /* Было 160px, уменьшаем */
+        max-height: 100px; /* Добавляем ограничение по высоте */
     }
+.option-card.option-title {align-content: left;}
+
+
     /* 7. НИЖНЯЯ ПАНЕЛЬ (уже задано выше) */
-    .selection-card-header {
-        justify-content: center;
+ .selection-card {
+        padding: 15px 20px ; /* Было 25px 30px */
+        gap: 15px ; /* Было 25px */
+        flex-wrap: wrap; /* Разрешаем перенос */
     }
     
-
-    .tags-container {
-        justify-content: center;
-        min-height: 40px;
+    .selection-card-header {
+        gap: 8px ; /* Было 15px */
     }
+    
+    .selection-card-header h3 {
+        font-size: 13px ; /* Было 18px */
+    }
+    
+    .selection-card-header i {
+        font-size: 18px ; /* Было 20px */
+    }
+    
+    /* Кнопка "Записаться на тест-драйв" */
+    .btn-final {
+        padding: 12px 24px ; /* Было 15px 30px */
+        font-size: 15px ; /* Было 16px */
+        white-space: nowrap; /* Не переносить текст */
+        flex-shrink: 0; /* Не сжимать кнопку */
+    }
+    
+    /* Теги выбора (когда будут) */
+    .tags-container {
+        gap: 8px ; /* Было 12px */
+        min-height: 35px ; /* Было 50px */
+    }
+    
+    .selection-tag {
+        padding: 8px 16px ; /* Было 10px 20px */
+        font-size: 14px ; /* Было 14px, оставляем */
+    }
+    
+    .tag-step {
+        width: 22px ; /* Было 24px */
+        height: 22px ;
+        font-size: 11px ; /* Было 12px */
+    }
+
     
     .btn-final {
-        width: 60%;
+         font-size: 11px
     }
-    
+    .selectionCardTitle{ font-size: 11px}
+      .btn-nav {
+        padding: 8px 10px ; /* Было 10px 15px */
+        font-size: 12px ; /* Было 14px */
+    }
     /* 8. ТЕСТ-ДРАЙВ */
     .test-drive-container {
         padding: 20px;

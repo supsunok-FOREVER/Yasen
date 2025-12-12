@@ -83,7 +83,7 @@ function initApp() {
             console.error('Шаг не найден:', stepId);
             return;
         }
-        
+
         // 1. Обновляем состояние
         appState.currentStep = stepId;
         
@@ -99,8 +99,7 @@ function initApp() {
         // 4. Обновляем правую панель
         updateInfoPanel(stepId);
         
-        // 5. Обновляем навигацию
-        updateNavigation();
+        // 5. Обновляем навигацию        updateNavigation();
         
         // 6. Обновляем карточку выбора
         updateSelectionCard();
@@ -397,8 +396,9 @@ function updateMainContent(stepId) {
     }
 
     function updateInfoPanel(stepId) {
+            if (window.innerWidth <= 480) {
+        return;}
         const stepData = appData.stepsData[stepId];
-        
         if (!stepData) return;
         
         if (stepId === 'home') {
@@ -429,129 +429,129 @@ function updateMainContent(stepId) {
         }
     }
 
-    function selectOption(stepId, optionData) {
-        // Сохраняем выбор
-        appState.selections[stepId] = optionData;
-        
-        // Визуально выделяем
-        document.querySelectorAll(`[data-step="${stepId}"]`).forEach(card => {
-            card.classList.remove('selected');
-            if (card.dataset.optionId === optionData.id) {
-                card.classList.add('selected');
-            }
-        });
-        
-        // Обновляем панель информации
-        const stepData = appData.stepsData[stepId];
-        const detailsHTML = `
-            <h4>${optionData.title}</h4>
+function selectOption(stepId, optionData) {
+    appState.selections[stepId] = optionData;
+
+    document.querySelectorAll(`[data-step="${stepId}"]`).forEach(card => {
+        card.classList.remove('selected');
+        if (card.dataset.optionId === optionData.id) {
+            card.classList.add('selected');
+        }
+    });
+
+    parameterDetails.innerHTML = `
+        <h4>${optionData.title}</h4>
+        <p>${optionData.desc}</p>
+        ${stepId === 'fabric' ? 
+            `<p class="fabric-note">
+                <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
+            </p>` : ''
+        }
+    `;
+
+    // Мобильная панель — только для телефонов
+    if (window.innerWidth <= 480) {
+        mobilePanelTitle.textContent = optionData.title;
+        mobileParameterDetails.innerHTML = `
             <p>${optionData.desc}</p>
             ${stepId === 'fabric' ? 
                 `<p class="fabric-note">
                     <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
-                </p>` : 
-                ''}
+                </p>` : ''
+            }
         `;
-        
-        parameterDetails.innerHTML = detailsHTML;
-        
-        // Обновляем мобильную панель
-        if (window.innerWidth <= 1200) {
-            mobilePanelTitle.textContent = optionData.title;
-            mobileParameterDetails.innerHTML = `
-                <p>${optionData.desc}</p>
-                ${stepId === 'fabric' ? 
-                    `<p class="fabric-note">
-                        <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
-                    </p>` : 
-                    ''}
-            `;
-            mobileInfoPanel.classList.add('show');
-            mobileInfoPanel.style.display = 'block';
-            document.body.classList.add('mobile-info-open');
-        }
-        
-        // Обновляем навигацию и карточку
-        updateNavigation();
-        updateSelectionCard();
+        mobileInfoPanel.classList.add('show');
+        document.body.classList.add('mobile-info-open');
     }
 
+    updateNavigation();
+    updateSelectionCard();
+}
+
+
+
     // ========== НАВИГАЦИЯ ==========
-    function updateNavigation() {
-        const stepIndex = appData.stepsOrder.indexOf(appState.currentStep);
-        const currentStep = appState.currentStep;
-        const isMobile = window.innerWidth <= 1200;
-        
-        // Кнопка "Назад"
-        prevBtn.disabled = (stepIndex === 0);
-        prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i> <span>${getUIText('backButton')}</span>`;
-        
-        // Кнопка "Далее"
-        let nextDisabled = false;
-        
-        if (currentStep === 'home') {
-            nextDisabled = false;
-        } else if (currentStep === 'test') {
-            nextDisabled = true;
-        } else if (appData.mainSteps.includes(currentStep)) {
-            const isCurrentStepSelected = !!appState.selections[currentStep];
-            nextDisabled = !isCurrentStepSelected;
-            
-            if (currentStep === 'decor') {
-                const allPreviousSelected = appData.mainSteps.every(step => 
-                    step === 'decor' ? true : !!appState.selections[step]
-                );
-                nextDisabled = !allPreviousSelected;
+function updateNavigation() {
+            const stepIndex = appData.stepsOrder.indexOf(appState.currentStep);
+            const currentStep = appState.currentStep;
+
+            // === УПРАВЛЕНИЕ НАВИГАЦИЕЙ .panel-navigation ===
+            const panelNav = document.querySelector('.panel-navigation');
+
+            if (panelNav) {
+                if (window.innerWidth > 480) {
+                    const isHomeOrTest = currentStep === 'home' || currentStep === 'test';
+                    panelNav.style.display = isHomeOrTest ? 'none' : 'flex';
+                } else {
+                    panelNav.style.display = 'none';
+                }
+            }
+
+            // Кнопка "Назад"
+            prevBtn.disabled = stepIndex <= 0;
+            prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i> <span>${getUIText('backButton')}</span>`;
+
+            // Кнопка "Далее"
+            let nextDisabled = false;
+
+            if (currentStep === 'home') {
+                nextDisabled = false;
+            } else if (currentStep === 'test') {
+                nextDisabled = true;
+            } else if (appData.mainSteps.includes(currentStep)) {
+                const isCurrentStepSelected = !!appState.selections[currentStep];
+                nextDisabled = !isCurrentStepSelected;
+
+                if (currentStep === 'decor') {
+                    const allPreviousSelected = appData.mainSteps.every(step =>
+                        step === 'decor' ? true : !!appState.selections[step]
+                    );
+                    nextDisabled = !allPreviousSelected;
+                }
+            }
+
+            nextBtn.disabled = nextDisabled;
+
+            // Текст кнопки "Далее"
+            nextBtn.innerHTML = currentStep === 'decor'
+                ? `<span>${getUIText('toTestDriveButton')}</span> <i class="fas ${getIcon('arrowRight')}"></i>`
+                : `<span>${getUIText('nextButton')}</span> <i class="fas ${getIcon('arrowRight')}"></i>`;
+
+            // Номер шага
+            let displayStepNum;
+            if (currentStep === 'home') {
+                displayStepNum = 0;
+            } else if (currentStep === 'test') {
+                displayStepNum = appData.mainSteps.length + 1;
+            } else {
+                displayStepNum = appData.mainSteps.indexOf(currentStep) + 1;
+            }
+            currentStepNum.textContent = displayStepNum;
+
+            // Обновляем текст счетчика шагов
+            const stepCounterElement = document.querySelector('.step-counter');
+            if (stepCounterElement) {
+                stepCounterElement.innerHTML = getUIText('stepCounter', {
+                    current: displayStepNum,
+                    total: appData.mainSteps.length + 1
+                });
+            }
+
+            // Кнопка финала
+            const allMainStepsSelected = appData.mainSteps.every(step => !!appState.selections[step]);
+            finalButton.disabled = !allMainStepsSelected;
+            finalButton.innerHTML = `<i class="fas ${getIcon('calendarCheck')}"></i> ${getUIText('finalButton')}`;
+
+            // Кнопка сброса
+            resetButton.innerHTML = `<i class="fas ${getIcon('redo')}"></i> ${getUIText('resetButton')}`;
+
+            // Заголовок карточки выбора
+            const selectionCardTitle = document.querySelector('.selection-card-header h3');
+            if (selectionCardTitle) {
+                selectionCardTitle.textContent = getUIText('selectionCardTitle');
             }
         }
-        
-        nextBtn.disabled = nextDisabled;
-        
-        // Текст кнопки "Далее"
-        if (currentStep === 'decor') {
-            nextBtn.innerHTML = `<span>${getUIText('toTestDriveButton')}</span> <i class="fas ${getIcon('arrowRight')}"></i>`;
-        } else {
-            nextBtn.innerHTML = `<span>${getUIText('nextButton')}</span> <i class="fas ${getIcon('arrowRight')}"></i>`;
-        }
-        
-        // Номер шага
-        let displayStepNum = 0;
-        if (currentStep !== 'home' && currentStep !== 'test') {
-            displayStepNum = appData.mainSteps.indexOf(currentStep) + 1;
-        } else if (currentStep === 'test') {
-            displayStepNum = 7;
-        }
-        currentStepNum.textContent = displayStepNum;
-        
-        // Обновляем текст счетчика шагов
-        const stepCounterElement = document.querySelector('.step-counter');
-        if (stepCounterElement) {
-            stepCounterElement.innerHTML = getUIText('stepCounter', {
-                current: displayStepNum,
-                total: 7
-            });
-        }
-        
-        // Кнопка внизу
-        const allMainStepsSelected = appData.mainSteps.every(step => !!appState.selections[step]);
-        finalButton.disabled = !allMainStepsSelected;
-        finalButton.innerHTML = `<i class="fas ${getIcon('calendarCheck')}"></i> ${getUIText('finalButton')}`;
-        
-        // Кнопка сброса
-        resetButton.innerHTML = `<i class="fas ${getIcon('redo')}"></i> ${getUIText('resetButton')}`;
-        
-        // Обновляем заголовок карточки выбора
-        const selectionCardTitle = document.querySelector('.selection-card-header h3');
-        if (selectionCardTitle) {
-            selectionCardTitle.textContent = getUIText('selectionCardTitle');
-        }
-        
-        // На мобильных скрываем навигацию на home и test
-        if (isMobile) {
-            const isHomeOrTest = currentStep === 'home' || currentStep === 'test';
-            document.querySelector('.panel-navigation').style.display = isHomeOrTest ? 'none' : 'flex';
-        }
-    }
+
 
     function updateSelectionCard() {
         selectionTags.innerHTML = '';
@@ -683,6 +683,7 @@ function updateMainContent(stepId) {
     // ========== ЗАПУСК ==========
     goToStep('home');
 }
+
 
 // Загружаем данные и запускаем приложение
 document.addEventListener('DOMContentLoaded', function() {
