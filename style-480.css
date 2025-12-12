@@ -1,6 +1,6 @@
 @media (max-width: 480px) {
       .app-container {
-        grid-template-columns: 70px 1fr; /* Меню слева, контент справа */
+        grid-template-columns: 50px 1fr; /* Меню слева, контент справа */
         grid-template-rows: 1fr auto;
         grid-template-areas: 
             "sidebar main"
@@ -31,8 +31,8 @@
         padding: 8px 5px;
         gap: 8px;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
+        align-items: left;
+        text-align: left;
     }
     
     
