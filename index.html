@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   
     
     <!-- Preload critical assets -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Font Awesome - preload and async load -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
     
     <!-- Google Fonts - preload and async load -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" 
@@ -25,7 +19,7 @@
     </noscript>
     
     <!-- Ваши стили с conditional preload -->
-    <link rel="preload" href="style.css" as="style"
+    <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="style-480.css" as="style" media="(max-width: 480px)">
     <link rel="preload" href="style-800.css" as="style" media="(min-width: 481px) and (max-width: 800px)">
     <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1200px)">
@@ -36,7 +30,7 @@
     <!-- Conditional stylesheets -->
 <link rel="stylesheet" href="style-1200.css" media="(max-width: 1200px)">
 <link rel="stylesheet" href="style-800.css" media="(max-width: 800px)">
-<link rel="stylesheet" href="style-480.css" media="(max-width: 480px)
+<link rel="stylesheet" href="style-480.css" media="(max-width: 480px)">
 <link rel="stylesheet" href="style-360.css" media="(max-width: 60px)">
 
     
@@ -98,7 +92,7 @@
                     
                     <!-- Шаг 7 (финальный) -->
                      <div class="menu-step final-step" data-step="test">
-                      <span class="menu-step-text">Тест-драйв</span>
+                      <span class="menu-step-text">Адреса</span>
                        </div>
                 </div>
             </div>
@@ -108,97 +102,17 @@
         <main class="maze-area" id="mazeArea">
             <!-- Сначала Home page -->
             <div class="home-content active" id="homeContent">
-                <div class="home-header">
-                    <h1 class="home-title">7 шагов к идеальному дивану</h1>
-                    <p class="home-subtitle">Ваш персональный гид в мире комфорта и стиля</p>
-                </div>
-                
-                <div class="compact-steps">
-                    <!-- Первая колонка -->
-                    <div class="steps-column">
-                        <div class="compact-step clickable-step" data-step="room">
-                            <div class="step-indicator">
-                                <div class="step-icon">
-                                    <i class="fas fa-door-open"></i>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <h3>Выберите комнату</h3>
-                                <p>Где будет стоять диван</p>
-                            </div>
-                        </div>
-                        
-                        <div class="compact-step clickable-step" data-step="model">
-                            <div class="step-indicator">
-                                <div class="step-icon">
-                                    <i class="fas fa-shapes"></i>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <h3>Определитесь с формой</h3>
-                                <p>Форма и размер дивана</p>
-                            </div>
-                        </div>
-                        
-                        <div class="compact-step clickable-step" data-step="mechanism">
-                            <div class="step-indicator">
-                                <div class="step-icon">
-                                    <i class="fas fa-cogs"></i>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <h3>Выберите механизм</h3>
-                                <p>Способ трансформации</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Вторая колонка -->
-                    <div class="steps-column">
-                        <div class="compact-step clickable-step" data-step="filling">
-                            <div class="step-indicator">
-                                <div class="step-icon">
-                                    <i class="fas fa-layer-group"></i>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <h3>Подберите наполнитель</h3>
-                                <p>Оптимальная жёсткость</p>
-                            </div>
-                        </div>
-                        
-                        <div class="compact-step clickable-step" data-step="fabric">
-                            <div class="step-indicator">
-                                <div class="step-icon">
-                                    <i class="fas fa-tshirt"></i>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <h3>Выберите ткань</h3>
-                                <p>Материал обивки</p>
-                            </div>
-                        </div>
-                        
-                        <div class="compact-step clickable-step" data-step="decor">
-                            <div class="step-indicator">
-                                <div class="step-icon">
-                                    <i class="fas fa-palette"></i>
-                                </div>
-                            </div>
-                            <div class="step-content">
-                                <h3>Добавьте декор</h3>
-                                <p>Индивидуальные детали</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="home-start">
-                    <button class="btn-primary btn-large" id="startButton">
-                        <i class="fas fa-play-circle"></i> Начать подбор
-                    </button>
-                </div>
+              <div style="text-align: center;" class="home-header">
+                <p style="text-align: center;"><h1 class="home-title">7 шагов к идеальному дивану</h1></p>
+               
             </div>
+            
+            <!-- Сетка 2x3 вместо компактных шагов -->
+                <div class="home-grid" id="homeGrid">
+                    <!-- Будет заполняться через JS -->
+                </div>
+
+</div>
             
             <!-- Сетка для других шагов (скрыта по умолчанию) -->
             <div class="house-grid" id="houseGrid" >
@@ -206,17 +120,18 @@
             </div>
             
             <!-- Контент для тест-драйва (скрыт по умолчанию) -->
-            <div class="test-drive-content" id="testContent" >
+            <div  id="testContent" >
                 <!-- Будет заполняться через JS -->
             </div>
         </main>
 
+  
         <!-- ПРАВАЯ ПАНЕЛЬ: Информация (только для десктопа) -->
         <aside class="info-panel" id="infoPanel">
             <div class="panel-content">
-                <div class="panel-header">
-                    <h2 id="panelTitle"><i class="fas fa-info-circle"></i> Ваш путь к дивану</h2>
-                    <p id="panelSubtitle" class="panel-subtitle">Выберите шаг в меню слева</p>
+                <div style="text-align: center;" class="panel-header">
+                    <h2 id="panelTitle"><i class="fas fa-info-circle"></i> </h2>
+                    <p id="panelSubtitle" class="panel-subtitle"> Выберите шаг в меню слева</p>
                 </div>
                 
                 <!-- Пояснение текущего шага -->
@@ -273,7 +188,7 @@
                 </div>
             </div>
             <button class="btn-primary btn-final" id="finalButton" disabled>
-                <i class="fas fa-calendar-check"></i> тест-драйв
+                <i class="fas fa-calendar-check"></i> Финал
             </button>
         </footer>
     </div>
