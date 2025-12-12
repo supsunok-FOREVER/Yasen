@@ -9,38 +9,43 @@
     }
     
     /* Компактное вертикальное меню прижатое к краю */
-    .sidebar-logo {
-        grid-area: sidebar;
-        padding: 10px 0; /* Убираем горизонтальные отступы */
-        min-height: auto;
-        background: #2c1810;
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        justify-content: flex-start;
-        align-items: flex-start; /* Прижимаем к левому краю */
-        width: auto; /* Ширина по содержимому */
-        min-width: 60px; /* Минимальная ширина */
-    }
-    
+        .sidebar-logo {
+            grid-area: sidebar;
+            padding: 10px 0;
+            background: #2c1810;
+            display: flex;
+            flex-direction: column;
+
+            /* Исправления */
+            align-items: flex-start; /* прижать содержимое к левому краю */
+            width: auto;             /* ширина по содержимому */
+            min-width: unset;        /* ← убираем фиксатор ширины */
+            max-width: max-content;  /* ← меню ровно под контент */
+        }
+            
     .logo-container {
         display: none;
     }
-    
+        
     .steps-container {
         flex-direction: column;
         gap: 6px;
-        width: 100%;
-        padding: 0 5px; /* Минимальные отступы */
+
+        /* важно */
+        width: auto;      /* ← было 100% */
+        padding: 0;       /* убираем лишние отступы */
     }
     
-    .menu-step {
-        padding: 8px 5px;
-        gap: 8px;
-        width: 100%;
-        text-align: left; /* Текст по левому краю */
-        justify-content: flex-start; /* Прижимаем содержимое к левому краю */
-    }
+.menu-step {
+    padding: 6px 8px;
+    gap: 6px;
+
+    /* главное исправление */
+    width: auto;               /* ← было 100% */
+    text-align: left;
+    justify-content: flex-start;
+    align-items: center;
+}
     
     .menu-step-icon {
         width: 30px;
@@ -49,15 +54,12 @@
         flex-shrink: 0; /* Иконки не сжимаются */
     }
     
-    .menu-step-text {
-        font-size: 9px;
-        line-height: 1.2;
-        white-space: nowrap; /* Текст в одну строку */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-align: left; /* Текст по левому краю */
-    }
-    
+ .menu-step-text {
+    white-space: nowrap;
+    max-width: 100px;        /* чтобы не ломал узкое меню */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
     .menu-step-number {
         display: none;
     }
