@@ -1,136 +1,177 @@
-@media (max-width: 751px) {
+@media (max-width: 800px) {
     .app-container {
-        flex-wrap: wrap;
-        justify-content: center;
-        grid-template-columns: 1fr ;
-        grid-template-rows: auto 1fr auto ;
-        grid-template-areas: "sidebar" "main" "footer";
+        grid-template-columns: 180px 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: 
+            "sidebar main"
+            "sidebar main"
+            "footer footer";
     }
     
+    /* Вертикальное меню (оставляем как есть, только уменьшаем) */
     .sidebar-logo {
-        grid-area: sidebar ;
-        flex-direction: row ;
-        min-height: 40px ;
-         display: flex;
-        
+        grid-area: sidebar;
+        padding: 15px 10px;
+        min-width: 180px;
     }
-    .progress-track {align-content: center;}
     
-    .maze-area {
-        grid-area: main ;
-        display: flex;
-        width: 100%;
-        padding: 1px;
-           }
-    .house-grid.optionDesc {max-height: 40px }
-       
-        .info-panel {
-        display: none ;
-    }
-        .option-card i {
-        display: none ;
-    }
-    .selection-card {
-        grid-area: footer ;
-    }
-   
-   /* 3. ОСТАЛЬНЫЕ СТИЛИ (ваши существующие) */
     .logo-container {
-        display: none ;
-        width: 100%;
+        display: block;
+        margin-bottom: 20px;
     }
     
     .logo-text {
         font-size: 18px;
         letter-spacing: 1px;
-        margin-bottom: 1px;
     }
     
     .logo-subtitle {
         font-size: 10px;
     }
     
-    /* 4. ГОРИЗОНТАЛЬНОЕ МЕНЮ */
+    /* Вертикальное меню (уменьшенное) */
     .steps-container {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        }
-    
-    .steps-container::-webkit-scrollbar {
-        display: none;
-        align-self: center;
+        flex-direction: column;
+        gap: 8px;
     }
     
     .menu-step {
-        flex-direction: column;
-        padding: 1px;
-        min-width: 30px;
-        gap: 8px;
-        flex-shrink: 0;
-    }
-    
-    .menu-step:hover {
-        transform: translateY(-3px);
-        align-self: center;
-    }
-    
-    .menu-step.active {
-        border-left: none;
-        border-bottom: 3px solid #e8d0b3;
-        align-self: center;
+        padding: 10px;
+        gap: 10px;
+        flex-direction: row;
     }
     
     .menu-step-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
     }
     
     .menu-step-text {
-        font-size: 12px;
-        text-align: center;
-        white-space: nowrap;
+        font-size: 11px;
+        white-space: normal;
     }
     
     .menu-step-number {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        width: 18px;
-        height: 18px;
-        font-size: 10px;
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
     }
     
-    /* 5. ЦЕНТРАЛЬНАЯ ОБЛАСТЬ */
+    .maze-area {
+        grid-area: main;
+        padding: 15px;
+    }
+    
+    /* Адаптация home-grid */
+    .home-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 500px;
+        margin: 0 auto 30px;
+    }
+    
+    .home-card {
+        padding: 20px;
+        min-height: 150px;
+        aspect-ratio: 1/1;
+    }
+    
+    .home-step-number {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .home-card-title {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .home-card-desc {
+        font-size: 12px;
+    }
+    
+    @media (max-width: 800px) {
+    /* ... существующие стили ... */
+    
+    /* Адаптация заголовков главной страницы */
+    .home-header {
+        margin-bottom: 30px;
+    }
+    
     .home-title {
-        font-size: 20px;
+        font-size: 24px;
+        margin-bottom: 10px;
     }
     
     .home-subtitle {
-        font-size: 16px;
+        font-size: 14px;
+        max-width: 400px;
     }
     
-    .compact-steps {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .steps-column {
-        gap: 5px;
-    }
-    
-    /* 6. HOUSE GRID - 1 колонка для планшетов */
+    /* ... остальные существующие стили ... */
+}
+    /* Адаптация house-grid */
     .house-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
-        gap: 5px;
-        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 10px;
+        max-width: 500px;
+        margin: 0 auto;
     }
     
+    .option-card {
+        padding: 15px;
+        min-height: 140px;
+    }
+    
+    .option-card i {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    
+    .option-title {
+        font-size: 14px;
+    }
+    
+    .option-desc {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+    
+    
+    /* Квадратный грид 2x3 (оставляем квадраты, только уменьшаем) */
+    .house-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 10px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .option-card {
+        padding: 15px;
+        min-height: 140px;
+    }
+    
+    .option-card i {
+        font-size: 30px;
+    }
+    
+    .option-title {
+        font-size: 14px;
+    }
+    
+    .option-desc {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+    
+    /* Позиционирование карточек (оставляем как в десктопе) */
     .house-roof {
-        grid-column: 1;
+        grid-column: 1 / span 2;
         grid-row: 1;
     }
     
@@ -140,110 +181,97 @@
     }
     
     .house-right-top {
-        grid-column: 1;
-        grid-row: 3;
+        grid-column: 2;
+        grid-row: 2;
     }
     
     .house-left-bottom {
         grid-column: 1;
-        grid-row: 4;
+        grid-row: 3;
     }
     
     .house-right-bottom {
-        grid-column: 1;
-        grid-row: 5;
-    }
-   
-    .option-card {
-        display: flex;
-        justify-content: flex ;
-        padding-top: 5px ;
-        max-height: 10px;
-        min-height: 60px; /* Было 160px, уменьшаем */
-        max-height: 100px; /* Добавляем ограничение по высоте */
-    }
-.option-card.option-title {align-content: left;}
-
-
-    /* 7. НИЖНЯЯ ПАНЕЛЬ (уже задано выше) */
- .selection-card {
-        padding: 15px 20px ; /* Было 25px 30px */
-        gap: 15px ; /* Было 25px */
-        flex-wrap: wrap; /* Разрешаем перенос */
+        grid-column: 2;
+        grid-row: 3;
     }
     
-    .selection-card-header {
-        gap: 8px ; /* Было 15px */
+    /* Нижняя панель */
+    .selection-card {
+        grid-area: footer;
+        padding: 15px;
+        gap: 15px;
+        flex-wrap: wrap;
     }
     
     .selection-card-header h3 {
-        font-size: 13px ; /* Было 18px */
+        font-size: 14px;
     }
     
-    .selection-card-header i {
-        font-size: 18px ; /* Было 20px */
-    }
-    
-    /* Кнопка "Записаться на тест-драйв" */
-    .btn-final {
-        padding: 12px 24px ; /* Было 15px 30px */
-        font-size: 15px ; /* Было 16px */
-        white-space: nowrap; /* Не переносить текст */
-        flex-shrink: 0; /* Не сжимать кнопку */
-    }
-    
-    /* Теги выбора (когда будут) */
     .tags-container {
-        gap: 8px ; /* Было 12px */
-        min-height: 35px ; /* Было 50px */
+        gap: 8px;
+        min-height: 40px;
     }
     
     .selection-tag {
-        padding: 8px 16px ; /* Было 10px 20px */
-        font-size: 14px ; /* Было 14px, оставляем */
+        padding: 6px 12px;
+        font-size: 12px;
     }
     
     .tag-step {
-        width: 22px ; /* Было 24px */
-        height: 22px ;
-        font-size: 11px ; /* Было 12px */
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
     }
-
     
     .btn-final {
-         font-size: 11px
-    }
-    .selectionCardTitle{ font-size: 11px}
-      .btn-nav {
-        padding: 8px 10px ; /* Было 10px 15px */
-        font-size: 12px ; /* Было 14px */
-    }
-    /* 8. ТЕСТ-ДРАЙВ */
-    .test-drive-container {
-        padding: 20px;
+        padding: 10px 20px;
+        font-size: 13px;
     }
     
-    .shop-group {
-        flex-direction: column;
+    /* Кнопки навигации (для правой панели) */
+    .btn-nav {
+        padding: 8px 12px;
+        font-size: 12px;
     }
     
-    .shop-card {
-        min-width: 100%;
+    /* Прячем правую панель */
+    .info-panel {
+        display: none;
+    }
+    .shops-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 500px;
+        margin: 0 auto 20px;
     }
     
-    /* 9. МОБИЛЬНАЯ ПАНЕЛЬ */
-    body.mobile-info-open {
-        overflow: hidden;
+    .shop-card-grid {
+        padding: 15px;
+        min-height: 160px;
     }
     
-    .mobile-info-panel {
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        max-height: 70vh;
+    .shop-card-header {
+        margin-bottom: 12px;
     }
     
-    .mobile-info-content h3 {
+    .shop-card-header h4 {
+        font-size: 14px;
+    }
+    
+    .shop-card-content p {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+  
+        .test-drive-container h3 {
         font-size: 18px;
-        margin-bottom: 10px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
     }
+    
+    .test-drive-container h3 i {
+        font-size: 20px;
+    }
+
 }

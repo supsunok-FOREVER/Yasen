@@ -58,9 +58,66 @@
         font-size: 16px;
     }
     
+    /* Адаптация home-grid */
+    .home-grid {
+        gap: 15px;
+        max-width: 700px;
+    }
+    
+    .home-card {
+        padding: 20px;
+        min-height: 180px;
+    }
+    
+    .home-card-title {
+        font-size: 16px;
+    }
+    
+    .home-card-desc {
+        font-size: 13px;
+    }
+        .home-title {
+        font-size: 32px;
+    }
+    
+    .home-subtitle {
+        font-size: 16px;
+        max-width: 500px;
+    }
+    /* Адаптация house-grid */
     .house-grid {
         gap: 15px;
+        max-width: 700px;
     }
+    
+       .test-drive-container h3 {
+        font-size: 22px;
+    }
+    .option-card {
+        padding: 20px;
+        min-height: 180px;
+    }
+    
+    .option-card i {
+        font-size: 40px;
+    }
+    
+    .option-title {
+        font-size: 16px;
+    }
+    
+    .option-desc {
+        font-size: 13px;
+    }
+    
+    #panelTitle {
+        font-size: 20px;
+    }
+    
+    .panel-subtitle {
+        font-size: 13px;
+    }
+    
     
     .option-card {
         padding: 20px;

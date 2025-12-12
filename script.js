@@ -14,25 +14,32 @@ const appState = {
 };
 
 // Загружаем данные из JSON файла
-async function loadAppData() {
+function loadAppData() {
     try {
-        const response = await fetch('data.json');
-        const data = await response.json();
+        const request = new XMLHttpRequest();
+        request.open('GET', 'data.json', false); // false = синхронный запрос
+        request.send(null);
         
-        appData = {
-            stepsData: data.stepsData || {},
-            stepsOrder: data.stepsOrder || [],
-            mainSteps: data.mainSteps || [],
-            uiTexts: data.uiTexts || {},
-            icons: data.icons || {},
-            uiClasses: data.uiClasses || {}
-        };
-        
-        console.log('Данные успешно загружены из data.json');
-        initApp();
+        if (request.status === 200) {
+            const data = JSON.parse(request.responseText);
+            
+            appData = {
+                stepsData: data.stepsData || {},
+                stepsOrder: data.stepsOrder || [],
+                mainSteps: data.mainSteps || [],
+                uiTexts: data.uiTexts || {},
+                icons: data.icons || {},
+                uiClasses: data.uiClasses || {}
+            };
+            
+            console.log('Данные успешно загружены из data.json');
+            initApp();
+        } else {
+            throw new Error(`HTTP error! status: ${request.status}`);
+        }
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
-        alert('Не удалось загрузить данные приложения. Пожалуйста, обновите страницу.');
+        alert('Не удалось загрузить данные приложения. Пожалуйста, обновите страницу или запустите через локальный сервер.');
     }
 }
 
@@ -140,69 +147,50 @@ function updateMainContent(stepId) {
 }
 
     function renderHomeContent() {
-        const stepData = appData.stepsData.home;
+    const stepData = appData.stepsData.home;
+    
+    // Создаем сетку для главной страницы
+    const homeGrid = homeContent.querySelector('#homeGrid');
+    if (homeGrid && stepData.compactSteps) {
+        homeGrid.innerHTML = '';
         
-        // Создаем структуру для компактных шагов
-        const compactStepsContainer = homeContent.querySelector('.compact-steps');
-        if (compactStepsContainer && stepData.compactSteps) {
-            // Разделяем шаги на две колонки
-            const stepsColumns = [
-                stepData.compactSteps.slice(0, 3),
-                stepData.compactSteps.slice(3, 6)
-            ];
+        stepData.compactSteps.forEach((step, index) => {
+            const card = document.createElement('div');
+            card.className = 'home-card clickable-step';
+            card.dataset.step = step.step;
             
-            compactStepsContainer.innerHTML = '';
+            card.innerHTML = `
+                
+                <div class="home-card-title">${step.title}</div>
+                <div class="home-card-desc">${step.description}</div>
+            `;
             
-            stepsColumns.forEach(columnSteps => {
-                const columnDiv = document.createElement('div');
-                columnDiv.className = getUIClass('home', 'stepsColumn') || 'steps-column';
-                
-                columnSteps.forEach(step => {
-                    const stepDiv = document.createElement('div');
-                    stepDiv.className = `${getUIClass('home', 'compactStep') || 'compact-step'} clickable-step`;
-                    stepDiv.dataset.step = step.step;
-                    
-                    stepDiv.innerHTML = `
-                        <div class="${getUIClass('home', 'stepIndicator') || 'step-indicator'}">
-                            <div class="${getUIClass('home', 'stepIcon') || 'step-icon'}">
-                                <i class="fas ${step.icon}"></i>
-                            </div>
-                        </div>
-                        <div class="${getUIClass('home', 'stepContent') || 'step-content'}">
-                            <h3>${step.title}</h3>
-                            <p>${step.description}</p>
-                        </div>
-                    `;
-                    
-                    columnDiv.appendChild(stepDiv);
-                });
-                
-                compactStepsContainer.appendChild(columnDiv);
-            });
-        }
-        
-        // Добавляем анимацию
-        setTimeout(() => {
-            const compactSteps = homeContent.querySelectorAll('.compact-step');
-            compactSteps.forEach((step, index) => {
-                step.style.animationDelay = `${index * 0.1}s`;
-                step.classList.add('fade-in');
-            });
-        }, 100);
-        
-        // Обработчики кликов для компактных шагов
-        setTimeout(() => {
-            const clickableSteps = homeContent.querySelectorAll('.clickable-step');
-            clickableSteps.forEach(step => {
-                step.addEventListener('click', function() {
-                    const stepId = this.dataset.step;
-                    if (stepId) {
-                        goToStep(stepId);
-                    }
-                });
-            });
-        }, 100);
+            homeGrid.appendChild(card);
+        });
     }
+    
+    // Добавляем анимацию
+    setTimeout(() => {
+        const homeCards = homeContent.querySelectorAll('.home-card');
+        homeCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.05}s`;
+            card.classList.add('fade-in');
+        });
+    }, 100);
+    
+    // Обработчики кликов
+    setTimeout(() => {
+        const clickableSteps = homeContent.querySelectorAll('.clickable-step');
+        clickableSteps.forEach(step => {
+            step.addEventListener('click', function() {
+                const stepId = this.dataset.step;
+                if (stepId) {
+                    goToStep(stepId);
+                }
+            });
+        });
+    }, 100);
+}
 
     function renderStepOptions(stepId, stepData) {
         houseGrid.innerHTML = '';
@@ -256,86 +244,84 @@ function updateMainContent(stepId) {
     }
 
     function renderTestContent() {
-
-      
-        const stepData = appData.stepsData.test;
-
-         const existingContent = testContent.querySelector('.test-drive-container, .button-container');
-          if (existingContent) {
-        // Если контент уже отрендерен, просто выходим
-        // Или, если хотите перерендерить, удалите старый контент:
-        testContent.innerHTML = '';
-    }
-        // Основной контейнер
-        const mainContainer = document.createElement('div');
-        mainContainer.className = getUIClass('testDrive', 'container') || 'test-drive-container';
+    const stepData = appData.stepsData.test;
+    
+    // Очищаем контейнер
+    testContent.innerHTML = '';
+    
+    // Основной контейнер
+    const mainContainer = document.createElement('div');
+    mainContainer.className = getUIClass('testDrive', 'container') || 'test-drive-container';
+    
+    // Заголовок
+    const title = document.createElement('h3');
+    const storeIcon = document.createElement('i');
+    storeIcon.className = `fas ${getIcon('store')}`;
+    title.appendChild(storeIcon);
+    title.appendChild(document.createTextNode(` ${appData.uiTexts.shopInvitation || 'Мы приглашаем вас в Наши магазины'}`));
+    mainContainer.appendChild(title);
+    
+    // Сетка магазинов (аналогично house-grid)
+    const shopGrid = document.createElement('div');
+    shopGrid.className = 'shops-grid'; // Добавляем новый класс
+    
+    stepData.shops.forEach((shop, index) => {
+        const shopCard = document.createElement('div');
+        shopCard.className = 'shop-card-grid'; // Новый класс для карточек в сетке
         
-        // Заголовок
-        const title = document.createElement('h3');
-        const storeIcon = document.createElement('i');
-        storeIcon.className = `fas ${getIcon('store')}`;
-        title.appendChild(storeIcon);
-        title.appendChild(document.createTextNode(` ${appData.uiTexts.shopInvitation || 'Мы приглашаем вас в Наши магазины'}`));
-        mainContainer.appendChild(title);
+        shopCard.innerHTML = `
+            <div class="shop-card-header">
+                <i class="fas ${getIcon('mapMarker')}"></i>
+                <h4>${shop.name}</h4>
+            </div>
+            <div class="shop-card-content">
+                <p class="shop-address-grid"><i class="fas fa-map-pin"></i> ${shop.address}</p>
+                ${shop.metro ? `<p class="shop-metro-grid"><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
+                <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
+                <p class="shop-phone-grid"><i class="fas ${getIcon('phone')}"></i> ${shop.phone}</p>
+            </div>
+        `;
         
-        // Контейнер для магазинов
-        const shopList = document.createElement('div');
-        shopList.className = getUIClass('testDrive', 'shopList') || 'shop-list';
-        
-        // Группируем магазины по 2
-        for (let i = 0; i < stepData.shops.length; i += 2) {
-            const shopGroup = document.createElement('div');
-            shopGroup.className = getUIClass('testDrive', 'shopGroup') || 'shop-group';
+        shopGrid.appendChild(shopCard);
+    });
+    
+    mainContainer.appendChild(shopGrid);
+    testContent.appendChild(mainContainer);
+    
+    // Кнопка записи
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = getUIClass('testDrive', 'buttonContainer') || 'button-container';
+    
+    const bookBtn = document.createElement('button');
+    bookBtn.className = `btn-primary ${getUIClass('testDrive', 'bookButton') || 'book-test-drive-btn'}`;
+    bookBtn.id = 'bookTestDrive';
+    
+    const calendarIcon = document.createElement('i');
+    calendarIcon.className = `fas ${getIcon('calendarCheck')}`;
+    bookBtn.appendChild(calendarIcon);
+    bookBtn.appendChild(document.createTextNode(` ${getUIText('bookTestDriveButton')}`));
+    
+    buttonContainer.appendChild(bookBtn);
+    testContent.appendChild(buttonContainer);
+    
+    // Обработчик кнопки
+    if (stepData.phoneNumber) {
+        bookBtn.addEventListener('click', function() {
+            alert(stepData.confirmationMessage || getUIText('confirmationMessage'));
             
-            // Если это не первая группа, добавляем отступ сверху через CSS класс
-            if (i > 0) {
-                shopGroup.style.marginTop = '25px';
+            const confirmCallMessage = (stepData.confirmCallMessage || getUIText('confirmCallMessage'))
+                .replace('{{phoneNumber}}', stepData.phoneNumber);
+            
+            const confirmCall = confirm(confirmCallMessage);
+            
+            if (confirmCall) {
+                window.location.href = `tel:${stepData.phoneNumber}`;
             }
-            
-            const groupShops = stepData.shops.slice(i, i + 2);
-            groupShops.forEach(shop => {
-                const shopCard = createShopCard(shop);
-                shopGroup.appendChild(shopCard);
-            });
-            
-            shopList.appendChild(shopGroup);
-        }
-        
-        mainContainer.appendChild(shopList);
-        testContent.appendChild(mainContainer);
-        
-        // Кнопка записи
-        const buttonContainer = document.createElement('div');
-        buttonContainer.className = getUIClass('testDrive', 'buttonContainer') || 'button-container';
-        
-        const bookBtn = document.createElement('button');
-        bookBtn.className = `btn-primary ${getUIClass('testDrive', 'bookButton') || 'book-test-drive-btn'}`;
-        bookBtn.id = 'bookTestDrive';
-        
-        const calendarIcon = document.createElement('i');
-        calendarIcon.className = `fas ${getIcon('calendarCheck')}`;
-        bookBtn.appendChild(calendarIcon);
-        bookBtn.appendChild(document.createTextNode(` ${getUIText('bookTestDriveButton')}`));
-        
-        buttonContainer.appendChild(bookBtn);
-        testContent.appendChild(buttonContainer);
-        
-        // Обработчик кнопки
-        if (stepData.phoneNumber) {
-            bookBtn.addEventListener('click', function() {
-                alert(stepData.confirmationMessage || getUIText('confirmationMessage'));
-                
-                const confirmCallMessage = (stepData.confirmCallMessage || getUIText('confirmCallMessage'))
-                    .replace('{{phoneNumber}}', stepData.phoneNumber);
-                
-                const confirmCall = confirm(confirmCallMessage);
-                
-                if (confirmCall) {
-                    window.location.href = `tel:${stepData.phoneNumber}`;
-                }
-            });
-        }
+        });
     }
+}
+
+
 
     function createShopCard(shop) {
         const card = document.createElement('div');
@@ -403,14 +389,14 @@ function updateMainContent(stepId) {
         
         if (stepId === 'home') {
             panelTitle.innerHTML = `<i class="fas ${getIcon('home')}"></i> ${stepData.title}`;
-            panelSubtitle.textContent = stepData.subtitle || '';
-            stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
+            //panelSubtitle.textContent = stepData.subtitle || '';
+            //stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
             parameterDetails.innerHTML = '';
             return;
         }
         
         panelTitle.innerHTML = `<i class="fas ${getIcon('info')}"></i> ${stepData.title}`;
-        panelSubtitle.textContent = stepData.subtitle || '';
+       // panelSubtitle.textContent = stepData.subtitle || '';
         stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
         
         if (appState.selections[stepId]) {
