@@ -1,6 +1,6 @@
- @media (max-width: 480px) {
+@media (max-width: 480px) {
     .app-container {
-        grid-template-columns: auto 1fr; /* auto для меню, 1fr для контента */
+        grid-template-columns: auto 1fr;
         grid-template-rows: 1fr auto;
         grid-template-areas: 
             "sidebar main"
@@ -9,20 +9,18 @@
     }
     
     /* Компактное вертикальное меню прижатое к краю */
-        .sidebar-logo {
-            grid-area: sidebar;
-            padding: 10px 0;
-            background: #2c1810;
-            display: flex;
-            flex-direction: column;
-
-            /* Исправления */
-            align-items: flex-start; /* прижать содержимое к левому краю */
-            width: auto;             /* ширина по содержимому */
-            min-width: unset;        /* ← убираем фиксатор ширины */
-            max-width: max-content;  /* ← меню ровно под контент */
-        }
-            
+    .sidebar-logo {
+        grid-area: sidebar;
+        padding: 10px 0;
+        background: #2c1810;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: auto;
+        min-width: unset;
+        max-width: none; /* Убираем ограничение */
+    }
+        
     .logo-container {
         display: none;
     }
@@ -30,36 +28,34 @@
     .steps-container {
         flex-direction: column;
         gap: 6px;
-
-        /* важно */
-        width: auto;      /* ← было 100% */
-        padding: 0;       /* убираем лишние отступы */
+        width: auto;
+        padding: 0 8px; /* Добавим небольшие отступы */
     }
     
-.menu-step {
-    padding: 6px 8px;
-    gap: 6px;
-
-    /* главное исправление */
-    width: auto;               /* ← было 100% */
-    text-align: left;
-    justify-content: flex-start;
-    align-items: center;
-}
+    .menu-step {
+        padding: 6px 8px;
+        gap: 6px;
+        width: auto;
+        text-align: left;
+        justify-content: flex-start;
+        align-items: center;
+    }
     
     .menu-step-icon {
         width: 30px;
         height: 30px;
         font-size: 14px;
-        flex-shrink: 0; /* Иконки не сжимаются */
+        flex-shrink: 0;
     }
     
- .menu-step-text {
-    white-space: nowrap;
-    max-width: 100px;        /* чтобы не ломал узкое меню */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    .menu-step-text {
+        white-space: nowrap;
+        font-size: 10px; /* Добавим явный размер шрифта */
+        min-width: 80px; /* Минимальная ширина для текста */
+        overflow: visible; /* Даем тексту отображаться полностью */
+        text-overflow: clip;
+    }
+    
     .menu-step-number {
         display: none;
     }
@@ -70,8 +66,6 @@
         overflow-y: auto;
     }
     
-    /* Остальные стили остаются */
-}
     /* Центральный контент */
     .home-title {
         font-size: 18px;
@@ -79,6 +73,24 @@
     
     .home-subtitle {
         font-size: 12px;
+    }
+    
+    /* Адаптация заголовков главной страницы */
+    .home-header {
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+    
+    .home-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+    
+    .home-subtitle {
+        font-size: 12px;
+        max-width: 300px;
+        line-height: 1.4;
     }
     
     .compact-steps {
@@ -107,7 +119,6 @@
         font-size: 10px;
     }
     
-        
     /* Сетки подстраиваем под новую ширину */
     .home-grid, .house-grid, .shops-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -118,14 +129,6 @@
     .home-card, .option-card, .shop-card-grid {
         padding: 10px;
         min-height: 140px;
-    }
-    
-    /* Нижняя панель */
-    .selection-card {
-        grid-area: footer;
-        padding: 10px;
-        gap: 10px;
-        flex-wrap: wrap;
     }
     
     /* Квадратный грид 2x3 (ещё меньше) */
@@ -186,6 +189,7 @@
         grid-area: footer;
         padding: 10px;
         gap: 10px;
+        flex-wrap: wrap;
     }
     
     .selection-card-header h3 {
@@ -251,7 +255,8 @@
     .shop-name {
         font-size: 14px;
     }
-       /* Адаптация заголовка тест-драйва */
+    
+    /* Адаптация заголовка тест-драйва */
     .test-drive-container h3 {
         font-size: 16px;
         flex-direction: column;
@@ -263,24 +268,15 @@
     .test-drive-container h3 i {
         font-size: 18px;
     }
-   
-    /* Адаптация заголовков главной страницы */
-    .home-header {
-        margin-bottom: 20px;
-        padding: 0 10px;
+    
+    /* Стили для сетки магазинов */
+    .shops-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
     
-    .home-title {
-        font-size: 20px;
-        margin-bottom: 8px;
-        line-height: 1.3;
+    .shop-card-grid {
+        padding: 10px;
+        min-height: 140px;
     }
-    
-    .home-subtitle {
-        font-size: 12px;
-        max-width: 300px;
-        line-height: 1.4;
-    }
-    
-    /* ... остальные существующие стили ... */
 }
