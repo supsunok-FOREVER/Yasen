@@ -5,13 +5,13 @@
         grid-template-areas: 
             "sidebar main"
             "footer footer";
-        min-height: 100vh;
+        min-height: 80vh;
     }
     
        /* Компактное вертикальное меню */
     .sidebar-logo {
         grid-area: sidebar;
-        padding: 10px 5px;
+        padding: 4px 5px;
         min-height: auto;
         background: #2c1810;
         display: flex;
