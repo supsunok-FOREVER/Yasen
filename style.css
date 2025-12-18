@@ -70,12 +70,6 @@ body {
     --brand-white: #ffffff;
 }
 
-/* Убираем влияние старых градиентов и оттенков */
-.sidebar-logo,
-.info-panel,
-.selection-card {
-    background-image: none !important;
-}
 
 /* -----------------------------------------------------------------------
    1. КАРТОЧКИ — ПРОСТЫЕ МОДУЛИ
@@ -129,11 +123,12 @@ body {
     background: var(--brand-red-deep) !important;
     background-image: none !important;
     color: #ffffff;
-    padding: 25px 20px;
+    padding: 5px 5px;
     display: flex;
     flex-direction: column;
     box-shadow: none;
     z-index: 100;
+    align-items: flex-start;
 }
 
 .logo-container {
@@ -950,12 +945,13 @@ body {
 .shops-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, minmax(200px, auto)); /* ← мин. высота 200px */
+    grid-template-rows: auto auto; /* ← 2 строки по содержимому */
     gap: 20px;
     max-width: 800px;
     margin: 0 auto 30px;
     width: 100%;
     box-sizing: border-box;
+    /* высота определяется содержимым */
 }
 
 .shop-card-grid {
