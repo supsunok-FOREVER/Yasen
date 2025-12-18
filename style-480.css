@@ -5,14 +5,13 @@
         grid-template-areas: 
             "sidebar main"
             "footer footer";
-        min-height: 100vh;
-        height: 100vh;
+        height: fit-content;
     }
     
     /* Компактное вертикальное меню БЕЗ иконок */
     .sidebar-logo {
         grid-area: sidebar;
-        padding: 10px 0;
+        padding: 7px 0;
         background: #2c1810;
         display: flex;
         flex-direction: column;
@@ -20,7 +19,7 @@
         width: auto;
         min-width: unset;
         max-width: none;
-        height: 100%;
+        height: auto;
         overflow-y: auto;
         justify-content: flex-start;
     }
@@ -83,7 +82,7 @@
         grid-area: main;
         padding: 10px;
         overflow-y: auto;
-        height: 100%;
+        
         display: flex;
         flex-direction: column;
     }
@@ -91,7 +90,9 @@
     /* Остальные стили остаются без изменений */
     /* ... */
 
-    
+    home-title {
+        font-size: 12px !important;
+    }
     /* Для всех гридов добавляем auto height */
     .home-grid,
     .house-grid,
@@ -265,12 +266,89 @@
     }
     
     /* Мобильная информационная панель */
+   
     .mobile-info-panel {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
         max-height: 60vh;
+        overflow-y: auto;
+    }
+    
+    .mobile-info-panel.show {
+        display: block;
+        animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    
+    /* Добавляем затемнение фона при открытой панели */
+    body.mobile-info-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .mobile-info-content {
+        position: relative;
     }
     
     .mobile-info-content h3 {
-        font-size: 16px;
+        color: #5a3825;
+        margin-bottom: 15px;
+        padding-right: 40px;
+        font-size: 18px;
+    }
+    
+    .btn-close-mobile-info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #999;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .mobile-parameter-details {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #666;
+    }
+    
+    .fabric-note {
+        color: #8B4513;
+        font-weight: 500;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
     }
     
     /* Кнопка "Начать подбор" */
@@ -280,6 +358,43 @@
     }
     
     /* Контент тест-драйва */
+
+        .home-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr); /* ⚠️ ДОБАВИТЬ: repeat(3, 1fr) */
+        gap: 8px;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    .home-card {
+        padding: 10px;
+        min-height: 120px; /* ⚠️ Сделать такой же как option-card (120px) */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto; /* ⚠️ Убрать фиксированную высоту */
+    }
+    
+    .home-card i {
+        font-size: 24px; /* Сделать такой же как option-card i */
+        margin-bottom: 8px;
+    }
+    
+    .home-card-title {
+        font-size: 12px; /* Сделать такой же как option-title */
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    
+    .home-card-desc {
+        font-size: 10px; /* Сделать такой же как option-desc */
+        line-height: 1.2;
+        text-align: center;
+    }
+}
     .test-drive-container {
         padding: 15px;
     }
@@ -315,5 +430,8 @@
     .shop-card-grid {
         padding: 10px;
         min-height: 140px;
+    }
+    .info-panel {
+        display: none; /* ✅ Скрывается на 800px и меньше */
     }
 }

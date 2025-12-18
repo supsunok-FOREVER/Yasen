@@ -84,11 +84,45 @@ function initApp() {
         return appData.uiClasses?.[section]?.[element] || '';
     }
 
+    // ========== ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ЗВОНКА ==========
+    function handleFinalCall() {
+        const stepData = appData.stepsData.test;
+        if (!stepData || !stepData.phoneNumber) {
+            alert("Контактная информация не найдена");
+            return false;
+        }
+        
+        // Показываем подтверждение
+        alert(stepData.confirmationMessage || getUIText('confirmationMessage'));
+        
+        // Формируем сообщение для подтверждения звонка
+        const confirmCallMessage = (stepData.confirmCallMessage || getUIText('confirmCallMessage'))
+            .replace('{{phoneNumber}}', stepData.phoneNumber);
+        
+        // Спрашиваем подтверждение
+        const confirmCall = confirm(confirmCallMessage);
+        
+        // Если подтвердили - звоним
+        if (confirmCall) {
+            window.location.href = `tel:${stepData.phoneNumber}`;
+            return true;
+        }
+        
+        return false;
+    }
+
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
         if (!appData.stepsData[stepId]) {
             console.error('Шаг не найден:', stepId);
             return;
+        }
+
+        // Закрываем мобильную панель при смене шага
+        if (window.innerWidth <= 480 && mobileInfoPanel && mobileInfoPanel.classList.contains('show')) {
+            mobileInfoPanel.classList.remove('show');
+            mobileInfoPanel.style.display = 'none';
+            document.body.classList.remove('mobile-info-open');
         }
 
         // 1. Обновляем состояние
@@ -106,7 +140,8 @@ function initApp() {
         // 4. Обновляем правую панель
         updateInfoPanel(stepId);
         
-        // 5. Обновляем навигацию        updateNavigation();
+        // 5. Обновляем навигацию
+        updateNavigation();
         
         // 6. Обновляем карточку выбора
         updateSelectionCard();
@@ -117,80 +152,79 @@ function initApp() {
         }
     }
 
-function updateMainContent(stepId) {
-    // Убираем все классы
-    homeContent.classList.remove('active');
-    homeContent.classList.add('hidden');
-    
-    houseGrid.classList.remove('active');
-    houseGrid.classList.add('hidden');
-    
-    testContent.classList.remove('active');
-    testContent.classList.add('hidden');
-    
-    const stepData = appData.stepsData[stepId];
-    
-    if (stepId === 'home') {
-        homeContent.classList.remove('hidden');
-        homeContent.classList.add('active');
-        renderHomeContent();
-    } else if (stepId === 'test') {
-        testContent.classList.remove('hidden');
-        testContent.classList.add('active');
-        renderTestContent();
-    } else {
-        // Для остальных шагов показываем сетку
-        houseGrid.classList.remove('hidden');
-        houseGrid.classList.add('active');
-        renderStepOptions(stepId, stepData);
+    function updateMainContent(stepId) {
+        // Убираем все классы
+        homeContent.classList.remove('active');
+        homeContent.classList.add('hidden');
+        
+        houseGrid.classList.remove('active');
+        houseGrid.classList.add('hidden');
+        
+        testContent.classList.remove('active');
+        testContent.classList.add('hidden');
+        
+        const stepData = appData.stepsData[stepId];
+        
+        if (stepId === 'home') {
+            homeContent.classList.remove('hidden');
+            homeContent.classList.add('active');
+            renderHomeContent();
+        } else if (stepId === 'test') {
+            testContent.classList.remove('hidden');
+            testContent.classList.add('active');
+            renderTestContent();
+        } else {
+            // Для остальных шагов показываем сетку
+            houseGrid.classList.remove('hidden');
+            houseGrid.classList.add('active');
+            renderStepOptions(stepId, stepData);
+        }
     }
-}
 
     function renderHomeContent() {
-    const stepData = appData.stepsData.home;
-    
-    // Создаем сетку для главной страницы
-    const homeGrid = homeContent.querySelector('#homeGrid');
-    if (homeGrid && stepData.compactSteps) {
-        homeGrid.innerHTML = '';
+        const stepData = appData.stepsData.home;
         
-        stepData.compactSteps.forEach((step, index) => {
-            const card = document.createElement('div');
-            card.className = 'home-card clickable-step';
-            card.dataset.step = step.step;
+        // Создаем сетку для главной страницы
+        const homeGrid = homeContent.querySelector('#homeGrid');
+        if (homeGrid && stepData.compactSteps) {
+            homeGrid.innerHTML = '';
             
-            card.innerHTML = `
+            stepData.compactSteps.forEach((step, index) => {
+                const card = document.createElement('div');
+                card.className = 'home-card clickable-step';
+                card.dataset.step = step.step;
                 
-                <div class="home-card-title">${step.title}</div>
-                <div class="home-card-desc">${step.description}</div>
-            `;
-            
-            homeGrid.appendChild(card);
-        });
-    }
-    
-    // Добавляем анимацию
-    setTimeout(() => {
-        const homeCards = homeContent.querySelectorAll('.home-card');
-        homeCards.forEach((card, index) => {
-            card.style.animationDelay = `${index * 0.05}s`;
-            card.classList.add('fade-in');
-        });
-    }, 100);
-    
-    // Обработчики кликов
-    setTimeout(() => {
-        const clickableSteps = homeContent.querySelectorAll('.clickable-step');
-        clickableSteps.forEach(step => {
-            step.addEventListener('click', function() {
-                const stepId = this.dataset.step;
-                if (stepId) {
-                    goToStep(stepId);
-                }
+                card.innerHTML = `
+                    <div class="home-card-title">${step.title}</div>
+                    <div class="home-card-desc">${step.description}</div>
+                `;
+                
+                homeGrid.appendChild(card);
             });
-        });
-    }, 100);
-}
+        }
+        
+        // Добавляем анимацию
+        setTimeout(() => {
+            const homeCards = homeContent.querySelectorAll('.home-card');
+            homeCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.classList.add('fade-in');
+            });
+        }, 100);
+        
+        // Обработчики кликов
+        setTimeout(() => {
+            const clickableSteps = homeContent.querySelectorAll('.clickable-step');
+            clickableSteps.forEach(step => {
+                step.addEventListener('click', function() {
+                    const stepId = this.dataset.step;
+                    if (stepId) {
+                        goToStep(stepId);
+                    }
+                });
+            });
+        }, 100);
+    }
 
     function renderStepOptions(stepId, stepData) {
         houseGrid.innerHTML = '';
@@ -244,300 +278,206 @@ function updateMainContent(stepId) {
     }
 
     function renderTestContent() {
-    const stepData = appData.stepsData.test;
-    
-    // Очищаем контейнер
-    testContent.innerHTML = '';
-    
-    // Основной контейнер
-    const mainContainer = document.createElement('div');
-    mainContainer.className = getUIClass('testDrive', 'container') || 'test-drive-container';
-    
-    // Заголовок
-    const title = document.createElement('h3');
-    const storeIcon = document.createElement('i');
-    storeIcon.className = `fas ${getIcon('store')}`;
-    title.appendChild(storeIcon);
-    title.appendChild(document.createTextNode(` ${appData.uiTexts.shopInvitation || 'Мы приглашаем вас в Наши магазины'}`));
-    mainContainer.appendChild(title);
-    
-    // Сетка магазинов (аналогично house-grid)
-    const shopGrid = document.createElement('div');
-    shopGrid.className = 'shops-grid'; // Добавляем новый класс
-    
-    stepData.shops.forEach((shop, index) => {
-        const shopCard = document.createElement('div');
-        shopCard.className = 'shop-card-grid'; // Новый класс для карточек в сетке
+        const stepData = appData.stepsData.test;
         
-        shopCard.innerHTML = `
-            <div class="shop-card-header">
-                <i class="fas ${getIcon('mapMarker')}"></i>
-                <h4>${shop.name}</h4>
-            </div>
-            <div class="shop-card-content">
-                <p class="shop-address-grid"><i class="fas fa-map-pin"></i> ${shop.address}</p>
-                ${shop.metro ? `<p class="shop-metro-grid"><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
-                <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
-                <p class="shop-phone-grid"><i class="fas ${getIcon('phone')}"></i> ${shop.phone}</p>
-            </div>
-        `;
+        // Очищаем контейнер
+        testContent.innerHTML = '';
         
-        shopGrid.appendChild(shopCard);
-    });
-    
-    mainContainer.appendChild(shopGrid);
-    testContent.appendChild(mainContainer);
-    
-    // Кнопка записи
-    const buttonContainer = document.createElement('div');
-    buttonContainer.className = getUIClass('testDrive', 'buttonContainer') || 'button-container';
-    
-    const bookBtn = document.createElement('button');
-    bookBtn.className = `btn-primary ${getUIClass('testDrive', 'bookButton') || 'book-test-drive-btn'}`;
-    bookBtn.id = 'bookTestDrive';
-    
-    const calendarIcon = document.createElement('i');
-    calendarIcon.className = `fas ${getIcon('calendarCheck')}`;
-    bookBtn.appendChild(calendarIcon);
-    bookBtn.appendChild(document.createTextNode(` ${getUIText('bookTestDriveButton')}`));
-    
-    buttonContainer.appendChild(bookBtn);
-    testContent.appendChild(buttonContainer);
-    
-    // Обработчик кнопки
-    if (stepData.phoneNumber) {
-        bookBtn.addEventListener('click', function() {
-            alert(stepData.confirmationMessage || getUIText('confirmationMessage'));
+        // Основной контейнер
+        const mainContainer = document.createElement('div');
+        mainContainer.className = getUIClass('testDrive', 'container') || 'test-drive-container';
+        
+        // Сетка магазинов
+        const shopGrid = document.createElement('div');
+        shopGrid.className = 'shops-grid';
+        
+        stepData.shops.forEach((shop, index) => {
+            const shopCard = document.createElement('div');
+            shopCard.className = 'shop-card-grid';
             
-            const confirmCallMessage = (stepData.confirmCallMessage || getUIText('confirmCallMessage'))
-                .replace('{{phoneNumber}}', stepData.phoneNumber);
+            shopCard.innerHTML = `
+                <div class="shop-card-header">
+                    <i class="fas ${getIcon('mapMarker')}"></i>
+                    <h4>${shop.name}</h4>
+                </div>
+                <div class="shop-card-content">
+                    <p class="shop-address-grid"><i class="fas fa-map-pin"></i> ${shop.address}</p>
+                    ${shop.metro ? `<p class="shop-metro-grid"><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
+                    <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
+                    <p class="shop-phone-grid"><i class="fas ${getIcon('phone')}"></i> ${shop.phone}</p>
+                </div>
+            `;
             
-            const confirmCall = confirm(confirmCallMessage);
-            
-            if (confirmCall) {
-                window.location.href = `tel:${stepData.phoneNumber}`;
-            }
+            shopGrid.appendChild(shopCard);
         });
-    }
-}
-
-
-
-    function createShopCard(shop) {
-        const card = document.createElement('div');
-        card.className = getUIClass('testDrive', 'shopCard') || 'shop-card';
         
-        // Название магазина
-        const name = document.createElement('h4');
-        name.className = getUIClass('testDrive', 'shopName') || 'shop-name';
-        
-        const mapIcon = document.createElement('i');
-        mapIcon.className = `fas ${getIcon('mapMarker')}`;
-        name.appendChild(mapIcon);
-        name.appendChild(document.createTextNode(` ${shop.name}`));
-        card.appendChild(name);
-        
-        // Адрес
-        const address = document.createElement('p');
-        address.className = getUIClass('testDrive', 'shopAddress') || 'shop-address';
-        address.textContent = shop.address;
-        card.appendChild(address);
-        
-        // Метро (если есть)
-        if (shop.metro) {
-            const metro = document.createElement('p');
-            metro.className = getUIClass('testDrive', 'shopMetro') || 'shop-metro';
-            
-            const metroIcon = document.createElement('i');
-            metroIcon.className = `fas ${getIcon('subway')}`;
-            metro.appendChild(metroIcon);
-            metro.appendChild(document.createTextNode(` ${shop.metro}`));
-            
-            card.appendChild(metro);
-        }
-        
-        // Часы работы
-        const hours = document.createElement('p');
-        hours.className = getUIClass('testDrive', 'shopHours') || 'shop-hours';
-        
-        const clockIcon = document.createElement('i');
-        clockIcon.className = `fas ${getIcon('clock')}`;
-        hours.appendChild(clockIcon);
-        hours.appendChild(document.createTextNode(` ${shop.hours}`));
-        
-        card.appendChild(hours);
-        
-        // Телефон
-        const phone = document.createElement('p');
-        phone.className = getUIClass('testDrive', 'shopPhone') || 'shop-phone';
-        
-        const phoneIcon = document.createElement('i');
-        phoneIcon.className = `fas ${getIcon('phone')}`;
-        phone.appendChild(phoneIcon);
-        phone.appendChild(document.createTextNode(` ${shop.phone}`));
-        
-        card.appendChild(phone);
-        
-        return card;
+        mainContainer.appendChild(shopGrid);
+        testContent.appendChild(mainContainer);
     }
 
     function updateInfoPanel(stepId) {
-            if (window.innerWidth <= 480) {
-        return;}
         const stepData = appData.stepsData[stepId];
         if (!stepData) return;
         
-        if (stepId === 'home') {
-            panelTitle.innerHTML = `<i class="fas ${getIcon('home')}"></i> ${stepData.title}`;
-            //panelSubtitle.textContent = stepData.subtitle || '';
-            //stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
-            parameterDetails.innerHTML = '';
-            return;
+        // Обновляем только для десктопа
+        if (window.innerWidth > 480) {
+            if (stepId === 'home') {
+                panelTitle.innerHTML = `<i class="fas ${getIcon('home')}"></i> ${stepData.title}`;
+                parameterDetails.innerHTML = '';
+                return;
+            }
+            
+            panelTitle.innerHTML = `<i class="fas ${getIcon('info')}"></i> ${stepData.title}`;
+            stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
+            
+            if (appState.selections[stepId]) {
+                const selected = appState.selections[stepId];
+                parameterDetails.innerHTML = `
+                    <h4>${selected.title}</h4>
+                    <p>${selected.desc}</p>
+                    ${stepId === 'fabric' ? 
+                        `<p class="fabric-note">
+                            <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
+                        </p>` : 
+                        ''}
+                `;
+            } else {
+                parameterDetails.innerHTML = `<p>${getUIText('noSelectionMessage')}</p>`;
+            }
         }
-        
-        panelTitle.innerHTML = `<i class="fas ${getIcon('info')}"></i> ${stepData.title}`;
-       // panelSubtitle.textContent = stepData.subtitle || '';
-        stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
-        
-        if (appState.selections[stepId]) {
-            const selected = appState.selections[stepId];
+    }
+
+    function selectOption(stepId, optionData) {
+        appState.selections[stepId] = optionData;
+
+        // Обновляем выделение карточек
+        document.querySelectorAll(`[data-step="${stepId}"]`).forEach(card => {
+            card.classList.remove('selected');
+            if (card.dataset.optionId === optionData.id) {
+                card.classList.add('selected');
+            }
+        });
+
+        // Обновляем десктопную панель (если видима)
+        if (window.innerWidth > 480) {
             parameterDetails.innerHTML = `
-                <h4>${selected.title}</h4>
-                <p>${selected.desc}</p>
+                <h4>${optionData.title}</h4>
+                <p>${optionData.desc}</p>
                 ${stepId === 'fabric' ? 
                     `<p class="fabric-note">
                         <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
-                    </p>` : 
-                    ''}
+                    </p>` : ''
+                }
             `;
-        } else {
-            parameterDetails.innerHTML = `<p>${getUIText('noSelectionMessage')}</p>`;
         }
+
+        // Мобильная панель — показываем всегда на мобилках при выборе
+        if (window.innerWidth <= 480) {
+            mobilePanelTitle.textContent = optionData.title;
+            mobileParameterDetails.innerHTML = `
+                <p>${optionData.desc}</p>
+                ${stepId === 'fabric' ? 
+                    `<p class="fabric-note">
+                        <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
+                    </p>` : ''
+                }
+            `;
+            mobileInfoPanel.classList.add('show');
+            mobileInfoPanel.style.display = 'block';
+            document.body.classList.add('mobile-info-open');
+        }
+
+        updateNavigation();
+        updateSelectionCard();
     }
-
-function selectOption(stepId, optionData) {
-    appState.selections[stepId] = optionData;
-
-    document.querySelectorAll(`[data-step="${stepId}"]`).forEach(card => {
-        card.classList.remove('selected');
-        if (card.dataset.optionId === optionData.id) {
-            card.classList.add('selected');
-        }
-    });
-
-    parameterDetails.innerHTML = `
-        <h4>${optionData.title}</h4>
-        <p>${optionData.desc}</p>
-        ${stepId === 'fabric' ? 
-            `<p class="fabric-note">
-                <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
-            </p>` : ''
-        }
-    `;
-
-    // Мобильная панель — только для телефонов
-    if (window.innerWidth <= 480) {
-        mobilePanelTitle.textContent = optionData.title;
-        mobileParameterDetails.innerHTML = `
-            <p>${optionData.desc}</p>
-            ${stepId === 'fabric' ? 
-                `<p class="fabric-note">
-                    <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
-                </p>` : ''
-            }
-        `;
-        mobileInfoPanel.classList.add('show');
-        document.body.classList.add('mobile-info-open');
-    }
-
-    updateNavigation();
-    updateSelectionCard();
-}
-
-
 
     // ========== НАВИГАЦИЯ ==========
-function updateNavigation() {
-            const stepIndex = appData.stepsOrder.indexOf(appState.currentStep);
-            const currentStep = appState.currentStep;
+    function updateNavigation() {
+        const stepIndex = appData.stepsOrder.indexOf(appState.currentStep);
+        const currentStep = appState.currentStep;
 
-            // === УПРАВЛЕНИЕ НАВИГАЦИЕЙ .panel-navigation ===
-            const panelNav = document.querySelector('.panel-navigation');
+        // === УПРАВЛЕНИЕ НАВИГАЦИЕЙ .panel-navigation ===
+        const panelNav = document.querySelector('.panel-navigation');
 
-            if (panelNav) {
-                if (window.innerWidth > 480) {
-                    const isHomeOrTest = currentStep === 'home' || currentStep === 'test';
-                    panelNav.style.display = isHomeOrTest ? 'none' : 'flex';
-                } else {
-                    panelNav.style.display = 'none';
-                }
-            }
-
-            // Кнопка "Назад"
-            prevBtn.disabled = stepIndex <= 0;
-            prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i> <span>${getUIText('backButton')}</span>`;
-
-            // Кнопка "Далее"
-            let nextDisabled = false;
-
-            if (currentStep === 'home') {
-                nextDisabled = false;
-            } else if (currentStep === 'test') {
-                nextDisabled = true;
-            } else if (appData.mainSteps.includes(currentStep)) {
-                const isCurrentStepSelected = !!appState.selections[currentStep];
-                nextDisabled = !isCurrentStepSelected;
-
-                if (currentStep === 'decor') {
-                    const allPreviousSelected = appData.mainSteps.every(step =>
-                        step === 'decor' ? true : !!appState.selections[step]
-                    );
-                    nextDisabled = !allPreviousSelected;
-                }
-            }
-
-            nextBtn.disabled = nextDisabled;
-
-            // Текст кнопки "Далее"
-            nextBtn.innerHTML = currentStep === 'decor'
-                ? `<span>${getUIText('toTestDriveButton')}</span> <i class="fas ${getIcon('arrowRight')}"></i>`
-                : `<span>${getUIText('nextButton')}</span> <i class="fas ${getIcon('arrowRight')}"></i>`;
-
-            // Номер шага
-            let displayStepNum;
-            if (currentStep === 'home') {
-                displayStepNum = 0;
-            } else if (currentStep === 'test') {
-                displayStepNum = appData.mainSteps.length + 1;
+        if (panelNav) {
+            if (window.innerWidth > 480) {
+                const isHomeOrTest = currentStep === 'home' || currentStep === 'test';
+                panelNav.style.display = isHomeOrTest ? 'none' : 'flex';
             } else {
-                displayStepNum = appData.mainSteps.indexOf(currentStep) + 1;
-            }
-            currentStepNum.textContent = displayStepNum;
-
-            // Обновляем текст счетчика шагов
-            const stepCounterElement = document.querySelector('.step-counter');
-            if (stepCounterElement) {
-                stepCounterElement.innerHTML = getUIText('stepCounter', {
-                    current: displayStepNum,
-                    total: appData.mainSteps.length + 1
-                });
-            }
-
-            // Кнопка финала
-            const allMainStepsSelected = appData.mainSteps.every(step => !!appState.selections[step]);
-            finalButton.disabled = !allMainStepsSelected;
-            finalButton.innerHTML = `<i class="fas ${getIcon('calendarCheck')}"></i> ${getUIText('finalButton')}`;
-
-            // Кнопка сброса
-            resetButton.innerHTML = `<i class="fas ${getIcon('redo')}"></i> ${getUIText('resetButton')}`;
-
-            // Заголовок карточки выбора
-            const selectionCardTitle = document.querySelector('.selection-card-header h3');
-            if (selectionCardTitle) {
-                selectionCardTitle.textContent = getUIText('selectionCardTitle');
+                panelNav.style.display = 'none';
             }
         }
 
+        // Кнопка "Назад"
+        prevBtn.disabled = stepIndex <= 0;
+        prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i> <span>${getUIText('backButton')}</span>`;
+
+        // Кнопка "Далее"
+        let nextDisabled = false;
+        let nextButtonText = getUIText('nextButton');
+        let nextButtonIcon = getIcon('arrowRight');
+
+        if (currentStep === 'home') {
+            nextDisabled = false;
+        } else if (currentStep === 'test') {
+            nextDisabled = true;
+        } else if (appData.mainSteps.includes(currentStep)) {
+            const isCurrentStepSelected = !!appState.selections[currentStep];
+            nextDisabled = !isCurrentStepSelected;
+
+            if (currentStep === 'decor') {
+                const allPreviousSelected = appData.mainSteps.every(step =>
+                    step === 'decor' ? true : !!appState.selections[step]
+                );
+                nextDisabled = !allPreviousSelected;
+                
+                // Если все выбрано - меняем текст кнопки на "Позвонить"
+                if (allPreviousSelected) {
+                    nextButtonText = getUIText('callButton') || 'Позвонить';
+                    nextButtonIcon = getIcon('phone') || 'fa-phone';
+                } else {
+                    nextButtonText = getUIText('toTestDriveButton');
+                }
+            }
+        }
+
+        nextBtn.disabled = nextDisabled;
+        nextBtn.innerHTML = `<span>${nextButtonText}</span> <i class="fas ${nextButtonIcon}"></i>`;
+
+        // Номер шага
+        let displayStepNum;
+        if (currentStep === 'home') {
+            displayStepNum = 0;
+        } else if (currentStep === 'test') {
+            displayStepNum = appData.mainSteps.length + 1;
+        } else {
+            displayStepNum = appData.mainSteps.indexOf(currentStep) + 1;
+        }
+        currentStepNum.textContent = displayStepNum;
+
+        // Обновляем текст счетчика шагов
+        const stepCounterElement = document.querySelector('.step-counter');
+        if (stepCounterElement) {
+            stepCounterElement.innerHTML = getUIText('stepCounter', {
+                current: displayStepNum,
+                total: appData.mainSteps.length + 1
+            });
+        }
+
+        // Кнопка финала - проверяем, все ли выбрано
+        const allMainStepsSelected = appData.mainSteps.every(step => !!appState.selections[step]);
+        finalButton.disabled = !allMainStepsSelected;
+        finalButton.innerHTML = `<i class="fas ${getIcon('calendarCheck')}"></i> ${getUIText('finalButton')}`;
+
+        // Кнопка сброса
+        resetButton.innerHTML = `<i class="fas ${getIcon('redo')}"></i> ${getUIText('resetButton')}`;
+
+        // Заголовок карточки выбора
+        const selectionCardTitle = document.querySelector('.selection-card-header h3');
+        if (selectionCardTitle) {
+            selectionCardTitle.textContent = getUIText('selectionCardTitle');
+        }
+    }
 
     function updateSelectionCard() {
         selectionTags.innerHTML = '';
@@ -593,9 +533,28 @@ function updateNavigation() {
 
     nextBtn.addEventListener('click', function(event) {
         event.preventDefault();
-        const currentIndex = appData.stepsOrder.indexOf(appState.currentStep);
-        if (currentIndex < appData.stepsOrder.length - 1) {
-            goToStep(appData.stepsOrder[currentIndex + 1]);
+        
+        if (appState.currentStep === 'decor') {
+            // Проверяем, все ли шаги выбраны
+            const allMainStepsSelected = appData.mainSteps.every(step => 
+                step === 'decor' ? true : !!appState.selections[step]
+            );
+            
+            if (allMainStepsSelected) {
+                // Запускаем процесс звонка
+                const callMade = handleFinalCall();
+                if (!callMade) {
+                    // Если звонок не сделан, все равно переходим к магазинам
+                    goToStep('test');
+                }
+            } else {
+                alert(getUIText('completeAllStepsAlert'));
+            }
+        } else {
+            const currentIndex = appData.stepsOrder.indexOf(appState.currentStep);
+            if (currentIndex < appData.stepsOrder.length - 1) {
+                goToStep(appData.stepsOrder[currentIndex + 1]);
+            }
         }
     });
 
@@ -616,11 +575,15 @@ function updateNavigation() {
 
     finalButton.addEventListener('click', function(event) {
         event.preventDefault();
+        
         // Проверяем, все ли шаги выбраны
         const allMainStepsSelected = appData.mainSteps.every(step => !!appState.selections[step]);
+        
         if (allMainStepsSelected) {
-            goToStep('test');
+            // Используем ту же функцию для звонка
+            handleFinalCall();
         } else {
+            // Если не все шаги выбраны - показываем предупреждение
             alert(getUIText('completeAllStepsAlert'));
         }
     });
@@ -638,7 +601,9 @@ function updateNavigation() {
     document.addEventListener('click', function(event) {
         if (mobileInfoPanel && mobileInfoPanel.classList.contains('show') && 
             !mobileInfoPanel.contains(event.target) && 
-            !event.target.closest('.option-card')) {
+            !event.target.closest('.option-card') &&
+            !event.target.closest('.home-card') &&
+            !event.target.closest('.menu-step')) {
             mobileInfoPanel.classList.remove('show');
             mobileInfoPanel.style.display = 'none';
             document.body.classList.remove('mobile-info-open');
@@ -669,7 +634,6 @@ function updateNavigation() {
     // ========== ЗАПУСК ==========
     goToStep('home');
 }
-
 
 // Загружаем данные и запускаем приложение
 document.addEventListener('DOMContentLoaded', function() {

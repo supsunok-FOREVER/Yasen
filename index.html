@@ -22,6 +22,7 @@
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="style-480.css" as="style" media="(max-width: 480px)">
     <link rel="preload" href="style-800.css" as="style" media="(min-width: 481px) and (max-width: 800px)">
+     <link rel="preload" href="style-1065.css" as="style" media="(max-width: 1065px)">
     <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1200px)">
     
     <!-- Main stylesheet -->
@@ -29,6 +30,7 @@
     
     <!-- Conditional stylesheets -->
 <link rel="stylesheet" href="style-1200.css" media="(max-width: 1200px)">
+<link rel="stylesheet" href="style-1065.css" media="(max-width: 1065px)">
 <link rel="stylesheet" href="style-800.css" media="(max-width: 800px)">
 <link rel="stylesheet" href="style-480.css" media="(max-width: 480px)">
 <link rel="stylesheet" href="style-360.css" media="(max-width: 360px)">
@@ -163,18 +165,18 @@
             </button>
         </aside>
 
-        <!-- МОБИЛЬНАЯ ИНФО-ПАНЕЛЬ (скрыта на десктопе) -->
-        <div class="mobile-info-panel" id="mobileInfoPanel">
-            <div class="mobile-info-content">
-                <h3 id="mobilePanelTitle">Информация</h3>
-                <div id="mobileParameterDetails">
-                    <p>Выберите параметр для подробностей</p>
+            <!-- МОБИЛЬНАЯ ИНФО-ПАНЕЛЬ (скрыта на десктопе) -->
+            <div class="mobile-info-panel" id="mobileInfoPanel">
+                <div class="mobile-info-content">
+                    <h3 id="mobilePanelTitle">Информация</h3>
+                    <div class="mobile-parameter-details" id="mobileParameterDetails">
+                        <p>Выберите параметр для подробностей</p>
+                    </div>
+                    <button class="btn-close-mobile-info">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <button class="btn-close-mobile-info">
-                    <i class="fas fa-times"></i>
-                </button>
             </div>
-        </div>
 
         <!-- НИЖНЯЯ ПАНЕЛЬ: Карточка выбора -->
         <footer class="selection-card" id="selectionCard">

@@ -1,0 +1,87 @@
+/* style-1065.css - Дополнительное уменьшение для экранов 1065px */
+@media (max-width: 1065px) {
+    .info-panel {
+        display: none !important;
+    }
+    
+    .app-container {
+        grid-template-columns: 250px 1fr !important;
+        grid-template-rows: 1fr auto !important; /* Изменено: первая строка растягивается */
+        min-height: 100vh; /* Важно для стабильности */
+    }
+    
+    .maze-area {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        height: auto; /* Убираем фиксированную высоту */
+        min-height: 0; /* Важно для grid-контейнера */
+        overflow: visible;
+    }
+    
+    /* СТАБИЛИЗИРУЕМ ВЫСОТУ СЕТОК */
+    .home-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 180px); /* Фиксируем высоту строк */
+        max-width: 900px;
+        height: auto;
+        min-height: 360px; /* 2 * 180px */
+    }
+    
+    .house-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 200px); /* Фиксируем высоту строк */
+        max-width: 900px;
+        height: auto;
+        min-height: 400px; /* 2 * 200px */
+    }
+    
+    /* ФИКСИРУЕМ ВЫСОТУ КАРТОЧЕК */
+    .home-card {
+        height: 100%; /* Занимает всю высоту ячейки */
+        min-height: 180px; /* Минимальная высота */
+    }
+    
+    .option-card {
+        height: 100%; /* Занимает всю высоту ячейки */
+        min-height: 200px; /* Минимальная высота */
+    }
+    
+    /* НИЖНЯЯ ПАНЕЛЬ - СТАБИЛЬНАЯ ВЫСОТА */
+    .selection-card {
+        grid-column: 1 / span 2 !important;
+        grid-row: 2 !important;
+        min-height: 80px; /* Фиксируем минимальную высоту */
+        height: auto;
+        padding: 15px 20px; /* Уменьшаем отступы */
+    }
+    
+    .tags-container {
+        min-height: 50px; /* Фиксируем высоту контейнера тегов */
+        align-items: center;
+    }
+    
+    /* Перепозиционируем карточки для 3x2 сетки */
+    .house-roof {
+        grid-column: 1 / span 3;
+        grid-row: 1;
+    }
+    
+    .house-left-top {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    
+    .house-right-top {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    
+    .house-left-bottom {
+        grid-column: 3;
+        grid-row: 2;
+    }
+    
+    .house-right-bottom {
+        display: none; /* Скрываем 5-ю карточку в 3x2 */
+    }
+}

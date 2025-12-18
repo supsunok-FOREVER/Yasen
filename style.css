@@ -7,63 +7,140 @@
 
 body {
     font-family: 'Inter', 'Open Sans', sans-serif;
-    background: linear-gradient(135deg, #0f0905 0%, #1a0e08 100%);
-    color: #f0e6d6;
+    background: var(--brand-red-deep);
+    color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
 }
 
+/* В style.css обновляем */
 .app-container {
     display: grid;
     grid-template-columns: 250px 1fr 350px;
-    grid-template-rows: 1fr auto;
-    min-height: 100vh;
+    grid-template-rows: 1fr auto; /* Единый подход для всех */
     gap: 0;
     position: relative;
+    min-height: 100vh; /* Важно */
 }
 
-/* ===== ЦВЕТОВАЯ ПАЛИТРА ===== */
+/* НИЖНЯЯ ПАНЕЛЬ - единые настройки */
+.selection-card {
+    grid-column: 1 / span 3;
+    grid-row: 2;
+    background: var(--brand-red-deep) !important;
+    padding: 20px 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    min-height: 80px; /* Фиксированная высота */
+    height: auto;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.tags-container {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-height: 50px; /* Фиксированная высота */
+    align-items: center;
+}
+
+/* Все контейнеры внутри центрируем */
+.home-content,
+.house-grid,
+#testContent {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* =======================================================================
+   🔴 BRAND RESET — ПРОСТО, ОВАЛЬНО, В ЦВЕТАХ ЛОГОТИПА
+   -----------------------------------------------------------------------
+   Цель:
+   - вернуться к ДНК эмблемы
+   - овальные формы
+   - чистые цвета
+   - минимум эффектов
+   ======================================================================= */
+
+/* -----------------------------------------------------------------------
+   1. ЖЁСТКАЯ ФИРМЕННАЯ ПАЛИТРА
+------------------------------------------------------------------------ */
+
 :root {
-    /* Темные цвета из левого меню */
-    --dark-1: #0f0905;
-    --dark-2: #1a0e08;
-    --dark-3: #2c1810;
-    --dark-4: #3a2115;
-    --dark-5: #4a2915;
-    --dark-6: #5a3825;
-    
-    /* Акцентные цвета */
-    --accent-1: #8B4513;
-    --accent-2: #D2691E;
-    --accent-3: #e8d0b3;
-    --accent-4: #d2a679;
-    --accent-5: #c9a86d;
-    
-    /* Текстуры и тени */
-    --shadow-dark: rgba(0, 0, 0, 0.3);
-    --shadow-medium: rgba(0, 0, 0, 0.2);
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --texture-dark: rgba(92, 56, 37, 0.3);
-    --texture-medium: rgba(92, 56, 37, 0.2);
-    --texture-light: rgba(232, 208, 179, 0.1);
-    
-    /* Градиенты */
-    --gradient-dark: linear-gradient(135deg, var(--dark-3) 0%, var(--dark-2) 100%);
-    --gradient-medium: linear-gradient(135deg, var(--dark-4) 0%, var(--dark-3) 100%);
-    --gradient-light: linear-gradient(135deg, var(--dark-5) 0%, var(--dark-4) 100%);
-    --gradient-accent: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+    --brand-red: #c40018;        /* основной цвет логотипа */
+    --brand-red-dark: #7a0f16;   /* бордовый / глубина */
+    --brand-red-deep: #4b0a0f;   /* корпус / панели */
+    --brand-white: #ffffff;
+}
+
+/* Убираем влияние старых градиентов и оттенков */
+.sidebar-logo,
+.info-panel,
+.selection-card {
+    background-image: none !important;
+}
+
+/* -----------------------------------------------------------------------
+   1. КАРТОЧКИ — ПРОСТЫЕ МОДУЛИ
+------------------------------------------------------------------------ */
+
+.home-card,
+.option-card,
+.shop-card-grid,
+.step-explanation,
+.dynamic-content {
+    background: var(--brand-red-dark);
+    border-radius: 28px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ffffff;
+}
+
+/* =======================================================================
+   🔴 FULL 3D DEPTH — ТЕНЬ ВНИЗ + ВПРАВО
+   -----------------------------------------------------------------------
+   Делает элементы объёмными в пространстве, а не "подвешенными"
+   ======================================================================= */
+
+/* -----------------------------------------------------------------------
+   1. БАЗОВЫЙ ПРОСТРАНСТВЕННЫЙ ОБЪЁМ (ВСЕ КЛЮЧЕВЫЕ БЛОКИ)
+------------------------------------------------------------------------ */
+
+.home-card,
+.option-card,
+.shop-card-grid,
+.step-explanation,
+.dynamic-content {
+    box-shadow:
+        /* нижняя тень (вес) */
+        0 10px 0 rgba(122, 15, 22, 0.95),
+
+        /* правая тень (пространство) */
+        8px 0 0 rgba(122, 15, 22, 0.85),
+
+        /* общая рассеянная */
+        10px 14px 30px rgba(0,0,0,0.35);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 /* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
 .sidebar-logo {
     grid-column: 1;
     grid-row: 1;
-    background: var(--gradient-dark);
-    color: var(--accent-3);
+    background: var(--brand-red-deep) !important;
+    background-image: none !important;
+    color: #ffffff;
     padding: 25px 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 0 20px var(--shadow-dark);
+    box-shadow: none;
     z-index: 100;
 }
 
@@ -71,7 +148,7 @@ body {
     text-align: center;
     margin-bottom: 40px;
     padding-bottom: 25px;
-    border-bottom: 1px solid var(--texture-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .logo-text {
@@ -79,20 +156,36 @@ body {
     font-size: 28px;
     font-weight: 800;
     letter-spacing: 3px;
-    color: var(--accent-3);
+    color: #ffffff;
     margin-bottom: 5px;
     text-transform: uppercase;
 }
 
 .logo-subtitle {
     font-size: 12px;
-    color: var(--accent-4);
+    color: rgba(255,255,255,0.8);
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+/* =======================================================================
+   🔴 УПРОЩЕНИЕ 3D — БЕЗ ПРАВОЙ ТЕНИ
+   -----------------------------------------------------------------------
+   Применяется ТОЛЬКО к кнопкам и progress-track.
+   Карточки НЕ ТРОГАЕМ.
+   ======================================================================= */
+
+/* -----------------------------------------------------------------------
+   2. PROGRESS TRACK — ПАНЕЛЬ, НЕ КНОПКА
+------------------------------------------------------------------------ */
+
 .progress-track {
     flex: 1;
+    border-radius: 24px;
+    background: var(--brand-red-dark);
+    box-shadow:
+        0 8px 0 rgba(122, 15, 22, 1),
+        0 14px 26px rgba(0,0,0,0.35);
 }
 
 .steps-container {
@@ -101,144 +194,183 @@ body {
     gap: 12px;
 }
 
+/* =======================================================================
+   🔴 MENU STEP — ПОЛНОЦЕННЫЙ 3D (НИЗ + ПРАВО)
+   -----------------------------------------------------------------------
+   menu-step и menu-step-icon становятся объёмными,
+   как физические кнопки навигации
+   ======================================================================= */
+
+/* -----------------------------------------------------------------------
+   1. ПУНКТ МЕНЮ — ОБЪЁМНЫЙ МОДУЛЬ
+------------------------------------------------------------------------ */
+
 .menu-step {
     display: flex;
     align-items: center;
     gap: 15px;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 14px 20px;
+    border-radius: 999px; /* ОВАЛ */
     cursor: pointer;
-    transition: all 0.3s ease;
+    background: var(--brand-red-dark);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
     position: relative;
-    background: rgba(255, 255, 255, 0.05);
+
+    box-shadow:
+        /* низ — вес */
+        0 8px 0 rgba(122, 15, 22, 0.95),
+
+        /* право — пространство */
+        6px 0 0 rgba(122, 15, 22, 0.85),
+
+        /* общая тень */
+        8px 12px 24px rgba(0,0,0,0.35);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
+/* hover — лёгкий подъём */
 .menu-step:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateX(5px);
+    background: var(--brand-red-dark);
+    transform: translate(-1px, -2px);
+
+    box-shadow:
+        0 10px 0 rgba(122, 15, 22, 1),
+        8px 0 0 rgba(122, 15, 22, 0.95),
+        10px 16px 32px rgba(0,0,0,0.4);
 }
 
 .menu-step.active {
-    background: rgba(232, 208, 179, 0.2);
-    border-left: 4px solid var(--accent-3);
+    background: var(--brand-red);
+    border-color: transparent;
 }
+
+/* active — продавливание */
+.menu-step:active {
+    transform: translate(2px, 2px);
+
+    box-shadow:
+        0 4px 0 rgba(122, 15, 22, 1),
+        3px 0 0 rgba(122, 15, 22, 1),
+        6px 10px 18px rgba(0,0,0,0.35);
+}
+
+/* -----------------------------------------------------------------------
+   2. ИКОНКА — КАК ОТДЕЛЬНАЯ КНОПКА ВНУТРИ
+------------------------------------------------------------------------ */
 
 .menu-step-icon {
     width: 40px;
     height: 40px;
-    background: rgba(232, 208, 179, 0.1);
     border-radius: 50%;
+    background: rgba(255,255,255,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: var(--accent-3);
+    color: #ffffff;
+    position: relative;
+
+    box-shadow:
+        0 4px 0 rgba(122, 15, 22, 0.95),
+        4px 0 0 rgba(122, 15, 22, 0.85),
+        4px 6px 12px rgba(0,0,0,0.35);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
 }
 
 .menu-step.active .menu-step-icon {
-    background: var(--accent-3);
-    color: var(--dark-6);
+    background: #ffffff;
+    color: var(--brand-red);
+}
+
+/* hover — иконка "дышит" вместе с пунктом */
+.menu-step:hover .menu-step-icon {
+    transform: translate(-1px, -1px);
+
+    box-shadow:
+        0 6px 0 rgba(122, 15, 22, 1),
+        6px 0 0 rgba(122, 15, 22, 0.95),
+        6px 10px 18px rgba(0,0,0,0.4);
+}
+
+/* active — утопление */
+.menu-step:active .menu-step-icon {
+    transform: translate(1px, 1px);
+
+    box-shadow:
+        0 2px 0 rgba(122, 15, 22, 1),
+        2px 0 0 rgba(122, 15, 22, 1),
+        4px 6px 10px rgba(0,0,0,0.35);
 }
 
 .menu-step-text {
     flex: 1;
     font-size: 14px;
     font-weight: 500;
+    color: #ffffff;
 }
 
-/* ===== ЦЕНТРАЛЬНАЯ ОБЛАСТЬ ===== */
-.maze-area {
-    grid-column: 2;
-    grid-row: 1;
-    padding: 30px;
-    overflow-y: auto;
-    background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark-3) 100%);
-}
 
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
 .home-content.active {
     display: block !important;
 }
 
+/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
 .home-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto repeat(3, 1fr);
+    grid-template-rows: 150px 150px 150px; /* Все 3 строки по 150px */
     gap: 20px;
     max-width: 800px;
     margin: 0 auto 40px;
     width: 100%;
     box-sizing: border-box;
-    height: auto;
 }
 
 .home-card {
-    background: var(--gradient-medium);
-    border-radius: 25px;
-    padding: 25px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid var(--texture-dark);
-    box-shadow: 
-        8px 8px 20px var(--shadow-dark),
-        inset 3px 3px 8px var(--texture-dark),
-        inset -3px -3px 8px var(--shadow-dark);
-   
-      height: 200px; /* фиксированная высота вместо min-height */
+    height: auto;
     min-height: auto;
-   
     position: relative;
     overflow: hidden;
 }
 
-.home-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-        12px 12px 30px var(--shadow-dark),
-        inset 2px 2px 6px var(--texture-dark),
-        inset -2px -2px 6px var(--shadow-dark);
+/* -----------------------------------------------------------------------
+   2. HOVER — УСИЛЕНИЕ ОБЪЁМА
+------------------------------------------------------------------------ */
+
+.home-card:hover,
+.option-card:hover,
+.shop-card-grid:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 14px 0 rgba(122, 15, 22, 1),
+        10px 0 0 rgba(122, 15, 22, 0.95),
+        14px 20px 40px rgba(0,0,0,0.4);
 }
 
 .home-card.selected {
-    border: 2px solid rgba(139, 69, 19, 0.4);
-}
-
-/* Эффект стежки на подушке */
-.home-card::before, .option-card::before, .shop-card-grid::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
-    background: 
-        linear-gradient(to bottom, transparent 95%, rgba(0, 0, 0, 0.1) 100%) repeat-y,
-        linear-gradient(to bottom, transparent 95%, rgba(0, 0, 0, 0.1) 100%) repeat-y 50% 0,
-        linear-gradient(to bottom, transparent 95%, rgba(0, 0, 0, 0.1) 100%) repeat-y 100% 0,
-        linear-gradient(to right, transparent 95%, rgba(0, 0, 0, 0.1) 100%) repeat-x,
-        linear-gradient(to right, transparent 95%, rgba(0, 0, 0, 0.1) 100%) repeat-x 0 50%,
-        linear-gradient(to right, transparent 95%, rgba(0, 0, 0, 0.1) 100%) repeat-x 0 100%;
-    background-size: 33.33% 100%, 33.33% 100%, 33.33% 100%, 100% 33.33%, 100% 33.33%, 100% 33.33%;
-    border-radius: 15px;
-    opacity: 0.2;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.home-card > *, .option-card > *, .shop-card-grid > * {
-    position: relative;
-    z-index: 2;
+    border: 2px solid #ffffff;
 }
 
 .home-card i {
     font-size: 48px;
     margin-bottom: 15px;
-    color: var(--accent-2);
+    color: #ffffff;
 }
 
 .home-header {
@@ -249,26 +381,38 @@ body {
 
 .home-title {
     font-size: 36px;
-    color: var(--accent-3);
+    color: #ffffff;
     margin-bottom: 10px;
     font-weight: 700;
     line-height: 1.2;
 }
 
+/* -----------------------------------------------------------------------
+   4. ТЕКСТ — ЧИСТЫЙ, КОНТРАСТНЫЙ
+------------------------------------------------------------------------ */
+
 .home-card-title {
     font-weight: 700;
     font-size: 18px;
     margin-bottom: 10px;
-    color: var(--accent-3);
+    color: #ffffff;
     text-align: center;
 }
 
 .home-card-desc {
     font-size: 14px;
-    color: var(--accent-3);
+    color: rgba(255,255,255,0.8);
     line-height: 1.5;
     text-align: center;
-    opacity: 0.9;
+}
+
+/* Убираем все псевдо-подложки под текст */
+.home-card-title::before,
+.home-card-desc::before,
+.option-title::before,
+.option-desc::before,
+.shop-card-header h4::before {
+    display: none !important;
 }
 
 /* ===== СЕТКА ОПЦИЙ ===== */
@@ -289,8 +433,6 @@ body {
 }
 
 .option-card {
-    background: var(--gradient-medium);
-    border-radius: 25px;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -298,61 +440,48 @@ body {
     justify-content: center;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid var(--texture-dark);
-    box-shadow: 
-        8px 8px 20px var(--shadow-dark),
-        inset 3px 3px 8px var(--texture-dark),
-        inset -3px -3px 8px var(--shadow-dark);
     min-height: 200px;
     height: auto;
     position: relative;
     overflow: hidden;
 }
 
-.option-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-        12px 12px 30px var(--shadow-dark),
-        inset 2px 2px 6px var(--texture-dark),
-        inset -2px -2px 6px var(--shadow-dark);
-}
-
 .option-card.selected {
-    border: 2px solid rgba(139, 69, 19, 0.4);
+    border: 2px solid #ffffff;
 }
 
 .option-card i {
     font-size: 48px;
     margin-bottom: 15px;
-    color: var(--accent-2);
+    color: #ffffff;
 }
 
 .option-title {
     font-weight: 700;
     font-size: 18px;
     margin-bottom: 10px;
-    color: var(--accent-3);
+    color: #ffffff;
 }
 
 .option-desc {
     font-size: 14px;
-    color: var(--accent-3);
+    color: rgba(255,255,255,0.8);
     line-height: 1.5;
     text-align: center;
-    opacity: 0.9;
 }
 
 /* ===== ПРАВАЯ ПАНЕЛЬ ===== */
 .info-panel {
     grid-column: 3;
     grid-row: 1;
-    background: var(--gradient-dark);
+    background: var(--brand-red-deep) !important;
+    background-image: none !important;
+    color: #ffffff;
     padding: 30px;
-    border-left: 1px solid var(--texture-dark);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     flex-direction: column;
-    box-shadow: -5px 0 20px var(--shadow-dark);
+    box-shadow: none;
     z-index: 100;
 }
 
@@ -363,12 +492,12 @@ body {
 .panel-header {
     margin-bottom: 25px;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(232, 208, 179, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #panelTitle {
     font-size: 22px;
-    color: var(--accent-3);
+    color: #ffffff;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
@@ -376,116 +505,237 @@ body {
 }
 
 .panel-subtitle {
-    color: var(--accent-4);
+    color: rgba(255,255,255,0.8);
     font-size: 14px;
     font-weight: 500;
 }
 
+/* -----------------------------------------------------------------------
+   5. INFO PANEL — ВЛОЖЕННЫЕ БЛОКИ ЧИТАЮТСЯ ОТДЕЛЬНО
+------------------------------------------------------------------------ */
+
+.info-panel .step-explanation,
+.info-panel .dynamic-content {
+    background: var(--brand-red-dark);
+    border-radius: 24px;
+}
+
 .step-explanation {
-    background: var(--gradient-medium);
     padding: 20px;
-    border-radius: 15px;
     margin-bottom: 25px;
-    border: 1px solid var(--texture-dark);
 }
 
 .step-explanation p {
-    color: var(--accent-3);
+    color: #ffffff;
     line-height: 1.6;
 }
 
 .dynamic-content {
-    background: var(--gradient-medium);
     padding: 25px;
-    border-radius: 15px;
-    border: 1px solid var(--texture-dark);
 }
 
 .parameter-details h4 {
-    color: var(--accent-3);
+    color: #ffffff;
     margin-bottom: 15px;
     font-size: 18px;
 }
 
 .parameter-details p {
-    color: var(--accent-3);
+    color: rgba(255,255,255,0.8);
     line-height: 1.6;
     margin-bottom: 15px;
 }
+
+/* -----------------------------------------------------------------------
+   3. INFO PANEL — КНОПКИ НЕ СЛИВАЮТСЯ
+------------------------------------------------------------------------ */
 
 .panel-navigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 30px 0;
-    padding: 20px;
-    background: var(--gradient-medium);
-    border-radius: 15px;
-    border: 1px solid var(--texture-dark);
+    background: rgba(0,0,0,0.15);
+    border-radius: 999px;
+    padding: 12px 16px;
+    gap: 14px;
+    box-shadow:
+        /* нижняя тень (вес) */
+        0 10px 0 rgba(122, 15, 22, 0.95),
+
+        /* правая тень (пространство) */
+        8px 0 0 rgba(122, 15, 22, 0.85),
+
+        /* общая рассеянная */
+        10px 14px 30px rgba(0,0,0,0.35);
 }
 
+/* -----------------------------------------------------------------------
+   4. СЧЁТЧИК ШАГОВ — НЕ СЛИВАЕТСЯ С КНОПКАМИ
+------------------------------------------------------------------------ */
+
 .step-counter {
-    font-weight: 700;
-    color: var(--accent-3);
-    font-size: 16px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.25);
+    color: #ffffff;
+    font-weight: 600;
 }
+
+/* кнопки в панели — как отдельные элементы */
+.panel-navigation .btn-nav {
+    background: var(--brand-red);
+    border-radius: 999px;
+    padding: 12px 22px;
+}
+
+/* =======================================================================
+   🔴 BRAND DETAIL — БЕЛАЯ ОКАНТОВКА ДЛЯ КНОПОК
+   -----------------------------------------------------------------------
+   Повторяем приём карточек:
+   - тонкая белая рамка
+   - подчёркивает форму
+   - усиливает 3D
+   ======================================================================= */
+
+/* -----------------------------------------------------------------------
+   1. ВСЕ КНОПКИ — БЕЛАЯ ОКАНТОВКА
+------------------------------------------------------------------------ */
 
 .btn-nav {
     padding: 12px 20px;
-    background: var(--gradient-light);
-    border: 1px solid var(--texture-dark);
-    border-radius: 10px;
+    background: var(--brand-red-dark);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px; /* общий язык формы */
     cursor: pointer;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.3s ease;
-    color: var(--accent-3);
+    position: relative;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+
+    /* лёгкий внутренний свет — чтобы рамка не была "наклейкой" */
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 6px 0 rgba(122, 15, 22, 1),
+        0 12px 22px rgba(0,0,0,0.35);
 }
 
+/* -----------------------------------------------------------------------
+   2. HOVER — РАМКА ЧУТЬ ЯРЧЕ
+------------------------------------------------------------------------ */
+
 .btn-nav:hover:not(:disabled) {
-    background: linear-gradient(135deg, var(--dark-6) 0%, var(--accent-1) 100%);
-    transform: translateY(-3px);
+    background: var(--brand-red-dark);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        0 8px 0 rgba(122, 15, 22, 1),
+        0 16px 28px rgba(0,0,0,0.4);
+}
+
+/* -----------------------------------------------------------------------
+   3. ACTIVE — РАМКА ОСТАЁТСЯ, КНОПКА "ВЖИМАЕТСЯ"
+------------------------------------------------------------------------ */
+
+.btn-nav:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+
+    box-shadow:
+        inset 0 2px 3px rgba(0,0,0,0.35),
+        0 3px 0 rgba(122, 15, 22, 1),
+        0 8px 14px rgba(0,0,0,0.35);
+}
+
+/* disabled — "утопленная" */
+.panel-navigation .btn-nav:disabled {
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.4);
+    transform: none;
+    opacity: 0.5;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .btn-nav:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .btn-reset {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, rgba(92, 56, 37, 0.05) 100%);
-    border: 2px solid rgba(232, 208, 179, 0.3);
-    border-radius: 12px;
-    color: var(--accent-3);
+    background: var(--brand-red-dark);
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px; /* общий язык формы */
     font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    transition: all 0.3s ease;
+    position: relative;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 6px 0 rgba(122, 15, 22, 1),
+        0 12px 22px rgba(0,0,0,0.35);
 }
 
+/* hover */
 .btn-reset:hover {
-    background: rgba(232, 208, 179, 0.1);
-    border-color: rgba(232, 208, 179, 0.5);
+    background: var(--brand-red-dark);
     transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        0 8px 0 rgba(122, 15, 22, 1),
+        0 16px 28px rgba(0,0,0,0.4);
+}
+
+/* active */
+.btn-reset:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+
+    box-shadow:
+        inset 0 2px 3px rgba(0,0,0,0.35),
+        0 3px 0 rgba(122, 15, 22, 1),
+        0 8px 14px rgba(0,0,0,0.35);
 }
 
 /* ===== НИЖНЯЯ ПАНЕЛЬ ===== */
+/* -----------------------------------------------------------------------
+   6. SELECTION CARD — ОЩУЩЕНИЕ ТЯЖЁЛОГО МОДУЛЯ
+------------------------------------------------------------------------ */
+
 .selection-card {
     grid-column: 1 / span 3;
     grid-row: 2;
-    background: var(--gradient-dark);
+    background: var(--brand-red-deep) !important;
     padding: 25px 30px;
-    border-top: 3px solid rgba(232, 208, 179, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: center;
     gap: 25px;
+    box-shadow:
+        0 12px 0 rgba(122, 15, 22, 1),
+        10px 0 0 rgba(122, 15, 22, 0.95),
+        14px 22px 42px rgba(0,0,0,0.45) !important;
 }
 
 .selection-card-header {
@@ -496,12 +746,12 @@ body {
 }
 
 .selection-card-header h3 {
-    color: var(--accent-3);
+    color: #ffffff;
     font-size: 18px;
 }
 
 .selection-card-header i {
-    color: var(--accent-2);
+    color: #ffffff;
     font-size: 20px;
 }
 
@@ -515,25 +765,53 @@ body {
 }
 
 .empty-state {
-    color: var(--accent-4);
+    color: rgba(255,255,255,0.8);
     font-style: italic;
 }
 
 .selection-tag {
-    background: linear-gradient(145deg, rgba(92, 56, 37, 0.4), rgba(139, 69, 19, 0.3));
+    background: var(--brand-red-dark);
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 999px; /* общий язык формы */
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(232, 208, 179, 0.3);
+    position: relative;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    color: #ffffff;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 6px 0 rgba(122, 15, 22, 1),
+        0 12px 22px rgba(0,0,0,0.35);
 }
 
+/* hover */
 .selection-tag:hover {
-    background: linear-gradient(145deg, rgba(139, 69, 19, 0.4), rgba(210, 105, 30, 0.3));
-    transform: translateY(-3px);
+    background: var(--brand-red-dark);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        0 8px 0 rgba(122, 15, 22, 1),
+        0 16px 28px rgba(0,0,0,0.4);
+}
+
+/* active */
+.selection-tag:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+
+    box-shadow:
+        inset 0 2px 3px rgba(0,0,0,0.35),
+        0 3px 0 rgba(122, 15, 22, 1),
+        0 8px 14px rgba(0,0,0,0.35);
 }
 
 .btn-final {
@@ -546,28 +824,58 @@ body {
 
 /* ===== КНОПКИ ===== */
 .btn-primary {
-    background: var(--gradient-accent);
-    color: var(--accent-3);
-    border: 2px solid rgba(210, 105, 30, 0.4);
-    border-radius: 50px;
+    background: var(--brand-red);
+    background-image: none;
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px; /* общий язык формы */
     padding: 15px 30px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    position: relative;
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.15s ease;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        0 6px 0 rgba(122, 15, 22, 1),
+        0 12px 22px rgba(0,0,0,0.35);
 }
 
+/* hover */
 .btn-primary:hover:not(:disabled) {
-    transform: translateY(-6px);
+    background: var(--brand-red);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        0 8px 0 rgba(122, 15, 22, 1),
+        0 16px 28px rgba(0,0,0,0.4);
+}
+
+/* active */
+.btn-primary:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+
+    box-shadow:
+        inset 0 2px 3px rgba(0,0,0,0.35),
+        0 3px 0 rgba(122, 15, 22, 1),
+        0 8px 14px rgba(0,0,0,0.35);
 }
 
 .btn-primary:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ===== МОБИЛЬНАЯ ПАНЕЛЬ ===== */
@@ -577,9 +885,10 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--gradient-medium);
+    background: var(--brand-red-deep) !important;
+    color: #ffffff;
     padding: 20px;
-    box-shadow: 0 -5px 20px var(--shadow-dark);
+    box-shadow: none;
     z-index: 1000;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
@@ -592,7 +901,7 @@ body {
 }
 
 .mobile-info-content h3 {
-    color: var(--accent-3);
+    color: #ffffff;
     margin-bottom: 15px;
     padding-right: 40px;
 }
@@ -604,7 +913,7 @@ body {
     background: none;
     border: none;
     font-size: 20px;
-    color: var(--accent-4);
+    color: rgba(255,255,255,0.8);
     cursor: pointer;
     width: 40px;
     height: 40px;
@@ -617,8 +926,8 @@ body {
 }
 
 .btn-close-mobile-info:hover {
-    background: rgba(232, 208, 179, 0.1);
-    color: var(--accent-3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
 }
 
 /* Добавляем title атрибуты для доступности */
@@ -657,29 +966,13 @@ body {
 }
 
 .shop-card-grid {
-    background: var(--gradient-medium);
-    border-radius: 25px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease;
-    border: 1px solid var(--texture-dark);
-    box-shadow: 
-        8px 8px 20px var(--shadow-dark),
-        inset 3px 3px 8px var(--texture-dark),
-        inset -3px -3px 8px var(--shadow-dark);
     min-height: 200px;
     height: auto;
     position: relative;
     overflow: hidden;
-}
-
-.shop-card-grid:hover {
-    transform: translateY(-8px);
-    box-shadow: 
-        12px 12px 30px var(--shadow-dark),
-        inset 2px 2px 6px var(--texture-dark),
-        inset -2px -2px 6px var(--shadow-dark);
 }
 
 .shop-card-header {
@@ -688,16 +981,16 @@ body {
     gap: 10px;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(92, 56, 37, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .shop-card-header i {
-    color: var(--accent-2);
+    color: #ffffff;
     font-size: 18px;
 }
 
 .shop-card-header h4 {
-    color: var(--accent-3);
+    color: #ffffff;
     font-size: 16px;
     margin: 0;
 }
@@ -710,7 +1003,7 @@ body {
 .shop-metro-grid,
 .shop-hours-grid,
 .shop-phone-grid {
-    color: var(--accent-3);
+    color: rgba(255,255,255,0.8);
     margin-bottom: 10px;
     line-height: 1.5;
     display: flex;
@@ -723,12 +1016,25 @@ body {
 .shop-metro-grid i,
 .shop-hours-grid i,
 .shop-phone-grid i {
-    color: var(--accent-2);
+    color: #ffffff;
     font-size: 14px;
     margin-top: 2px;
 }
 
 .shop-hours-grid {
-    color: var(--accent-2);
+    color: #ffffff;
     font-weight: 700;
+}
+
+/* ===== МОДУЛЬНЫЙ ДИВАН / ВЕЛЮР ===== */
+
+.sofa-module {
+    border-radius: 28px;
+    position: relative;
+    background: var(--brand-red-dark);
+    overflow: hidden;
+
+    /* Объём дивана */
+    box-shadow:
+        0 12px 28px rgba(0,0,0,0.35);
 }
