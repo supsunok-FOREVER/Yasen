@@ -1,7 +1,7 @@
     @media (max-width: 512px) {
     .app-container {
-        grid-template-columns: 110px 1fr !important;;
-        grid-template-rows: 1fr auto;
+        grid-template-columns: 120px 1fr !important;;
+        grid-template-rows: auto 1fr;
         grid-template-areas: 
             "sidebar main"
             "footer footer";
