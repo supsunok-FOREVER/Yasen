@@ -29,7 +29,7 @@
         height: auto;
         overflow-y: auto;
         justify-content: flex-start;
-         overflow: hidden;
+        
     }
         
    
@@ -100,18 +100,30 @@
         font-size: 12px !important;
     }
     /* Для всех гридов добавляем auto height */
-    .home-grid,
-    .house-grid,
-    .shops-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        max-width: 100%;
-        height: auto; /* Автоматическая высота по содержимому */
-        margin-bottom: 10px;
-        align-items: start; 
-        display: flex;
-            flex: 1;
-    }
+        .home-grid,
+        .house-grid,
+        .shops-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            align-items: start;
+            /* УБРАТЬ display: flex */
+            /* УБРАТЬ flex: 1 */
+            display: grid !important; /* ← Добавить */
+        }
+
+        /* Позже в файле для .home-grid: */
+        .home-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            /* display: grid уже есть в предыдущем правиле */
+        }
     
         .shop-card-grid {
             padding: 0px;
@@ -387,16 +399,7 @@
         font-size: 14px;
     }
     
-    /* Контент тест-драйва */
-
-        .home-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr); /* ⚠️ ДОБАВИТЬ: repeat(3, 1fr) */
-        gap: 8px;
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 20px;
-    }
+ 
     
     .home-card {
         padding: 10px;

@@ -18,6 +18,8 @@
     }
 
     .maze-area {
+         display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
