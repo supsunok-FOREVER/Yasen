@@ -1,0 +1,122 @@
+/* style-360.css - Дополнительное уменьшение для экранов ≤360px */
+@media (max-width: 360px) {
+    .app-container {
+        grid-template-columns: 110px 1fr !important;;
+    }
+    
+     .sidebar-logo {
+        grid-area: sidebar !important;
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        padding: 15px 10px !important;
+        width: 110px !important;
+        min-width: 110px !important;
+        max-width: 110px !important;
+        height: 100% !important;
+    }
+    
+    .menu-step {
+        padding: 4px 2px;
+        gap: 4px;
+    }
+    
+    .menu-step-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+    
+    .menu-step-text {
+        font-size: 8px;
+    }
+    
+    .maze-area {
+        padding: 8px;
+    }
+    
+    /* Остальные стили... */
+    
+    .home-title {
+        font-size: 16px;
+    }
+    
+    .home-subtitle {
+        font-size: 11px;
+    }
+    
+    .compact-step {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .step-indicator {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .step-icon {
+        font-size: 12px;
+    }
+    
+    .step-content h3 {
+        font-size: 11px;
+    }
+    
+    .step-content p {
+        font-size: 9px;
+    }
+    
+    /* Грид: остаёмся 2x3, но ещё меньше */
+    .house-grid {
+        gap: 6px;
+    }
+    
+    .option-card {
+        padding: 8px;
+        min-height: 100px;
+    }
+    
+    .option-card i {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    
+    .option-title {
+        font-size: 11px;
+    }
+    
+    .option-desc {
+        font-size: 9px;
+    }
+    
+    /* Нижняя панель */
+    .selection-card {
+        padding: 8px;
+    }
+    
+    .selection-tag {
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+    
+    .btn-final {
+        padding: 6px 12px;
+        font-size: 10px;
+    }
+    
+    .btn-large {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+        .home-title {
+        font-size: 18px;
+    }
+    
+    .home-subtitle {
+        font-size: 11px;
+    }
+    
+    .test-drive-container h3 {
+        font-size: 14px;
+    }
+}

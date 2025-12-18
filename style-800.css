@@ -8,7 +8,7 @@
         padding: 0 !important;
     }
   .app-container {
-        grid-template-columns: 180px 1fr !important; /* ← РАБОЧЕЕ РЕШЕНИЕ */
+        grid-template-columns: 140px 1fr !important; /* ← РАБОЧЕЕ РЕШЕНИЕ */
         grid-template-rows: 1fr auto;
         grid-template-areas: 
             "sidebar main"
@@ -31,9 +31,9 @@
         grid-column: 1 !important;
         grid-row: 1 !important;
         padding: 15px 10px !important;
-        width: 180px !important;
-        min-width: 180px !important;
-        max-width: 180px !important;
+        width: 140px !important;
+        min-width: 140px !important;
+        max-width: 140px !important;
         height: 100% !important;
     }
     
