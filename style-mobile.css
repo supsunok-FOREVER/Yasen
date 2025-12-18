@@ -1,0 +1,27 @@
+/* =======================================================================
+   📱 MOBILE ONLY (REAL DEVICE)
+   ======================================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    body {
+        overflow: hidden;
+    }
+
+    .app-container {
+        height: calc(100dvh - 60px);
+        max-height: calc(100dvh - 60px);
+        overflow: hidden;
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .maze-area {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .selection-card {
+        margin-bottom: 12px;
+    }
+
+}
