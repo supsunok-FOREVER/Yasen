@@ -85,9 +85,9 @@
     
     .maze-area {
         grid-area: main;
-        padding: 10px;
+        padding: 5px;
         overflow-y: auto;
-        
+        max-width: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -106,7 +106,7 @@
         gap: 8px;
         max-width: 100%;
         height: auto; /* Автоматическая высота по содержимому */
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     
     /* Центральный контент */
@@ -383,10 +383,6 @@
         text-align: center;
     }
 }
-    .test-drive-container {
-        padding: 15px;
-    }
-    
     .shop-card {
         min-width: 100%;
         padding: 15px;
@@ -405,54 +401,29 @@
         line-height: 1.3;
     }
     
-    .test-drive-container h3 i {
-        font-size: 18px;
-    }
+  
     
-    /* Стили для сетки магазинов */
-    .shops-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-    
-    .shop-card-grid {
-        padding: 10px;
-        min-height: 140px;
-    }
-    .info-panel {
+ 
+     .info-panel {
         display: none; /* ✅ Скрывается на 800px и меньше */
     }
 
-     #testContent {
-        padding: 3px !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        width: 100% !important;
-    }
-    
-    .test-drive-container h3 {
-        font-size: 16px !important;
-        flex-direction: column;
-        text-align: center;
-        gap: 6px;
-        line-height: 1.3;
-        margin-bottom: 15px;
-    }
-    
-    .test-drive-container h3 i {
-        font-size: 18px !important;
-    }
-    
-    .shops-grid {
+
+  .shops-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
-        margin-bottom: 15px;
+        max-width: 500px; /* ← КОПИРУЕМ ТАК ЖЕ КАК У home-grid/house-grid */
+        margin: 0 auto 20px; /* ← КОПИРУЕМ ТАК ЖЕ */
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
     }
     
     .shop-card-grid {
         padding: 10px;
         min-height: 140px;
     }
+    
     
     .shop-card-header h4 {
         font-size: 12px !important;
