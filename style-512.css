@@ -409,20 +409,20 @@
     }
 
 
-  .shops-grid {
+    .shops-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, minmax(140px, auto)); /* ← еще меньше */
         gap: 8px;
-        max-width: 500px; /* ← КОПИРУЕМ ТАК ЖЕ КАК У home-grid/house-grid */
-        margin: 0 auto 20px; /* ← КОПИРУЕМ ТАК ЖЕ */
-        width: 100%;
+        max-width: 500px;
+        margin: 0 auto 20px;
         padding: 0 10px;
-        box-sizing: border-box;
     }
     
     .shop-card-grid {
         padding: 10px;
         min-height: 140px;
     }
+}
     
     
     .shop-card-header h4 {
