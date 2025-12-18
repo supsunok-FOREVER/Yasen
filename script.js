@@ -49,7 +49,7 @@ function initApp() {
     const menuSteps = document.querySelectorAll('.menu-step');
     const homeContent = document.getElementById('homeContent');
     const houseGrid = document.getElementById('houseGrid');
-    const testContent = document.getElementById('testContent');
+    const shopsGrid = document.getElementById('shopsGrid'); // ⚠️ ИЗМЕНЕНО: testContent → shopsGrid
     const panelTitle = document.getElementById('panelTitle');
     const panelSubtitle = document.getElementById('panelSubtitle');
     const stepExplanation = document.getElementById('stepExplanation');
@@ -160,8 +160,9 @@ function initApp() {
         houseGrid.classList.remove('active');
         houseGrid.classList.add('hidden');
         
-        testContent.classList.remove('active');
-        testContent.classList.add('hidden');
+        // ⚠️ ИЗМЕНЕНО: testContent на shopsGrid
+        shopsGrid.classList.remove('active');
+        shopsGrid.classList.add('hidden');
         
         const stepData = appData.stepsData[stepId];
         
@@ -170,11 +171,11 @@ function initApp() {
             homeContent.classList.add('active');
             renderHomeContent();
         } else if (stepId === 'test') {
-            testContent.classList.remove('hidden');
-            testContent.classList.add('active');
+            // ⚠️ ИЗМЕНЕНО: shopsGrid вместо testContent
+            shopsGrid.classList.remove('hidden');
+            shopsGrid.classList.add('active');
             renderTestContent();
         } else {
-            // Для остальных шагов показываем сетку
             houseGrid.classList.remove('hidden');
             houseGrid.classList.add('active');
             renderStepOptions(stepId, stepData);
@@ -280,16 +281,8 @@ function initApp() {
     function renderTestContent() {
         const stepData = appData.stepsData.test;
         
-        // Очищаем контейнер
-        testContent.innerHTML = '';
-        
-        // Основной контейнер
-        const mainContainer = document.createElement('div');
-        mainContainer.className = getUIClass('testDrive', 'container') || 'test-drive-container';
-        
-        // Сетка магазинов
-        const shopGrid = document.createElement('div');
-        shopGrid.className = 'shops-grid';
+        // ⚠️ ИЗМЕНЕНО: shopsGrid вместо testContent
+        shopsGrid.innerHTML = '';
         
         stepData.shops.forEach((shop, index) => {
             const shopCard = document.createElement('div');
@@ -308,11 +301,8 @@ function initApp() {
                 </div>
             `;
             
-            shopGrid.appendChild(shopCard);
+            shopsGrid.appendChild(shopCard);
         });
-        
-        mainContainer.appendChild(shopGrid);
-        testContent.appendChild(mainContainer);
     }
 
     function updateInfoPanel(stepId) {

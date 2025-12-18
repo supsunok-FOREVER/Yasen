@@ -910,7 +910,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    title: "Закрыть";
+  
 }
 
 .btn-close-mobile-info:hover {
@@ -918,10 +918,7 @@ body {
     color: #ffffff;
 }
 
-/* Добавляем title атрибуты для доступности */
-.btn-nav[title=""], .btn-reset[title=""], .btn-primary[title=""] {
-    title: "Кнопка";
-}
+
 
 /* ===== СКРЫТЫЕ ЭЛЕМЕНТЫ ===== */
 .hidden {
@@ -938,21 +935,31 @@ body {
 }
 
 .test-drive-content.active {
+    
     display: block !important;
 }
+
+  .test-drive-container {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    }
 
 /* ===== СЕТКА МАГАЗИНОВ ===== */
 
 .shops-grid {
-    display: grid;
+    display: none; /* ← скрыт по умолчанию */
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto; /* ← 2 строки по содержимому */
+    grid-auto-rows: minmax(200px, auto);
     gap: 20px;
-    max-width: 800px;
-    margin: 0 auto 30px;
+    max-width: 800px; /* ← как у .home-grid и .house-grid */
+    margin: 0 auto 30px; /* ← центрирование */
     width: 100%;
     box-sizing: border-box;
-    /* высота определяется содержимым */
+}
+
+.shops-grid.active {
+    display: grid !important; /* ← показываем когда активно */
 }
 
 .shop-card-grid {
