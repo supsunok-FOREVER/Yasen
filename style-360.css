@@ -1,17 +1,17 @@
 /* style-360.css - Дополнительное уменьшение для экранов ≤360px */
 @media (max-width: 360px) {
     .app-container {
-        grid-template-columns: 110px 1fr !important;;
+        grid-template-columns: 100px 1fr !important;;
     }
     
      .sidebar-logo {
         grid-area: sidebar !important;
         grid-column: 1 !important;
         grid-row: 1 !important;
-        padding: 15px 10px !important;
-        width: 110px !important;
-        min-width: 110px !important;
-        max-width: 110px !important;
+        padding: 5px 10px !important;
+        width: 100px !important;
+        min-width: 100px !important;
+        max-width: 100px !important;
         height: 100% !important;
     }
     
