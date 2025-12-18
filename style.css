@@ -950,13 +950,12 @@ body {
 .shops-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto; /* ← 2 строки по содержимому */
+    grid-template-rows: repeat(2, minmax(200px, auto)); /* ← мин. высота 200px */
     gap: 20px;
     max-width: 800px;
     margin: 0 auto 30px;
     width: 100%;
     box-sizing: border-box;
-    /* высота определяется содержимым */
 }
 
 .shop-card-grid {
