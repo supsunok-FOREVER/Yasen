@@ -5,14 +5,15 @@
         grid-template-areas: 
             "sidebar main"
             "footer footer";
-        height: fit-content;
-        max-height: calc(100dvh - 60px);
+        min-height: 690px;
+        max-height: 790px;
     }
     
     /* Компактное вертикальное меню БЕЗ иконок */
     .sidebar-logo {
         grid-area: sidebar;
-        padding: 7px 0;
+        padding: 7px 1px;
+        
         background: #2c1810;
         display: flex;
         width: 118px !important;
@@ -46,7 +47,7 @@
         width: 100%;
         text-align: left;
         justify-content: flex-start;
-        align-items: center;
+        align-items: left;
         display: flex;
         flex-direction: row;
         min-height: 36px; /* Фиксированная минимальная высота */

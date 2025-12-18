@@ -123,11 +123,11 @@ body {
     background: var(--brand-red-deep) !important;
     background-image: none !important;
     color: #ffffff;
-    padding: 5px 5px;
+    padding: 5px 20px;
     display: flex;
     flex-direction: column;
     box-shadow: none;
-    z-index: 100;
+    z-index: 120;
     align-items: flex-start;
 }
 
@@ -146,6 +146,7 @@ body {
     color: #ffffff;
     margin-bottom: 5px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .logo-subtitle {
