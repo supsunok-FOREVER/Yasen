@@ -15,9 +15,9 @@
         padding: 7px 0;
         background: #2c1810;
         display: flex;
-        width: 110px !important;
-        min-width: 110px !important;
-        max-width: 110px !important;
+        width: 120px !important;
+        min-width: 120px !important;
+        max-width: 120px !important;
         height: 100% !important;
         flex-direction: column;
         align-items: flex-start;
