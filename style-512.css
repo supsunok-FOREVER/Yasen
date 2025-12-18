@@ -382,7 +382,7 @@
         line-height: 1.2;
         text-align: center;
     }
-}
+
     .shop-card {
         min-width: 100%;
         padding: 15px;
@@ -420,9 +420,8 @@
     
     .shop-card-grid {
         padding: 10px;
-        min-height: 140px;
+   
     }
-}
     
     
     .shop-card-header h4 {
