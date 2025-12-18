@@ -90,6 +90,7 @@
         max-width: 100%;
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
     
     /* Остальные стили остаются без изменений */
