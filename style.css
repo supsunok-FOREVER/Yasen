@@ -27,7 +27,7 @@
     .selection-card {
         grid-column: 1 / span 3;
         grid-row: 2;
-        background: var(--brand-red-deep) !important;
+        background: var(--brand-red-deep) ;
         padding: 20px 30px;
         border-top: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
@@ -106,7 +106,7 @@
     }
 
     .shops-grid.active {
-        display: grid !important; /* Показывается при активации */
+        display: grid ; /* Показывается при активации */
     }
     .maze-area{ padding: 35px;}
     .home-card,
@@ -134,8 +134,8 @@
     .sidebar-logo {
         grid-column: 1;
         grid-row: 1;
-        background: var(--brand-red-deep) !important;
-        background-image: none !important;
+        background: var(--brand-red-deep) ;
+        background-image: none ;
         color: #ffffff;
         padding: 5px 20px;
         display: flex;
@@ -321,7 +321,7 @@
 
     /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
     .home-content.active {
-        display: block !important;
+        display: block ;
     }
 
     /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
@@ -415,7 +415,7 @@
     .option-title::before,
     .option-desc::before,
     .shop-card-header h4::before {
-        display: none !important;
+        display: none ;
     }
 
     /* ===== СЕТКА ОПЦИЙ ===== */
@@ -432,7 +432,7 @@
     }
 
     .house-grid.active {
-        display: grid !important;
+        display: grid ;
     }
 
     .option-card {
@@ -477,8 +477,8 @@
     .info-panel {
         grid-column: 3;
         grid-row: 1;
-        background: var(--brand-red-deep) !important;
-        background-image: none !important;
+        background: var(--brand-red-deep) ;
+        background-image: none ;
         color: #ffffff;
         padding: 30px;
         border-left: 1px solid rgba(255, 255, 255, 0.15);
@@ -729,7 +729,7 @@
     .selection-card {
         grid-column: 1 / span 3;
         grid-row: 2;
-        background: var(--brand-red-deep) !important;
+        background: var(--brand-red-deep) ;
         padding: 25px 30px;
         border-top: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
@@ -738,7 +738,7 @@
         box-shadow:
             0 12px 0 rgba(122, 15, 22, 1),
             10px 0 0 rgba(122, 15, 22, 0.95),
-            14px 22px 42px rgba(0,0,0,0.45) !important;
+            14px 22px 42px rgba(0,0,0,0.45) ;
     }
 
     .selection-card-header {
@@ -937,21 +937,21 @@
 
     /* ===== СКРЫТЫЕ ЭЛЕМЕНТЫ ===== */
     .hidden {
-        display: none !important;
+        display: none ;
     }
 
     /* Активные элементы */
     .home-content.active {
-        display: block !important;
+        display: block ;
     }
 
     .house-grid.active {
-        display: grid !important;
+        display: grid ;
     }
 
     .test-drive-content.active {
         
-        display: block !important;
+        display: block ;
     }
 
     .test-drive-container {
@@ -974,95 +974,107 @@
     }
 
     .shops-grid.active {
-        display: grid !important; /* ← показываем когда активно */
+        display: grid ; /* ← показываем когда активно */
     }
 
     .shop-card-grid {
-        padding: 20px;
+        background: var(--brand-red-dark);
+        border-radius: 28px;
+        padding: 25px;
+        min-height: 220px;
         display: flex;
         flex-direction: column;
-        min-height: 200px;
-        height: auto;
         position: relative;
         overflow: hidden;
-        align-content: flex-start;
+        border: 1px solid rgba(255,255,255,0.15);
+        
+        /* 3D эффект */
+        box-shadow:
+            0 10px 0 rgba(122, 15, 22, 0.95),
+            8px 0 0 rgba(122, 15, 22, 0.85),
+            10px 14px 30px rgba(0,0,0,0.35);
+        
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
     }
 
-    .shop-card-header {
+    /* Заголовок магазина */
+    .shop-card-grid h4 {
+        color: #e8d0b3;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 15px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        gap: 12px;
+        line-height: 1.3;
     }
 
-    .shop-card-header i {
-        color: #ffffff;
+    .shop-card-grid h4 i {
         font-size: 18px;
+        color: #ffffff;
+        opacity: 0.9;
+        flex-shrink: 0;
     }
 
-    .shop-card-header h4 {
-        color: #e8d0b3;
-        font-size: 16px;
-        margin: 0;
-    }
-
-    .shop-card-content {
-        flex: 1;
-    }
-
-    .shop-address-grid,
-    .shop-metro-grid,
-    .shop-hours-grid,
-    .shop-phone-grid {
-        color: rgba(255,255,255,0.8);
-        margin-bottom: 10px;
+    /* Все параграфы внутри карточки */
+    .shop-card-grid p {
+        margin-bottom: 14px;
         line-height: 1.5;
         display: flex;
         align-items: flex-start;
-        gap: 10px;
-        opacity: 0.9;
+        gap: 12px;
+        position: relative;
+        min-height: 22px;
     }
 
-    .shop-address-grid i,
-    .shop-metro-grid i,
-    .shop-hours-grid i,
-    .shop-phone-grid i {
+    /* Иконки в параграфах */
+    .shop-card-grid p i {
+        font-size: 15px;
         color: #ffffff;
+        opacity: 0.85;
+        flex-shrink: 0;
+        margin-top: 3px;
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Адрес — БЕЛЫЙ, ВАЖНЫЙ */
+    .shop-card-grid p:nth-child(2) {
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 15px;
+    }
+
+    /* Метро — СВЕТЛО-БЕЛЫЙ */
+    .shop-card-grid p:nth-child(3) {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
         font-size: 14px;
-        margin-top: 2px;
     }
 
-    .shop-hours-grid {
-    color: #ffffff;
-    font-weight: 700;
+    /* Часы работы — АКЦЕНТНЫЙ ЦВЕТ */
+    .shop-card-grid .shop-hours-grid {
+        color: #e8d0b3 ;
+        font-weight: 700 ;
+        font-size: 15px ;
+        margin-top: 5px;
+        margin-bottom: 15px ;
     }
 
-/* ===== МОДУЛЬНЫЙ ДИВАН / ВЕЛЮР ===== */
-
-    .sofa-module {
-    border-radius: 28px;
-    position: relative;
-    background: var(--brand-red-dark);
-    overflow: hidden;
-
-    /* Объём дивана */
-    box-shadow:
-        0 12px 28px rgba(0,0,0,0.35);
-    }
-    .home-card,
-    .option-card,
-    .shop-card-grid,
-    .selection-card {
-        border-color: rgba(255,255,255,0.35);
+    .shop-card-grid .shop-hours-grid i {
+        color: #e8d0b3 ;
+        opacity: 1 ;
     }
 
-/* Общий объём — более графичный */
-    .home-card,
-    .option-card,
-    .shop-card-grid {
-        box-shadow:
-        0 10px 0 var(--brand-red-dark),
-        0 18px 28px rgba(0,0,0,0.30);
+    /* Телефон — БЕЛЫЙ, ВЫДЕЛЕННЫЙ */
+    .shop-card-grid p:nth-last-child(1) {
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 15px;
+        margin-top: 5px;
+        margin-bottom: 0 ;
     }

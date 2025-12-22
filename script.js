@@ -278,32 +278,42 @@ function initApp() {
         }, 100);
     }
 
-    function renderTestContent() {
-        const stepData = appData.stepsData.test;
+   function renderTestContent() {
+    const stepData = appData.stepsData.test;
+    
+    // Определяем, мобильная ли версия
+    const isMobile = window.innerWidth <= 512;
+    
+    shopsGrid.innerHTML = '';
+    
+    stepData.shops.forEach((shop, index) => {
+        const shopCard = document.createElement('div');
+        shopCard.className = 'shop-card-grid';
         
-        // ⚠️ ИЗМЕНЕНО: shopsGrid вместо testContent
-        shopsGrid.innerHTML = '';
-        
-        stepData.shops.forEach((shop, index) => {
-            const shopCard = document.createElement('div');
-            shopCard.className = 'shop-card-grid';
-            
+        // Разный рендеринг для мобильной и десктопной версий
+        if (isMobile) {
+            // Для мобильной версии - без иконок, с data-атрибутами
             shopCard.innerHTML = `
-                <div class="shop-card-header">
-                    <i class="fas ${getIcon('mapMarker')}"></i>
-                    <h4>${shop.name}</h4>
-                </div>
-                <div class="shop-card-content">
-                    <p class="shop-address-grid"><i class="fas fa-map-pin"></i> ${shop.address}</p>
-                    ${shop.metro ? `<p class="shop-metro-grid"><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
-                    <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
-                    <p class="shop-phone-grid"><i class="fas ${getIcon('phone')}"></i> ${shop.phone}</p>
-                </div>
+                <h4 class="shop-card-header">${shop.name}</h4>
+                <p data-label="Адрес">${shop.address}</p>
+                ${shop.metro ? `<p data-label="Метро">${shop.metro}</p>` : ''}
+                <p class="shop-hours-grid" data-label="Часы">${shop.hours}</p>
+                <p data-label="Телефон">${shop.phone}</p>
             `;
-            
-            shopsGrid.appendChild(shopCard);
-        });
-    }
+        } else {
+            // Для десктопной версии - с иконками
+            shopCard.innerHTML = `
+                <h4><i class="fas ${getIcon('mapMarker')}"></i> ${shop.name}</h4>
+                <p><i class="fas fa-map-pin"></i> ${shop.address}</p>
+                ${shop.metro ? `<p><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
+                <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
+                <p><i class="fas ${getIcon('phone')}"></i> ${shop.phone}</p>
+            `;
+        }
+        
+        shopsGrid.appendChild(shopCard);
+    });
+}
 
     function updateInfoPanel(stepId) {
         const stepData = appData.stepsData[stepId];
