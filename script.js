@@ -303,7 +303,7 @@ function initApp() {
         } else {
             // Для десктопной версии - с иконками
             shopCard.innerHTML = `
-                <h4><i class="fas ${getIcon('mapMarker')}"></i> ${shop.name}</h4>
+                <h4 class="shop-card-header"><i class="fas ${getIcon('mapMarker')}"></i> ${shop.name}</h4>
                 <p><i class="fas fa-map-pin"></i> ${shop.address}</p>
                 ${shop.metro ? `<p><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
                 <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
@@ -410,7 +410,7 @@ function initApp() {
 
         // Кнопка "Назад"
         prevBtn.disabled = stepIndex <= 0;
-        prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i> <span>${getUIText('backButton')}</span>`;
+        prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i>`;
 
         // Кнопка "Далее"
         let nextDisabled = false;

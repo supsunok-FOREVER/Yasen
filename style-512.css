@@ -459,8 +459,8 @@
             
             
             /* Для всех магазинов в сетке на мобильных */
-        .shops-grid .shop-card-grid .shop-card-header h4 {
-            font-size: 10px ; /* Уменьшаем заголовок магазина */
+        .shops-grid .shop-card-grid h4.shop-card-header {
+            font-size: 12px ; /* Уменьшаем заголовок магазина */
             font-weight: 400;
             line-height: 1.2;
             margin-bottom: 8px;
