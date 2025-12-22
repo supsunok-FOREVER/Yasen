@@ -111,7 +111,7 @@
             align-items: start;
             /* УБРАТЬ display: flex */
             /* УБРАТЬ flex: 1 */
-            display: grid !important; /* ← Добавить */
+           
         }
 
         /* Позже в файле для .home-grid: */
