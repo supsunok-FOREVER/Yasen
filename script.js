@@ -639,7 +639,3 @@ function initApp() {
 document.addEventListener('DOMContentLoaded', function() {
     loadAppData();
 });
-
-
-    }, 1000);
-});
