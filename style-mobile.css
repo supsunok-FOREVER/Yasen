@@ -1,24 +1,22 @@
-/* =======================================================================
-   📱 MOBILE ONLY (REAL DEVICE)
-   ======================================================================= */
-
 @media (hover: none) and (pointer: coarse) {
-
+    /* =======================================================================
+       📱 MOBILE ONLY (REAL DEVICE)
+       ======================================================================= */
+    
     body {
         overflow: hidden;
     }
 
     .app-container {
         height: calc(100dvh - 60px);
-        max-height: 95%;
+        max-height: 690px;
         overflow: hidden;
         padding-bottom: env(safe-area-inset-bottom);
         min-height: 590px;
-        max-height: 690px;
     }
 
     .maze-area {
-         display: grid !important;
+        display: grid !important;
         grid-template-columns: repeat(2, 1fr);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -26,80 +24,72 @@
 
     .selection-card {
         margin-bottom: 12px;
-    }      
-            /* Для всех магазинов в сетке на мобильных */
-        .shops-grid .shop-card-grid h4.shop-card-header {
-            font-size: 12px; /* Уменьшаем заголовок магазина */
-            font-weight: 400;
-            line-height: 1;
-            margin-bottom: 11px;
-                       
-        }
+    }
 
-        .shops-grid .shop-card-grid p {
-            font-size: 11px ; /* Уменьшаем все параграфы */
-            line-height: 1.3;
-            margin-bottom: 6px;
-        }
+    /* Стили карточек магазинов */
+    .shops-grid .shop-card-grid .shop-card-header {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 10px;
+    }
 
-        .shops-grid .shop-card-grid p i {
-            font-size: 12px ; /* Уменьшаем иконки в параграфах */
-            margin-right: 6px;
-            min-width: 14px;
-        }
+    .shops-grid .shop-card-grid .shop-card-header h4 {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1;
+        margin-bottom: 11px;
+    }
 
-        /* Адрес магазина */
-        .shops-grid .shop-card-grid p:nth-child(2) {
-            font-size: 11px ;
-            font-weight: 600; /* Делаем немного жирнее для важности */
-            
-        }
+    .shops-grid .shop-card-grid .shop-card-header h4 i {
+        font-size: 12px;
+        margin-right: 8px;
+    }
 
-        /* Метро */
-        .shops-grid .shop-card-grid p:nth-child(3) {
-            font-size: 11px ;
-            
-        }
+    .shops-grid .shop-card-grid p {
+        font-size: 11px;
+        line-height: 1.3;
+        margin-bottom: 6px;
+    }
 
-        /* Часы работы (акцентный) */
-        .shops-grid .shop-card-grid .shop-hours-grid {
-            font-size: 11px ;
-            font-weight: 700;
-            color: #e8d0b3 ;
-            margin-top: 4px;
-            
-            margin-bottom: 10px ;
-        }
+    .shops-grid .shop-card-grid p i {
+        font-size: 12px;
+        margin-right: 6px;
+        min-width: 14px;
+    }
 
-        .shops-grid .shop-card-grid .shop-hours-grid i {
-            font-size: 11px ;
-            color: #e8d0b3 ;
-        }
+    /* Адрес магазина */
+    .shops-grid .shop-card-grid p:nth-child(2) {
+        font-size: 11px;
+        font-weight: 600;
+    }
 
-        /* Телефон (выделенный) */
-        .shops-grid .shop-card-grid p:nth-last-child(1) {
-            font-size: 11px ;
-            font-weight: 700;
-            margin-top: 4px;
-            margin-left: 4px;
-            margin-bottom: 0 ;
-        }
+    /* Метро */
+    .shops-grid .shop-card-grid p:nth-child(3) {
+        font-size: 11px;
+    }
 
-        /* Убираем или уменьшаем отступы в заголовке */
-        .shops-grid .shop-card-grid .shop-card-header {
-            border-bottom: none ;
-            padding-bottom: 0 ;
-            margin-bottom: 10px ;
-        }
+    /* Часы работы */
+    .shops-grid .shop-card-grid .shop-hours-grid {
+        font-size: 11px;
+        font-weight: 700;
+        color: #e8d0b3;
+        margin-top: 4px;
+        margin-bottom: 10px;
+    }
 
-        .shops-grid .shop-card-grid .shop-card-header h4 {
-            margin-bottom: 0 ;
-            padding-bottom: 0 ;
-        }
+    .shops-grid .shop-card-grid .shop-hours-grid i {
+        font-size: 11px;
+        color: #e8d0b3;
+    }
 
-        /* Уменьшаем иконку в заголовке магазина */
-        .shops-grid .shop-card-grid .shop-card-header h4 i {
-            font-size: 12px ;
-            margin-right: 8px;
-        }
+    /* Телефон */
+    .shops-grid .shop-card-grid p:nth-last-child(1) {
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 4px;
+        margin-left: 4px;
+        margin-bottom: 0;
+    }
 }
