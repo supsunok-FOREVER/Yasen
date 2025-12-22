@@ -640,59 +640,6 @@ document.addEventListener('DOMContentLoaded', function() {
     loadAppData();
 });
 
-// Добавьте этот код сразу после загрузки DOM
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('=== ДЕБАГ ИКОНОК ===');
-    
-    // Проверка путей к файлам
-    console.log('1. Текущая директория:', window.location.pathname);
-    console.log('2. Проверка наличия файлов:');
-    
-    // Проверьте доступность файла иконок
-    fetch('all.min.css')
-        .then(response => {
-            console.log('all.min.css статус:', response.status, response.ok ? 'OK' : 'ОШИБКА');
-            if (!response.ok) {
-                console.error('Файл all.min.css не найден! Проверьте:');
-                console.error('- Находится ли файл в той же папке?');
-                console.error('- Правильное ли имя файла? (сравните с вашими файлами)');
-            }
-            return response.text();
-        })
-        .then(text => {
-            const hasFontAwesome = text.includes('Font Awesome') || text.includes('fa-');
-            console.log('Содержит ли файл Font Awesome стили?', hasFontAwesome);
-        })
-        .catch(error => {
-            console.error('Ошибка загрузки all.min.css:', error);
-            console.log('Рекомендация: используйте CDN вместо локального файла');
-            console.log('Добавьте в head:');
-            console.log('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">');
-        });
-    
-    // Проверка отображения конкретных иконок
-    setTimeout(() => {
-        console.log('\n3. Проверка конкретных иконок в DOM:');
-        const allIcons = document.querySelectorAll('i.fas, i.far, i.fal, i.fab');
-        console.log('Всего иконок найдено:', allIcons.length);
-        
-        allIcons.forEach((icon, index) => {
-            const computedStyle = window.getComputedStyle(icon);
-            const fontFamily = computedStyle.fontFamily;
-            const content = computedStyle.content;
-            
-            console.log(`Иконка ${index + 1}:`, {
-                'классы': icon.className,
-                'font-family': fontFamily,
-                'content': content,
-                'видима?': icon.offsetParent !== null
-            });
-            
-            // Проверка, использует ли Font Awesome
-            if (!fontFamily.includes('Font Awesome')) {
-                console.warn(`⚠️ Иконка "${icon.className}" не использует Font Awesome!`);
-                console.warn('   Используемый шрифт:', fontFamily);
-            }
-        });
+
     }, 1000);
 });
