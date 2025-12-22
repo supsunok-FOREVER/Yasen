@@ -33,8 +33,7 @@
             font-weight: 400;
             line-height: 1;
             margin-bottom: 11px;
-            margin-left: 55px;
-            
+                       
         }
 
         .shops-grid .shop-card-grid p {
@@ -53,13 +52,13 @@
         .shops-grid .shop-card-grid p:nth-child(2) {
             font-size: 11px ;
             font-weight: 600; /* Делаем немного жирнее для важности */
-            margin-left: 2px;
+            
         }
 
         /* Метро */
         .shops-grid .shop-card-grid p:nth-child(3) {
             font-size: 11px ;
-            margin-left: 4px;
+            
         }
 
         /* Часы работы (акцентный) */
@@ -68,7 +67,7 @@
             font-weight: 700;
             color: #e8d0b3 ;
             margin-top: 4px;
-            margin-left: 2px;
+            
             margin-bottom: 10px ;
         }
 

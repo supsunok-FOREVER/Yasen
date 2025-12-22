@@ -293,12 +293,12 @@ function initApp() {
         // Разный рендеринг для мобильной и десктопной версий
         if (isMobile) {
             // Для мобильной версии - без иконок, с data-атрибутами
-            shopCard.innerHTML = `
+            shopCard.innerHTML = `<p style="text-align: center;">
                 <h4 class="shop-card-header">${shop.name}</h4>
                 <p data-label="Адрес">${shop.address}</p>
                 ${shop.metro ? `<p data-label="Метро">${shop.metro}</p>` : ''}
                 <p class="shop-hours-grid" data-label="Часы">${shop.hours}</p>
-                <p data-label="Телефон">${shop.phone}</p>
+                <p data-label="Телефон">${shop.phone}</p></p>
             `;
         } else {
             // Для десктопной версии - с иконками
