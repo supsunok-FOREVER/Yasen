@@ -1,591 +1,594 @@
 /* ===== ОБЩИЕ СТИЛИ ===== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-body {
-    font-family: 'Inter', 'Open Sans', sans-serif;
-    background: var(--brand-red-deep);
-    color: #ffffff;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
+    body {
+        font-family: 'Inter', 'Open Sans', sans-serif;
+        background: var(--brand-red-deep);
+        color: #ffffff;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
 
-/* В style.css обновляем */
-.app-container {
-    display: grid;
-    grid-template-columns: 250px 1fr 350px;
-    grid-template-rows: 1fr auto; /* Единый подход для всех */
-    gap: 0;
-    position: relative;
-    min-height: 100vh; /* Важно */
-}
+    /* В style.css обновляем */
+    .app-container {
+        display: grid;
+        grid-template-columns: 250px 1fr 350px;
+        grid-template-rows: 1fr auto; /* Единый подход для всех */
+        gap: 0;
+        position: relative;
+        min-height: 100vh; /* Важно */
+    }
 
-/* НИЖНЯЯ ПАНЕЛЬ - единые настройки */
-.selection-card {
-    grid-column: 1 / span 3;
-    grid-row: 2;
-    background: var(--brand-red-deep) !important;
-    padding: 20px 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    min-height: 80px; /* Фиксированная высота */
-    height: auto;
-    color: #ffffff;
-    box-shadow: none;
-}
+    /* НИЖНЯЯ ПАНЕЛЬ - единые настройки */
+    .selection-card {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+        background: var(--brand-red-deep) !important;
+        padding: 20px 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        min-height: 80px; /* Фиксированная высота */
+        height: auto;
+        color: #ffffff;
+        box-shadow: none;
+    }
 
-.tags-container {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    min-height: 50px; /* Фиксированная высота */
-    align-items: center;
-}
+    .tags-container {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        min-height: 50px; /* Фиксированная высота */
+        align-items: center;
+    }
 
 
-/* =======================================================================
-   🔴 BRAND RESET — ПРОСТО, ОВАЛЬНО, В ЦВЕТАХ ЛОГОТИПА
-   -----------------------------------------------------------------------
-   Цель:
-   - вернуться к ДНК эмблемы
-   - овальные формы
-   - чистые цвета
-   - минимум эффектов
-   ======================================================================= */
+    /* =======================================================================
+    🔴 BRAND RESET — ПРОСТО, ОВАЛЬНО, В ЦВЕТАХ ЛОГОТИПА
+    -----------------------------------------------------------------------
+    Цель:
+    - вернуться к ДНК эмблемы
+    - овальные формы
+    - чистые цвета
+    - минимум эффектов
+    ======================================================================= */
 
-/* -----------------------------------------------------------------------
-   1. ЖЁСТКАЯ ФИРМЕННАЯ ПАЛИТРА
------------------------------------------------------------------------- */
+    /* -----------------------------------------------------------------------
+    1. ЖЁСТКАЯ ФИРМЕННАЯ ПАЛИТРА
+    ------------------------------------------------------------------------ */
 
 :root {
-    --brand-red: #c40018;        /* основной цвет логотипа */
-    --brand-red-dark: #7a0f16;   /* бордовый / глубина */
-    --brand-red-deep: #4b0a0f;   /* корпус / панели */
+    --brand-red: #ef2b43;        /* яркий логотипный красный */
+    --brand-red-dark: #b3272f;   /* ещё читаемый бордовый */
+    --brand-red-deep: #7a1b20;   /* фон, но не тьма */
     --brand-white: #ffffff;
 }
 
 
-/* -----------------------------------------------------------------------
-   1. КАРТОЧКИ — ПРОСТЫЕ МОДУЛИ
------------------------------------------------------------------------- */
-
-.home-card,
-.option-card,
-.shop-card-grid,
-.step-explanation,
-.dynamic-content {
-    background: var(--brand-red-dark);
-    border-radius: 28px;
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #ffffff;
-}
-
-/* =======================================================================
-   🔴 FULL 3D DEPTH — ТЕНЬ ВНИЗ + ВПРАВО
-   -----------------------------------------------------------------------
-   Делает элементы объёмными в пространстве, а не "подвешенными"
-   ======================================================================= */
-
-/* -----------------------------------------------------------------------
-   1. БАЗОВЫЙ ПРОСТРАНСТВЕННЫЙ ОБЪЁМ (ВСЕ КЛЮЧЕВЫЕ БЛОКИ)
------------------------------------------------------------------------- */
-
-.shops-grid {
-    display: none; /* Скрыт по умолчанию */
-    /* остальные стили */
-}
-
-.shops-grid.active {
-    display: grid !important; /* Показывается при активации */
-}
-.maze-area{ padding: 35px;}
-.home-card,
-.option-card,
-.shop-card-grid,
-.step-explanation,
-.dynamic-content {
-    box-shadow:
-        /* нижняя тень (вес) */
-        0 10px 0 rgba(122, 15, 22, 0.95),
-
-        /* правая тень (пространство) */
-        8px 0 0 rgba(122, 15, 22, 0.85),
-
-        /* общая рассеянная */
-        10px 14px 30px rgba(0,0,0,0.35);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-        padding-bottom: 1%;
-}
-
-/* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
-.sidebar-logo {
-    grid-column: 1;
-    grid-row: 1;
-    background: var(--brand-red-deep) !important;
-    background-image: none !important;
-    color: #ffffff;
-    padding: 5px 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: none;
-    z-index: 120;
-    align-items: flex-start;
-}
-
-.logo-container {
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.logo-text {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #ffffff;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.logo-subtitle {
-    font-size: 12px;
-    color: rgba(255,255,255,0.8);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* =======================================================================
-   🔴 УПРОЩЕНИЕ 3D — БЕЗ ПРАВОЙ ТЕНИ
-   -----------------------------------------------------------------------
-   Применяется ТОЛЬКО к кнопкам и progress-track.
-   Карточки НЕ ТРОГАЕМ.
-   ======================================================================= */
-
-/* -----------------------------------------------------------------------
-   2. PROGRESS TRACK — ПАНЕЛЬ, НЕ КНОПКА
------------------------------------------------------------------------- */
-
-.progress-track {
-    flex: 1;
-    border-radius: 24px;
-    background: var(--brand-red-dark);
-    box-shadow:
-        0 8px 0 rgba(122, 15, 22, 1),
-        0 14px 26px rgba(0,0,0,0.35);
-}
-
-.steps-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* =======================================================================
-   🔴 MENU STEP — ПОЛНОЦЕННЫЙ 3D (НИЗ + ПРАВО)
-   -----------------------------------------------------------------------
-   menu-step и menu-step-icon становятся объёмными,
-   как физические кнопки навигации
-   ======================================================================= */
-
-/* -----------------------------------------------------------------------
-   1. ПУНКТ МЕНЮ — ОБЪЁМНЫЙ МОДУЛЬ
------------------------------------------------------------------------- */
-
-.menu-step {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 14px 20px;
-    border-radius: 999px; /* ОВАЛ */
-    cursor: pointer;
-    background: var(--brand-red-dark);
-    color: #ffffff;
-    border: 1px solid rgba(255,255,255,0.2);
-    position: relative;
-
-    box-shadow:
-        /* низ — вес */
-        0 8px 0 rgba(122, 15, 22, 0.95),
-
-        /* право — пространство */
-        6px 0 0 rgba(122, 15, 22, 0.85),
-
-        /* общая тень */
-        8px 12px 24px rgba(0,0,0,0.35);
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-/* hover — лёгкий подъём */
-.menu-step:hover {
-    background: var(--brand-red-dark);
-    transform: translate(-1px, -2px);
-
-    box-shadow:
-        0 10px 0 rgba(122, 15, 22, 1),
-        8px 0 0 rgba(122, 15, 22, 0.95),
-        10px 16px 32px rgba(0,0,0,0.4);
-}
-
-.menu-step.active {
-    background: var(--brand-red);
-    border-color: transparent;
-}
-
-/* active — продавливание */
-.menu-step:active {
-    transform: translate(2px, 2px);
-
-    box-shadow:
-        0 4px 0 rgba(122, 15, 22, 1),
-        3px 0 0 rgba(122, 15, 22, 1),
-        6px 10px 18px rgba(0,0,0,0.35);
-}
-
-/* -----------------------------------------------------------------------
-   2. ИКОНКА — КАК ОТДЕЛЬНАЯ КНОПКА ВНУТРИ
------------------------------------------------------------------------- */
-
-.menu-step-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: #ffffff;
-    position: relative;
-
-    box-shadow:
-        0 4px 0 rgba(122, 15, 22, 0.95),
-        4px 0 0 rgba(122, 15, 22, 0.85),
-        4px 6px 12px rgba(0,0,0,0.35);
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-.menu-step.active .menu-step-icon {
-    background: #ffffff;
-    color: var(--brand-red);
-}
-
-/* hover — иконка "дышит" вместе с пунктом */
-.menu-step:hover .menu-step-icon {
-    transform: translate(-1px, -1px);
-
-    box-shadow:
-        0 6px 0 rgba(122, 15, 22, 1),
-        6px 0 0 rgba(122, 15, 22, 0.95),
-        6px 10px 18px rgba(0,0,0,0.4);
-}
-
-/* active — утопление */
-.menu-step:active .menu-step-icon {
-    transform: translate(1px, 1px);
-
-    box-shadow:
-        0 2px 0 rgba(122, 15, 22, 1),
-        2px 0 0 rgba(122, 15, 22, 1),
-        4px 6px 10px rgba(0,0,0,0.35);
-}
-
-.menu-step-text {
-    flex: 1;
-    font-size: 14px;
-    font-weight: 500;
-    color: #ffffff;
-}
-
-
-/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
-.home-content.active {
-    display: block !important;
-}
-
-/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
-.home-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 150px 150px 150px; /* Все 3 строки по 150px */
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.home-card {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-    height: auto;
-    min-height: auto;
-    position: relative;
-    overflow: hidden;
-}
-
-/* -----------------------------------------------------------------------
-   2. HOVER — УСИЛЕНИЕ ОБЪЁМА
------------------------------------------------------------------------- */
-
-.home-card:hover,
-.option-card:hover,
-.shop-card-grid:hover {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 14px 0 rgba(122, 15, 22, 1),
-        10px 0 0 rgba(122, 15, 22, 0.95),
-        14px 20px 40px rgba(0,0,0,0.4);
-}
-
-.home-card.selected {
-    border: 2px solid #ffffff;
-}
-
-.home-card i {
-    font-size: 48px;
-    margin-bottom: 15px;
-    color: #ffffff;
-}
-
-.home-header {
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 0 20px;
-}
-
-.home-title {
-    font-size: 36px;
-    color: #ffffff;
-    margin-bottom: 10px;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-/* -----------------------------------------------------------------------
-   4. ТЕКСТ — ЧИСТЫЙ, КОНТРАСТНЫЙ
------------------------------------------------------------------------- */
-
-.home-card-title {
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #ffffff;
-    text-align: center;
-}
-
-.home-card-desc {
-    font-size: 14px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.5;
-    text-align: center;
-}
-
-/* Убираем все псевдо-подложки под текст */
-.home-card-title::before,
-.home-card-desc::before,
-.option-title::before,
-.option-desc::before,
-.shop-card-header h4::before {
-    display: none !important;
-}
-
-/* ===== СЕТКА ОПЦИЙ ===== */
-.house-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-    height: auto;
-}
-
-.house-grid.active {
-    display: grid !important;
-}
-
-.option-card {
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-    min-height: 200px;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-}
-
-.option-card.selected {
-    border: 2px solid #ffffff;
-}
-
-.option-card i {
-    font-size: 48px;
-    margin-bottom: 15px;
-    color: #ffffff;
-}
-
-.option-title {
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #ffffff;
-}
-
-.option-desc {
-    font-size: 14px;
-    color: rgba(255,255,255,0.8);
-    line-height: 1.5;
-    text-align: center;
-}
-
-/* ===== ПРАВАЯ ПАНЕЛЬ ===== */
-.info-panel {
-    grid-column: 3;
-    grid-row: 1;
-    background: var(--brand-red-deep) !important;
-    background-image: none !important;
-    color: #ffffff;
-    padding: 30px;
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    flex-direction: column;
-    box-shadow: none;
-    z-index: 100;
-}
-
-.panel-content {
-    flex: 1;
-}
-
-.panel-header {
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-#panelTitle {
-    font-size: 22px;
-    color: #ffffff;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.panel-subtitle {
-    color: rgba(255,255,255,0.8);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-/* -----------------------------------------------------------------------
-   5. INFO PANEL — ВЛОЖЕННЫЕ БЛОКИ ЧИТАЮТСЯ ОТДЕЛЬНО
------------------------------------------------------------------------- */
-
-.info-panel .step-explanation,
-.info-panel .dynamic-content {
-    background: var(--brand-red-dark);
-    border-radius: 24px;
-}
-
-.step-explanation {
-    padding: 20px;
-    margin-bottom: 25px;
-}
-
-.step-explanation p {
-    color: #ffffff;
-    line-height: 1.6;
-}
-
-.dynamic-content {
-    padding: 25px;
-}
-
-.parameter-details h4 {
-    color: #ffffff;
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.parameter-details p {
-    color: rgba(255,255,255,0.8);
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-/* -----------------------------------------------------------------------
-   3. INFO PANEL — КНОПКИ НЕ СЛИВАЮТСЯ
------------------------------------------------------------------------- */
-
-.panel-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 30px 0;
-    background: rgba(0,0,0,0.15);
-    border-radius: 999px;
-    padding: 12px 16px;
-    gap: 14px;
-    box-shadow:
-        /* нижняя тень (вес) */
-        0 10px 0 rgba(122, 15, 22, 0.95),
-
-        /* правая тень (пространство) */
-        8px 0 0 rgba(122, 15, 22, 0.85),
-
-        /* общая рассеянная */
-        10px 14px 30px rgba(0,0,0,0.35);
-}
-
-/* -----------------------------------------------------------------------
-   4. СЧЁТЧИК ШАГОВ — НЕ СЛИВАЕТСЯ С КНОПКАМИ
------------------------------------------------------------------------- */
-
-.step-counter {
-    padding: 8px 18px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.25);
-    color: #ffffff;
-    font-weight: 600;
-}
-
-/* кнопки в панели — как отдельные элементы */
-.panel-navigation .btn-nav {
-    background: var(--brand-red);
-    border-radius: 999px;
-    padding: 12px 22px;
-}
+
+    
+
+    /* -----------------------------------------------------------------------
+    1. КАРТОЧКИ — ПРОСТЫЕ МОДУЛИ
+    ------------------------------------------------------------------------ */
+
+    .home-card,
+    .option-card,
+    .shop-card-grid,
+    .step-explanation,
+    .dynamic-content {
+        background: var(--brand-red-dark);
+        border-radius: 28px;
+        border: 1px solid rgba(255,255,255,0.15);
+        color: #ffffff;
+    }
+
+    /* =======================================================================
+    🔴 FULL 3D DEPTH — ТЕНЬ ВНИЗ + ВПРАВО
+    -----------------------------------------------------------------------
+    Делает элементы объёмными в пространстве, а не "подвешенными"
+    ======================================================================= */
+
+    /* -----------------------------------------------------------------------
+    1. БАЗОВЫЙ ПРОСТРАНСТВЕННЫЙ ОБЪЁМ (ВСЕ КЛЮЧЕВЫЕ БЛОКИ)
+    ------------------------------------------------------------------------ */
+
+    .shops-grid {
+        display: none; /* Скрыт по умолчанию */
+        /* остальные стили */
+    }
+
+    .shops-grid.active {
+        display: grid !important; /* Показывается при активации */
+    }
+    .maze-area{ padding: 35px;}
+    .home-card,
+    .option-card,
+    .shop-card-grid,
+    .step-explanation,
+    .dynamic-content {
+        box-shadow:
+            /* нижняя тень (вес) */
+            0 10px 0 rgba(122, 15, 22, 0.95),
+
+            /* правая тень (пространство) */
+            8px 0 0 rgba(122, 15, 22, 0.85),
+
+            /* общая рассеянная */
+            10px 14px 30px rgba(0,0,0,0.35);
+
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+            padding-bottom: 1%;
+    }
+
+    /* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
+    .sidebar-logo {
+        grid-column: 1;
+        grid-row: 1;
+        background: var(--brand-red-deep) !important;
+        background-image: none !important;
+        color: #ffffff;
+        padding: 5px 20px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: none;
+        z-index: 120;
+        align-items: flex-start;
+    }
+
+    .logo-container {
+        text-align: center;
+        margin-bottom: 40px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .logo-text {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: #ffffff;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .logo-subtitle {
+        font-size: 12px;
+        color: rgba(255,255,255,0.8);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* =======================================================================
+    🔴 УПРОЩЕНИЕ 3D — БЕЗ ПРАВОЙ ТЕНИ
+    -----------------------------------------------------------------------
+    Применяется ТОЛЬКО к кнопкам и progress-track.
+    Карточки НЕ ТРОГАЕМ.
+    ======================================================================= */
+
+    /* -----------------------------------------------------------------------
+    2. PROGRESS TRACK — ПАНЕЛЬ, НЕ КНОПКА
+    ------------------------------------------------------------------------ */
+
+    .progress-track {
+        flex: 1;
+        border-radius: 24px;
+        background: var(--brand-red-dark);
+        box-shadow:
+            0 8px 0 rgba(122, 15, 22, 1),
+            0 14px 26px rgba(0,0,0,0.35);
+    }
+
+    .steps-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* =======================================================================
+    🔴 MENU STEP — ПОЛНОЦЕННЫЙ 3D (НИЗ + ПРАВО)
+    -----------------------------------------------------------------------
+    menu-step и menu-step-icon становятся объёмными,
+    как физические кнопки навигации
+    ======================================================================= */
+
+    /* -----------------------------------------------------------------------
+    1. ПУНКТ МЕНЮ — ОБЪЁМНЫЙ МОДУЛЬ
+    ------------------------------------------------------------------------ */
+
+    .menu-step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 14px 20px;
+        border-radius: 999px; /* ОВАЛ */
+        cursor: pointer;
+        background: var(--brand-red-dark);
+        color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+
+        box-shadow:
+            /* низ — вес */
+            0 8px 0 rgba(122, 15, 22, 0.95),
+
+            /* право — пространство */
+            6px 0 0 rgba(122, 15, 22, 0.85),
+
+            /* общая тень */
+            8px 12px 24px rgba(0,0,0,0.35);
+
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    /* hover — лёгкий подъём */
+    .menu-step:hover {
+        background: var(--brand-red-dark);
+        transform: translate(-1px, -2px);
+
+        box-shadow:
+            0 10px 0 rgba(122, 15, 22, 1),
+            8px 0 0 rgba(122, 15, 22, 0.95),
+            10px 16px 32px rgba(0,0,0,0.4);
+    }
+
+    .menu-step.active {
+        background: var(--brand-red);
+        border-color: transparent;
+    }
+
+    /* active — продавливание */
+    .menu-step:active {
+        transform: translate(2px, 2px);
+
+        box-shadow:
+            0 4px 0 rgba(122, 15, 22, 1),
+            3px 0 0 rgba(122, 15, 22, 1),
+            6px 10px 18px rgba(0,0,0,0.35);
+    }
+
+    /* -----------------------------------------------------------------------
+    2. ИКОНКА — КАК ОТДЕЛЬНАЯ КНОПКА ВНУТРИ
+    ------------------------------------------------------------------------ */
+
+    .menu-step-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #ffffff;
+        position: relative;
+
+        box-shadow:
+            0 4px 0 rgba(122, 15, 22, 0.95),
+            4px 0 0 rgba(122, 15, 22, 0.85),
+            4px 6px 12px rgba(0,0,0,0.35);
+
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease;
+    }
+
+    .menu-step.active .menu-step-icon {
+        background: #ffffff;
+        color: var(--brand-red);
+    }
+
+    /* hover — иконка "дышит" вместе с пунктом */
+    .menu-step:hover .menu-step-icon {
+        transform: translate(-1px, -1px);
+
+        box-shadow:
+            0 6px 0 rgba(122, 15, 22, 1),
+            6px 0 0 rgba(122, 15, 22, 0.95),
+            6px 10px 18px rgba(0,0,0,0.4);
+    }
+
+    /* active — утопление */
+    .menu-step:active .menu-step-icon {
+        transform: translate(1px, 1px);
+
+        box-shadow:
+            0 2px 0 rgba(122, 15, 22, 1),
+            2px 0 0 rgba(122, 15, 22, 1),
+            4px 6px 10px rgba(0,0,0,0.35);
+    }
+
+    .menu-step-text {
+        flex: 1;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+
+    /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
+    .home-content.active {
+        display: block !important;
+    }
+
+    /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
+    .home-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 150px 150px 150px; /* Все 3 строки по 150px */
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .home-card {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        height: auto;
+        min-height: auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* -----------------------------------------------------------------------
+    2. HOVER — УСИЛЕНИЕ ОБЪЁМА
+    ------------------------------------------------------------------------ */
+
+    .home-card:hover,
+    .option-card:hover,
+    .shop-card-grid:hover {
+        transform: translateY(-4px);
+
+        box-shadow:
+            0 14px 0 rgba(122, 15, 22, 1),
+            10px 0 0 rgba(122, 15, 22, 0.95),
+            14px 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .home-card.selected {
+        border: 2px solid #ffffff;
+    }
+
+    .home-card i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+
+    .home-header {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 0 20px;
+    }
+
+    .home-title {
+        font-size: 36px;
+        color: #ffffff;
+        margin-bottom: 10px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    /* -----------------------------------------------------------------------
+    4. ТЕКСТ — ЧИСТЫЙ, КОНТРАСТНЫЙ
+    ------------------------------------------------------------------------ */
+
+    .home-card-title {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    .home-card-desc {
+        font-size: 14px;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    /* Убираем все псевдо-подложки под текст */
+    .home-card-title::before,
+    .home-card-desc::before,
+    .option-title::before,
+    .option-desc::before,
+    .shop-card-header h4::before {
+        display: none !important;
+    }
+
+    /* ===== СЕТКА ОПЦИЙ ===== */
+    .house-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
+        height: auto;
+    }
+
+    .house-grid.active {
+        display: grid !important;
+    }
+
+    .option-card {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        min-height: 200px;
+        height: auto;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .option-card.selected {
+        border: 2px solid #ffffff;
+    }
+
+    .option-card i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+
+    .option-title {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .option-desc {
+        font-size: 14px;
+        color: rgba(255,255,255,0.8);
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    /* ===== ПРАВАЯ ПАНЕЛЬ ===== */
+    .info-panel {
+        grid-column: 3;
+        grid-row: 1;
+        background: var(--brand-red-deep) !important;
+        background-image: none !important;
+        color: #ffffff;
+        padding: 30px;
+        border-left: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        flex-direction: column;
+        box-shadow: none;
+        z-index: 100;
+    }
+
+    .panel-content {
+        flex: 1;
+    }
+
+    .panel-header {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #panelTitle {
+        font-size: 22px;
+        color: #ffffff;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .panel-subtitle {
+        color: rgba(255,255,255,0.8);
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /* -----------------------------------------------------------------------
+    5. INFO PANEL — ВЛОЖЕННЫЕ БЛОКИ ЧИТАЮТСЯ ОТДЕЛЬНО
+    ------------------------------------------------------------------------ */
+
+    .info-panel .step-explanation,
+    .info-panel .dynamic-content {
+        background: var(--brand-red-dark);
+        border-radius: 24px;
+    }
+
+    .step-explanation {
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    .step-explanation p {
+        color: #ffffff;
+        line-height: 1.6;
+    }
+
+    .dynamic-content {
+        padding: 25px;
+    }
+
+    .parameter-details h4 {
+        color: #ffffff;
+        margin-bottom: 15px;
+        font-size: 18px;
+    }
+
+    .parameter-details p {
+        color: rgba(255,255,255,0.8);
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    /* -----------------------------------------------------------------------
+    3. INFO PANEL — КНОПКИ НЕ СЛИВАЮТСЯ
+    ------------------------------------------------------------------------ */
+
+    .panel-navigation {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 30px 0;
+        background: rgba(0,0,0,0.15);
+        border-radius: 999px;
+        padding: 12px 16px;
+        gap: 14px;
+        box-shadow:
+            /* нижняя тень (вес) */
+            0 10px 0 rgba(122, 15, 22, 0.95),
+
+            /* правая тень (пространство) */
+            8px 0 0 rgba(122, 15, 22, 0.85),
+
+            /* общая рассеянная */
+            10px 14px 30px rgba(0,0,0,0.35);
+    }
+
+    /* -----------------------------------------------------------------------
+    4. СЧЁТЧИК ШАГОВ — НЕ СЛИВАЕТСЯ С КНОПКАМИ
+    ------------------------------------------------------------------------ */
+
+    .step-counter {
+        padding: 8px 18px;
+        border-radius: 999px;
+        background: rgba(0,0,0,0.25);
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    /* кнопки в панели — как отдельные элементы */
+    .panel-navigation .btn-nav {
+        background: var(--brand-red);
+        border-radius: 999px;
+        padding: 12px 22px;
+    }
 
 /* =======================================================================
    🔴 BRAND DETAIL — БЕЛАЯ ОКАНТОВКА ДЛЯ КНОПОК
@@ -600,442 +603,442 @@ body {
    1. ВСЕ КНОПКИ — БЕЛАЯ ОКАНТОВКА
 ------------------------------------------------------------------------ */
 
-.btn-nav {
-    padding: 12px 20px;
-    background: var(--brand-red-dark);
-    color: #ffffff;
-    border: 1.5px solid rgba(255, 255, 255, 0.55);
-    border-radius: 999px; /* общий язык формы */
-    cursor: pointer;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    position: relative;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease;
+    .btn-nav {
+        padding: 12px 20px;
+        background: var(--brand-red-dark);
+        color: #ffffff;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        border-radius: 999px; /* общий язык формы */
+        cursor: pointer;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: relative;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            border-color 0.15s ease;
 
-    /* лёгкий внутренний свет — чтобы рамка не была "наклейкой" */
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.35),
-        0 6px 0 rgba(122, 15, 22, 1),
-        0 12px 22px rgba(0,0,0,0.35);
-}
+        /* лёгкий внутренний свет — чтобы рамка не была "наклейкой" */
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.35),
+            0 6px 0 rgba(122, 15, 22, 1),
+            0 12px 22px rgba(0,0,0,0.35);
+    }
 
-/* -----------------------------------------------------------------------
-   2. HOVER — РАМКА ЧУТЬ ЯРЧЕ
------------------------------------------------------------------------- */
+    /* -----------------------------------------------------------------------
+    2. HOVER — РАМКА ЧУТЬ ЯРЧЕ
+    ------------------------------------------------------------------------ */
 
-.btn-nav:hover:not(:disabled) {
-    background: var(--brand-red-dark);
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.8);
+    .btn-nav:hover:not(:disabled) {
+        background: var(--brand-red-dark);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.8);
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.45),
-        0 8px 0 rgba(122, 15, 22, 1),
-        0 16px 28px rgba(0,0,0,0.4);
-}
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.45),
+            0 8px 0 rgba(122, 15, 22, 1),
+            0 16px 28px rgba(0,0,0,0.4);
+    }
 
-/* -----------------------------------------------------------------------
-   3. ACTIVE — РАМКА ОСТАЁТСЯ, КНОПКА "ВЖИМАЕТСЯ"
------------------------------------------------------------------------- */
+    /* -----------------------------------------------------------------------
+    3. ACTIVE — РАМКА ОСТАЁТСЯ, КНОПКА "ВЖИМАЕТСЯ"
+    ------------------------------------------------------------------------ */
 
-.btn-nav:active {
-    transform: translateY(2px);
-    border-color: rgba(255, 255, 255, 0.6);
+    .btn-nav:active {
+        transform: translateY(2px);
+        border-color: rgba(255, 255, 255, 0.6);
 
-    box-shadow:
-        inset 0 2px 3px rgba(0,0,0,0.35),
-        0 3px 0 rgba(122, 15, 22, 1),
-        0 8px 14px rgba(0,0,0,0.35);
-}
+        box-shadow:
+            inset 0 2px 3px rgba(0,0,0,0.35),
+            0 3px 0 rgba(122, 15, 22, 1),
+            0 8px 14px rgba(0,0,0,0.35);
+    }
 
-/* disabled — "утопленная" */
-.panel-navigation .btn-nav:disabled {
-    box-shadow:
-        inset 0 2px 4px rgba(0,0,0,0.4);
-    transform: none;
-    opacity: 0.5;
-    border-color: rgba(255, 255, 255, 0.3);
-}
+    /* disabled — "утопленная" */
+    .panel-navigation .btn-nav:disabled {
+        box-shadow:
+            inset 0 2px 4px rgba(0,0,0,0.4);
+        transform: none;
+        opacity: 0.5;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
 
-.btn-nav:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    border-color: rgba(255, 255, 255, 0.3);
-}
+    .btn-nav:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
 
-.btn-reset {
-    width: 100%;
-    padding: 15px;
-    background: var(--brand-red-dark);
-    color: #ffffff;
-    border: 1.5px solid rgba(255, 255, 255, 0.55);
-    border-radius: 999px; /* общий язык формы */
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    position: relative;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease;
+    .btn-reset {
+        width: 100%;
+        padding: 15px;
+        background: var(--brand-red-dark);
+        color: #ffffff;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        border-radius: 999px; /* общий язык формы */
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            border-color 0.15s ease;
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.35),
-        0 6px 0 rgba(122, 15, 22, 1),
-        0 12px 22px rgba(0,0,0,0.35);
-}
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.35),
+            0 6px 0 rgba(122, 15, 22, 1),
+            0 12px 22px rgba(0,0,0,0.35);
+    }
 
-/* hover */
-.btn-reset:hover {
-    background: var(--brand-red-dark);
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.8);
+    /* hover */
+    .btn-reset:hover {
+        background: var(--brand-red-dark);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.8);
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.45),
-        0 8px 0 rgba(122, 15, 22, 1),
-        0 16px 28px rgba(0,0,0,0.4);
-}
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.45),
+            0 8px 0 rgba(122, 15, 22, 1),
+            0 16px 28px rgba(0,0,0,0.4);
+    }
+
+    /* active */
+    .btn-reset:active {
+        transform: translateY(2px);
+        border-color: rgba(255, 255, 255, 0.6);
+
+        box-shadow:
+            inset 0 2px 3px rgba(0,0,0,0.35),
+            0 3px 0 rgba(122, 15, 22, 1),
+            0 8px 14px rgba(0,0,0,0.35);
+    }
+
+    /* ===== НИЖНЯЯ ПАНЕЛЬ ===== */
+    /* -----------------------------------------------------------------------
+    6. SELECTION CARD — ОЩУЩЕНИЕ ТЯЖЁЛОГО МОДУЛЯ
+    ------------------------------------------------------------------------ */
+
+    .selection-card {
+        grid-column: 1 / span 3;
+        grid-row: 2;
+        background: var(--brand-red-deep) !important;
+        padding: 25px 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        box-shadow:
+            0 12px 0 rgba(122, 15, 22, 1),
+            10px 0 0 rgba(122, 15, 22, 0.95),
+            14px 22px 42px rgba(0,0,0,0.45) !important;
+    }
+
+    .selection-card-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-shrink: 0;
+    }
+
+    .selection-card-header h3 {
+        color: #ffffff;
+        font-size: 18px;
+    }
+
+    .selection-card-header i {
+        color: #ffffff;
+        font-size: 20px;
+    }
+
+    .tags-container {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        min-height: 50px;
+        align-items: center;
+    }
+
+    .empty-state {
+        color: rgba(255,255,255,0.8);
+        font-style: italic;
+    }
+
+    .selection-tag {
+        background: var(--brand-red-dark);
+        padding: 10px 20px;
+        border-radius: 999px; /* общий язык формы */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        position: relative;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            border-color 0.15s ease;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        color: #ffffff;
+
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.35),
+            0 6px 0 rgba(122, 15, 22, 1),
+            0 12px 22px rgba(0,0,0,0.35);
+    }
+
+    /* hover */
+    .selection-tag:hover {
+        background: var(--brand-red-dark);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.8);
+
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.45),
+            0 8px 0 rgba(122, 15, 22, 1),
+            0 16px 28px rgba(0,0,0,0.4);
+    }
 
 /* active */
-.btn-reset:active {
-    transform: translateY(2px);
-    border-color: rgba(255, 255, 255, 0.6);
+    .selection-tag:active {
+        transform: translateY(2px);
+        border-color: rgba(255, 255, 255, 0.6);
 
-    box-shadow:
-        inset 0 2px 3px rgba(0,0,0,0.35),
-        0 3px 0 rgba(122, 15, 22, 1),
-        0 8px 14px rgba(0,0,0,0.35);
-}
+        box-shadow:
+            inset 0 2px 3px rgba(0,0,0,0.35),
+            0 3px 0 rgba(122, 15, 22, 1),
+            0 8px 14px rgba(0,0,0,0.35);
+    }
 
-/* ===== НИЖНЯЯ ПАНЕЛЬ ===== */
-/* -----------------------------------------------------------------------
-   6. SELECTION CARD — ОЩУЩЕНИЕ ТЯЖЁЛОГО МОДУЛЯ
------------------------------------------------------------------------- */
-
-.selection-card {
-    grid-column: 1 / span 3;
-    grid-row: 2;
-    background: var(--brand-red-deep) !important;
-    padding: 25px 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    box-shadow:
-        0 12px 0 rgba(122, 15, 22, 1),
-        10px 0 0 rgba(122, 15, 22, 0.95),
-        14px 22px 42px rgba(0,0,0,0.45) !important;
-}
-
-.selection-card-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 0;
-}
-
-.selection-card-header h3 {
-    color: #ffffff;
-    font-size: 18px;
-}
-
-.selection-card-header i {
-    color: #ffffff;
-    font-size: 20px;
-}
-
-.tags-container {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    min-height: 50px;
-    align-items: center;
-}
-
-.empty-state {
-    color: rgba(255,255,255,0.8);
-    font-style: italic;
-}
-
-.selection-tag {
-    background: var(--brand-red-dark);
-    padding: 10px 20px;
-    border-radius: 999px; /* общий язык формы */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    position: relative;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease;
-    border: 1.5px solid rgba(255, 255, 255, 0.55);
-    color: #ffffff;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.35),
-        0 6px 0 rgba(122, 15, 22, 1),
-        0 12px 22px rgba(0,0,0,0.35);
-}
-
-/* hover */
-.selection-tag:hover {
-    background: var(--brand-red-dark);
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.8);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.45),
-        0 8px 0 rgba(122, 15, 22, 1),
-        0 16px 28px rgba(0,0,0,0.4);
-}
-
-/* active */
-.selection-tag:active {
-    transform: translateY(2px);
-    border-color: rgba(255, 255, 255, 0.6);
-
-    box-shadow:
-        inset 0 2px 3px rgba(0,0,0,0.35),
-        0 3px 0 rgba(122, 15, 22, 1),
-        0 8px 14px rgba(0,0,0,0.35);
-}
-
-.btn-final {
-    flex-shrink: 0;
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    .btn-final {
+        flex-shrink: 0;
+        padding: 15px 30px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
 /* ===== КНОПКИ ===== */
-.btn-primary {
-    background: var(--brand-red);
-    background-image: none;
-    color: #ffffff;
-    border: 1.5px solid rgba(255, 255, 255, 0.55);
-    border-radius: 999px; /* общий язык формы */
-    padding: 15px 30px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    position: relative;
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease;
+    .btn-primary {
+        background: var(--brand-red);
+        background-image: none;
+        color: #ffffff;
+        border: 1.5px solid rgba(255, 255, 255, 0.55);
+        border-radius: 999px; /* общий язык формы */
+        padding: 15px 30px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+        transition:
+            transform 0.15s ease,
+            box-shadow 0.15s ease,
+            border-color 0.15s ease;
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.35),
-        0 6px 0 rgba(122, 15, 22, 1),
-        0 12px 22px rgba(0,0,0,0.35);
-}
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.35),
+            0 6px 0 rgba(122, 15, 22, 1),
+            0 12px 22px rgba(0,0,0,0.35);
+    }
 
-/* hover */
-.btn-primary:hover:not(:disabled) {
-    background: var(--brand-red);
-    transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.8);
+    /* hover */
+    .btn-primary:hover:not(:disabled) {
+        background: var(--brand-red);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.8);
 
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.45),
-        0 8px 0 rgba(122, 15, 22, 1),
-        0 16px 28px rgba(0,0,0,0.4);
-}
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.45),
+            0 8px 0 rgba(122, 15, 22, 1),
+            0 16px 28px rgba(0,0,0,0.4);
+    }
 
 /* active */
-.btn-primary:active {
-    transform: translateY(2px);
-    border-color: rgba(255, 255, 255, 0.6);
+    .btn-primary:active {
+        transform: translateY(2px);
+        border-color: rgba(255, 255, 255, 0.6);
 
-    box-shadow:
-        inset 0 2px 3px rgba(0,0,0,0.35),
-        0 3px 0 rgba(122, 15, 22, 1),
-        0 8px 14px rgba(0,0,0,0.35);
-}
-
-.btn-primary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* ===== МОБИЛЬНАЯ ПАНЕЛЬ ===== */
-.mobile-info-panel {
-    display: none; /* Скрыта по умолчанию на десктопе */
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--brand-red-deep) !important;
-    color: #ffffff;
-    padding: 20px;
-    box-shadow: none;
-    z-index: 1000;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    max-height: 50vh;
-    overflow-y: auto;
-}
-
-.mobile-info-content {
-    position: relative;
-}
-
-.mobile-info-content h3 {
-    color: #ffffff;
-    margin-bottom: 15px;
-    padding-right: 40px;
-}
-
-.btn-close-mobile-info {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: none;
-    border: none;
-    font-size: 20px;
-    color: rgba(255,255,255,0.8);
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  
-}
-
-.btn-close-mobile-info:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-}
-
-
-
-/* ===== СКРЫТЫЕ ЭЛЕМЕНТЫ ===== */
-.hidden {
-    display: none !important;
-}
-
-/* Активные элементы */
-.home-content.active {
-    display: block !important;
-}
-
-.house-grid.active {
-    display: grid !important;
-}
-
-.test-drive-content.active {
-    
-    display: block !important;
-}
-
-  .test-drive-container {
-    margin: 10px;
-    padding: 10px;
-    display: flex;
+        box-shadow:
+            inset 0 2px 3px rgba(0,0,0,0.35),
+            0 3px 0 rgba(122, 15, 22, 1),
+            0 8px 14px rgba(0,0,0,0.35);
     }
+
+    .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ===== МОБИЛЬНАЯ ПАНЕЛЬ ===== */
+    .mobile-info-panel {
+        display: none; /* Скрыта по умолчанию на десктопе */
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--brand-red-deep) !important;
+        color: #ffffff;
+        padding: 20px;
+        box-shadow: none;
+        z-index: 1000;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    .mobile-info-content {
+        position: relative;
+    }
+
+    .mobile-info-content h3 {
+        color: #ffffff;
+        margin-bottom: 15px;
+        padding-right: 40px;
+    }
+
+    .btn-close-mobile-info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: rgba(255,255,255,0.8);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    
+    }
+
+    .btn-close-mobile-info:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+    }
+
+
+
+    /* ===== СКРЫТЫЕ ЭЛЕМЕНТЫ ===== */
+    .hidden {
+        display: none !important;
+    }
+
+    /* Активные элементы */
+    .home-content.active {
+        display: block !important;
+    }
+
+    .house-grid.active {
+        display: grid !important;
+    }
+
+    .test-drive-content.active {
+        
+        display: block !important;
+    }
+
+    .test-drive-container {
+        margin: 10px;
+        padding: 10px;
+        display: flex;
+        }
 
 /* ===== СЕТКА МАГАЗИНОВ ===== */
 
-.shops-grid {
-    display: none; /* ← скрыт по умолчанию */
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(200px, auto);
-    gap: 20px;
-    max-width: 800px; /* ← как у .home-grid и .house-grid */
-    margin: 0 auto 30px; /* ← центрирование */
-    width: 100%;
-    box-sizing: border-box;
-}
+    .shops-grid {
+        display: none; /* ← скрыт по умолчанию */
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(200px, auto);
+        gap: 20px;
+        max-width: 800px; /* ← как у .home-grid и .house-grid */
+        margin: 0 auto 30px; /* ← центрирование */
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-.shops-grid.active {
-    display: grid !important; /* ← показываем когда активно */
-}
+    .shops-grid.active {
+        display: grid !important; /* ← показываем когда активно */
+    }
 
-.shop-card-grid {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    min-height: 200px;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-}
+    .shop-card-grid {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        min-height: 200px;
+        height: auto;
+        position: relative;
+        overflow: hidden;
+    }
 
-.shop-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
+    .shop-card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-.shop-card-header i {
-    color: #ffffff;
-    font-size: 18px;
-}
+    .shop-card-header i {
+        color: #ffffff;
+        font-size: 18px;
+    }
 
-.shop-card-header h4 {
-    color: #ffffff;
-    font-size: 16px;
-    margin: 0;
-}
+    .shop-card-header h4 {
+        color: #ffffff;
+        font-size: 16px;
+        margin: 0;
+    }
 
-.shop-card-content {
-    flex: 1;
-}
+    .shop-card-content {
+        flex: 1;
+    }
 
-.shop-address-grid,
-.shop-metro-grid,
-.shop-hours-grid,
-.shop-phone-grid {
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 10px;
-    line-height: 1.5;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    opacity: 0.9;
-}
+    .shop-address-grid,
+    .shop-metro-grid,
+    .shop-hours-grid,
+    .shop-phone-grid {
+        color: rgba(255,255,255,0.8);
+        margin-bottom: 10px;
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        opacity: 0.9;
+    }
 
-.shop-address-grid i,
-.shop-metro-grid i,
-.shop-hours-grid i,
-.shop-phone-grid i {
-    color: #ffffff;
-    font-size: 14px;
-    margin-top: 2px;
-}
+    .shop-address-grid i,
+    .shop-metro-grid i,
+    .shop-hours-grid i,
+    .shop-phone-grid i {
+        color: #ffffff;
+        font-size: 14px;
+        margin-top: 2px;
+    }
 
-.shop-hours-grid {
+    .shop-hours-grid {
     color: #ffffff;
     font-weight: 700;
-}
+    }
 
 /* ===== МОДУЛЬНЫЙ ДИВАН / ВЕЛЮР ===== */
 
-.sofa-module {
+    .sofa-module {
     border-radius: 28px;
     position: relative;
     background: var(--brand-red-dark);
@@ -1044,4 +1047,19 @@ body {
     /* Объём дивана */
     box-shadow:
         0 12px 28px rgba(0,0,0,0.35);
-}
+    }
+    .home-card,
+    .option-card,
+    .shop-card-grid,
+    .selection-card {
+        border-color: rgba(255,255,255,0.35);
+    }
+
+/* Общий объём — более графичный */
+    .home-card,
+    .option-card,
+    .shop-card-grid {
+        box-shadow:
+        0 10px 0 var(--brand-red-dark),
+        0 18px 28px rgba(0,0,0,0.30);
+    }
