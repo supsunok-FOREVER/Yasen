@@ -64,9 +64,10 @@
     ------------------------------------------------------------------------ */
 
 :root {
-    --brand-red: #ef2b43;        /* яркий логотипный красный */
-    --brand-red-dark: #b3272f;   /* ещё читаемый бордовый */
-    --brand-red-deep: #7a1b20;   /* фон, но не тьма */
+    --brand-red: #e01b32;              /* карточки, кнопки */
+    --brand-red-dark: #9b1f27;         /* панели, desktop info */
+    --brand-red-mobile-info: #8a1a22;  /* mobile info-panel (НОВОЕ) */
+    --brand-red-deep: #6b1418;         /* фон, корпус */
     --brand-white: #ffffff;
 }
 
@@ -886,7 +887,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: var(--brand-red-deep) !important;
+        background-color: var(--brand-red-mobile-info);
         color: #ffffff;
         padding: 20px;
         box-shadow: none;
