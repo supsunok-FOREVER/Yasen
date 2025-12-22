@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
-    
-    <!-- Preload critical assets -->
+<!-- Preload critical assets -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="all.min.css">
+  
     
     <!-- Google Fonts - preload and async load -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" 
@@ -19,6 +21,7 @@
     </noscript>
     
     <!-- Ваши стили с conditional preload -->
+    <link rel="preload" href="all.min.css">
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="style-512.css" as="style" media="(max-width: 512px)">
     <link rel="preload" href="style-800.css" as="style" media="(max-width: 800px)">
@@ -36,7 +39,6 @@
 <link rel="stylesheet" href="style-512.css" media="(max-width: 512px)">
 <link rel="stylesheet" href="style-360.css" media="(max-width: 360px)">
 <link rel="stylesheet" href="style-mobile.css">
-
     
     <title>Ваш персональный гид в мире комфорта и стиля</title>
 </head>
