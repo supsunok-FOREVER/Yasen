@@ -24,23 +24,25 @@
               href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap">
     </noscript>
     <!-- Ваши стили с conditional preload -->
-   
+    <link rel="preload" rel="stylesheet" href="style-mobile.css" as="style">
     <link rel="preload" href="style.css" as="style">
     <link rel="preload" href="style-512.css" as="style" media="(max-width: 512px)">
+    <link rel="preload" href="style-553.css" as="style" media="(max-width: 574px)">
     <link rel="preload" href="style-800.css" as="style" media="(max-width: 800px)">
      <link rel="preload" href="style-1065.css" as="style" media="(max-width: 1065px)">
-    <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1200px)">
-    <link rel="preload" rel="stylesheet" href="style-mobile.css" as="style">
+    <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1245px)">
+    
     
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="style.css" as="style">
     
     <!-- Conditional stylesheets -->
-<link rel="stylesheet" href="style-1200.css" media="(max-width: 1200px)">
+<link rel="stylesheet" href="style-1200.css" media="(max-width: 1245px)">
 <link rel="stylesheet" href="style-1065.css" media="(max-width: 1065px)">
 <link rel="stylesheet" href="style-800.css" media="(max-width: 800px)">
+<link rel="stylesheet" href="style-553.css" media="(max-width: 574px)">
 <link rel="stylesheet" href="style-512.css" media="(max-width: 512px)">
-<link rel="stylesheet" href="style-360.css" media="(max-width: 360px)">
+
 <link rel="stylesheet" href="style-mobile.css" as="style">
     
     <title>Ваш персональный гид в мире комфорта и стиля</title>
@@ -112,16 +114,16 @@
             <!-- Сначала Home page -->
             <div class="home-content active" id="homeContent">
               <div style="text-align: center;" class="home-header">
-                <p style="text-align: center;"><h1 class="home-title">7 шагов к идеальному дивану</h1></p>
+                <h1 class="home-title">7 шагов к идеальному дивану</h1>
                
-            </div>
+                </div>
             
             <!-- Сетка 2x3 вместо компактных шагов -->
                 <div class="home-grid" id="homeGrid">
                     <!-- Будет заполняться через JS -->
                 </div>
 
-</div>
+            </div>
             
             <!-- Сетка для других шагов (скрыта по умолчанию) -->
             <div class="house-grid" id="houseGrid" >
