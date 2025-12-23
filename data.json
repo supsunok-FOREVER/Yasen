@@ -7,37 +7,37 @@
       "compactSteps": [
         {
           "step": "room",
-          "icon": "fa-door-open",
+          "icon": "door-open.svg",
           "title": "Выберите комнату",
           "description": "Где будет стоять диван"
         },
         {
           "step": "model",
-          "icon": "fa-shapes",
+          "icon": "shapes.svg",
           "title": "Определитесь с формой",
           "description": "Форма и размер дивана"
         },
         {
           "step": "mechanism",
-          "icon": "fa-cogs",
+          "icon": "cogs.svg",
           "title": "Выберите механизм",
           "description": "Способ трансформации"
         },
         {
           "step": "filling",
-          "icon": "fa-layer-group",
+          "icon": "layer-group.svg",
           "title": "Подберите наполнитель",
           "description": "Оптимальная жёсткость"
         },
         {
           "step": "fabric",
-          "icon": "fa-tshirt",
+          "icon": "tshirt.svg",
           "title": "Выберите ткань",
           "description": "Материал обивки"
         },
         {
           "step": "decor",
-          "icon": "fa-palette",
+          "icon": "palette.svg",
           "title": "Добавьте декор",
           "description": "Индивидуальные детали"
         }
@@ -51,7 +51,7 @@
         {
           "id": "hallway",
           "title": "Прихожая",
-          "icon": "fa-home",
+          "icon": "home.svg",
           "desc": "Первое впечатление о доме. Часто ставят узкие банкетки или диваны с ящиком для хранения.",
           "position": "roof",
           "colorClass": "color-hallway"
@@ -59,7 +59,7 @@
         {
           "id": "kitchen",
           "title": "Кухня",
-          "icon": "fa-utensils",
+          "icon": "utensils.svg",
           "desc": "Диван для кухни должен быть компактным, устойчивым к загрязнениям и влаге.",
           "position": "left-top",
           "colorClass": "color-kitchen"
@@ -67,7 +67,7 @@
         {
           "id": "living",
           "title": "Гостиная",
-          "icon": "fa-couch",
+          "icon": "couch.svg",
           "desc": "Главная комната для отдыха. Нужен стильный, комфортный диван, часто с функцией спального места.",
           "position": "right-top",
           "colorClass": "color-living"
@@ -75,7 +75,7 @@
         {
           "id": "kids",
           "title": "Детская",
-          "icon": "fa-child",
+          "icon": "child.svg",
           "desc": "Игривое и безопасное пространство. Диван должен быть прочным, с немаркой тканью.",
           "position": "left-bottom",
           "colorClass": "color-kids"
@@ -83,7 +83,7 @@
         {
           "id": "bedroom",
           "title": "Спальня",
-          "icon": "fa-bed",
+          "icon": "bed.svg",
           "desc": "Личное пространство для релаксации. Диван должен быть удобным для чтения и уединения.",
           "position": "right-bottom",
           "colorClass": "color-bedroom"
@@ -98,31 +98,31 @@
         {
           "id": "model1",
           "title": "Прямой диван",
-          "icon": "fa-square",
+          "icon": "square.svg",
           "desc": "Идеален для размещения у стены в небольших пространствах."
         },
         {
           "id": "model2",
           "title": "Угловой диван",
-          "icon": "fa-th-large",
+          "icon": "th-large.svg",
           "desc": "Максимально использует угол комнаты, больше посадочных мест."
         },
         {
           "id": "model3",
           "title": "Модульная система",
-          "icon": "fa-puzzle-piece",
+          "icon": "puzzle-piece.svg",
           "desc": "Можно менять конфигурацию под любые задачи и пространства."
         },
         {
           "id": "model4",
           "title": "Еврософа",
-          "icon": "fa-star",
+          "icon": "star.svg",
           "desc": "Компактная модель с лаконичным дизайном для современных интерьеров."
         },
         {
           "id": "model5",
           "title": "Диван-Кровать",
-          "icon": "fa-moon",
+          "icon": "moon.svg",
           "desc": "Основной акцент на удобство раскладывания и комфорт для сна."
         }
       ]
@@ -135,31 +135,31 @@
         {
           "id": "mechanism1",
           "title": "Еврокнижка",
-          "icon": "fa-book-open",
+          "icon": "book-open.svg",
           "desc": "Надёжный и простой механизм для ежедневного сна. Высокая износостойкость."
         },
         {
           "id": "mechanism2",
           "title": "Выкатной",
-          "icon": "fa-arrow-right",
+          "icon": "arrow-right.svg",
           "desc": "Спальное место выкатывается из-под сиденья. Ровная поверхность для сна."
         },
         {
           "id": "mechanism3",
           "title": "Дельфин",
-          "icon": "fa-fish",
+          "icon": "fish.svg",
           "desc": "Чаще используется в угловых диванах. Простой и удобный механизм."
         },
         {
           "id": "mechanism4",
           "title": "Клик-кляк",
-          "icon": "fa-comments",
+          "icon": "comments.svg",
           "desc": "Позволяет фиксировать спинку в нескольких положениях для отдыха."
         },
         {
           "id": "mechanism5",
           "title": "Без механизма",
-          "icon": "fa-times-circle",
+          "icon": "times-circle.svg",
           "desc": "Стационарный диван, не для трансформации. Максимальный комфорт сидения."
         }
       ]
@@ -172,31 +172,31 @@
         {
           "id": "filling1",
           "title": "ППУ (Стретчпен)",
-          "icon": "fa-layer-group",
+          "icon": "layer-group.svg",
           "desc": "Современный, упругий материал с эффектом памяти. Быстро восстанавливает форму."
         },
         {
           "id": "filling2",
           "title": "Пружинный блок",
-          "icon": "fa-bolt",
+          "icon": "bolt.svg",
           "desc": "Классическое решение для ортопедической поддержки. Долговечность и комфорт."
         },
         {
           "id": "filling3",
           "title": "Латекс",
-          "icon": "fa-feather-alt",
+          "icon": "feather-alt.svg",
           "desc": "Натуральный материал, гипоаллергенный и дышащий. Мягкость и экологичность."
         },
         {
           "id": "filling4",
           "title": "Холлофайбер",
-          "icon": "fa-cloud",
+          "icon": "cloud.svg",
           "desc": "Мягкий и объёмный синтетический материал. Доступность и лёгкость."
         },
         {
           "id": "filling5",
           "title": "Пух/перо",
-          "icon": "fa-heart",
+          "icon": "heart.svg",
           "desc": "Классический наполнитель для максимальной мягкости. Роскошь и комфорт."
         }
       ]
@@ -209,31 +209,31 @@
         {
           "id": "fabric1",
           "title": "Рогожка",
-          "icon": "fa-th",
+          "icon": "th.svg",
           "desc": "Прочная фактурная ткань из натуральных волокон. Практичность и натуральность."
         },
         {
           "id": "fabric2",
           "title": "Велюр",
-          "icon": "fa-couch",
+          "icon": "couch.svg",
           "desc": "Мягкая, приятная на ощупь ткань с коротким ворсом. Комфорт и элегантность."
         },
         {
           "id": "fabric3",
           "title": "Антикоготь",
-          "icon": "fa-paw",
+          "icon": "paw.svg",
           "desc": "Высокотехнологичная ткань с повышенной стойкостью к повреждениям."
         },
         {
           "id": "fabric4",
           "title": "Шенилл",
-          "icon": "fa-braille",
+          "icon": "braille.svg",
           "desc": "Плотная, мягкая ткань, хорошо скрывает загрязнения. Практичность."
         },
         {
           "id": "fabric5",
           "title": "Кожа",
-          "icon": "fa-circle",
+          "icon": "circle.svg",
           "desc": "Натуральный материал premium-класса, элегантный и долговечный. Статус."
         }
       ]
@@ -246,31 +246,31 @@
         {
           "id": "decor1",
           "title": "Подушки и спинки",
-          "icon": "fa-cube",
+          "icon": "cube.svg",
           "desc": "Классические квадратные или валики. Добавляют комфорт и стиль."
         },
         {
           "id": "decor2",
           "title": "Подлокотники",
-          "icon": "fa-hand-paper",
+          "icon": "hand-paper.svg",
           "desc": "Мягкие, жёсткие или с функциональными полками. Удобство и функциональность."
         },
         {
           "id": "decor3",
           "title": "Ножки",
-          "icon": "fa-shoe-prints",
+          "icon": "shoe-prints.svg",
           "desc": "Деревянные, металлические, пластиковые. Влияют на стиль и высоту."
         },
         {
           "id": "decor4",
           "title": "Стежка",
-          "icon": "fa-bezier-curve",
+          "icon": "bezier-curve.svg",
           "desc": "Каретная стяжка или фигурные швы. Декоративные элементы."
         },
         {
           "id": "decor5",
           "title": "Кант",
-          "icon": "fa-border-style",
+          "icon": "border-style.svg",
           "desc": "Контрастная окантовка по краям дивана. Акцент на форме."
         }
       ]
@@ -337,21 +337,21 @@
     "callConfirmation": "Хотите позвонить нам?"
   },
   "icons": {
-    "home": "fa-home",
-    "info": "fa-info-circle",
-    "arrowLeft": "fa-arrow-left",
-    "arrowRight": "fa-arrow-right",
-    "redo": "fa-redo",
-    "clipboard": "fa-clipboard-list",
-    "store": "fa-store",
-    "mapMarker": "fa-map-marker-alt",
-    "subway": "fa-subway",
-    "clock": "fa-clock",
-    "phone": "fa-phone",
-    "calendarCheck": "fa-calendar-check",
-    "handPointRight": "fa-hand-point-right",
-    "times": "fa-times",
-    "playCircle": "fa-play-circle"
+    "home": "home.svg",
+    "info": "info-circle.svg",
+    "arrowLeft": "arrow-left.svg",
+    "arrowRight": "arrow-right.svg",
+    "redo": "redo.svg",
+    "clipboard": "clipboard-list.svg",
+    "store": "store.svg",
+    "mapMarker": "map-marker-alt.svg",
+    "subway": "subway.svg",
+    "clock": "clock.svg",
+    "phone": "phone.svg",
+    "calendarCheck": "calendar-check.svg",
+    "handPointRight": "hand-point-right.svg",
+    "times": "times.svg",
+    "playCircle": "play-circle.svg"
   },
   "uiClasses": {
     "testDrive": {
