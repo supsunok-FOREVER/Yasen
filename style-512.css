@@ -282,10 +282,10 @@
     /* Нижняя панель */
     .selection-card {
         grid-area: footer;
-        padding: 10px;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 12px;
+        padding: 6px;
+        gap: 6px;
+        flex-wrap: nowrap;
+        margin-bottom: 6px;
     }
 
     .selection-card-header h3 {
@@ -293,7 +293,7 @@
     }
 
     .selection-card-header i {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .tags-container {
@@ -302,13 +302,15 @@
     }
 
     .selection-tag {
-        padding: 5px 10px;
+        padding: 5px 5px;
         font-size: 10px;
+         flex-shrink: 0; /* ← НЕ СЖИМАТЬ элементы */
+        white-space: nowrap
     }
 
     .tag-step {
-        width: 18px;
-        height: 18px;
+        width: 6px;
+        height: 6px;
         font-size: 9px;
     }
 
