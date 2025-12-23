@@ -272,12 +272,29 @@
     }
 
     /* Нижняя панель */
+
     .selection-card {
         grid-area: footer;
-        padding: 6px;
+        padding: 6px 6px; /* ← Уменьшаем padding на мобильных */
         gap: 6px;
-        flex-wrap: nowrap;
+        flex-wrap: nowrapwrap;
         margin-bottom: 6px;
+        min-height: auto; /* ← Убираем фиксированную высоту */
+        align-items: flex-start; /* ← Выравнивание по верху */
+    }
+
+    .tags-container {
+        gap: 6px;
+        min-height: auto; /* ← Убираем фиксированную высоту */
+        padding: 3px 0;
+    }
+
+    .selection-tag {
+        padding: 5px 5px;
+        font-size: 10px;
+        flex-shrink: 0;
+        white-space: nowrap;
+        margin-bottom: 3px; /* ← Отступ между рядами тегов */
     }
 
     .selection-card-header h3 {
@@ -286,18 +303,6 @@
 
     .selection-card-header i {
         font-size: 12px;
-    }
-
-    .tags-container {
-        gap: 6px;
-        min-height: 30px;
-    }
-
-    .selection-tag {
-        padding: 5px 5px;
-        font-size: 10px;
-         flex-shrink: 0; /* ← НЕ СЖИМАТЬ элементы */
-        white-space: nowrap
     }
 
     .tag-step {
