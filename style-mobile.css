@@ -8,7 +8,7 @@
     }
 
     .app-container {
-        height: calc(100dvh - 263px);
+        height: calc(100dvh - 364px);
         max-height: 690px;
         overflow: hidden;
         padding-bottom: env(safe-area-inset-bottom);
