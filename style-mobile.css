@@ -12,7 +12,8 @@
         max-height: 690px;
         overflow: hidden;
         padding-bottom: env(safe-area-inset-bottom);
-        min-height: 98%;
+        min-height: 88%;
+         max-height: 98%;
     }
 
     .maze-area {
