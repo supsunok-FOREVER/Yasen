@@ -276,7 +276,7 @@
       ]
     },
     "test": {
-      "title": "Запишитесь на тест-драйв!",
+      "title": "Заказ!",
       "subtitle": "Финальный шаг — встреча в салоне",
       "explanation": "Вы прошли все шаги онлайн. Теперь самое важное — ощутить диван вживую.",
       "shops": [
@@ -319,11 +319,11 @@
   "uiTexts": {
     "backButton": "Назад",
     "nextButton": "Далее",
-    "toTestDriveButton": "К тест-драйву",
+    "toTestDriveButton": "К заказу",
     "resetButton": "Начать заново",
     "startButton": "Начать подбор",
-    "finalButton": "тест-драйв",
-    "bookTestDriveButton": "тест-драйв",
+    "finalButton": "Заказ",
+    "bookTestDriveButton": "Заказ",
     "selectionCardTitle": "Ваша подборка",
     "stepCounter": "Шаг {{current}} из {{total}}",
     "noSelectionMessage": "Выберите параметр в центральном окне, чтобы увидеть его подробное описание.",
