@@ -83,55 +83,54 @@ function initApp() {
     function getUIClass(section, element) {
         return appData.uiClasses?.[section]?.[element] || '';
     }
+   // Функция для получения SVG иконки
+    let svgCache = {}; // Кэш для SVG
 
-    // Функция для получения SVG иконки
-let svgCache = {}; // Кэш для SVG
-
-function getSvgIcon(iconName, altText = '') {
-    if (!iconName) return '';
-    
-    // Если уже есть в кэше
-    if (svgCache[iconName]) {
-        return svgCache[iconName].replace('<svg', `<svg aria-label="${altText}" fill="currentColor"`);
+    function getSvgIcon(iconName, altText = '') {
+        if (!iconName) return '';
+        
+        // Если уже есть в кэше
+        if (svgCache[iconName]) {
+            return svgCache[iconName].replace('<svg', `<svg aria-label="${altText}" fill="currentColor"`);
+        }
+        
+        // Если нет в кэше - возвращаем img (потом обновится)
+        return `<img src="icons/${iconName}" alt="${altText}" class="svg-icon" data-svg="${iconName}">`;
     }
-    
-    // Если нет в кэше - возвращаем img (потом обновится)
-    return `<img src="icons/${iconName}" alt="${altText}" class="svg-icon" data-svg="${iconName}">`;
-}
 
 // Функция для загрузки всех SVG при старте
-function loadSvgIcons() {
-    const iconNames = [
-        // Все иконки из data.json
-        'home.svg', 'times.svg', 'door-open.svg', 'shapes.svg', 'cogs.svg',
-        'layer-group.svg', 'tshirt.svg', 'palette.svg', 'utensils.svg',
-        'couch.svg', 'child.svg', 'bed.svg', 'square.svg', 'th-large.svg',
-        'puzzle-piece.svg', 'star.svg', 'moon.svg', 'book-open.svg',
-        'arrow-right.svg', 'fish.svg', 'comments.svg', 'times-circle.svg',
-        'bolt.svg', 'feather-alt.svg', 'cloud.svg', 'heart.svg', 'th.svg',
-        'paw.svg', 'braille.svg', 'circle.svg', 'cube.svg', 'hand-paper.svg',
-        'shoe-prints.svg', 'bezier-curve.svg', 'border-style.svg',
-        'info-circle.svg', 'arrow-left.svg', 'redo.svg', 'clipboard-list.svg',
-        'store.svg', 'map-marker-alt.svg', 'subway.svg', 'clock.svg',
-        'phone.svg', 'calendar-check.svg', 'hand-point-right.svg',
-        'play-circle.svg'
-    ];
-    
-    // Загружаем все иконки
-    iconNames.forEach(iconName => {
-        fetch(`icons/${iconName}`)
-            .then(response => response.text())
-            .then(svgText => {
-                svgCache[iconName] = svgText;
-                // Обновляем все img на странице
-                document.querySelectorAll(`img[data-svg="${iconName}"]`).forEach(img => {
-                    const alt = img.getAttribute('alt') || '';
-                    img.outerHTML = svgText.replace('<svg', `<svg aria-label="${alt}" fill="currentColor"`);
-                });
-            })
-            .catch(error => console.error('Error loading SVG:', iconName, error));
-    });
-}
+    function loadSvgIcons() {
+        const iconNames = [
+            // Все иконки из data.json
+            'home.svg', 'times.svg', 'door-open.svg', 'shapes.svg', 'cogs.svg',
+            'layer-group.svg', 'tshirt.svg', 'palette.svg', 'utensils.svg',
+            'couch.svg', 'child.svg', 'bed.svg', 'square.svg', 'th-large.svg',
+            'puzzle-piece.svg', 'star.svg', 'moon.svg', 'book-open.svg',
+            'arrow-right.svg', 'fish.svg', 'comments.svg', 'times-circle.svg',
+            'bolt.svg', 'feather-alt.svg', 'cloud.svg', 'heart.svg', 'th.svg',
+            'paw.svg', 'braille.svg', 'circle.svg', 'cube.svg', 'hand-paper.svg',
+            'shoe-prints.svg', 'bezier-curve.svg', 'border-style.svg',
+            'info-circle.svg', 'arrow-left.svg', 'redo.svg', 'clipboard-list.svg',
+            'store.svg', 'map-marker-alt.svg', 'subway.svg', 'clock.svg',
+            'phone.svg', 'calendar-check.svg', 'hand-point-right.svg',
+            'play-circle.svg'
+        ];
+        
+        // Загружаем все иконки
+        iconNames.forEach(iconName => {
+            fetch(`icons/${iconName}`)
+                .then(response => response.text())
+                .then(svgText => {
+                    svgCache[iconName] = svgText;
+                    // Обновляем все img на странице
+                    document.querySelectorAll(`img[data-svg="${iconName}"]`).forEach(img => {
+                        const alt = img.getAttribute('alt') || '';
+                        img.outerHTML = svgText.replace('<svg', `<svg aria-label="${alt}" fill="currentColor"`);
+                    });
+                })
+                .catch(error => console.error('Error loading SVG:', iconName, error));
+        });
+    }
 
     // ========== ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ЗВОНКА ==========
     function handleFinalCall() {
@@ -681,6 +680,7 @@ function loadSvgIcons() {
 
     // ========== ЗАПУСК ==========
     goToStep('home');
+    loadSvgIcons();
 }
 
 // Загружаем данные и запускаем приложение
