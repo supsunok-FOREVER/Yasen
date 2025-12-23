@@ -15,6 +15,7 @@
         grid-template-areas:
             "sidebar main"
             "footer footer";
+       min-height: 88%;
        
         max-height: 90%;
     }
