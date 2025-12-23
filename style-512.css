@@ -277,9 +277,9 @@
         grid-area: footer;
         padding: 6px 6px; /* ← Уменьшаем padding на мобильных */
         gap: 6px;
-        flex-wrap: nowrapwrap;
+        flex-wrap: nowrap;
         margin-bottom: 6px;
-        min-height: auto; /* ← Убираем фиксированную высоту */
+        height: 370px; 
         align-items: flex-start; /* ← Выравнивание по верху */
     }
 
