@@ -49,7 +49,7 @@ function initApp() {
     const menuSteps = document.querySelectorAll('.menu-step');
     const homeContent = document.getElementById('homeContent');
     const houseGrid = document.getElementById('houseGrid');
-    const shopsGrid = document.getElementById('shopsGrid'); // ⚠️ ИЗМЕНЕНО: testContent → shopsGrid
+    const shopsGrid = document.getElementById('shopsGrid');
     const panelTitle = document.getElementById('panelTitle');
     const panelSubtitle = document.getElementById('panelSubtitle');
     const stepExplanation = document.getElementById('stepExplanation');
@@ -83,6 +83,55 @@ function initApp() {
     function getUIClass(section, element) {
         return appData.uiClasses?.[section]?.[element] || '';
     }
+
+    // Функция для получения SVG иконки
+let svgCache = {}; // Кэш для SVG
+
+function getSvgIcon(iconName, altText = '') {
+    if (!iconName) return '';
+    
+    // Если уже есть в кэше
+    if (svgCache[iconName]) {
+        return svgCache[iconName].replace('<svg', `<svg aria-label="${altText}" fill="currentColor"`);
+    }
+    
+    // Если нет в кэше - возвращаем img (потом обновится)
+    return `<img src="icons/${iconName}" alt="${altText}" class="svg-icon" data-svg="${iconName}">`;
+}
+
+// Функция для загрузки всех SVG при старте
+function loadSvgIcons() {
+    const iconNames = [
+        // Все иконки из data.json
+        'home.svg', 'times.svg', 'door-open.svg', 'shapes.svg', 'cogs.svg',
+        'layer-group.svg', 'tshirt.svg', 'palette.svg', 'utensils.svg',
+        'couch.svg', 'child.svg', 'bed.svg', 'square.svg', 'th-large.svg',
+        'puzzle-piece.svg', 'star.svg', 'moon.svg', 'book-open.svg',
+        'arrow-right.svg', 'fish.svg', 'comments.svg', 'times-circle.svg',
+        'bolt.svg', 'feather-alt.svg', 'cloud.svg', 'heart.svg', 'th.svg',
+        'paw.svg', 'braille.svg', 'circle.svg', 'cube.svg', 'hand-paper.svg',
+        'shoe-prints.svg', 'bezier-curve.svg', 'border-style.svg',
+        'info-circle.svg', 'arrow-left.svg', 'redo.svg', 'clipboard-list.svg',
+        'store.svg', 'map-marker-alt.svg', 'subway.svg', 'clock.svg',
+        'phone.svg', 'calendar-check.svg', 'hand-point-right.svg',
+        'play-circle.svg'
+    ];
+    
+    // Загружаем все иконки
+    iconNames.forEach(iconName => {
+        fetch(`icons/${iconName}`)
+            .then(response => response.text())
+            .then(svgText => {
+                svgCache[iconName] = svgText;
+                // Обновляем все img на странице
+                document.querySelectorAll(`img[data-svg="${iconName}"]`).forEach(img => {
+                    const alt = img.getAttribute('alt') || '';
+                    img.outerHTML = svgText.replace('<svg', `<svg aria-label="${alt}" fill="currentColor"`);
+                });
+            })
+            .catch(error => console.error('Error loading SVG:', iconName, error));
+    });
+}
 
     // ========== ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ЗВОНКА ==========
     function handleFinalCall() {
@@ -160,7 +209,6 @@ function initApp() {
         houseGrid.classList.remove('active');
         houseGrid.classList.add('hidden');
         
-        // ⚠️ ИЗМЕНЕНО: testContent на shopsGrid
         shopsGrid.classList.remove('active');
         shopsGrid.classList.add('hidden');
         
@@ -171,7 +219,6 @@ function initApp() {
             homeContent.classList.add('active');
             renderHomeContent();
         } else if (stepId === 'test') {
-            // ⚠️ ИЗМЕНЕНО: shopsGrid вместо testContent
             shopsGrid.classList.remove('hidden');
             shopsGrid.classList.add('active');
             renderTestContent();
@@ -196,6 +243,7 @@ function initApp() {
                 card.dataset.step = step.step;
                 
                 card.innerHTML = `
+                    ${getSvgIcon(step.icon, step.title)}
                     <div class="home-card-title">${step.title}</div>
                     <div class="home-card-desc">${step.description}</div>
                 `;
@@ -259,7 +307,7 @@ function initApp() {
             card.dataset.step = stepId;
             
             card.innerHTML = `
-                <i class="fas ${option.icon}"></i>
+                ${getSvgIcon(option.icon, option.title)}
                 <div class="${getUIClass('houseGrid', 'optionTitle') || 'option-title'}">${option.title}</div>
                 <div class="${getUIClass('houseGrid', 'optionDesc') || 'option-desc'}">${option.desc ? option.desc.substring(0, 80) + '...' : ''}</div>
             `;
@@ -278,42 +326,35 @@ function initApp() {
         }, 100);
     }
 
-   function renderTestContent() {
-    const stepData = appData.stepsData.test;
-    
-    // Определяем, мобильная ли версия
-    const isMobile = window.innerWidth <= 512;
-    
-    shopsGrid.innerHTML = '';
-    
-    stepData.shops.forEach((shop, index) => {
-        const shopCard = document.createElement('div');
-        shopCard.className = 'shop-card-grid';
+    function renderTestContent() {
+        const stepData = appData.stepsData.test;
         
-        // Разный рендеринг для мобильной и десктопной версий
-        if (isMobile) {
-            // Для мобильной версии - без иконок, с data-атрибутами
-            shopCard.innerHTML = `<p style="text-align: center;">
-                <h4 class="shop-card-header">${shop.name}</h4>
-                <p data-label="Адрес">${shop.address}</p>
-                ${shop.metro ? `<p data-label="Метро">${shop.metro}</p>` : ''}
-                <p class="shop-hours-grid" data-label="Часы">${shop.hours}</p>
-                <p data-label="Телефон">${shop.phone}</p></p>
-            `;
-        } else {
-            // Для десктопной версии - с иконками
-            shopCard.innerHTML = `
-                <h4 class="shop-card-header"><i class="fas ${getIcon('mapMarker')}"></i> ${shop.name}</h4>
-                <p><i class="fas fa-map-pin"></i> ${shop.address}</p>
-                ${shop.metro ? `<p><i class="fas ${getIcon('subway')}"></i> ${shop.metro}</p>` : ''}
-                <p class="shop-hours-grid"><i class="fas ${getIcon('clock')}"></i> ${shop.hours}</p>
-                <p><i class="fas ${getIcon('phone')}"></i> ${shop.phone}</p>
-            `;
-        }
+        // Определяем, мобильная ли версия
+        const isMobile = window.innerWidth <= 512;
         
-        shopsGrid.appendChild(shopCard);
-    });
-}
+        shopsGrid.innerHTML = '';
+        
+        stepData.shops.forEach((shop, index) => {
+            const shopCard = document.createElement('div');
+            shopCard.className = 'shop-card-grid';
+            
+            // Разный рендеринг для мобильной и десктопной версий
+         
+                shopCard.innerHTML = `
+                    <h4 class="shop-card-header">
+                        ${getSvgIcon(getIcon('mapMarker'), 'Местоположение')} ${shop.name}
+                    </h4>
+                    <p>${getSvgIcon('map-pin.svg', 'Адрес')} ${shop.address}</p>
+                    ${shop.metro ? `<p>${getSvgIcon(getIcon('subway'), 'Метро')} ${shop.metro}</p>` : ''}
+                    <p class="shop-hours-grid">
+                        ${getSvgIcon(getIcon('clock'), 'Часы работы')} ${shop.hours}
+                    </p>
+                    <p>${getSvgIcon(getIcon('phone'), 'Телефон')} ${shop.phone}</p>
+                `;
+                        
+            shopsGrid.appendChild(shopCard);
+        });
+    }
 
     function updateInfoPanel(stepId) {
         const stepData = appData.stepsData[stepId];
@@ -322,12 +363,12 @@ function initApp() {
         // Обновляем только для десктопа
         if (window.innerWidth > 480) {
             if (stepId === 'home') {
-                panelTitle.innerHTML = `<i class="fas ${getIcon('home')}"></i> ${stepData.title}`;
+                panelTitle.innerHTML = `${getSvgIcon(getIcon('home'), 'Главная')} ${stepData.title}`;
                 parameterDetails.innerHTML = '';
                 return;
             }
             
-            panelTitle.innerHTML = `<i class="fas ${getIcon('info')}"></i> ${stepData.title}`;
+            panelTitle.innerHTML = `${getSvgIcon(getIcon('info'), 'Информация')} ${stepData.title}`;
             stepExplanation.innerHTML = `<p>${stepData.explanation}</p>`;
             
             if (appState.selections[stepId]) {
@@ -337,7 +378,7 @@ function initApp() {
                     <p>${selected.desc}</p>
                     ${stepId === 'fabric' ? 
                         `<p class="fabric-note">
-                            <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
+                            ${getSvgIcon(getIcon('handPointRight'), 'Примечание')} ${getUIText('touchFabricNote')}
                         </p>` : 
                         ''}
                 `;
@@ -365,7 +406,7 @@ function initApp() {
                 <p>${optionData.desc}</p>
                 ${stepId === 'fabric' ? 
                     `<p class="fabric-note">
-                        <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
+                        ${getSvgIcon(getIcon('handPointRight'), 'Примечание')} ${getUIText('touchFabricNote')}
                     </p>` : ''
                 }
             `;
@@ -378,7 +419,7 @@ function initApp() {
                 <p>${optionData.desc}</p>
                 ${stepId === 'fabric' ? 
                     `<p class="fabric-note">
-                        <i class="fas ${getIcon('handPointRight')}"></i> ${getUIText('touchFabricNote')}
+                        ${getSvgIcon(getIcon('handPointRight'), 'Примечание')} ${getUIText('touchFabricNote')}
                     </p>` : ''
                 }
             `;
@@ -410,7 +451,7 @@ function initApp() {
 
         // Кнопка "Назад"
         prevBtn.disabled = stepIndex <= 0;
-        prevBtn.innerHTML = `<i class="fas ${getIcon('arrowLeft')}"></i>`;
+        prevBtn.innerHTML = getSvgIcon(getIcon('arrowLeft'), 'Назад');
 
         // Кнопка "Далее"
         let nextDisabled = false;
@@ -434,7 +475,7 @@ function initApp() {
                 // Если все выбрано - меняем текст кнопки на "Позвонить"
                 if (allPreviousSelected) {
                     nextButtonText = getUIText('callButton') || 'Позвонить';
-                    nextButtonIcon = getIcon('phone') || 'fa-phone';
+                    nextButtonIcon = getIcon('phone') || 'phone.svg';
                 } else {
                     nextButtonText = getUIText('toTestDriveButton');
                 }
@@ -442,7 +483,7 @@ function initApp() {
         }
 
         nextBtn.disabled = nextDisabled;
-        nextBtn.innerHTML = `<span>${nextButtonText}</span> <i class="fas ${nextButtonIcon}"></i>`;
+        nextBtn.innerHTML = `<span>${nextButtonText}</span> ${getSvgIcon(nextButtonIcon, 'Далее')}`;
 
         // Номер шага
         let displayStepNum;
@@ -467,15 +508,21 @@ function initApp() {
         // Кнопка финала - проверяем, все ли выбрано
         const allMainStepsSelected = appData.mainSteps.every(step => !!appState.selections[step]);
         finalButton.disabled = !allMainStepsSelected;
-        finalButton.innerHTML = `<i class="fas ${getIcon('calendarCheck')}"></i> ${getUIText('finalButton')}`;
+        finalButton.innerHTML = `${getSvgIcon(getIcon('calendarCheck'), 'Заказ')} ${getUIText('finalButton')}`;
 
         // Кнопка сброса
-        resetButton.innerHTML = `<i class="fas ${getIcon('redo')}"></i> ${getUIText('resetButton')}`;
+        resetButton.innerHTML = `${getSvgIcon(getIcon('redo'), 'Сбросить')} ${getUIText('resetButton')}`;
 
         // Заголовок карточки выбора
         const selectionCardTitle = document.querySelector('.selection-card-header h3');
         if (selectionCardTitle) {
             selectionCardTitle.textContent = getUIText('selectionCardTitle');
+        }
+
+        // Обновляем иконку в заголовке карточки выбора
+        const selectionCardIcon = document.querySelector('.selection-card-header .svg-icon');
+        if (selectionCardIcon) {
+            selectionCardIcon.outerHTML = getSvgIcon(getIcon('clipboard'), 'Подборка');
         }
     }
 
@@ -590,6 +637,7 @@ function initApp() {
 
     // Закрытие мобильной панели
     if (closeMobileInfoBtn) {
+        closeMobileInfoBtn.innerHTML = getSvgIcon(getIcon('times'), 'Закрыть');
         closeMobileInfoBtn.addEventListener('click', function() {
             mobileInfoPanel.classList.remove('show');
             mobileInfoPanel.style.display = 'none';

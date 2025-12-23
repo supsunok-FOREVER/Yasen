@@ -24,30 +24,34 @@
     }
 
     /* НИЖНЯЯ ПАНЕЛЬ - единые настройки */
-    .selection-card {
-        grid-column: 1 / span 3;
-        grid-row: 2;
-        background: var(--brand-red-deep) ;
-        padding: 20px 30px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        align-items: center;
-        gap: 25px;
-        min-height: 80px; /* Фиксированная высота */
-        height: auto;
-        color: #ffffff;
-        box-shadow: none;
-    }
+        .selection-card {
+            grid-column: 1 / span 3;
+            grid-row: 2;
+            background: var(--brand-red-deep);
+            padding: 20px 30px; /* ← Уменьшим padding */
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: flex-start; /* ← Выравнивание по верху */
+            gap: 25px;
+            min-height: auto; /* ← Убираем фиксированную высоту */
+            height: auto;      /* ← Автоматическая высота */
+            color: #ffffff;
+            box-shadow: 
+                0 12px 0 rgba(122, 15, 22, 1),
+                10px 0 0 rgba(122, 15, 22, 0.95),
+                14px 22px 42px rgba(0,0,0,0.45);
+            flex-wrap: wrap; /* ← Перенос при необходимости */
+        }
 
-    .tags-container {
-        flex: 1;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        min-height: 50px; /* Фиксированная высота */
-        align-items: center;
-    }
-
+        .tags-container {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            min-height: auto; /* ← Убираем фиксированную высоту */
+            align-items: flex-start; /* ← Выравнивание по верху */
+            padding: 5px 0; /* ← Небольшой внутренний отступ */
+        }
 
     /* =======================================================================
     🔴 BRAND RESET — ПРОСТО, ОВАЛЬНО, В ЦВЕТАХ ЛОГОТИПА
@@ -1069,3 +1073,42 @@
         margin-top: 5px;
         margin-bottom: 0 ;
     }
+    .svg-icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+}
+
+/* Для карточек */
+
+.svg-icon {
+    color: #e8d0b3;
+}
+
+/* Для конкретных мест можно переопределить */
+.btn-close-mobile-info .svg-icon {
+    color: #999;
+}
+
+.option-card.selected .svg-icon {
+    color: #ffffff;
+}
+.option-card .svg-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+/* Для кнопок */
+.btn-nav .svg-icon,
+.btn-reset .svg-icon,
+.btn-final .svg-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* Для крестика закрытия */
+.btn-close-mobile-info .svg-icon {
+    width: 20px;
+    height: 20px;
+}

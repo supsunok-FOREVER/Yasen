@@ -1,11 +1,4 @@
 @media (max-width: 512px) {
-     /* Логотипы оставляем видимыми */
-    .logo-container .fas,
-    .logo-container .far,
-    .logo-container .fab {
-        display: block;
-    }
-
     /* Основная структура */
     .app-container {
         grid-template-columns: 105px 1fr;

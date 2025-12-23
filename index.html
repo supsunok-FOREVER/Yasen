@@ -9,19 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
- 
-  <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
-  
-    
+     
     <!-- Google Fonts -->
     <link rel="preload" 
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" 
           as="style" 
           onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" 
-              href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap">
+        <link rel="stylesheet" as="style"  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap">
     </noscript>
     <!-- Ваши стили с conditional preload -->
      <link rel="preload" href="style.css" as="style">
@@ -61,52 +56,60 @@
             <div class="progress-track">
                 <div class="steps-container" id="stepsMenu">
                     <!-- Меню 6 шагов -->
-                    <div class="menu-step" data-step="room">
-                        <div class="menu-step-icon">
-                            <i class="fas fa-door-open"></i>
+                     
+                        <!-- Комната -->
+                        <div class="menu-step" data-step="room">
+                            <div class="menu-step-icon">
+                                <img src="icons/door-open.svg" alt="Комната" class="menu-icon">
+                            </div>
+                            <span class="menu-step-text">Комната</span>
                         </div>
-                        <span class="menu-step-text">Комната</span>
-                                            </div>
-                    <div class="menu-step" data-step="model">
-                        <div class="menu-step-icon">
-                            <i class="fas fa-shapes"></i>
+
+                        <!-- Модель -->
+                        <div class="menu-step" data-step="model">
+                            <div class="menu-step-icon">
+                                <img src="icons/shapes.svg" alt="Модель" class="menu-icon">
+                            </div>
+                            <span class="menu-step-text">Модель</span>
                         </div>
-                        <span class="menu-step-text">Модель</span>
-                       
-                    </div>
-                    <div class="menu-step" data-step="mechanism">
-                        <div class="menu-step-icon">
-                            <i class="fas fa-cogs"></i>
+
+                        <!-- Механизм -->
+                        <div class="menu-step" data-step="mechanism">
+                            <div class="menu-step-icon">
+                                <img src="icons/cogs.svg" alt="Механизм" class="menu-icon">
+                            </div>
+                            <span class="menu-step-text">Механизм</span>
                         </div>
-                        <span class="menu-step-text">Механизм</span>
-                       
-                    </div>
-                    <div class="menu-step" data-step="filling">
-                        <div class="menu-step-icon">
-                            <i class="fas fa-layer-group"></i>
+
+                        <!-- Наполнитель -->
+                        <div class="menu-step" data-step="filling">
+                            <div class="menu-step-icon">
+                                <img src="icons/layer-group.svg" alt="Наполнитель" class="menu-icon">
+                            </div>
+                            <span class="menu-step-text">Наполнитель</span>
                         </div>
-                        <span class="menu-step-text">Наполнитель</span>
-                      
-                    </div>
-                    <div class="menu-step" data-step="fabric">
-                        <div class="menu-step-icon">
-                            <i class="fas fa-tshirt"></i>
+
+                        <!-- Ткань -->
+                        <div class="menu-step" data-step="fabric">
+                            <div class="menu-step-icon">
+                                <img src="icons/tshirt.svg" alt="Ткань" class="menu-icon">
+                            </div>
+                            <span class="menu-step-text">Ткань</span>
                         </div>
-                        <span class="menu-step-text">Ткань</span>
-                  
-                    </div>
-                    <div class="menu-step" data-step="decor">
-                        <div class="menu-step-icon">
-                            <i class="fas fa-palette"></i>
+
+                        <!-- Декор -->
+                        <div class="menu-step" data-step="decor">
+                            <div class="menu-step-icon">
+                                <img src="icons/palette.svg" alt="Декор" class="menu-icon">
+                            </div>
+                            <span class="menu-step-text">Декор</span>
                         </div>
-                        <span class="menu-step-text">Декор</span>
-                        
-                    </div>
-                    
-                    <!-- Шаг 7 (финальный) -->
-                     <div class="menu-step final-step" data-step="test">
-                      <span class="menu-step-text">Адреса</span>
-                       </div>
+
+                        <div class="menu-step final-step" data-step="test">
+                            <div class="menu-step-icon">
+                            <img src="icons/map-marker-alt.svg" alt="адрес" class="menu-icon"></div>
+                            <span class="menu-step-text">Адреса</span>
+                        </div>
                 </div>
             </div>
         </aside>
@@ -192,7 +195,7 @@
         <!-- НИЖНЯЯ ПАНЕЛЬ: Карточка выбора -->
         <footer class="selection-card" id="selectionCard">
             <div class="selection-card-header">
-                <i class="fas fa-clipboard-list"></i>
+                <img src="icons/clipboard-list.svg" alt="Подборка" class="header-icon">
                 <h3>Ваша подборка</h3>
             </div>
             <div class="tags-container" id="selectionTags">
