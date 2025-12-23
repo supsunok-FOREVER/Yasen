@@ -15,9 +15,9 @@
         grid-template-areas:
             "sidebar main"
             "footer footer";
-       min-height: 88%;
+       min-height: 78%;
        
-        max-height: 90%;
+        max-height: 80%;
     }
 
        .progress-track {
