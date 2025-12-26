@@ -1,5 +1,5 @@
-/* style-1065.css - Дополнительное уменьшение для экранов 1065px */
-@media (max-width: 1065px) and (min-width: 801px)  {
+/* style-1065.css - Адаптация для экранов 801px-1065px */
+@media (max-width: 1065px) and (min-width: 801px) {
     .info-panel {
         display: none !important;
     }
@@ -10,70 +10,65 @@
     }
     
     .app-container {
-        grid-template-columns: 200px 1fr !important;
+        grid-template-columns: 180px 1fr !important;
         grid-template-rows: 1fr auto !important;
         min-height: 100vh;
     }
     
     .logo-container {
-        position: 18px;
         text-align: center;
-        margin-bottom: 13px;
-        padding-bottom: 13px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
         border-bottom: none;
     }
     
     .logo-text {
         font-family: 'Open Sans', sans-serif;
-        font-size: 26px;
-        font-weight: 800;
-        letter-spacing: 1px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
         color: #ffffff;
-        margin-bottom: 5px;
+        margin-bottom: 4px;
         text-transform: uppercase;
         text-align: center;
     }
 
     .logo-subtitle {
-        font-size: 14px;
+        font-size: 12px;
         color: rgba(255,255,255,0.8);
         text-transform: uppercase;
         letter-spacing: 0px;
     }
 
     .menu-step {
-        padding: 12px;
-        gap: 12px;
+        padding: 10px;
+        gap: 10px;
     }
 
     .menu-step-icon {
-        width: 36px;
-        height: 36px;
-        font-size: 16px;
+        width: 32px;
+        height: 32px;
     }
     
     /* ===== ИКОНКИ ДЛЯ КАРТОЧЕК ===== */
     
-    /* Иконки в карточках главной страницы */
     .home-card .svg-icon,
     .home-grid .home-card .svg-icon {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         margin-bottom: 12px;
     }
     
-    /* Иконки в карточках опций */
     .option-card .svg-icon,
     .house-grid .option-card .svg-icon {
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         margin-bottom: 12px;
     }
     
-    /* Иконки в карточках магазинов */
     .shop-card-grid h4 .svg-icon {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         margin-right: 8px;
     }
     
@@ -83,63 +78,82 @@
         margin-right: 6px;
     }
     
-    /* СТАБИЛИЗИРУЕМ ВЫСОТУ СЕТОК */
+    /* СЕТКА 2×3 С ГИБКОЙ АДАПТАЦИЕЙ */
     .home-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 180px);
-        max-width: 900px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, minmax(150px, 1fr));
+        gap: 16px;
+        max-width: 700px;
+        width: 100%;
+        margin: 0 auto;
         height: auto;
-        min-height: 360px;
+        min-height: 0;
+        align-content: start;
     }
     
     .house-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 200px);
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, minmax(160px, 1fr));
+        gap: 16px;
         max-width: 700px;
+        width: 100%;
+        margin: 0 auto;
         height: auto;
-        min-height: 400px;
+        min-height: 0;
+        align-content: start;
     }
     
-    /* ФИКСИРУЕМ ВЫСОТУ КАРТОЧЕК */
+    /* ГИБКИЕ КАРТОЧКИ */
     .home-card {
         height: 100%;
-        min-height: 180px;
+        min-height: 150px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
     }
     
     .option-card {
         height: 100%;
-        min-height: 200px;
-    }
-    
-    /* НИЖНЯЯ ПАНЕЛЬ - СТАБИЛЬНАЯ ВЫСОТА */
-    .selection-card {
-        grid-area: footer;
-        height: auto;
-        min-height: fit-content;
-        padding: 15px 20px;
-        gap: 20px;
-        grid-column: 1 / span 3;
-        grid-row: 2;
-        background: var(--brand-red-deep);
-        padding: 25px 30px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        min-height: 160px;
+        padding: 20px;
         display: flex;
-        align-items: center;
-        gap: 25px;
-        box-shadow:
-            0 12px 0 rgba(122, 15, 22, 1),
-            10px 0 0 rgba(122, 15, 22, 0.95),
-            14px 22px 42px rgba(0,0,0,0.45);
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
     }
     
-    .tags-container {
-        min-height: 50px;
-        align-items: center;
+    /* ТИПОГРАФИКА */
+    .home-card-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        line-height: 1.2;
     }
     
-    /* Перепозиционируем карточки для 3x2 сетки */
+    .home-card-desc {
+        font-size: 12px;
+        line-height: 1.4;
+        opacity: 0.9;
+    }
+    
+    .option-title {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+    
+    .option-desc {
+        font-size: 12px;
+        line-height: 1.4;
+        opacity: 0.9;
+    }
+    
+    /* ПОЗИЦИОНИРОВАНИЕ ДЛЯ 2×3 СЕТКИ */
     .house-roof {
-        grid-column: 1 / span 3;
+        grid-column: 1 / span 2;
         grid-row: 1;
     }
     
@@ -154,11 +168,71 @@
     }
     
     .house-left-bottom {
-        grid-column: 3;
-        grid-row: 2;
+        grid-column: 1;
+        grid-row: 3;
     }
     
     .house-right-bottom {
-        display: none;
+        grid-column: 2;
+        grid-row: 3;
+        display: flex !important;
+    }
+    
+    /* НИЖНЯЯ ПАНЕЛЬ */
+    .selection-card {
+        grid-area: footer;
+        height: auto;
+        min-height: fit-content;
+        padding: 20px 25px;
+        gap: 20px;
+        grid-column: 1 / span 2;
+        grid-row: 2;
+        background: var(--brand-red-deep);
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        box-shadow:
+            0 12px 0 rgba(122, 15, 22, 1),
+            10px 0 0 rgba(122, 15, 22, 0.95),
+            14px 22px 42px rgba(0,0,0,0.45);
+    }
+    
+    .tags-container {
+        min-height: 45px;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    /* АДАПТАЦИЯ ЗАГОЛОВКОВ */
+    .home-title {
+        font-size: 26px;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* МАГАЗИНЫ - ТАКЖЕ 2×3 СЕТКА */
+    .shops-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+        gap: 16px;
+        max-width: 700px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    
+    .shop-card-grid {
+        padding: 20px;
+        min-height: 180px;
+    }
+    
+    /* УЛУЧШЕНИЯ ДЛЯ ПРОСМОТРА */
+    .maze-area {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
     }
 }
