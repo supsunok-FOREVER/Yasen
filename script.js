@@ -319,9 +319,9 @@ function initApp() {
             shopCard.className = 'shop-card-grid';
             
             shopCard.innerHTML = `
-                <h4 class="shop-card-header">
-                    ${getSvgIcon(getIcon('mapMarker'), 'Местоположение')} ${shop.name}
-                </h4>
+            <h4 class="shop-card-header">
+                ${getSvgIcon('map-pin.svg', 'Местоположение')} ${shop.name}
+            </h4>
                 <p>${getSvgIcon('map-pin.svg', 'Адрес')} ${shop.address}</p>
                 ${shop.metro ? `<p>${getSvgIcon(getIcon('subway'), 'Метро')} ${shop.metro}</p>` : ''}
                 <p class="shop-hours-grid">
@@ -429,7 +429,7 @@ function initApp() {
 
         // Кнопка "Назад"
         prevBtn.disabled = stepIndex <= 0;
-        prevBtn.innerHTML = `${getSvgIcon(getIcon('arrowLeft'), 'Назад')} <span>${getUIText('backButton')}</span>`;
+        prevBtn.innerHTML = `<span>${getUIText('backButton')}</span>`;
 
         // Кнопка "Далее"
         let nextDisabled = false;
@@ -461,7 +461,7 @@ function initApp() {
         }
 
         nextBtn.disabled = nextDisabled;
-        nextBtn.innerHTML = `<span>${nextButtonText}</span> ${getSvgIcon(nextButtonIcon, 'Далее')}`;
+        nextBtn.innerHTML = `<span>${nextButtonText}</span>`;
 
         // Номер шага
         let displayStepNum;
