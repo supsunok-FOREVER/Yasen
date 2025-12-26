@@ -318,7 +318,9 @@ function initApp() {
             const shopCard = document.createElement('div');
             shopCard.className = 'shop-card-grid';
             
-            shopCard.innerHTML = `<h4 class="shop-hours-grid">   ${shop.name} </h4>
+            shopCard.innerHTML = `<h4 class="shop-card-header">
+                ${getSvgIcon(getIcon('mapMarker'), 'Местоположение')} ${shop.name}
+                </h4>
                 <p>${getSvgIcon('map-pin.svg', 'Адрес')} ${shop.address}</p>
                 ${shop.metro ? `<p>${getSvgIcon(getIcon('subway'), 'Метро')} ${shop.metro}</p>` : ''}
                 <p class="shop-hours-grid">
