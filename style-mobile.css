@@ -2,12 +2,7 @@
     /* =======================================================================
        📱 MOBILE ONLY (REAL DEVICE)
        ======================================================================= */
-    
-    body {
-        overflow: hidden;
-    }
-
-   .app-container {
+    .app-container {
         grid-template-columns: 105px 1fr;
         grid-template-rows: 1fr auto;
         grid-template-areas:
@@ -17,46 +12,195 @@
         max-height: 90%;
     }
 
-    .maze-area {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr);
+       .progress-track {
+        flex: 1;
+        width: 98%;
+        border-radius: 14px;
+        background: var(--brand-red-dark);
+        box-shadow:
+            0 8px 0 rgba(122, 15, 22, 1),
+            0 14px 26px rgba(0,0,0,0.35);
+    }
+    /* Боковая панель */
+    .sidebar-logo {
+        grid-area: sidebar;
+        padding: 7px 1px;
+        background: #2c1810;
+        display: flex;
+        width: 105px;
+        min-width: 105px;
+        max-width: 105px;
+        height: 100%;
+        flex-direction: column;
+        align-items: flex-start;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        justify-content: flex-start;
+    }
+
+    .sidebar-logo .logo-text {
+        font-size: 14px;
+        line-height: 1.1;
+        letter-spacing: 0.08em;
+        margin-bottom: 2px;
+    }
+
+    .sidebar-logo .logo-subtitle {
+        font-size: 9px;
+        line-height: 1.2;
+        opacity: 0.85;
+    }
+
+    /* Меню */
+    .steps-container {
+        flex-direction: column;
+        gap: 4px;
+        width: 100%;
+        padding: 0 6px;
+    }
+
+    .menu-step {
+        padding: 8px 6px;
+        gap: 0;
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+        align-items: start;
+        display: flex;
+        flex-direction: row;
+        min-height: 36px;
+    }
+
+    .menu-step-icon,
+    .menu-step-number {
+        display: none;
+    }
+
+    .menu-step-text {
+        white-space: nowrap;
+        font-size: 12px;
+        min-width: 80px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        display: block;
+        font-weight: 500;
+        color: #e8d0b3;
+        line-height: 1.2;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-step.active .menu-step-text {
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    /* Основная область */
+    .maze-area {
+        grid-area: main;
+        padding: 1px;
+        overflow-y: auto;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
         margin-top: 5px;
-
     }
 
-    .selection-card {
-        margin-bottom: 12px;
+
+
+    /* Сетки */
+    .home-grid,
+    .house-grid,
+    .shops-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        max-width: 97%;
+        height: auto;
+        margin-bottom: 20px;
+        align-items: center;
     }
 
-    /* Стили карточек магазинов */
-    .shops-grid .shop-card-grid .shop-card-header {
+    .home-grid {
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    /* Карточки */
+    .home-card,
+    .option-card {
+        padding: 10px;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home-card i,
+    .option-card i {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .home-card-title,
+    .option-title {
+        font-size: 12px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    .home-card-desc,
+    .option-desc {
+        font-size: 10px;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    /* Карточки магазинов */
+    .shop-card-grid {
+        padding: 0;
+        display: flex;
+        flex: 1;
+        width: 100%;
+    }
+
+    .shop-card {
+        min-width: 100%;
+        padding: 15px;
+    }
+
+    .shop-card-header {
         border-bottom: none;
         padding-bottom: 0;
         margin-bottom: 10px;
     }
 
-    .shops-grid .shop-card-grid .shop-card-header h4 {
+    .shop-card-header h4 {
+        font-size: 12px;
+        font-weight: 600;
         margin-bottom: 0;
-        padding-bottom: 0;
+    }
+
+    .shops-grid .shop-card-grid h4.shop-card-header {
         font-size: 12px;
         font-weight: 400;
-        line-height: 1;
-        margin-bottom: 11px;
+        line-height: 1.2;
+        margin-bottom: 8px;
+        align-content: center;
     }
 
-    .shops-grid .shop-card-grid .shop-card-header h4 i {
-        font-size: 12px;
-        margin-right: 8px;
-    }
-
+    .shop-card-grid .shop-card-content p,
     .shops-grid .shop-card-grid p {
         font-size: 11px;
         line-height: 1.3;
-        margin-bottom: 6px;
+        margin-bottom: 7px;
+        display: flex;
+        flex: 1;
+        padding: 4px;
     }
 
+    .shop-card-grid i,
     .shops-grid .shop-card-grid p i {
         font-size: 12px;
         margin-right: 6px;
@@ -93,10 +237,212 @@
         font-size: 11px;
         font-weight: 700;
         margin-top: 4px;
-        margin-left: 4px;
         margin-bottom: 0;
     }
-        .home-card .svg-icon,
+
+    /* Позиционирование дома */
+    .house-roof {
+        grid-column: 1 / span 2;
+        grid-row: 1;
+    }
+
+    .house-left-top {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .house-right-top {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .house-left-bottom {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .house-right-bottom {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    /* Нижняя панель */
+
+    .selection-card {
+        grid-area: footer;
+        padding: 6px 6px; /* ← Уменьшаем padding на мобильных */
+        gap: 6px;
+        flex-wrap: nowrap;
+        margin-bottom: 6px;
+        height: 200px; 
+        align-items: flex-start; /* ← Выравнивание по верху */
+    }
+
+    .tags-container {
+        gap: 6px;
+        min-height: auto; /* ← Убираем фиксированную высоту */
+        padding: 3px 0;
+    }
+
+    .selection-tag {
+        padding: 5px 5px;
+        font-size: 10px;
+        flex-shrink: 0;
+        white-space: nowrap;
+        margin-bottom: 3px; /* ← Отступ между рядами тегов */
+    }
+
+    .selection-card-header h3 {
+        font-size: 12px;
+    }
+
+    .selection-card-header i {
+        font-size: 12px;
+    }
+
+    .tag-step {
+        width: 6px;
+        height: 6px;
+        font-size: 9px;
+    }
+
+    /* Кнопки */
+    .btn-final {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+
+    .btn-nav {
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+
+    .btn-large {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    /* Компактные шаги */
+    .compact-steps {
+        gap: 8px;
+    }
+
+    .compact-step {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .step-indicator {
+        width: 32px;
+        height: 32px;
+    }
+
+    .step-icon {
+        font-size: 14px;
+    }
+
+    .step-content h3 {
+        font-size: 12px;
+    }
+
+    .step-content p {
+        font-size: 10px;
+    }
+
+    /* Информационная панель */
+    .info-panel {
+        display: none;
+    }
+
+    /* Мобильная информационная панель */
+    .mobile-info-panel {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .mobile-info-panel.show {
+        display: block;
+        animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    body.mobile-info-open::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+    .mobile-info-content {
+        position: relative;
+    }
+
+    .mobile-info-content h3 {
+        color: #5a3825;
+        margin-bottom: 15px;
+        padding-right: 40px;
+        font-size: 18px;
+    }
+
+   .btn-close-mobile-info {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #999;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 !important; /* Важно: убрать все отступы */
+        padding: 0;
+        z-index: 1001;
+    }
+
+    .mobile-parameter-details {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #666;
+    }
+
+    .fabric-note {
+        color: #8B4513;
+        font-weight: 500;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+    /* ===== ИКОНКИ ДЛЯ КАРТОЧЕК ===== */
+    
+    .home-card .svg-icon,
     .home-grid .home-card .svg-icon {
         width: 19px;
         height: 19px;
@@ -121,4 +467,5 @@
         height: 19px;
         margin-right: 6px;
     }
+    
 }
