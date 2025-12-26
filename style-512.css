@@ -188,12 +188,13 @@
     }
 
     .shops-grid .shop-card-grid h4.shop-card-header {
-        font-size: 12px !important;
+        font-size: 12px;
         font-weight: 200;
         line-height: 1;
         margin-bottom: 12px;
         text-align: left;
         padding-bottom: 0;
+         padding-left: 2px;
         border-bottom: none;
         white-space: normal;
         word-break: break-word;
