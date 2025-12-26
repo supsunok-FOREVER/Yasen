@@ -1007,7 +1007,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    line-height: 1.2;                      /* Компактный межстрочный */
+    line-height: 1;                      /* Компактный межстрочный */
     text-align: left;                      /* ЛЕВЫЙ КРАЙ */
     justify-content: flex-start;           /* Выравнивание по левому краю */
     width: 100%;
@@ -1026,7 +1026,7 @@
 /* Все параграфы внутри карточки */
 .shop-card-grid p {
     margin-bottom: 14px;
-    line-height: 1.5;
+    line-height: 1;
     display: flex;
     align-items: flex-start;
     gap: 12px;
