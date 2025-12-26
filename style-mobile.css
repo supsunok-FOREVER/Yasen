@@ -7,13 +7,14 @@
         overflow: hidden;
     }
 
-    .app-container {
-        height: calc(100dvh - 370px);
-       
-        overflow: hidden;
-        padding-bottom: env(safe-area-inset-bottom);
-        min-height: 90%;
-        max-height: 98%;
+   .app-container {
+        grid-template-columns: 105px 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "sidebar main"
+            "footer footer";
+       height: calc(100dvh - 200px);
+        max-height: 90%;
     }
 
     .maze-area {
