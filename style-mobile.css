@@ -2,17 +2,31 @@
     /* =======================================================================
        📱 MOBILE ONLY (REAL DEVICE)
        ======================================================================= */
+    
+    /* 1. Создаем CSS-переменные для часто используемых значений */
+    :root {
+        --mobile-icon-size: 17px;
+        --mobile-spacing-sm: 4px;
+        --mobile-spacing-md: 6px;
+        --mobile-spacing-lg: 8px;
+        --mobile-font-xs: 10px;
+        --mobile-font-sm: 11px;
+        --mobile-font-md: 12px;
+        --mobile-font-lg: 13px;
+        --mobile-card-padding: 5px;
+    }
+    
     .app-container {
         grid-template-columns: 105px 1fr;
         grid-template-rows: 1fr auto;
         grid-template-areas:
             "sidebar main"
             "footer footer";
-       height: calc(100dvh - 200px);
+        height: calc(100dvh - 200px);
         max-height: 90%;
     }
 
-       .progress-track {
+    .progress-track {
         flex: 1;
         width: 98%;
         border-radius: 14px;
@@ -21,6 +35,7 @@
             0 8px 0 rgba(122, 15, 22, 1),
             0 14px 26px rgba(0,0,0,0.35);
     }
+    
     /* Боковая панель */
     .sidebar-logo {
         grid-area: sidebar;
@@ -38,14 +53,14 @@
     }
 
     .sidebar-logo .logo-text {
-        font-size: 14px;
+        font-size: var(--mobile-font-lg);
         line-height: 1.1;
         letter-spacing: 0.08em;
         margin-bottom: 2px;
     }
 
     .sidebar-logo .logo-subtitle {
-        font-size: 9px;
+        font-size: var(--mobile-font-xs);
         line-height: 1.2;
         opacity: 0.85;
     }
@@ -53,13 +68,13 @@
     /* Меню */
     .steps-container {
         flex-direction: column;
-        gap: 4px;
+        gap: var(--mobile-spacing-sm);
         width: 100%;
-        padding: 0 6px;
+        padding: 0 var(--mobile-spacing-md);
     }
 
     .menu-step {
-        padding: 8px 6px;
+        padding: var(--mobile-spacing-lg) var(--mobile-spacing-md);
         gap: 0;
         width: 100%;
         text-align: left;
@@ -77,7 +92,7 @@
 
     .menu-step-text {
         white-space: nowrap;
-        font-size: 12px;
+        font-size: var(--mobile-font-md);
         min-width: 80px;
         max-width: 100px;
         overflow: hidden;
@@ -108,14 +123,12 @@
         margin-top: 5px;
     }
 
-
-
     /* Сетки */
     .home-grid,
     .house-grid,
     .shops-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        gap: var(--mobile-spacing-lg);
         max-width: 97%;
         height: auto;
         margin-bottom: 20px;
@@ -129,7 +142,7 @@
     /* Карточки */
     .home-card,
     .option-card {
-        padding: 10px;
+        padding: var(--mobile-card-padding);
         min-height: 120px;
         display: flex;
         flex-direction: column;
@@ -137,22 +150,41 @@
         align-items: center;
     }
 
+    /* 2. Унифицированное правило для иконок */
     .home-card i,
-    .option-card i {
+    .option-card i,
+    .svg-icon {
         font-size: 24px;
-        margin-bottom: 10px;
+        margin-bottom: var(--mobile-card-padding);
     }
 
+    /* УНИФИЦИРОВАННЫЕ ЗАГОЛОВКИ КАРТОЧЕК */
     .home-card-title,
     .option-title {
-        font-size: 12px;
+        font-size: var(--mobile-font-md);
+        font-weight: 600;
         margin-bottom: 5px;
         text-align: center;
     }
 
+    /* ЗАГОЛОВОК КАРТОЧКИ МАГАЗИНА - ИСПРАВЛЕННЫЙ ВАРИАНТ */
+.shop-card-header h4,
+.shops-grid .shop-card-grid h4.shop-card-header {
+    font-size: var(--mobile-font-md); /* 12px через переменную */
+    font-weight: 200;                 /* Тонкий шрифт */
+    line-height: 1.2;
+    margin-bottom: var(--mobile-spacing-lg); /* 8px через переменную */
+    text-align: left;                /* ВАЖНО: прибит к левому краю */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;     /* Выравнивание по левому краю */
+    width: 100%;                     /* Занимает всю ширину */
+    padding-left: 0;                 /* Убираем левый отступ если есть */
+}
+
     .home-card-desc,
     .option-desc {
-        font-size: 10px;
+        font-size: var(--mobile-font-xs);
         line-height: 1.2;
         text-align: center;
     }
@@ -173,70 +205,67 @@
     .shop-card-header {
         border-bottom: none;
         padding-bottom: 0;
-        margin-bottom: 10px;
+        margin-bottom: var(--mobile-card-padding);
     }
 
-    .shop-card-header h4 {
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 0;
-    }
-
-    .shops-grid .shop-card-grid h4.shop-card-header {
-        font-size: 12px;
-        font-weight: 200;
-        line-height: 1.2;
-        margin-bottom: 8px;
-        align-content: center;
-    }
-
+    /* 3. Объединенные правила для текста карточек магазина */
     .shop-card-grid .shop-card-content p,
     .shops-grid .shop-card-grid p {
-        font-size: 11px;
+        font-size: var(--mobile-font-sm);
         line-height: 1.3;
         margin-bottom: 7px;
         display: flex;
-        flex: 1;
-        padding: 4px;
+        align-items: center;
+        gap: var(--mobile-spacing-md);
+        padding: var(--mobile-spacing-sm);
     }
 
+    /* Иконки в карточках */
     .shop-card-grid i,
+    .shops-grid .shop-card-grid p i,
+    .shops-grid .shop-card-grid p .svg-icon {
+        font-size: var(--mobile-font-md);
+        width: var(--mobile-icon-size);
+        height: var(--mobile-icon-size);
+        flex-shrink: 0;
+    }
+
     .shops-grid .shop-card-grid p i {
-        font-size: 12px;
-        margin-right: 6px;
+        margin-right: var(--mobile-spacing-md);
         min-width: 14px;
     }
 
-    /* Адрес магазина */
+    .shops-grid .shop-card-grid p .svg-icon {
+        margin-right: 0;
+    }
+
+    /* Специфичные стили для элементов магазина */
     .shops-grid .shop-card-grid p:nth-child(2) {
-        font-size: 11px;
-        font-weight: 600;
+        font-size: var(--mobile-font-xs);
+        font-weight: 400;
     }
 
-    /* Метро */
     .shops-grid .shop-card-grid p:nth-child(3) {
-        font-size: 11px;
+        font-size: var(--mobile-font-sm);
     }
 
-    /* Часы работы */
     .shops-grid .shop-card-grid .shop-hours-grid {
-        font-size: 11px;
-        font-weight: 700;
+        font-size: var(--mobile-font-sm);
+        font-weight: 400;
         color: #e8d0b3;
-        margin-top: 4px;
+        margin-top: var(--mobile-spacing-sm);
         margin-bottom: 10px;
     }
 
     .shops-grid .shop-card-grid .shop-hours-grid i {
-        font-size: 11px;
+        font-size: var(--mobile-font-sm);
         color: #e8d0b3;
     }
 
-    /* Телефон */
     .shops-grid .shop-card-grid p:nth-last-child(1) {
-        font-size: 11px;
+        font-size: var(--mobile-font-sm);
         font-weight: 700;
-        margin-top: 4px;
+        margin-top: var(--mobile-spacing-sm);
         margin-bottom: 0;
     }
 
@@ -267,37 +296,36 @@
     }
 
     /* Нижняя панель */
-
     .selection-card {
         grid-area: footer;
-        padding: 6px 6px; /* ← Уменьшаем padding на мобильных */
-        gap: 6px;
+        padding: var(--mobile-spacing-md);
+        gap: var(--mobile-spacing-md);
         flex-wrap: nowrap;
-        margin-bottom: 6px;
+        margin-bottom: var(--mobile-spacing-md);
         height: 200px; 
-        align-items: flex-start; /* ← Выравнивание по верху */
+        align-items: flex-start;
     }
 
     .tags-container {
-        gap: 6px;
-        min-height: auto; /* ← Убираем фиксированную высоту */
+        gap: var(--mobile-spacing-md);
+        min-height: auto;
         padding: 3px 0;
     }
 
     .selection-tag {
-        padding: 5px 5px;
-        font-size: 10px;
+        padding: 5px;
+        font-size: var(--mobile-font-xs);
         flex-shrink: 0;
         white-space: nowrap;
-        margin-bottom: 3px; /* ← Отступ между рядами тегов */
+        margin-bottom: 3px;
     }
 
     .selection-card-header h3 {
-        font-size: 12px;
+        font-size: var(--mobile-font-md);
     }
 
     .selection-card-header i {
-        font-size: 12px;
+        font-size: var(--mobile-font-md);
     }
 
     .tag-step {
@@ -308,23 +336,23 @@
 
     /* Кнопки */
     .btn-final {
-        padding: 8px 16px;
-        font-size: 11px;
+        padding: var(--mobile-spacing-lg) 16px;
+        font-size: var(--mobile-font-sm);
     }
 
     .btn-nav {
-        padding: 6px 10px;
-        font-size: 10px;
+        padding: var(--mobile-spacing-md) 10px;
+        font-size: var(--mobile-font-xs);
     }
 
     .btn-large {
         padding: 12px 24px;
-        font-size: 14px;
+        font-size: var(--mobile-font-lg);
     }
 
     /* Компактные шаги */
     .compact-steps {
-        gap: 8px;
+        gap: var(--mobile-spacing-lg);
     }
 
     .compact-step {
@@ -338,15 +366,15 @@
     }
 
     .step-icon {
-        font-size: 14px;
+        font-size: var(--mobile-font-lg);
     }
 
     .step-content h3 {
-        font-size: 12px;
+        font-size: var(--mobile-font-md);
     }
 
     .step-content p {
-        font-size: 10px;
+        font-size: var(--mobile-font-xs);
     }
 
     /* Информационная панель */
@@ -407,7 +435,7 @@
         font-size: 18px;
     }
 
-   .btn-close-mobile-info {
+    .btn-close-mobile-info {
         position: absolute;
         top: 0;
         right: 0;
@@ -422,13 +450,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 !important; /* Важно: убрать все отступы */
+        margin: 0 !important;
         padding: 0;
         z-index: 1001;
     }
 
     .mobile-parameter-details {
-        font-size: 14px;
+        font-size: var(--mobile-font-lg);
         line-height: 1.5;
         color: #666;
     }
@@ -440,50 +468,20 @@
         padding-top: 10px;
         border-top: 1px solid #eee;
     }
-    /* ===== ИКОНКИ ДЛЯ КАРТОЧЕК ===== */
     
-    .home-card .svg-icon,
-    .home-grid .home-card .svg-icon {
-        width: 19px;
-        height: 19px;
-        margin-bottom: 10px;
+    /* 4. Упрощенное правило для SVG иконок */
+    .svg-icon {
+        width: var(--mobile-icon-size);
+        height: var(--mobile-icon-size);
+        margin-bottom: var(--mobile-card-padding);
     }
     
-    .option-card .svg-icon,
-    .house-grid .option-card .svg-icon {
-        width: 19px;
-        height: 19px;
-        margin-bottom: 10px;
+    .home-card .svg-icon,
+    .option-card .svg-icon {
+        margin-bottom: var(--mobile-card-padding);
     }
     
     .shop-card-grid h4 .svg-icon {
-        width: 19px;
-        height: 19px;
-        margin-right: 8px;
+        margin-right: var(--mobile-spacing-lg);
     }
-
-    .shops-grid .shop-card-grid p {
-    font-size: 11px;
-    line-height: 1.3;
-    margin-bottom: 7px;
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Компактный отступ между иконкой и текстом */
-    padding: 4px;
-}
-
-/* Иконки в карточке магазина */
-.shops-grid .shop-card-grid p .svg-icon {
-    width: 19px;
-    height: 19px;
-    margin-right: 0;
-    flex-shrink: 0;
-}
-
-.shops-grid .shop-card-grid p i {
-    font-size: 12px;
-    margin-right: 5px;
-    min-width: 14px;
-    flex-shrink: 0;
-}
 }

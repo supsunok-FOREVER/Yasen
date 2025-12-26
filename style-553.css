@@ -1,10 +1,10 @@
-    @media (max-width: 574px)
-{
-       /* Сетки */
+@media (max-width: 574px) {
+    /* Сетки - ТОЛЬКО сеточные свойства (не трогаем display) */
     .home-grid,
-    .house-grid   {   
+    .house-grid,
+    .shops-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 3px;
+        gap: 8px;
         max-width: 98%;
         height: auto;
         margin-bottom: 20px;
@@ -14,6 +14,13 @@
 
     .home-grid {
         grid-template-rows: repeat(3, 1fr);
+    }
+
+    /* СЕТКА МАГАЗИНОВ - ОСНОВНЫЕ НАСТРОЙКИ */
+    .shops-grid {
+        grid-auto-rows: minmax(180px, auto);
+        margin: 0 auto 20px;
+        width: 100%;
     }
 
     /* Карточки */
@@ -60,46 +67,62 @@
         text-align: center;
     }
 
-    /* Карточки магазинов */
+    /* КАРТОЧКИ МАГАЗИНОВ - ЕДИНСТВЕННЫЙ ВАРИАНТ (убрали дубли) */
     .shop-card-grid {
-        padding: 2px;
+        padding: 15px;
         display: flex;
-        flex: 1;
-        width: 99%;
+        flex-direction: column;
+        width: 100%;
+        min-height: 200px;
+        background: var(--brand-red-dark);
+        border-radius: 28px;
+        border: 1px solid rgba(255,255,255,0.15);
+        box-shadow:
+            0 10px 0 rgba(122, 15, 22, 0.95),
+            8px 0 0 rgba(122, 15, 22, 0.85),
+            10px 14px 30px rgba(0,0,0,0.35);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .shop-card {
-        min-width: 1%;
-        padding: 15px;
+        min-width: 100%;
+        padding: 0;
     }
 
     .shop-card-header {
         border-bottom: none;
-        padding: 5px;
-        margin-bottom: 10px;
+        padding: 0;
+        margin-bottom: 12px;
     }
 
+    /* ЗАГОЛОВОК КАРТОЧКИ МАГАЗИНА */
+    .shop-card-grid h4,
+    .shops-grid .shop-card-grid h4.shop-card-header,
     .shop-card-header h4 {
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 0;
-    }
-
-    .shops-grid .shop-card-grid h4.shop-card-header {
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 1.2;
-        margin-bottom: 8px;
-        align-content: center;
+        font-size: 14px !important;
+        font-weight: 200 !important;
+        line-height: 1.2 !important;
+        margin-bottom: 12px !important;
+        text-align: left !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        max-width: 100% !important;
+        padding-bottom: 0 !important;
+        border-bottom: none !important;
+        color: #e8d0b3 !important;
     }
 
     .shop-card-grid .shop-card-content p,
     .shops-grid .shop-card-grid p {
         font-size: 11px;
         line-height: 1.3;
-        margin-bottom: 7px;
+        margin-bottom: 8px;
         display: flex;
-        flex: 1;
+        align-items: center;
         padding: 4px;
     }
 
@@ -119,6 +142,7 @@
     /* Метро */
     .shops-grid .shop-card-grid p:nth-child(3) {
         font-size: 11px;
+        font-weight: 500;
     }
 
     /* Часы работы */
@@ -243,5 +267,37 @@
 
     .step-content p {
         font-size: 10px;
+    }
+
+    /* SVG ИКОНКИ В КАРТОЧКАХ МАГАЗИНОВ */
+    .shop-card-grid h4 .svg-icon,
+    .shops-grid .shop-card-grid h4 .svg-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+    }
+    
+    .shops-grid .shop-card-grid p .svg-icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 0;
+        flex-shrink: 0;
+    }
+
+    .shops-grid .shop-card-grid p {
+        font-size: 11px;
+        line-height: 1.3;
+        margin-bottom: 7px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px;
+    }
+
+    .shops-grid .shop-card-grid p i {
+        font-size: 12px;
+        margin-right: 5px;
+        min-width: 14px;
+        flex-shrink: 0;
     }
 }

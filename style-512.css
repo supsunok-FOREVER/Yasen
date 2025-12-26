@@ -171,20 +171,33 @@
     .shop-card-header {
         border-bottom: none;
         padding-bottom: 0;
-        margin-bottom: 10px;
+        margin-bottom: 8px !important;
     }
 
     .shop-card-header h4 {
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 0;
+        font-size: 12px !important;
+        font-weight: 200;
+        line-height: 1.2;
+        margin-bottom: 12px;
+        text-align: left;
+        padding-bottom: 0;
+        border-bottom: none;
+        white-space: normal;
+        word-break: break-word;
+        max-width: 100%;
     }
 
     .shops-grid .shop-card-grid h4.shop-card-header {
-        font-size: 12px;
+        font-size: 12px !important;
         font-weight: 200;
         line-height: 1.2;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        text-align: left;
+        padding-bottom: 0;
+        border-bottom: none;
+        white-space: normal;
+        word-break: break-word;
+        max-width: 100%;
         align-content: center;
     }
 
