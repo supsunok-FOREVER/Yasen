@@ -320,7 +320,7 @@ function initApp() {
             
             shopCard.innerHTML = `
             <h4 class="shop-card-header">
-                ${getSvgIcon('map-pin.svg', 'Местоположение')} ${shop.name}
+                ${getSvgIcon(${shop.name}
             </h4>
                 <p>${getSvgIcon('map-pin.svg', 'Адрес')} ${shop.address}</p>
                 ${shop.metro ? `<p>${getSvgIcon(getIcon('subway'), 'Метро')} ${shop.metro}</p>` : ''}
