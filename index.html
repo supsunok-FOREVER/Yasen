@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
  
     <!-- Preload critical assets -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-     
     <!-- Google Fonts -->
     <link rel="preload" 
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" 
@@ -18,29 +16,29 @@
     <noscript>
         <link rel="stylesheet" as="style"  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap">
     </noscript>
+    
     <!-- Ваши стили с conditional preload -->
-     <link rel="preload" href="style.css" as="style">
-      <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1245px)">
-          <link rel="preload" href="style-1065.css" as="style" media="(max-width: 1065px)">
-            <link rel="preload" href="style-800.css" as="style" media="(max-width: 800px)">
-            <link rel="preload" href="style-553.css" as="style" media="(max-width: 574px)">
-            <link rel="preload" href="style-512.css" as="style" media="(max-width: 512px)">
-                    
-        <link rel="preload" rel="stylesheet" href="style-mobile.css" as="style">
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="style-1200.css" as="style" media="(max-width: 1245px)">
+    <link rel="preload" href="style-1065.css" as="style" media="(max-width: 1065px)">
+    <link rel="preload" href="style-800.css" as="style" media="(max-width: 800px)">
+    <link rel="preload" href="style-553.css" as="style" media="(max-width: 574px)">
+    <link rel="preload" href="style-512.css" as="style" media="(max-width: 512px)">
+    <link rel="preload" href="style-mobile.css" as="style">
     
-    
+  
     <!-- Main stylesheet -->
-    <link rel="stylesheet" href="style.css" as="style">
+    <link rel="stylesheet" type="text/css" href="style.css">
     
     <!-- Conditional stylesheets -->
-<link rel="stylesheet" href="style-1200.css" as="style" media="(max-width: 1245px)">
-<link rel="stylesheet" href="style-1065.css" as="style" media="(max-width: 1065px)">
-<link rel="stylesheet" href="style-800.css" as="style" media="(max-width: 800px)">
-<link rel="stylesheet" href="style-553.css" as="style" media="(max-width: 574px)">
-<link rel="stylesheet" href="style-512.css" as="style" media="(max-width: 512px)">
-
-<link rel="stylesheet" href="style-mobile.css" as="style">
-    
+<!-- Conditional stylesheets -->
+<link rel="stylesheet" href="style-1200.css" type="text/css" media="(max-width: 1245px)">
+<link rel="stylesheet" href="style-1065.css" type="text/css" media="(max-width: 1065px)">
+<link rel="stylesheet" href="style-800.css" type="text/css" media="(max-width: 800px)">
+<link rel="stylesheet" href="style-553.css" type="text/css" media="(max-width: 574px)">
+<link rel="stylesheet" href="style-512.css" type="text/css" media="(max-width: 512px)">
+<link rel="stylesheet" href="style-mobile.css" type="text/css" media="screen">
+       
     <title>Ваш персональный гид в мире комфорта и стиля</title>
 </head>
 <body>
@@ -55,61 +53,61 @@
             
             <div class="progress-track">
                 <div class="steps-container" id="stepsMenu">
-                    <!-- Меню 6 шагов -->
-                     
-                        <!-- Комната -->
-                        <div class="menu-step" data-step="room">
-                            <div class="menu-step-icon">
-                                <img src="icons/door-open.svg" alt="Комната" class="menu-icon">
-                            </div>
-                            <span class="menu-step-text">Комната</span>
+                    <!-- Комната -->
+                    <div class="menu-step" data-step="room">
+                        <div class="menu-step-icon">
+                            <img src="icons/door-open.svg" alt="Комната" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Комната</span>
+                    </div>
 
-                        <!-- Модель -->
-                        <div class="menu-step" data-step="model">
-                            <div class="menu-step-icon">
-                                <img src="icons/shapes.svg" alt="Модель" class="menu-icon">
-                            </div>
-                            <span class="menu-step-text">Модель</span>
+                    <!-- Модель -->
+                    <div class="menu-step" data-step="model">
+                        <div class="menu-step-icon">
+                            <img src="icons/shapes.svg" alt="Модель" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Модель</span>
+                    </div>
 
-                        <!-- Механизм -->
-                        <div class="menu-step" data-step="mechanism">
-                            <div class="menu-step-icon">
-                                <img src="icons/cogs.svg" alt="Механизм" class="menu-icon">
-                            </div>
-                            <span class="menu-step-text">Механизм</span>
+                    <!-- Механизм -->
+                    <div class="menu-step" data-step="mechanism">
+                        <div class="menu-step-icon">
+                            <img src="icons/cogs.svg" alt="Механизм" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Механизм</span>
+                    </div>
 
-                        <!-- Наполнитель -->
-                        <div class="menu-step" data-step="filling">
-                            <div class="menu-step-icon">
-                                <img src="icons/layer-group.svg" alt="Наполнитель" class="menu-icon">
-                            </div>
-                            <span class="menu-step-text">Наполнитель</span>
+                    <!-- Наполнитель -->
+                    <div class="menu-step" data-step="filling">
+                        <div class="menu-step-icon">
+                            <img src="icons/layer-group.svg" alt="Наполнитель" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Наполнитель</span>
+                    </div>
 
-                        <!-- Ткань -->
-                        <div class="menu-step" data-step="fabric">
-                            <div class="menu-step-icon">
-                                <img src="icons/tshirt.svg" alt="Ткань" class="menu-icon">
-                            </div>
-                            <span class="menu-step-text">Ткань</span>
+                    <!-- Ткань -->
+                    <div class="menu-step" data-step="fabric">
+                        <div class="menu-step-icon">
+                            <img src="icons/tshirt.svg" alt="Ткань" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Ткань</span>
+                    </div>
 
-                        <!-- Декор -->
-                        <div class="menu-step" data-step="decor">
-                            <div class="menu-step-icon">
-                                <img src="icons/palette.svg" alt="Декор" class="menu-icon">
-                            </div>
-                            <span class="menu-step-text">Декор</span>
+                    <!-- Декор -->
+                    <div class="menu-step" data-step="decor">
+                        <div class="menu-step-icon">
+                            <img src="icons/palette.svg" alt="Декор" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Декор</span>
+                    </div>
 
-                        <div class="menu-step final-step" data-step="test">
-                            <div class="menu-step-icon">
-                            <img src="icons/map-marker-alt.svg" alt="адрес" class="menu-icon"></div>
-                            <span class="menu-step-text">Адреса</span>
+                    <!-- Тест-драйв -->
+                    <div class="menu-step final-step" data-step="test">
+                        <div class="menu-step-icon">
+                            <img src="icons/map-marker-alt.svg" alt="Адреса" class="svg-icon menu-icon">
                         </div>
+                        <span class="menu-step-text">Адреса</span>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -118,36 +116,36 @@
         <main class="maze-area" id="mazeArea">
             <!-- Сначала Home page -->
             <div class="home-content active" id="homeContent">
-              <div style="text-align: center;" class="home-header">
-                <h1 class="home-title">7 шагов к идеальному дивану</h1>
-               
+                <div style="text-align: center;" class="home-header">
+                    <h1 class="home-title">7 шагов к идеальному дивану</h1>
                 </div>
             
-            <!-- Сетка 2x3 вместо компактных шагов -->
+                <!-- Сетка 2x3 вместо компактных шагов -->
                 <div class="home-grid" id="homeGrid">
                     <!-- Будет заполняться через JS -->
                 </div>
-
             </div>
             
             <!-- Сетка для других шагов (скрыта по умолчанию) -->
-            <div class="house-grid" id="houseGrid" >
+            <div class="house-grid" id="houseGrid">
                 <!-- Будет заполняться через JS -->
             </div>
             
             <!-- Контент для тест-драйва (скрыт по умолчанию) -->
-                <div class="shops-grid" id="shopsGrid">
-            <!-- Будет заполняться через JS -->
-                </div>
+            <div class="shops-grid" id="shopsGrid">
+                <!-- Будет заполняться через JS -->
+            </div>
         </main>
 
-  
         <!-- ПРАВАЯ ПАНЕЛЬ: Информация (только для десктопа) -->
         <aside class="info-panel" id="infoPanel">
             <div class="panel-content">
                 <div style="text-align: center;" class="panel-header">
-                    <h2 id="panelTitle"><i class="fas fa-info-circle"></i> </h2>
-                    <p id="panelSubtitle" class="panel-subtitle"> Выберите шаг в меню слева</p>
+                    <h2 id="panelTitle">
+                        <img src="icons/info-circle.svg" alt="Информация" class="svg-icon">
+                        <span id="panelTitleText"></span>
+                    </h2>
+                    <p id="panelSubtitle" class="panel-subtitle">Выберите шаг в меню слева</p>
                 </div>
                 
                 <!-- Пояснение текущего шага -->
@@ -166,36 +164,42 @@
             <!-- Навигация -->
             <div class="panel-navigation">
                 <button class="btn-nav btn-prev" id="prevBtn" disabled>
-                    <i class="fas fa-arrow-left"></i> <span></span>
+                    <img src="icons/arrow-left.svg" alt="Назад" class="svg-icon">
+                    <span></span>
                 </button>
                 <span class="step-counter">Шаг <span id="currentStepNum">0</span> из 7</span>
                 <button class="btn-nav btn-next" id="nextBtn">
-                    <span></span> <i class="fas fa-arrow-right"></i>
+                    <span></span>
+                    <img src="icons/arrow-right.svg" alt="Вперед" class="svg-icon">
                 </button>
             </div>
             
             <button class="btn-reset" id="resetButton">
-                <i class="fas fa-redo"></i> Начать заново
+                <img src="icons/redo.svg" alt="Сбросить" class="svg-icon">
+                Начать заново
             </button>
         </aside>
 
-            <!-- МОБИЛЬНАЯ ИНФО-ПАНЕЛЬ (скрыта на десктопе) -->
-            <div class="mobile-info-panel" id="mobileInfoPanel">
-                <div class="mobile-info-content">
-                    <h3 id="mobilePanelTitle">Информация</h3>
-                    <div class="mobile-parameter-details" id="mobileParameterDetails">
-                        <p>Выберите параметр для подробностей</p>
-                    </div>
-                    <button class="btn-close-mobile-info">
-                        <i class="fas fa-times"></i>
-                    </button>
+        <!-- МОБИЛЬНАЯ ИНФО-ПАНЕЛЬ (скрыта на десктопа) -->
+        <div class="mobile-info-panel" id="mobileInfoPanel">
+            <div class="mobile-info-content">
+                <h3 id="mobilePanelTitle">
+                    <img src="icons/info-circle.svg" alt="Информация" class="svg-icon">
+                    <span id="mobilePanelTitleText">Информация</span>
+                </h3>
+                <div class="mobile-parameter-details" id="mobileParameterDetails">
+                    <p>Выберите параметр для подробностей</p>
                 </div>
+                <button class="btn-close-mobile-info">
+                    <img src="icons/times.svg" alt="Закрыть" class="svg-icon">
+                </button>
             </div>
+        </div>
 
         <!-- НИЖНЯЯ ПАНЕЛЬ: Карточка выбора -->
         <footer class="selection-card" id="selectionCard">
             <div class="selection-card-header">
-                <img src="icons/clipboard-list.svg" alt="Подборка" class="header-icon">
+                <img src="icons/clipboard-list.svg" alt="Подборка" class="svg-icon header-icon">
                 <h3>Ваша подборка</h3>
             </div>
             <div class="tags-container" id="selectionTags">
@@ -204,7 +208,8 @@
                 </div>
             </div>
             <button class="btn-primary btn-final" id="finalButton" disabled>
-                <i class="fas fa-calendar-check"></i> Финал
+                <img src="icons/calendar-check.svg" alt="Финал" class="svg-icon">
+                Финал
             </button>
         </footer>
     </div>

@@ -1085,30 +1085,236 @@
     color: #e8d0b3;
 }
 
-/* Для конкретных мест можно переопределить */
-.btn-close-mobile-info .svg-icon {
-    color: #999;
+/* ===== АДАПТАЦИЯ ИКОНОК ДЛЯ ВСЕХ ЭКРАНОВ ===== */
+
+/* ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ ИКОНОК */
+.svg-icon {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    vertical-align: middle;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
 }
 
-.option-card.selected .svg-icon {
-    color: #ffffff;
-}
+/* ===== БАЗОВЫЕ РАЗМЕРЫ ИКОНОК (ДЛЯ ДЕСКТОПА) ===== */
+
+/* 1. ИКОНКИ В КАРТОЧКАХ - САМЫЕ БОЛЬШИЕ */
+.home-card .svg-icon,
 .option-card .svg-icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
 }
 
-/* Для кнопок */
-.btn-nav .svg-icon,
-.btn-reset .svg-icon,
-.btn-final .svg-icon {
+/* 2. ИКОНКИ В INFO PANEL (правая панель) */
+.info-panel .svg-icon {
     width: 16px;
     height: 16px;
 }
 
-/* Для крестика закрытия */
-.btn-close-mobile-info .svg-icon {
+/* Иконки в заголовке info panel */
+#panelTitle .svg-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Иконки в навигации info panel */
+.panel-navigation .btn-nav .svg-icon {
+    width: 14px;
+    height: 14px;
+    margin: 0 4px;
+}
+
+/* Иконка сброса в info panel */
+#resetButton .svg-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+/* 3. ИКОНКИ В SELECTION CARD (нижняя панель) */
+.selection-card-header .svg-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 12px;
+}
+
+.selection-tag .svg-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+}
+
+.btn-final .svg-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+/* 4. ИКОНКИ В HOUSE GRID (сетка опций) */
+.house-grid .option-card .svg-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+}
+
+/* 5. ИКОНКИ В HOME GRID (главная сетка) */
+.home-grid .home-card .svg-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+}
+
+/* 6. ИКОНКИ В SHOPS GRID (сетка магазинов) */
+.shops-grid .shop-card-grid h4 .svg-icon {
     width: 20px;
     height: 20px;
+    margin-right: 10px;
+}
+
+.shops-grid .shop-card-grid p .svg-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* 7. ИКОНКИ В БОКОВОМ МЕНЮ */
+.menu-step-icon .svg-icon {
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    width: 24px;
+    height: 24px;
+}
+
+/* 8. ИКОНКИ В КНОПКАХ НАВИГАЦИИ */
+.btn-nav .svg-icon,
+.btn-reset .svg-icon,
+.btn-primary .svg-icon {
+    transition: transform 0.15s ease;
+    width: 16px;
+    height: 16px;
+    margin: 0 4px;
+}
+
+/* 9. ИКОНКИ В МОБИЛЬНОЙ ПАНЕЛИ */
+.mobile-info-panel .svg-icon {
+    width: 16px;
+    height: 16px;
+}
+
+#mobilePanelTitle .svg-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.btn-close-mobile-info .svg-icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+    width: 20px;
+    height: 20px;
+}
+
+/* 10. ИКОНКИ В ДИНАМИЧЕСКОМ КОНТЕНТЕ */
+.step-explanation .svg-icon,
+.dynamic-content .svg-icon,
+.parameter-details .svg-icon {
+    width: 14px;
+    height: 14px;
+    margin: 0 4px;
+}
+
+/* ===== ЭФФЕКТЫ И АНИМАЦИИ ===== */
+
+/* АКТИВНЫЕ ИКОНКИ */
+.option-card.selected .svg-icon,
+.home-card.selected .svg-icon {
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+    transform: scale(1.05);
+}
+
+/* ХОВЕР ЭФФЕКТЫ */
+.btn-nav:hover .svg-icon,
+.btn-reset:hover .svg-icon,
+.btn-final:hover .svg-icon,
+.btn-primary:hover .svg-icon {
+    transform: translateY(-1px);
+}
+
+.menu-step:hover .menu-step-icon .svg-icon {
+    transform: translateY(-1px);
+}
+
+.menu-step.active .menu-step-icon .svg-icon {
+    filter: brightness(1.2) drop-shadow(0 3px 4px rgba(0, 0, 0, 0.3));
+}
+
+.selection-tag:hover .svg-icon {
+    opacity: 1;
+    transform: rotate(5deg);
+}
+
+.btn-close-mobile-info:hover .svg-icon {
+    transform: rotate(90deg);
+    color: #fff;
+}
+
+/* АНИМАЦИЯ НАГРУЗКИ */
+.svg-icon.loading {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ЦВЕТА ИКОНОК */
+.svg-icon.color-primary { color: var(--brand-red); }
+.svg-icon.color-accent { color: #e8d0b3; }
+.svg-icon.color-white { color: #ffffff; }
+.svg-icon.color-muted { color: rgba(255, 255, 255, 0.7); }
+
+/* ===== СПЕЦИАЛЬНЫЕ КЛАССЫ ДЛЯ РАЗНЫХ РАЗМЕРОВ ===== */
+
+/* Маленькие иконки */
+.svg-icon-sm {
+    width: 12px !important;
+    height: 12px !important;
+}
+
+/* Средние иконки */
+.svg-icon-md {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* Большие иконки */
+.svg-icon-lg {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+/* Огромные иконки (для карточек) */
+.svg-icon-xl {
+    width: 48px !important;
+    height: 48px !important;
+}
+
+/* Иконки одинакового размера для квадратных контейнеров */
+.svg-icon-square {
+    object-fit: contain;
+}
+
+/* ИКОНКИ С ТЕКСТОМ - ВЫРАВНИВАНИЕ */
+.icon-with-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.icon-with-text .svg-icon {
+    flex-shrink: 0;
 }

@@ -4,24 +4,26 @@
         display: none !important;
     }
     
-            .far,
-            .fab {
-                display: none;
-            }
+    .far,
+    .fab {
+        display: none;
+    }
+    
     .app-container {
         grid-template-columns: 200px 1fr !important;
-        grid-template-rows: 1fr auto !important; /* Изменено: первая строка растягивается */
-        min-height: 100vh; /* Важно для стабильности */
+        grid-template-rows: 1fr auto !important;
+        min-height: 100vh;
     }
-       .logo-container {
+    
+    .logo-container {
         position: 18px;
         text-align: center;
-        margin-bottom: 13px;    /* поменьше после блока */
-        padding-bottom: 13px;   /* поменьше внутри блока (без линии) */
-        border-bottom: none;    /* убрали линию */
-        }
+        margin-bottom: 13px;
+        padding-bottom: 13px;
+        border-bottom: none;
+    }
     
-     .logo-text {
+    .logo-text {
         font-family: 'Open Sans', sans-serif;
         font-size: 26px;
         font-weight: 800;
@@ -39,43 +41,74 @@
         letter-spacing: 0px;
     }
 
-        .menu-step {
+    .menu-step {
         padding: 12px;
         gap: 12px;
-        }
+    }
 
-        .menu-step-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 16px;
-        }
-        
+    .menu-step-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    /* ===== ИКОНКИ ДЛЯ КАРТОЧЕК ===== */
+    
+    /* Иконки в карточках главной страницы */
+    .home-card .svg-icon,
+    .home-grid .home-card .svg-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+    }
+    
+    /* Иконки в карточках опций */
+    .option-card .svg-icon,
+    .house-grid .option-card .svg-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+    }
+    
+    /* Иконки в карточках магазинов */
+    .shop-card-grid h4 .svg-icon {
+        width: 18px;
+        height: 18px;
+        margin-right: 8px;
+    }
+    
+    .shop-card-grid p .svg-icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 6px;
+    }
+    
     /* СТАБИЛИЗИРУЕМ ВЫСОТУ СЕТОК */
     .home-grid {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 180px); /* Фиксируем высоту строк */
+        grid-template-rows: repeat(2, 180px);
         max-width: 900px;
         height: auto;
-        min-height: 360px; /* 2 * 180px */
+        min-height: 360px;
     }
     
     .house-grid {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, 200px); /* Фиксируем высоту строк */
+        grid-template-rows: repeat(2, 200px);
         max-width: 700px;
         height: auto;
-        min-height: 400px; /* 2 * 200px */
+        min-height: 400px;
     }
     
     /* ФИКСИРУЕМ ВЫСОТУ КАРТОЧЕК */
     .home-card {
-        height: 100%; /* Занимает всю высоту ячейки */
-        min-height: 180px; /* Минимальная высота */
+        height: 100%;
+        min-height: 180px;
     }
     
     .option-card {
-        height: 100%; /* Занимает всю высоту ячейки */
-        min-height: 200px; /* Минимальная высота */
+        height: 100%;
+        min-height: 200px;
     }
     
     /* НИЖНЯЯ ПАНЕЛЬ - СТАБИЛЬНАЯ ВЫСОТА */
@@ -85,22 +118,22 @@
         min-height: fit-content;
         padding: 15px 20px;
         gap: 20px;
-         grid-column: 1 / span 3;
-            grid-row: 2;
-            background: var(--brand-red-deep) ;
-            padding: 25px 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            box-shadow:
-                0 12px 0 rgba(122, 15, 22, 1),
-                10px 0 0 rgba(122, 15, 22, 0.95),
-                14px 22px 42px rgba(0,0,0,0.45) ;
+        grid-column: 1 / span 3;
+        grid-row: 2;
+        background: var(--brand-red-deep);
+        padding: 25px 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        box-shadow:
+            0 12px 0 rgba(122, 15, 22, 1),
+            10px 0 0 rgba(122, 15, 22, 0.95),
+            14px 22px 42px rgba(0,0,0,0.45);
     }
     
     .tags-container {
-        min-height: 50px; /* Фиксируем высоту контейнера тегов */
+        min-height: 50px;
         align-items: center;
     }
     
@@ -126,6 +159,6 @@
     }
     
     .house-right-bottom {
-        display: none; /* Скрываем 5-ю карточку в 3x2 */
+        display: none;
     }
 }

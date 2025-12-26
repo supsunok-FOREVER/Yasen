@@ -1,4 +1,5 @@
 // script.js
+
 let appData = {
     stepsData: {},
     stepsOrder: [],
@@ -13,38 +14,113 @@ const appState = {
     selections: {}
 };
 
-// Загружаем данные из JSON файла
+// ========== ФУНКЦИЯ ЗАГРУЗКИ ДАННЫХ ==========
+
 function loadAppData() {
-    try {
-        const request = new XMLHttpRequest();
-        request.open('GET', 'data.json', false); // false = синхронный запрос
-        request.send(null);
-        
-        if (request.status === 200) {
-            const data = JSON.parse(request.responseText);
+    return new Promise((resolve, reject) => {
+        try {
+            const request = new XMLHttpRequest();
+            request.open('GET', 'data.json', true);
             
-            appData = {
-                stepsData: data.stepsData || {},
-                stepsOrder: data.stepsOrder || [],
-                mainSteps: data.mainSteps || [],
-                uiTexts: data.uiTexts || {},
-                icons: data.icons || {},
-                uiClasses: data.uiClasses || {}
+            request.onload = function() {
+                if (request.status === 200) {
+                    try {
+                        const data = JSON.parse(request.responseText);
+                        
+                        appData = {
+                            stepsData: data.stepsData || {},
+                            stepsOrder: data.stepsOrder || [],
+                            mainSteps: data.mainSteps || [],
+                            uiTexts: data.uiTexts || {},
+                            icons: data.icons || {},
+                            uiClasses: data.uiClasses || {}
+                        };
+                        
+                        console.log('Данные успешно загружены из data.json');
+                        resolve();
+                    } catch (parseError) {
+                        console.error('Ошибка парсинга JSON:', parseError);
+                        reject(parseError);
+                    }
+                } else {
+                    reject(new Error(`HTTP error! status: ${request.status}`));
+                }
             };
             
-            console.log('Данные успешно загружены из data.json');
-            initApp();
-        } else {
-            throw new Error(`HTTP error! status: ${request.status}`);
+            request.onerror = function() {
+                reject(new Error('Network error loading data.json'));
+            };
+            
+            request.ontimeout = function() {
+                reject(new Error('Request timeout loading data.json'));
+            };
+            
+            request.send();
+        } catch (error) {
+            console.error('Ошибка инициализации запроса:', error);
+            reject(error);
         }
-    } catch (error) {
-        console.error('Ошибка загрузки данных:', error);
-        alert('Не удалось загрузить данные приложения. Пожалуйста, обновите страницу или запустите через локальный сервер.');
-    }
+    });
 }
 
-// Инициализация приложения
+// ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+
+function getSvgIcon(iconName, altText = '') {
+    if (!iconName) return '';
+    
+    // Всегда возвращаем img тег
+    return `<img src="icons/${iconName}" alt="${altText}" class="svg-icon">`;
+}
+
+function getUIText(key, replacements = {}) {
+    let text = appData.uiTexts[key] || '';
+    for (const [key, value] of Object.entries(replacements)) {
+        text = text.replace(`{{${key}}}`, value);
+    }
+    return text;
+}
+
+function getIcon(key) {
+    return appData.icons[key] || '';
+}
+
+function getUIClass(section, element) {
+    return appData.uiClasses?.[section]?.[element] || '';
+}
+
+// ========== ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ЗВОНКА ==========
+
+function handleFinalCall() {
+    const stepData = appData.stepsData.test;
+    if (!stepData || !stepData.phoneNumber) {
+        alert("Контактная информация не найдена");
+        return false;
+    }
+    
+    // Показываем подтверждение
+    alert(stepData.confirmationMessage || getUIText('confirmationMessage'));
+    
+    // Формируем сообщение для подтверждения звонка
+    const confirmCallMessage = (stepData.confirmCallMessage || getUIText('confirmCallMessage'))
+        .replace('{{phoneNumber}}', stepData.phoneNumber);
+    
+    // Спрашиваем подтверждение
+    const confirmCall = confirm(confirmCallMessage);
+    
+    // Если подтвердили - звоним
+    if (confirmCall) {
+        window.location.href = `tel:${stepData.phoneNumber}`;
+        return true;
+    }
+    
+    return false;
+}
+
+// ========== ИНИЦИАЛИЗАЦИЯ ПРИЛОЖЕНИЯ ==========
+
 function initApp() {
+    console.log('Инициализация приложения...');
+    
     // ========== ИНИЦИАЛИЗАЦИЯ DOM ЭЛЕМЕНТОВ ==========
     const menuSteps = document.querySelectorAll('.menu-step');
     const homeContent = document.getElementById('homeContent');
@@ -66,98 +142,6 @@ function initApp() {
     const mobilePanelTitle = document.getElementById('mobilePanelTitle');
     const mobileParameterDetails = document.getElementById('mobileParameterDetails');
     const closeMobileInfoBtn = document.querySelector('.btn-close-mobile-info');
-
-    // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
-    function getUIText(key, replacements = {}) {
-        let text = appData.uiTexts[key] || '';
-        for (const [key, value] of Object.entries(replacements)) {
-            text = text.replace(`{{${key}}}`, value);
-        }
-        return text;
-    }
-
-    function getIcon(key) {
-        return appData.icons[key] || '';
-    }
-
-    function getUIClass(section, element) {
-        return appData.uiClasses?.[section]?.[element] || '';
-    }
-   // Функция для получения SVG иконки
-    let svgCache = {}; // Кэш для SVG
-
-    function getSvgIcon(iconName, altText = '') {
-        if (!iconName) return '';
-        
-        // Если уже есть в кэше
-        if (svgCache[iconName]) {
-            return svgCache[iconName].replace('<svg', `<svg aria-label="${altText}" fill="currentColor"`);
-        }
-        
-        // Если нет в кэше - возвращаем img (потом обновится)
-        return `<img src="icons/${iconName}" alt="${altText}" class="svg-icon" data-svg="${iconName}">`;
-    }
-
-// Функция для загрузки всех SVG при старте
-    function loadSvgIcons() {
-        const iconNames = [
-            // Все иконки из data.json
-            'home.svg', 'times.svg', 'door-open.svg', 'shapes.svg', 'cogs.svg',
-            'layer-group.svg', 'tshirt.svg', 'palette.svg', 'utensils.svg',
-            'couch.svg', 'child.svg', 'bed.svg', 'square.svg', 'th-large.svg',
-            'puzzle-piece.svg', 'star.svg', 'moon.svg', 'book-open.svg',
-            'arrow-right.svg', 'fish.svg', 'comments.svg', 'times-circle.svg',
-            'bolt.svg', 'feather-alt.svg', 'cloud.svg', 'heart.svg', 'th.svg',
-            'paw.svg', 'braille.svg', 'circle.svg', 'cube.svg', 'hand-paper.svg',
-            'shoe-prints.svg', 'bezier-curve.svg', 'border-style.svg',
-            'info-circle.svg', 'arrow-left.svg', 'redo.svg', 'clipboard-list.svg',
-            'store.svg', 'map-marker-alt.svg', 'subway.svg', 'clock.svg',
-            'phone.svg', 'calendar-check.svg', 'hand-point-right.svg',
-            'play-circle.svg'
-        ];
-        
-        // Загружаем все иконки
-        iconNames.forEach(iconName => {
-            fetch(`icons/${iconName}`)
-                .then(response => response.text())
-                .then(svgText => {
-                    svgCache[iconName] = svgText;
-                    // Обновляем все img на странице
-                    document.querySelectorAll(`img[data-svg="${iconName}"]`).forEach(img => {
-                        const alt = img.getAttribute('alt') || '';
-                        img.outerHTML = svgText.replace('<svg', `<svg aria-label="${alt}" fill="currentColor"`);
-                    });
-                })
-                .catch(error => console.error('Error loading SVG:', iconName, error));
-        });
-    }
-
-    // ========== ФУНКЦИЯ ДЛЯ ОБРАБОТКИ ЗВОНКА ==========
-    function handleFinalCall() {
-        const stepData = appData.stepsData.test;
-        if (!stepData || !stepData.phoneNumber) {
-            alert("Контактная информация не найдена");
-            return false;
-        }
-        
-        // Показываем подтверждение
-        alert(stepData.confirmationMessage || getUIText('confirmationMessage'));
-        
-        // Формируем сообщение для подтверждения звонка
-        const confirmCallMessage = (stepData.confirmCallMessage || getUIText('confirmCallMessage'))
-            .replace('{{phoneNumber}}', stepData.phoneNumber);
-        
-        // Спрашиваем подтверждение
-        const confirmCall = confirm(confirmCallMessage);
-        
-        // Если подтвердили - звоним
-        if (confirmCall) {
-            window.location.href = `tel:${stepData.phoneNumber}`;
-            return true;
-        }
-        
-        return false;
-    }
 
     // ========== ГЛАВНАЯ ФУНКЦИЯ ==========
     function goToStep(stepId) {
@@ -328,28 +312,23 @@ function initApp() {
     function renderTestContent() {
         const stepData = appData.stepsData.test;
         
-        // Определяем, мобильная ли версия
-        const isMobile = window.innerWidth <= 512;
-        
         shopsGrid.innerHTML = '';
         
         stepData.shops.forEach((shop, index) => {
             const shopCard = document.createElement('div');
             shopCard.className = 'shop-card-grid';
             
-            // Разный рендеринг для мобильной и десктопной версий
-         
-                shopCard.innerHTML = `
-                    <h4 class="shop-card-header">
-                        ${getSvgIcon(getIcon('mapMarker'), 'Местоположение')} ${shop.name}
-                    </h4>
-                    <p>${getSvgIcon('map-pin.svg', 'Адрес')} ${shop.address}</p>
-                    ${shop.metro ? `<p>${getSvgIcon(getIcon('subway'), 'Метро')} ${shop.metro}</p>` : ''}
-                    <p class="shop-hours-grid">
-                        ${getSvgIcon(getIcon('clock'), 'Часы работы')} ${shop.hours}
-                    </p>
-                    <p>${getSvgIcon(getIcon('phone'), 'Телефон')} ${shop.phone}</p>
-                `;
+            shopCard.innerHTML = `
+                <h4 class="shop-card-header">
+                    ${getSvgIcon(getIcon('mapMarker'), 'Местоположение')} ${shop.name}
+                </h4>
+                <p>${getSvgIcon('map-pin.svg', 'Адрес')} ${shop.address}</p>
+                ${shop.metro ? `<p>${getSvgIcon(getIcon('subway'), 'Метро')} ${shop.metro}</p>` : ''}
+                <p class="shop-hours-grid">
+                    ${getSvgIcon(getIcon('clock'), 'Часы работы')} ${shop.hours}
+                </p>
+                <p>${getSvgIcon(getIcon('phone'), 'Телефон')} ${shop.phone}</p>
+            `;
                         
             shopsGrid.appendChild(shopCard);
         });
@@ -450,7 +429,7 @@ function initApp() {
 
         // Кнопка "Назад"
         prevBtn.disabled = stepIndex <= 0;
-        prevBtn.innerHTML = getSvgIcon(getIcon('arrowLeft'), 'Назад');
+        prevBtn.innerHTML = `${getSvgIcon(getIcon('arrowLeft'), 'Назад')} <span>${getUIText('backButton')}</span>`;
 
         // Кнопка "Далее"
         let nextDisabled = false;
@@ -678,12 +657,23 @@ function initApp() {
         }
     });
 
-    // ========== ЗАПУСК ==========
+    // ========== ЗАПУСК ПРИЛОЖЕНИЯ ==========
+    console.log('Запуск приложения...');
     goToStep('home');
-    loadSvgIcons();
 }
 
-// Загружаем данные и запускаем приложение
+// ========== ЗАГРУЗКА ДАННЫХ И ЗАПУСК ПРИЛОЖЕНИЯ ==========
+
 document.addEventListener('DOMContentLoaded', function() {
-    loadAppData();
+    console.log('DOM загружен, начинаю загрузку данных...');
+    
+    loadAppData()
+        .then(() => {
+            console.log('Данные загружены, инициализирую приложение...');
+            initApp();
+        })
+        .catch(error => {
+            console.error('Ошибка загрузки данных:', error);
+            alert('Не удалось загрузить данные приложения. Пожалуйста, обновите страницу или запустите через локальный сервер.');
+        });
 });
