@@ -151,7 +151,7 @@
     .home-card-desc,
     .option-desc {
         font-size: 10px;
-        line-height: 1.2;
+        line-height: 1;
         text-align: center;
     }
 
@@ -177,7 +177,7 @@
     .shop-card-header h4 {
         font-size: 12px !important;
         font-weight: 200;
-        line-height: 1.2;
+        line-height: 1;
         margin-bottom: 12px;
         text-align: left;
         padding-bottom: 0;
@@ -190,7 +190,7 @@
     .shops-grid .shop-card-grid h4.shop-card-header {
         font-size: 12px !important;
         font-weight: 200;
-        line-height: 1.2;
+        line-height: 1;
         margin-bottom: 12px;
         text-align: left;
         padding-bottom: 0;
@@ -204,7 +204,7 @@
     .shop-card-grid .shop-card-content p,
     .shops-grid .shop-card-grid p {
         font-size: 11px;
-        line-height: 1.3;
+        line-height: 1;
         margin-bottom: 7px;
         display: flex;
         flex: 1;
