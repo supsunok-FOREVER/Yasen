@@ -442,16 +442,16 @@
     
     .home-card .svg-icon,
     .home-grid .home-card .svg-icon {
-        width: 19px;
-        height: 19px;
-        margin-bottom: 5px;
+        width: 17px;
+        height: 17px;
+        margin-bottom: 3px;
     }
     
     .option-card .svg-icon,
     .house-grid .option-card .svg-icon {
-        width: 19px;
-        height: 19px;
-        margin-bottom: 5px;
+        width: 17px;
+        height: 17px;
+        margin-bottom: 3px;
     }
     
     .shop-card-grid h4 .svg-icon {
@@ -472,14 +472,14 @@
 
 /* Иконки в карточке магазина */
 .shops-grid .shop-card-grid p .svg-icon {
-    width: 19px;
-    height: 19px;
+    width: 17px;
+    height: 17px;
     margin-right: 0;
     flex-shrink: 0;
 }
 
 .shops-grid .shop-card-grid p i {
-    font-size: 11px;
+    font-size: 10px;
     margin-right: 1px;
     min-width: 14px;
     flex-shrink: 0;
