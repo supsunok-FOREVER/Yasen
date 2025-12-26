@@ -172,7 +172,7 @@
 .shops-grid .shop-card-grid h4.shop-card-header {
     font-size: var(--mobile-font-md); /* 12px через переменную */
     font-weight: 200;                 /* Тонкий шрифт */
-    line-height: 1;
+    line-height: 0.5;
     margin-bottom: var(--mobile-spacing-lg); /* 8px через переменную */
     text-align: left;                /* ВАЖНО: прибит к левому краю */
     display: flex;
@@ -185,7 +185,7 @@
     .home-card-desc,
     .option-desc {
         font-size: var(--mobile-font-xs);
-        line-height: 1;
+        line-height: 0.5;
         text-align: center;
     }
 
@@ -212,7 +212,7 @@
     .shop-card-grid .shop-card-content p,
     .shops-grid .shop-card-grid p {
         font-size: var(--mobile-font-sm);
-        line-height: 1;
+        line-height: 0.5;
         margin-bottom: 7px;
         display: flex;
         align-items: center;
