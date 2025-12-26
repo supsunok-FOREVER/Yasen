@@ -465,5 +465,28 @@
         height: 19px;
         margin-right: 6px;
     }
-    
+    .shops-grid .shop-card-grid p {
+    font-size: 11px;
+    line-height: 1.3;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Компактный отступ между иконкой и текстом */
+    padding: 4px;
+}
+
+/* Иконки в карточке магазина */
+.shops-grid .shop-card-grid p .svg-icon {
+    width: 19px;
+    height: 19px;
+    margin-right: 0;
+    flex-shrink: 0;
+}
+
+.shops-grid .shop-card-grid p i {
+    font-size: 12px;
+    margin-right: 5px;
+    min-width: 14px;
+    flex-shrink: 0;
+}
 }
