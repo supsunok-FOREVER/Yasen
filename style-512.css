@@ -438,4 +438,32 @@
         padding-top: 10px;
         border-top: 1px solid #eee;
     }
+    /* ===== ИКОНКИ ДЛЯ КАРТОЧЕК ===== */
+    
+    .home-card .svg-icon,
+    .home-grid .home-card .svg-icon {
+        width: 19px;
+        height: 19px;
+        margin-bottom: 10px;
+    }
+    
+    .option-card .svg-icon,
+    .house-grid .option-card .svg-icon {
+        width: 19px;
+        height: 19px;
+        margin-bottom: 10px;
+    }
+    
+    .shop-card-grid h4 .svg-icon {
+        width: 19px;
+        height: 19px;
+        margin-right: 8px;
+    }
+    
+    .shop-card-grid p .svg-icon {
+        width: 19px;
+        height: 19px;
+        margin-right: 6px;
+    }
+    
 }
