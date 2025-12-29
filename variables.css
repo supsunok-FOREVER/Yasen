@@ -1,0 +1,62 @@
+/* variables.css - ТОЛЬКО ИСПОЛЬЗУЕМЫЕ ПЕРЕМЕННЫЕ С МЕДИА-ЗАПРОСАМИ */
+:root {
+    /* ===== ОСНОВНЫЕ ПЕРЕМЕННЫЕ (ДЕСКТОП) ===== */
+    
+    /* ЦВЕТА */
+    --color-brand-red: #e01b32;
+    --color-brand-red-dark: #9b1f27;
+    --color-brand-red-mobile-info: #8a1a22;
+    --color-brand-red-deep: #6b1418;
+    --color-white: #ffffff;
+    --color-accent-beige: #e8d0b3;
+    
+    /* ДЛЯ УПРОЩЕННОЙ СИСТЕМЫ */
+    --font-size-large: 18px;
+    --font-size-small: 14px;
+    
+    /* Переменные для логотипа */
+    --logo-text-size: 24px;
+    --logo-subtitle-size: 12px;
+    
+    --line-height-tight: 1.1;
+    --line-height-normal: 1.4;
+    
+    --font-weight-light: 300;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* ДЛЯ УПРОЩЕННОЙ СИСТЕМЫ */
+    --spacing-large: 24px;
+    --spacing-medium: 16px;
+    --spacing-small: 8px;
+    
+    /* РАДИУСЫ */
+    --radius-medium: 16px;
+    --radius-large: 24px;
+    --radius-small: 8px;
+    --radius-pill: 9999px;
+    --radius-circle: 50%;
+    
+    /* ИКОНКИ */
+    --icon-size-large: 35px;
+    --icon-size-small: 18px;
+    
+    /* ВЫСОТЫ/ШИРИНЫ */
+    --element-height: 150px;
+    --info-panel-width: 400px;
+    
+    /* ТЕНИ */
+    --shadow-3d: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15);
+    --shadow-3d-hover: 0 6px 12px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.2);
+    --shadow-3d-active: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+    
+    /* АНИМАЦИИ */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+
+
+
+}

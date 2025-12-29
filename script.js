@@ -14,6 +14,44 @@ const appState = {
     selections: {}
 };
 
+// ========== ФУНКЦИИ ДЛЯ РАБОТЫ С LOCALSTORAGE ==========
+
+function saveSelectionsToStorage() {
+    try {
+        localStorage.setItem('sofaSelections', JSON.stringify(appState.selections));
+        localStorage.setItem('sofaCurrentStep', appState.currentStep);
+        console.log('Данные сохранены в localStorage');
+    } catch (error) {
+        console.error('Ошибка сохранения в localStorage:', error);
+    }
+}
+
+function loadSelectionsFromStorage() {
+    try {
+        const savedSelections = localStorage.getItem('sofaSelections');
+        const savedStep = localStorage.getItem('sofaCurrentStep');
+        
+        if (savedSelections) {
+            appState.selections = JSON.parse(savedSelections);
+            console.log('Данные загружены из localStorage:', appState.selections);
+        }
+        
+        if (savedStep && appData.stepsOrder.includes(savedStep)) {
+            appState.currentStep = savedStep;
+            console.log('Текущий шаг загружен из localStorage:', appState.currentStep);
+        }
+    } catch (error) {
+        console.error('Ошибка загрузки из localStorage:', error);
+        // При ошибке очищаем хранилище
+        clearStorage();
+    }
+}
+
+function clearStorage() {
+    localStorage.removeItem('sofaSelections');
+    localStorage.removeItem('sofaCurrentStep');
+}
+
 // ========== ФУНКЦИЯ ЗАГРУЗКИ ДАННЫХ ==========
 
 function loadAppData() {
@@ -121,6 +159,9 @@ function handleFinalCall() {
 function initApp() {
     console.log('Инициализация приложения...');
     
+    // ЗАГРУЖАЕМ СОХРАНЕННЫЕ ДАННЫЕ ИЗ LOCALSTORAGE
+    loadSelectionsFromStorage();
+    
     // ========== ИНИЦИАЛИЗАЦИЯ DOM ЭЛЕМЕНТОВ ==========
     const menuSteps = document.querySelectorAll('.menu-step');
     const homeContent = document.getElementById('homeContent');
@@ -182,6 +223,9 @@ function initApp() {
         if (window.innerWidth <= 1200) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        
+        // Сохраняем текущий шаг в localStorage
+        saveSelectionsToStorage();
     }
 
     function updateMainContent(stepId) {
@@ -367,6 +411,9 @@ function initApp() {
 
     function selectOption(stepId, optionData) {
         appState.selections[stepId] = optionData;
+        
+        // СОХРАНЯЕМ В LOCALSTORAGE ПРИ КАЖДОМ ВЫБОРЕ
+        saveSelectionsToStorage();
 
         // Обновляем выделение карточек
         document.querySelectorAll(`[data-step="${stepId}"]`).forEach(card => {
@@ -451,7 +498,7 @@ function initApp() {
                 
                 // Если все выбрано - меняем текст кнопки на "Позвонить"
                 if (allPreviousSelected) {
-                    nextButtonText = getUIText('callButton') || 'Позвонить';
+                     //nextButtonText = getUIText('callButton') || 'Позвонить';
                     nextButtonIcon = getIcon('phone') || 'phone.svg';
                 } else {
                     nextButtonText = getUIText('toTestDriveButton');
@@ -586,6 +633,8 @@ function initApp() {
         event.preventDefault();
         if (confirm(getUIText('resetConfirmation'))) {
             appState.selections = {};
+            // ОЧИЩАЕМ LOCALSTORAGE ПРИ СБРОСЕ
+            clearStorage();
             goToStep('home');
         }
     });
@@ -658,7 +707,7 @@ function initApp() {
 
     // ========== ЗАПУСК ПРИЛОЖЕНИЯ ==========
     console.log('Запуск приложения...');
-    goToStep('home');
+    goToStep(appState.currentStep);
 }
 
 // ========== ЗАГРУЗКА ДАННЫХ И ЗАПУСК ПРИЛОЖЕНИЯ ==========
@@ -669,10 +718,23 @@ document.addEventListener('DOMContentLoaded', function() {
     loadAppData()
         .then(() => {
             console.log('Данные загружены, инициализирую приложение...');
+            // ТЕПЕРЬ initApp() вызовет goToStep с сохраненным шагом
             initApp();
         })
         .catch(error => {
             console.error('Ошибка загрузки данных:', error);
             alert('Не удалось загрузить данные приложения. Пожалуйста, обновите страницу или запустите через локальный сервер.');
         });
+});
+
+// ========== ДОБАВЛЯЕМ ОБРАБОТЧИК ДЛЯ ОБНОВЛЕНИЯ ПРИ ЗАКРЫТИИ СТРАНИЦЫ ==========
+
+// Сохраняем данные при закрытии/обновлении страницы
+window.addEventListener('beforeunload', function() {
+    saveSelectionsToStorage();
+});
+
+// Также можно сохранять при каждом изменении (опционально)
+window.addEventListener('unload', function() {
+    saveSelectionsToStorage();
 });

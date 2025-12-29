@@ -1,1257 +1,691 @@
-/* ===== ОБЩИЕ СТИЛИ ===== */
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+/* style.css - Упрощенная система переменных с 2 градациями */
+* {
+    box-sizing: border-box;
+    margin: 1;
+    padding: 1;
+}
 
-    body {
-        font-family: 'Inter', 'Open Sans', sans-serif;
-        background: var(--brand-red-deep);
-        color: #ffffff;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
-    /* В style.css обновляем */
-    .app-container {
-        display: grid;
-        grid-template-columns: 250px 1fr 400px;
-        grid-template-rows: 1fr auto; /* Единый подход для всех */
-        gap: 0;
-        position: relative;
-        min-height: 100vh; /* Важно */
-    }
-
-    /* НИЖНЯЯ ПАНЕЛЬ - единые настройки */
-        .selection-card {
-            grid-column: 1 / span 3;
-            grid-row: 2;
-            background: var(--brand-red-deep);
-            padding: 20px 30px; /* ← Уменьшим padding */
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex;
-            align-items: flex-start; /* ← Выравнивание по верху */
-            gap: 25px;
-            min-height: auto; /* ← Убираем фиксированную высоту */
-            height: auto;      /* ← Автоматическая высота */
-            color: #ffffff;
-            box-shadow: 
-                0 12px 0 rgba(122, 15, 22, 1),
-                10px 0 0 rgba(122, 15, 22, 0.95),
-                14px 22px 42px rgba(0,0,0,0.45);
-            flex-wrap: wrap; /* ← Перенос при необходимости */
-        }
-
-        .tags-container {
-            flex: 1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            min-height: auto; /* ← Убираем фиксированную высоту */
-            align-items: flex-start; /* ← Выравнивание по верху */
-            padding: 5px 0; /* ← Небольшой внутренний отступ */
-        }
-
-    /* =======================================================================
-    🔴 BRAND RESET — ПРОСТО, ОВАЛЬНО, В ЦВЕТАХ ЛОГОТИПА
-    -----------------------------------------------------------------------
-    Цель:
-    - вернуться к ДНК эмблемы
-    - овальные формы
-    - чистые цвета
-    - минимум эффектов
-    ======================================================================= */
-
-    /* -----------------------------------------------------------------------
-    1. ЖЁСТКАЯ ФИРМЕННАЯ ПАЛИТРА
-    ------------------------------------------------------------------------ */
-
+/* ===== ОСНОВНЫЕ ПЕРЕМЕННЫЕ ===== */
 :root {
-    --brand-red: #e01b32;              /* карточки, кнопки */
-    --brand-red-dark: #9b1f27;         /* панели, desktop info */
-    --brand-red-mobile-info: #8a1a22;  /* mobile info-panel (НОВОЕ) */
-    --brand-red-deep: #6b1418;         /* фон, корпус */
-    --brand-white: #ffffff;
+    /* 1. ТИПОГРАФИЯ - 2 градации */
+    --font-size-large: 18px;    /* Заголовки, важный текст */
+    --font-size-small: 14px;    /* Описания, второстепенный текст */
+    
+    /* 2. ИКОНКИ - 2 градации */
+    --icon-size-large: 48px;    /* Большие иконки (карточки) */
+    --icon-size-small: 20px;    /* Мелкие иконки (меню, теги) */
+    
+    /* 3. ОТСТУПЫ - 3 градации */
+    --spacing-large: 24px;      /* Крупные отступы */
+    --spacing-medium: 16px;     /* Средние отступы */
+    --spacing-small: 8px;       /* Мелкие отступы */
+    
+    /* 4. ВЫСОТЫ/ШИРИНЫ */
+    --element-height: 150px;    /* Высота карточек */
+    --sidebar-width: 280px;     /* Ширина боковой панели */
+    --info-panel-width: 320px;  /* Ширина правой панели */
+
+     --logo-text-size: 23px;
+    --logo-subtitle-size: 12px;
+    
+    /* 5. ЦВЕТА */
+    --color-brand-red-deep: #8B0000;
+    --color-brand-red-dark: #A52A2A;
+    --color-brand-red: #DC143C;
+    --color-brand-red-mobile-info: rgba(139, 0, 0, 0.95);
+    --color-accent-beige: #F5F5DC;
+    --color-white: #FFFFFF;
+    
+    /* 6. РАДИУСЫ */
+    --radius-large: 24px;
+    --radius-medium: 16px;
+    --radius-small: 8px;
+    --radius-pill: 9999px;
+    --radius-circle: 50%;
+    
+    /* 7. ТЕНИ */
+    --shadow-3d: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15);
+    --shadow-3d-hover: 0 6px 12px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.2);
+    --shadow-3d-active: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+    
+    /* 8. АНИМАЦИИ */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+    
+    /* 9. ШРИФТЫ */
+    --font-weight-extrabold: 800;
+    --font-weight-bold: 700;
+    --font-weight-semibold: 600;
+    --font-weight-medium: 500;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    
+    /* 10. МЕЖСТРОЧНЫЕ ИНТЕРВАЛЫ */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+}
+
+/* ===== АДАПТИВНЫЕ ИЗМЕНЕНИЯ ПЕРЕМЕННЫХ ===== */
+
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
+body {
+    font-family: 'Inter', 'Open Sans', sans-serif;
+    background: var(--color-brand-red-deep);
+    color: var(--color-white);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: auto 1fr var(--info-panel-width);
+    grid-template-rows: 1fr auto;
+    gap: 0;
+    position: relative;
+    height: 100vh; /* Добавляем 100vh */
+    
 }
 
 
 
-    
-
-    /* -----------------------------------------------------------------------
-    1. КАРТОЧКИ — ПРОСТЫЕ МОДУЛИ
-    ------------------------------------------------------------------------ */
-
-    .home-card,
-    .option-card,
-    .shop-card-grid,
-    .step-explanation,
-    .dynamic-content {
-        background: var(--brand-red-dark);
-        border-radius: 28px;
-        border: 1px solid rgba(255,255,255,0.15);
-        color: #ffffff;
-    }
-
-    /* =======================================================================
-    🔴 FULL 3D DEPTH — ТЕНЬ ВНИЗ + ВПРАВО
-    -----------------------------------------------------------------------
-    Делает элементы объёмными в пространстве, а не "подвешенными"
-    ======================================================================= */
-
-    /* -----------------------------------------------------------------------
-    1. БАЗОВЫЙ ПРОСТРАНСТВЕННЫЙ ОБЪЁМ (ВСЕ КЛЮЧЕВЫЕ БЛОКИ)
-    ------------------------------------------------------------------------ */
-    .maze-area{ padding: 35px; align-items: center;}
-    .home-card,
-    .option-card,
-    .shop-card-grid,
-    .step-explanation,
-    .dynamic-content {
-        box-shadow:
-            /* нижняя тень (вес) */
-            0 10px 0 rgba(122, 15, 22, 0.95),
-
-            /* правая тень (пространство) */
-            8px 0 0 rgba(122, 15, 22, 0.85),
-
-            /* общая рассеянная */
-            10px 14px 30px rgba(0,0,0,0.35);
-
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-            padding-bottom: 1%;
-    }
-
-    /* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
-    .sidebar-logo {
-        grid-column: 1;
-        grid-row: 1;
-        background: var(--brand-red-deep) ;
-        background-image: none ;
-        color: #ffffff;
-        padding: 5px 20px;
-        display: flex;
-        flex-direction: column;
-        box-shadow: none;
-        z-index: 120;
-        align-items: flex-start;
-    }
-
-    .logo-container {
-        text-align: center;
-        margin-bottom: 40px;
-        padding-bottom: 25px;
-        position: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .logo-text {
-        font-family: 'Open Sans', sans-serif;
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: 3px;
-        color: #ffffff;
-        margin-bottom: 5px;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    .logo-subtitle {
-        font-size: 18px;
-        color: rgba(255,255,255,0.8);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    /* =======================================================================
-    🔴 УПРОЩЕНИЕ 3D — БЕЗ ПРАВОЙ ТЕНИ
-    -----------------------------------------------------------------------
-    Применяется ТОЛЬКО к кнопкам и progress-track.
-    Карточки НЕ ТРОГАЕМ.
-    ======================================================================= */
-
-    /* -----------------------------------------------------------------------
-    2. PROGRESS TRACK — ПАНЕЛЬ, НЕ КНОПКА
-    ------------------------------------------------------------------------ */
-
-    .progress-track {
-        flex: 1;
-        border-radius: 24px;
-        background: var(--brand-red-dark);
-        box-shadow:
-            0 8px 0 rgba(122, 15, 22, 1),
-            0 14px 26px rgba(0,0,0,0.35);
-    }
-
-    .steps-container {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    /* =======================================================================
-    🔴 MENU STEP — ПОЛНОЦЕННЫЙ 3D (НИЗ + ПРАВО)
-    -----------------------------------------------------------------------
-    menu-step и menu-step-icon становятся объёмными,
-    как физические кнопки навигации
-    ======================================================================= */
-
-    /* -----------------------------------------------------------------------
-    1. ПУНКТ МЕНЮ — ОБЪЁМНЫЙ МОДУЛЬ
-    ------------------------------------------------------------------------ */
-
-    .menu-step {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 14px 20px;
-        border-radius: 999px; /* ОВАЛ */
-        cursor: pointer;
-        background: var(--brand-red-dark);
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.2);
-        position: relative;
-
-        box-shadow:
-            /* низ — вес */
-            0 8px 0 rgba(122, 15, 22, 0.95),
-
-            /* право — пространство */
-            6px 0 0 rgba(122, 15, 22, 0.85),
-
-            /* общая тень */
-            8px 12px 24px rgba(0,0,0,0.35);
-
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease;
-    }
-
-    /* hover — лёгкий подъём */
-    .menu-step:hover {
-        background: var(--brand-red-dark);
-        transform: translate(-1px, -2px);
-
-        box-shadow:
-            0 10px 0 rgba(122, 15, 22, 1),
-            8px 0 0 rgba(122, 15, 22, 0.95),
-            10px 16px 32px rgba(0,0,0,0.4);
-    }
-
-    .menu-step.active {
-        background: var(--brand-red);
-        border-color: transparent;
-    }
-
-    /* active — продавливание */
-    .menu-step:active {
-        transform: translate(2px, 2px);
-
-        box-shadow:
-            0 4px 0 rgba(122, 15, 22, 1),
-            3px 0 0 rgba(122, 15, 22, 1),
-            6px 10px 18px rgba(0,0,0,0.35);
-    }
-
-    /* -----------------------------------------------------------------------
-    2. ИКОНКА — КАК ОТДЕЛЬНАЯ КНОПКА ВНУТРИ
-    ------------------------------------------------------------------------ */
-
-    .menu-step-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        color: #e8d0b3;
-        position: relative;
-
-        box-shadow:
-            0 4px 0 rgba(122, 15, 22, 0.95),
-            4px 0 0 rgba(122, 15, 22, 0.85),
-            4px 6px 12px rgba(0,0,0,0.35);
-
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease;
-    }
-
-    .menu-step.active .menu-step-icon {
-        background: #ffffff;
-        color: var(--brand-red);
-    }
-
-    /* hover — иконка "дышит" вместе с пунктом */
-    .menu-step:hover .menu-step-icon {
-        transform: translate(-1px, -1px);
-
-        box-shadow:
-            0 6px 0 rgba(122, 15, 22, 1),
-            6px 0 0 rgba(122, 15, 22, 0.95),
-            6px 10px 18px rgba(0,0,0,0.4);
-    }
-
-    /* active — утопление */
-    .menu-step:active .menu-step-icon {
-        transform: translate(1px, 1px);
-
-        box-shadow:
-            0 2px 0 rgba(122, 15, 22, 1),
-            2px 0 0 rgba(122, 15, 22, 1),
-            4px 6px 10px rgba(0,0,0,0.35);
-    }
-
-    .menu-step-text {
-        flex: 1;
-        font-size: 14px;
-        font-weight: 500;
-        color: #e8d0b3;
-    }
-
-
-    /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
-    .home-content.active {
-        display: block ;
-        align-items: center;
-    }
-
-    /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
-    .home-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 150px 150px 150px; /* Все 3 строки по 150px */
-        gap: 20px;
-        max-width: 800px;
-        margin: 60px auto 40px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .home-card {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-        height: auto;
-        min-height: auto;
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* -----------------------------------------------------------------------
-    2. HOVER — УСИЛЕНИЕ ОБЪЁМА
-    ------------------------------------------------------------------------ */
-
-    .home-card:hover,
-    .option-card:hover,
-    .shop-card-grid:hover {
-        transform: translateY(-4px);
-
-        box-shadow:
-            0 14px 0 rgba(122, 15, 22, 1),
-            10px 0 0 rgba(122, 15, 22, 0.95),
-            14px 20px 40px rgba(0,0,0,0.4);
-    }
-
-    .home-card.selected {
-        border: 2px solid #ffffff;
-    }
-
-    .home-card i {
-        font-size: 48px;
-        margin-bottom: 15px;
-        color: #ffffff;
-    }
- 
-
-    .home-title {
-        font-size: 32px;
-        color: #e8d0b3;
-        margin-bottom: 10px;
-        font-weight: 700;
-        line-height: 1.2;
-        align-items: center;
-    }
-
-    /* -----------------------------------------------------------------------
-    4. ТЕКСТ — ЧИСТЫЙ, КОНТРАСТНЫЙ
-    ------------------------------------------------------------------------ */
-
-    .home-card-title {
-        font-weight: 700;
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #e8d0b3;
-        text-align: center;
-    }
-
-    .home-card-desc {
-        font-size: 14px;
-        color: rgba(255,255,255,0.8);
-        line-height: 1.5;
-        text-align: center;
-    }
-
-    /* Убираем все псевдо-подложки под текст */
-    .home-card-title::before,
-    .home-card-desc::before,
-    .option-title::before,
-    .option-desc::before,
-    .shop-card-header h4::before {
-        display: none ;
-    }
-
-    /* ===== СЕТКА ОПЦИЙ ===== */
-    .house-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        gap: 20px;
-        max-width: 800px;
-        margin: 0 auto;
-        width: 100%;
-        box-sizing: border-box;
-        height: auto;
-    }
-
-    .house-grid.active {
-        display: grid ;
-    }
-
-    .option-card {
-        padding: 25px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-        min-height: 200px;
-        height: auto;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .option-card.selected {
-        border: 2px solid #ffffff;
-    }
-
-    .option-card i {
-        font-size: 48px;
-        margin-bottom: 15px;
-        color: #ffffff;
-    }
-
-    .option-title {
-        font-weight: 700;
-        font-size: 18px;
-        margin-bottom: 10px;
-        color:#e8d0b3;
-    }
-
-    .option-desc {
-        font-size: 14px;
-        color: rgba(255,255,255,0.8);
-        line-height: 1.5;
-        text-align: center;
-    }
-
-    /* ===== ПРАВАЯ ПАНЕЛЬ ===== */
-    .info-panel {
-        grid-column: 3;
-        grid-row: 1;
-        background: var(--brand-red-deep) ;
-        background-image: none ;
-        color: #ffffff;
-        padding: 30px;
-        border-left: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        flex-direction: column;
-        box-shadow: none;
-        z-index: 100;
-    }
-
-    .panel-content {
-        flex: 1;
-    }
-
-    .panel-header {
-        margin-bottom: 25px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    #panelTitle {
-        font-size: 20px;
-        color: #ffffff;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .panel-subtitle {
-        color: rgba(255,255,255,0.8);
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    /* -----------------------------------------------------------------------
-    5. INFO PANEL — ВЛОЖЕННЫЕ БЛОКИ ЧИТАЮТСЯ ОТДЕЛЬНО
-    ------------------------------------------------------------------------ */
-
-    .info-panel .step-explanation,
-    .info-panel .dynamic-content {
-        background: var(--brand-red-dark);
-        border-radius: 24px;
-    }
-
-    .step-explanation {
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-
-    .step-explanation p {
-        color: #ffffff;
-        line-height: 1.6;
-    }
-
-    .dynamic-content {
-        padding: 25px;
-    }
-
-    .parameter-details h4 {
-        color: #ffffff;
-        margin-bottom: 15px;
-        font-size: 18px;
-    }
-
-    .parameter-details p {
-        color: rgba(255,255,255,0.8);
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-
-    /* -----------------------------------------------------------------------
-    3. INFO PANEL — КНОПКИ НЕ СЛИВАЮТСЯ
-    ------------------------------------------------------------------------ */
-
-    .panel-navigation {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 30px 0;
-        background: rgba(0,0,0,0.15);
-        border-radius: 999px;
-        padding: 12px 16px;
-        gap: 14px;
-        box-shadow:
-            /* нижняя тень (вес) */
-            0 10px 0 rgba(122, 15, 22, 0.95),
-
-            /* правая тень (пространство) */
-            8px 0 0 rgba(122, 15, 22, 0.85),
-
-            /* общая рассеянная */
-            10px 14px 30px rgba(0,0,0,0.35);
-        max-width: 100%;
-        flex-wrap: nowrap;
-        overflow: hidden;
-    }
-
-    /* -----------------------------------------------------------------------
-    4. СЧЁТЧИК ШАГОВ — НЕ СЛИВАЕТСЯ С КНОПКАМИ
-    ------------------------------------------------------------------------ */
-
-    .step-counter {
-        padding: 8px 18px;
-        border-radius: 999px;
-        background: rgba(0,0,0,0.25);
-        color: #ffffff;
-        font-weight: 600;
-    }
-
-    /* кнопки в панели — как отдельные элементы */
-    .panel-navigation .btn-nav {
-        background: var(--brand-red);
-        border-radius: 999px;
-        padding: 12px 22px;
-    }
-
-/* =======================================================================
-   🔴 BRAND DETAIL — БЕЛАЯ ОКАНТОВКА ДЛЯ КНОПОК
-   -----------------------------------------------------------------------
-   Повторяем приём карточек:
-   - тонкая белая рамка
-   - подчёркивает форму
-   - усиливает 3D
-   ======================================================================= */
-
-/* -----------------------------------------------------------------------
-   1. ВСЕ КНОПКИ — БЕЛАЯ ОКАНТОВКА
------------------------------------------------------------------------- */
-
-    .btn-nav {
-        padding: 12px 20px;
-        background: var(--brand-red-dark);
-        color: #ffffff;
-        border: 1.5px solid rgba(255, 255, 255, 0.55);
-        border-radius: 999px; /* общий язык формы */
-        cursor: pointer;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        position: relative;
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease,
-            border-color 0.15s ease;
-
-        /* лёгкий внутренний свет — чтобы рамка не была "наклейкой" */
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.35),
-            0 6px 0 rgba(122, 15, 22, 1),
-            0 12px 22px rgba(0,0,0,0.35);
-    }
-
-    /* -----------------------------------------------------------------------
-    2. HOVER — РАМКА ЧУТЬ ЯРЧЕ
-    ------------------------------------------------------------------------ */
-
-    .btn-nav:hover:not(:disabled) {
-        background: var(--brand-red-dark);
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.8);
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.45),
-            0 8px 0 rgba(122, 15, 22, 1),
-            0 16px 28px rgba(0,0,0,0.4);
-    }
-
-    /* -----------------------------------------------------------------------
-    3. ACTIVE — РАМКА ОСТАЁТСЯ, КНОПКА "ВЖИМАЕТСЯ"
-    ------------------------------------------------------------------------ */
-
-    .btn-nav:active {
-        transform: translateY(2px);
-        border-color: rgba(255, 255, 255, 0.6);
-
-        box-shadow:
-            inset 0 2px 3px rgba(0,0,0,0.35),
-            0 3px 0 rgba(122, 15, 22, 1),
-            0 8px 14px rgba(0,0,0,0.35);
-    }
-
-    /* disabled — "утопленная" */
-    .panel-navigation .btn-nav:disabled {
-        box-shadow:
-            inset 0 2px 4px rgba(0,0,0,0.4);
-        transform: none;
-        opacity: 0.5;
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .btn-nav:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .btn-reset {
-        width: 100%;
-        padding: 15px;
-        background: var(--brand-red-dark);
-        color: #ffffff;
-        border: 1.5px solid rgba(255, 255, 255, 0.55);
-        border-radius: 999px; /* общий язык формы */
-        font-weight: 700;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        position: relative;
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease,
-            border-color 0.15s ease;
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.35),
-            0 6px 0 rgba(122, 15, 22, 1),
-            0 12px 22px rgba(0,0,0,0.35);
-    }
-
-    /* hover */
-    .btn-reset:hover {
-        background: var(--brand-red-dark);
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.8);
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.45),
-            0 8px 0 rgba(122, 15, 22, 1),
-            0 16px 28px rgba(0,0,0,0.4);
-    }
-
-    /* active */
-    .btn-reset:active {
-        transform: translateY(2px);
-        border-color: rgba(255, 255, 255, 0.6);
-
-        box-shadow:
-            inset 0 2px 3px rgba(0,0,0,0.35),
-            0 3px 0 rgba(122, 15, 22, 1),
-            0 8px 14px rgba(0,0,0,0.35);
-    }
-
-    /* ===== НИЖНЯЯ ПАНЕЛЬ ===== */
-    /* -----------------------------------------------------------------------
-    6. SELECTION CARD — ОЩУЩЕНИЕ ТЯЖЁЛОГО МОДУЛЯ
-    ------------------------------------------------------------------------ */
-
-    .selection-card {
-        grid-column: 1 / span 3;
-        grid-row: 2;
-        background: var(--brand-red-deep) ;
-        padding: 25px 30px;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        display: flex;
-        align-items: center;
-        gap: 25px;
-        box-shadow:
-            0 12px 0 rgba(122, 15, 22, 1),
-            10px 0 0 rgba(122, 15, 22, 0.95),
-            14px 22px 42px rgba(0,0,0,0.45) ;
-    }
-
-    .selection-card-header {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        flex-shrink: 0;
-    }
-
-    .selection-card-header h3 {
-        color: #ffffff;
-        font-size: 18px;
-    }
-
-    .selection-card-header i {
-        color: #ffffff;
-        font-size: 20px;
-    }
-
-    .tags-container {
-        flex: 1;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        min-height: 50px;
-        align-items: center;
-    }
-
-    .empty-state {
-        color: rgba(255,255,255,0.8);
-        font-style: italic;
-    }
-
-    .selection-tag {
-        background: var(--brand-red-dark);
-        padding: 10px 20px;
-        border-radius: 999px; /* общий язык формы */
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        position: relative;
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease,
-            border-color 0.15s ease;
-        border: 1.5px solid rgba(255, 255, 255, 0.55);
-        color: #ffffff;
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.35),
-            0 6px 0 rgba(122, 15, 22, 1),
-            0 12px 22px rgba(0,0,0,0.35);
-    }
-
-    /* hover */
-    .selection-tag:hover {
-        background: var(--brand-red-dark);
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.8);
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.45),
-            0 8px 0 rgba(122, 15, 22, 1),
-            0 16px 28px rgba(0,0,0,0.4);
-    }
-
-/* active */
-    .selection-tag:active {
-        transform: translateY(2px);
-        border-color: rgba(255, 255, 255, 0.6);
-
-        box-shadow:
-            inset 0 2px 3px rgba(0,0,0,0.35),
-            0 3px 0 rgba(122, 15, 22, 1),
-            0 8px 14px rgba(0,0,0,0.35);
-    }
-
-    .btn-final {
-        flex-shrink: 0;
-        padding: 15px 30px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-/* ===== КНОПКИ ===== */
-    .btn-primary {
-        background: var(--brand-red);
-        background-image: none;
-        color: #ffffff;
-        border: 1.5px solid rgba(255, 255, 255, 0.55);
-        border-radius: 999px; /* общий язык формы */
-        padding: 15px 30px;
-        font-size: 16px;
-        font-weight: 700;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        position: relative;
-        transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease,
-            border-color 0.15s ease;
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.35),
-            0 6px 0 rgba(122, 15, 22, 1),
-            0 12px 22px rgba(0,0,0,0.35);
-    }
-
-    /* hover */
-    .btn-primary:hover:not(:disabled) {
-        background: var(--brand-red);
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.8);
-
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.45),
-            0 8px 0 rgba(122, 15, 22, 1),
-            0 16px 28px rgba(0,0,0,0.4);
-    }
-
-/* active */
-    .btn-primary:active {
-        transform: translateY(2px);
-        border-color: rgba(255, 255, 255, 0.6);
-
-        box-shadow:
-            inset 0 2px 3px rgba(0,0,0,0.35),
-            0 3px 0 rgba(122, 15, 22, 1),
-            0 8px 14px rgba(0,0,0,0.35);
-    }
-
-    .btn-primary:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* ===== МОБИЛЬНАЯ ПАНЕЛЬ ===== */
-    .mobile-info-panel {
-        display: none; /* Скрыта по умолчанию на десктопе */
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: var(--brand-red-mobile-info);
-        color: #ffffff;
-        padding: 20px;
-        box-shadow: none;
-        z-index: 1000;
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-
-    .mobile-info-content {
-        position: relative;
-    }
-
-    .mobile-info-content h3 {
-        color: #ffffff;
-        margin-bottom: 15px;
-        padding-right: 40px;
-    }
-
-    .btn-close-mobile-info {
-        position: absolute;
-        top: 0;
-        right: 0;
-        background: none;
-        border: none;
-        font-size: 20px;
-        color: rgba(255,255,255,0.8);
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    
-    }
-
-    .btn-close-mobile-info:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
-    }
-
-
-
-    /* ===== СКРЫТЫЕ ЭЛЕМЕНТЫ ===== */
-    .hidden {
-        display: none ;
-    }
-
-    /* Активные элементы */
-    .home-content.active {
-        display: block ;
-    }
-
-    .house-grid.active {
-        display: grid ;
-    }
-
-    .test-drive-content.active {
-        
-        display: block ;
-    }
-
-    .test-drive-container {
-        margin: 10px;
-        padding: 10px;
-        display: flex;
-        }
-
-
-/* ===== СЕТКА МАГАЗИНОВ ===== */
-
+/* ===== ЦЕНТРАЛЬНАЯ ОБЛАСТЬ КОНТЕНТА ===== */
+.maze-area {
+    padding: var(--spacing-large);
+    align-items: center;
+}
+
+/* ===== СКРЫТЫЕ/АКТИВНЫЕ ЭЛЕМЕНТЫ ===== */
+.hidden {
+    display: none !important;
+}
+
+.home-content.active {
+    display: block;
+    align-items: center;
+}
+
+.house-grid.active {
+    display: grid;
+}
+
+.test-drive-content.active {
+    display: block;
+}
+
+.test-drive-container {
+    margin: var(--spacing-small);
+    padding: var(--spacing-small);
+    display: flex;
+}
+
+/* Сетка магазинов - скрыта по умолчанию */
 .shops-grid {
-    display: none; /* ← скрыт по умолчанию */
+    display: none;
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: minmax(200px, auto);
-    gap: 20px;
-    max-width: 800px; /* ← как у .home-grid и .house-grid */
-    margin: 0 auto 30px; /* ← центрирование */
+    grid-auto-rows: minmax(var(--element-height), auto);
+    gap: var(--spacing-large);
+    
+    margin: 0 auto var(--spacing-large);
     width: 100%;
-    box-sizing: border-box;
 }
 
 .shops-grid.active {
-    display: grid ; /* ← показываем когда активно */
+    display: grid;
 }
 
-.shop-card-grid {
-    background: var(--brand-red-dark);
-    border-radius: 28px;
-    padding: 25px;
-    min-height: 220px;
+/* ===== БОКОВАЯ ПАНЕЛЬ ===== */
+.sidebar-logo {
+    grid-column: 1;
+    grid-row: 1;
+    background: var(--color-brand-red-deep);
+    color: var(--color-white);
+    padding: var(--spacing-large);
     display: flex;
     flex-direction: column;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.15);
-    
-    /* 3D эффект */
-    box-shadow:
-        0 10px 0 rgba(122, 15, 22, 0.95),
-        8px 0 0 rgba(122, 15, 22, 0.85),
-        10px 14px 30px rgba(0,0,0,0.35);
-    
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+       top: 0;
+    z-index: 100;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    min-width: unset;
+    max-width: none;
+    padding: var(--spacing-lg);
 }
 
-/* ЗАГОЛОВОК МАГАЗИНА - ЛЕВЫЙ КРАЙ, БЕЗ РАМКИ */
-.shops-grid .shop-card-grid h4,
-.shops-grid .shop-card-grid .shop-card-header h4 {
-    color: #e8d0b3;
-    font-size: 18px;
-    font-weight: 200;                      /* Тонкий шрифт */
-    margin-bottom: 20px;
-    padding-bottom: 0;                     /* Убираем отступ и рамку */
-    border-bottom: none;                   /* Убираем нижнюю границу */
+
+
+.logo-container {
+    text-align: center;
+    width: fit-content;
+    margin-bottom: var(--spacing-large);
+    padding-bottom: var(--spacing-large);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* В style.css обновить классы логотипа: */
+.logo-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: var(--logo-text-size, 24px); /* Добавить переменную с фолбэком */
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: 0.08em;
+    color: var(--color-white);
+    margin-bottom: var(--spacing-small);
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.logo-subtitle {
+    font-size: var(--logo-subtitle-size, 12px); /* Добавить переменную с фолбэком */
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+   }
+
+/* ===== ПРОГРЕСС-ТРЕК ===== */
+.progress-track {
+    flex: 1;
+    border-radius: var(--radius-medium);
+    background: var(--color-brand-red-dark);
+    box-shadow: var(--shadow-3d);
+    width: fit-content;
+}
+
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+    width: fit-content;
+}
+
+/* ===== МЕНЮ ===== */
+.menu-step {
     display: flex;
     align-items: center;
-    gap: 12px;
-    line-height: 1;                      /* Компактный межстрочный */
-    text-align: left;                      /* ЛЕВЫЙ КРАЙ */
-    justify-content: flex-start;           /* Выравнивание по левому краю */
-    width: 100%;
-    white-space: normal;                   /* Разрешить перенос */
-    word-break: break-word;                /* Перенос длинных слов */
-    max-width: 100%;
-}
-
-.shop-card-grid h4 i {
-    font-size: 18px;
-    color: #ffffff;
-    opacity: 0.9;
-    flex-shrink: 0;
-}
-
-/* Все параграфы внутри карточки */
-.shop-card-grid p {
-    margin-bottom: 14px;
-    line-height: 1;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
+    width: fit-content;
+    gap: var(--spacing-small);
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--radius-pill);
+    background: var(--color-brand-red-dark);
+    color: var(--color-white);
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
     position: relative;
-    min-height: 22px;
+    box-shadow: var(--shadow-3d);
+    transition: all var(--transition-fast);
 }
 
-/* Иконки в параграфах */
-.shop-card-grid p i {
-    font-size: 15px;
-    color: #ffffff;
-    opacity: 0.85;
-    flex-shrink: 0;
-    margin-top: 3px;
-    width: 20px;
+.menu-step:hover {
+    transform: translate(-1px, -2px);
+    box-shadow: var(--shadow-3d-hover);
+    width: fit-content;
+}
+
+.menu-step.active {
+    background: var(--color-brand-red);
+    border-color: transparent;
+    transform: translate(2px, 2px);
+    box-shadow: var(--shadow-3d-active);
+}
+
+.menu-step-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    border-radius: var(--radius-circle);
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-small);
+    color: var(--color-accent-beige);
+    position: relative;
+    box-shadow: var(--shadow-3d);
+    transition: all var(--transition-fast);
+}
+
+.menu-step.active .menu-step-icon {
+    background: var(--color-white);
+    color: var(--color-brand-red);
+}
+
+.menu-step:hover .menu-step-icon {
+    transform: translate(-1px, -1px);
+    box-shadow: var(--shadow-3d-hover);
+}
+
+.menu-step:active .menu-step-icon {
+    transform: translate(1px, 1px);
+    box-shadow: var(--shadow-3d-active);
+}
+
+.menu-step-text {
+    flex: 1;
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-accent-beige);
+}
+
+/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
+.home-title {
+    font-size: var(--font-size-large);
+    color: var(--color-accent-beige);
+    margin-bottom: var(--spacing-medium);
+    font-weight: var(--font-weight-bold);
     text-align: center;
+    line-height: var(--line-height-tight);
 }
 
-/* Адрес — БЕЛЫЙ, ВАЖНЫЙ */
-.shop-card-grid p:nth-child(2) {
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 15px;
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, var(--element-height));
+    gap: var(--spacing-large);
+    
+    margin: var(--spacing-large) auto var(--spacing-large);
+    width: 100%;
 }
 
-/* Метро — СВЕТЛО-БЕЛЫЙ */
-.shop-card-grid p:nth-child(3) {
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 500;
-    font-size: 14px;
-}
-
-/* Часы работы — АКЦЕНТНЫЙ ЦВЕТ */
-.shop-card-grid .shop-hours-grid {
-    color: #e8d0b3 ;
-    font-weight: 700 ;
-    font-size: 15px ;
-    margin-top: 5px;
-    margin-bottom: 15px ;
-}
-
-.shop-card-grid .shop-hours-grid i {
-    color: #e8d0b3 ;
-    opacity: 1 ;
-}
-
-/* Телефон — БЕЛЫЙ, ВЫДЕЛЕННЫЙ */
-.shop-card-grid p:nth-last-child(1) {
-    color: #ffffff;
-    font-weight: 600;
-    font-size: 15px;
-    margin-top: 5px;
-    margin-bottom: 0 ;
-}
-
-/* Для карточек */
-
-.svg-icon {
-    color: #e8d0b3;
-}
-
-/* ===== АДАПТАЦИЯ ИКОНОК ДЛЯ ВСЕХ ЭКРАНОВ ===== */
-
-/* ОБЩИЕ СТИЛИ ДЛЯ ВСЕХ ИКОНОК */
-.svg-icon {
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    vertical-align: middle;
-    display: inline-block;
-    width: auto;
+.home-card {
+    background: var(--color-brand-red-dark);
+    border-radius: var(--radius-large);
+    padding: var(--spacing-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: var(--shadow-3d);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
     height: auto;
-    max-width: 100%;
+    min-height: var(--element-height);
 }
 
-/* ===== БАЗОВЫЕ РАЗМЕРЫ ИКОНОК (ДЛЯ ДЕСКТОПА) ===== */
+.home-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3d-hover);
+}
 
-/* 1. ИКОНКИ В КАРТОЧКАХ - САМЫЕ БОЛЬШИЕ */
-.home-card .svg-icon,
-.option-card .svg-icon {
+.home-card.selected {
+    border: 2px solid var(--color-white);
+}
+
+.home-card .svg-icon {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large);
+    margin-bottom: var(--spacing-small);
     filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
-    width: 48px;
-    height: 48px;
-    margin-bottom: 15px;
 }
 
-/* 2. ИКОНКИ В INFO PANEL (правая панель) */
-.info-panel .svg-icon {
-    width: 16px;
-    height: 16px;
-}
-
-/* Иконки в заголовке info panel */
-#panelTitle .svg-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-}
-
-/* Иконки в навигации info panel */
-.panel-navigation .btn-nav .svg-icon {
-    width: 14px;
-    height: 14px;
-    margin: 0 4px;
-}
-
-/* Иконка сброса в info panel */
-#resetButton .svg-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-}
-
-/* 3. ИКОНКИ В SELECTION CARD (нижняя панель) */
-.selection-card-header .svg-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-}
-
-.selection-tag .svg-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 8px;
-}
-
-.btn-final .svg-icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 8px;
-}
-
-/* 4. ИКОНКИ В HOUSE GRID (сетка опций) */
-.house-grid .option-card .svg-icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 15px;
-}
-
-/* 5. ИКОНКИ В HOME GRID (главная сетка) */
-.home-grid .home-card .svg-icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 15px;
-}
-
-/* 6. ИКОНКИ В SHOPS GRID (сетка магазинов) */
-.shops-grid .shop-card-grid h4 .svg-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.shops-grid .shop-card-grid p .svg-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-    flex-shrink: 0;
-}
-
-/* 7. ИКОНКИ В БОКОВОМ МЕНЮ */
-.menu-step-icon .svg-icon {
-    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
-    width: 24px;
-    height: 24px;
-}
-
-/* 8. ИКОНКИ В КНОПКАХ НАВИГАЦИИ */
-.btn-nav .svg-icon,
-.btn-reset .svg-icon,
-.btn-primary .svg-icon {
-    transition: transform 0.15s ease;
-    width: 16px;
-    height: 16px;
-    margin: 0 4px;
-}
-
-/* 9. ИКОНКИ В МОБИЛЬНОЙ ПАНЕЛИ */
-.mobile-info-panel .svg-icon {
-    width: 16px;
-    height: 16px;
-}
-
-#mobilePanelTitle .svg-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-}
-
-.btn-close-mobile-info .svg-icon {
-    transition: transform 0.3s ease, color 0.3s ease;
-    width: 20px;
-    height: 20px;
-}
-
-/* 10. ИКОНКИ В ДИНАМИЧЕСКОМ КОНТЕНТЕ */
-.step-explanation .svg-icon,
-.dynamic-content .svg-icon,
-.parameter-details .svg-icon {
-    width: 14px;
-    height: 14px;
-    margin: 0 4px;
-}
-
-/* ===== ЭФФЕКТЫ И АНИМАЦИИ ===== */
-
-/* АКТИВНЫЕ ИКОНКИ */
-.option-card.selected .svg-icon,
 .home-card.selected .svg-icon {
     filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
     transform: scale(1.05);
 }
 
-/* ХОВЕР ЭФФЕКТЫ */
-.btn-nav:hover .svg-icon,
-.btn-reset:hover .svg-icon,
-.btn-final:hover .svg-icon,
-.btn-primary:hover .svg-icon {
-    transform: translateY(-1px);
+.home-card-title {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-small);
+    color: var(--color-accent-beige);
+    text-align: center;
 }
 
-.menu-step:hover .menu-step-icon .svg-icon {
-    transform: translateY(-1px);
+.home-card-desc {
+    font-size: var(--font-size-small);
+    color: rgba(255,255,255,0.8);
+    line-height: var(--line-height-normal);
+    text-align: center;
 }
 
-.menu-step.active .menu-step-icon .svg-icon {
-    filter: brightness(1.2) drop-shadow(0 3px 4px rgba(0, 0, 0, 0.3));
+/* ===== СЕТКА ОПЦИЙ ===== */
+.house-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, var(--element-height));
+    gap: var(--spacing-large);
+   
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+.option-card {
+    background: var(--color-brand-red-dark);
+    border-radius: var(--radius-large);
+    padding: var(--spacing-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: var(--shadow-3d);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    min-height: var(--element-height);
+    height: auto;
+}
+
+.option-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3d-hover);
+}
+
+.option-card.selected {
+    border: 2px solid var(--color-white);
+}
+
+.option-card .svg-icon {
+    width: var(--icon-size-large);
+    height: var(--icon-size-large);
+    margin-bottom: var(--spacing-small);
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+}
+
+.option-card.selected .svg-icon {
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+    transform: scale(1.05);
+}
+
+.option-title {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-small);
+    color: var(--color-accent-beige);
+}
+
+.option-desc {
+    font-size: var(--font-size-small);
+    color: rgba(255,255,255,0.8);
+    line-height: var(--line-height-normal);
+    text-align: center;
+}
+
+/* ===== ПРАВАЯ ПАНЕЛЬ ===== */
+.info-panel {
+    grid-column: 3;
+    grid-row: 1;
+    background: var(--color-brand-red-deep);
+    color: var(--color-white);
+    padding: var(--spacing-large);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    width: var(--info-panel-width);
+    z-index: 100;
+}
+
+.panel-content {
+    flex: 1;
+}
+
+.panel-header {
+    margin-bottom: var(--spacing-large);
+    padding-bottom: var(--spacing-medium);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#panelTitle {
+    font-size: var(--font-size-large);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-small);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+}
+
+.panel-subtitle {
+    color: rgba(255,255,255,0.8);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Контейнеры в info-panel */
+.step-explanation {
+    background: var(--color-brand-red-dark);
+    border-radius: var(--radius-medium);
+    padding: var(--spacing-medium);
+    margin-bottom: var(--spacing-large);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: var(--shadow-3d);
+}
+
+.dynamic-content {
+    background: var(--color-brand-red-dark);
+    border-radius: var(--radius-medium);
+    padding: var(--spacing-medium);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: var(--shadow-3d);
+}
+
+.step-explanation p,
+.dynamic-content p {
+    color: var(--color-white);
+    line-height: var(--line-height-normal);
+}
+
+.parameter-details h4 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-small);
+    font-size: var(--font-size-large);
+}
+
+.parameter-details p {
+    color: rgba(255,255,255,0.8);
+    line-height: var(--line-height-normal);
+    margin-bottom: var(--spacing-small);
+}
+
+/* Панель навигации в info-panel */
+.panel-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: var(--spacing-large) 0;
+    background: rgba(0,0,0,0.15);
+    border-radius: var(--radius-pill);
+    padding: var(--spacing-small) var(--spacing-medium);
+    gap: var(--spacing-small);
+    box-shadow: var(--shadow-3d);
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.step-counter {
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--radius-pill);
+    background: rgba(0,0,0,0.25);
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-small);
+}
+
+/* ===== КНОПКИ ===== */
+.btn-nav {
+    padding: var(--spacing-small) var(--spacing-medium);
+    background: var(--color-brand-red-dark);
+    color: var(--color-white);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-3d);
+}
+
+.btn-nav:hover:not(:disabled) {
+    background: var(--color-brand-red-dark);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-3d-hover);
+}
+
+.btn-nav:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-3d-active);
+}
+
+.btn-nav:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+    transform: none;
+}
+
+/* Кнопка сброса */
+.btn-reset {
+    width: 100%;
+    padding: var(--spacing-medium);
+    background: var(--color-brand-red-dark);
+    color: var(--color-white);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-pill);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-small);
+    position: relative;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-3d);
+}
+
+.btn-reset:hover {
+    background: var(--color-brand-red-dark);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-3d-hover);
+}
+
+.btn-reset:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-3d-active);
+}
+
+/* Основная кнопка */
+.btn-primary {
+    background: var(--color-brand-red);
+    color: var(--color-white);
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    border-radius: var(--radius-pill);
+    padding: var(--spacing-medium) var(--spacing-large);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-small);
+    position: relative;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-3d);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--color-brand-red);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-3d-hover);
+}
+
+.btn-primary:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-3d-active);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ===== НИЖНЯЯ ПАНЕЛЬ ===== */
+.selection-card {
+    grid-column: 1 / span 3;
+    grid-row: 2;
+    background: var(--color-brand-red-deep);
+    padding: var(--spacing-large);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-large);
+    box-shadow: var(--shadow-3d);
+    min-height: auto;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.selection-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    flex-shrink: 0;
+}
+
+.selection-card-header h3 {
+    color: var(--color-white);
+    font-size: var(--font-size-large);
+}
+
+.selection-card-header .svg-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    margin-right: var(--spacing-small);
+}
+
+.tags-container {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-small);
+    min-height: auto;
+    align-items: flex-start;
+    padding: var(--spacing-small) 0;
+}
+
+.empty-state {
+    color: rgba(255,255,255,0.8);
+    font-style: italic;
+    font-size: var(--font-size-small);
+}
+
+.selection-tag {
+    background: var(--color-brand-red-dark);
+    padding: var(--spacing-small) var(--spacing-medium);
+    border-radius: var(--radius-pill);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    cursor: pointer;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    color: var(--color-white);
+    font-size: var(--font-size-small);
+    box-shadow: var(--shadow-3d);
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.selection-tag:hover {
+    background: var(--color-brand-red-dark);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: var(--shadow-3d-hover);
 }
 
 .selection-tag:hover .svg-icon {
@@ -1259,12 +693,196 @@
     transform: rotate(5deg);
 }
 
-.btn-close-mobile-info:hover .svg-icon {
-    transform: rotate(90deg);
-    color: #fff;
+.selection-tag:active {
+    transform: translateY(2px);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-3d-active);
 }
 
-/* АНИМАЦИЯ НАГРУЗКИ */
+.selection-tag .svg-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    margin-right: var(--spacing-small);
+}
+
+.btn-final {
+    padding: var(--spacing-medium) var(--spacing-large);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    flex-shrink: 0;
+}
+
+/* ===== СЕТКА МАГАЗИНОВ ===== */
+.shop-card-grid {
+    background: var(--color-brand-red-dark);
+    border-radius: var(--radius-large);
+    padding: var(--spacing-medium);
+    min-height: var(--element-height);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: var(--shadow-3d);
+    transition: all var(--transition-fast);
+}
+
+.shop-card-grid:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3d-hover);
+}
+
+.shop-card-grid h4 {
+    color: var(--color-accent-beige);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-light);
+    margin-bottom: var(--spacing-medium);
+    padding-bottom: 0;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-small);
+    line-height: var(--line-height-tight);
+    text-align: left;
+    justify-content: flex-start;
+    width: 100%;
+    white-space: normal;
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.shop-card-grid h4 .svg-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    color: var(--color-white);
+    opacity: 0.9;
+    flex-shrink: 0;
+}
+
+.shop-card-grid p {
+    margin-bottom: var(--spacing-small);
+    line-height: var(--line-height-tight);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-small);
+    position: relative;
+    min-height: 22px;
+    font-size: var(--font-size-small);
+}
+
+.shop-card-grid p .svg-icon {
+    width: var(--icon-size-small);
+    height: var(--icon-size-small);
+    color: var(--color-white);
+    opacity: 0.85;
+    flex-shrink: 0;
+    margin-top: 2px;
+    text-align: center;
+}
+
+/* Адрес — БЕЛЫЙ, ВАЖНЫЙ */
+.shop-card-grid p:nth-child(2) {
+    color: var(--color-white);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Метро — СВЕТЛО-БЕЛЫЙ */
+.shop-card-grid p:nth-child(3) {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: var(--font-weight-medium);
+}
+
+/* Часы работы — АКЦЕНТНЫЙ ЦВЕТ */
+.shop-card-grid .shop-hours-grid {
+    color: var(--color-accent-beige);
+    font-weight: var(--font-weight-bold);
+    margin-top: var(--spacing-small);
+    margin-bottom: var(--spacing-medium);
+}
+
+.shop-card-grid .shop-hours-grid .svg-icon {
+    color: var(--color-accent-beige);
+    opacity: 1;
+}
+
+/* Телефон — БЕЛЫЙ, ВЫДЕЛЕННЫЙ */
+.shop-card-grid p:nth-last-child(1) {
+    color: var(--color-white);
+    font-weight: var(--font-weight-semibold);
+    margin-top: var(--spacing-small);
+    margin-bottom: 0;
+}
+
+/* ===== МОБИЛЬНАЯ ПАНЕЛЬ ===== */
+.mobile-info-panel {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-brand-red-mobile-info);
+    color: var(--color-white);
+    padding: var(--spacing-medium);
+    z-index: 1000;
+    border-top-left-radius: var(--radius-medium);
+    border-top-right-radius: var(--radius-medium);
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.mobile-info-content {
+    position: relative;
+}
+
+.mobile-info-content h3 {
+    color: var(--color-white);
+    font-size: var(--font-size-large);
+    margin-bottom: var(--spacing-medium);
+    padding-right: 40px;
+}
+
+.btn-close-mobile-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: var(--font-size-large);
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+}
+
+.btn-close-mobile-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+.btn-close-mobile-info:hover .svg-icon {
+    transform: rotate(90deg);
+    color: var(--color-white);
+}
+
+/* ===== СТИЛИ ДЛЯ SVG ИКОНОК ===== */
+.svg-icon {
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    vertical-align: middle;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+/* Анимация загрузки */
 .svg-icon.loading {
     animation: spin 1s linear infinite;
 }
@@ -1274,50 +892,293 @@
     to { transform: rotate(360deg); }
 }
 
-/* ЦВЕТА ИКОНОК */
-.svg-icon.color-primary { color: var(--brand-red); }
-.svg-icon.color-accent { color: #e8d0b3; }
-.svg-icon.color-white { color: #ffffff; }
+/* Цвета иконок */
+.svg-icon.color-primary { color: var(--color-brand-red); }
+.svg-icon.color-accent { color: var(--color-accent-beige); }
+.svg-icon.color-white { color: var(--color-white); }
 .svg-icon.color-muted { color: rgba(255, 255, 255, 0.7); }
 
-/* ===== СПЕЦИАЛЬНЫЕ КЛАССЫ ДЛЯ РАЗНЫХ РАЗМЕРОВ ===== */
-
-/* Маленькие иконки */
+/* Специальные классы для разных размеров */
 .svg-icon-sm {
-    width: 12px !important;
-    height: 12px !important;
+    width: var(--icon-size-small) !important;
+    height: var(--icon-size-small) !important;
 }
 
-/* Средние иконки */
 .svg-icon-md {
-    width: 16px !important;
-    height: 16px !important;
+    width: var(--icon-size-small) !important;
+    height: var(--icon-size-small) !important;
 }
 
-/* Большие иконки */
 .svg-icon-lg {
-    width: 24px !important;
-    height: 24px !important;
+    width: var(--icon-size-large) !important;
+    height: var(--icon-size-large) !important;
 }
 
-/* Огромные иконки (для карточек) */
 .svg-icon-xl {
-    width: 48px !important;
-    height: 48px !important;
+    width: var(--icon-size-large) !important;
+    height: var(--icon-size-large) !important;
 }
 
-/* Иконки одинакового размера для квадратных контейнеров */
+.svg-icon-xxl {
+    width: var(--icon-size-large) !important;
+    height: var(--icon-size-large) !important;
+}
+
+.svg-icon-xxxl {
+    width: var(--icon-size-large) !important;
+    height: var(--icon-size-large) !important;
+}
+
 .svg-icon-square {
     object-fit: contain;
 }
 
-/* ИКОНКИ С ТЕКСТОМ - ВЫРАВНИВАНИЕ */
 .icon-with-text {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--spacing-small);
 }
 
 .icon-with-text .svg-icon {
     flex-shrink: 0;
+}
+
+/* ===== СТРУКТУРНЫЕ МЕДИА-ЗАПРОСЫ ===== */
+
+/* 1245px и меньше - меняем структуру сетки */
+@media (max-width: 1245px) {
+    .app-container {
+        grid-template-columns: auto 1fr var(--info-panel-width);
+    }
+}
+
+/* 1200px и меньше - адаптивные переменные */
+@media (max-width: 1200px) {
+    :root {
+        --icon-size-large: 26px;
+        --icon-size-small: 17px;
+    }
+}
+
+/* 1065px и меньше - убираем правую панель */
+@media (max-width: 1065px) {
+    .app-container {
+        grid-template-columns: auto 1fr;
+    }
+    
+    .info-panel {
+        display: none;
+    }
+    
+    .selection-card {
+        grid-column: 1 / span 2;
+    }
+    
+    :root {
+        /* Упрощенные переменные */
+        --font-size-large: 15px;
+        --font-size-small: 11px;
+        
+        --spacing-large: 20px;
+        --spacing-medium: 12px;
+        --spacing-small: 6px;
+        
+        /* Упрощенные переменные */
+        --icon-size-large: 32px;
+        --icon-size-small: 17px;
+        
+        --element-height: 140px;
+        --info-panel-width: 0;
+
+        --logo-text-size: 22px;
+        --logo-subtitle-size: 11px;
+    }
+}
+
+/* 800px и меньше - структурные изменения */
+@media (max-width: 800px) {
+    .app-container {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr auto;
+    }
+    
+    .home-grid,
+    .house-grid,
+    .shops-grid {
+        grid-template-rows: repeat(3, minmax(var(--element-height), 1fr));
+    }
+    
+    :root {
+        --logo-text-size: 16px;
+        --logo-subtitle-size: 12px;
+
+        /* Упрощенные переменные */
+        --font-size-large: 12px;
+        --font-size-small: 9px;
+        
+        --spacing-large: 16px;
+        --spacing-medium: 8px;
+        --spacing-small: 4px;
+        
+        /* Упрощенные переменные */
+        --icon-size-large: 28px;
+        --icon-size-small: 14px;
+        
+        --element-height: 130px;
+    }
+}
+
+/* 654px и меньше - оптимизация меню */
+@media (max-width: 654px) {
+    .app-container {
+        grid-template-columns: auto 1fr;
+    }
+    
+    /* Убираем иконки из меню на маленьких экранах */
+    .menu-step-icon {
+        display: none;
+    }
+    
+    .menu-step {
+        justify-content: center;
+        text-align: center;
+        gap: 0;
+    }
+    
+    /* Для очень маленьких экранов можно скрыть иконки в магазинах */
+    .shop-card-grid h4 .svg-icon {
+        display: none;
+    }
+    
+    .shop-card-grid p .svg-icon {
+        display: none;
+    }
+    
+    :root {
+        --logo-text-size: 14px;
+        --logo-subtitle-size: 10px;
+        
+        /* Упрощенные переменные */
+        --font-size-large: 12px;
+        --font-size-small: 10px;
+        
+        --spacing-large: 12px;
+        --spacing-medium: 6px;
+        --spacing-small: 3px;
+        
+        /* Упрощенные переменные */
+        --icon-size-large: 28px;
+        --icon-size-small: 14px;
+        
+        --element-height: 120px;
+    }
+}
+
+/* 553px и меньше - дополнительные настройки */
+@media (max-width: 553px) {
+    :root {
+        --logo-text-size: 12px;
+        --logo-subtitle-size: 6px;
+        --spacing-lg:0;
+    }
+    
+    .app-container {
+        grid-template-columns: 85px 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "sidebar main"
+            "footer footer";
+        height: calc(100dvh - 200px); /* ← ПРОБЛЕМА */
+        max-height: 90%;
+    }
+}
+
+/* 480px и меньше - мобильные изменения */
+@media (max-width: 480px) {
+    .home-grid,
+    .house-grid,
+    .shops-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: var(--element-height);
+    }
+    
+    .selection-card {
+        flex-direction: column;
+        gap: var(--spacing-medium);
+    }
+    
+    .selection-card-header {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .tags-container {
+        width: 100%;
+    }
+    
+    .btn-final {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Активируем мобильную панель */
+    .mobile-info-panel {
+        display: block;
+    }
+    
+    :root {
+        /* Упрощенные переменные */
+        --font-size-large: 11px;
+        --font-size-small: 9px;
+        
+        --spacing-large: 10px;
+        --spacing-medium: 5px;
+        --spacing-small: 2px;
+        
+        /* Упрощенные переменные */
+        --icon-size-large: 24px;
+        --icon-size-small: 12px;
+        
+        --element-height: 110px;
+    }
+}
+
+/* 360px и меньше - экстремальные изменения */
+@media (max-width: 360px) {
+    .logo-text {
+        font-size: var(--font-size-small);
+    }
+    
+    .menu-step-text {
+        font-size: var(--font-size-small);
+        line-height: 1.1;
+    }
+    
+    /* Меню в одну строку */
+    .menu-step {
+        padding: var(--spacing-small);
+    }
+    
+    .menu-step-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    :root {
+        /* Упрощенные переменные */
+        --font-size-large: 10px;
+        --font-size-small: 8px;
+        
+        --spacing-large: 8px;
+        --spacing-medium: 4px;
+        --spacing-small: 1px;
+        
+        /* Упрощенные переменные */
+        --icon-size-large: 20px;
+        --icon-size-small: 10px;
+        
+        --element-height: 100px;
+ 
+    }
 }
